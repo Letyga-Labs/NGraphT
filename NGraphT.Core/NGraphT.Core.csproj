@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="alg\**" />
+      <Compile Remove="event\**" />
+      <Compile Remove="generate\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="alg\**" />
+      <EmbeddedResource Remove="event\**" />
+      <EmbeddedResource Remove="generate\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="alg\**" />
+      <None Remove="event\**" />
+      <None Remove="generate\**" />
+    </ItemGroup>
+
+</Project>
