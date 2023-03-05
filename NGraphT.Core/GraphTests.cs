@@ -193,9 +193,9 @@ public abstract class GraphTests
     ///
     /// <para>
     /// This method does not performing any caching, instead recomputes everything from scratch. In
-    /// case more control is required use <seealso cref="ConnectivityInspector"/> directly.
-    ///
+    /// case more control is required use <see cref="ConnectivityInspector"/> directly.
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -215,15 +215,15 @@ public abstract class GraphTests
     /// <para>
     /// This method does not performing any caching, instead recomputes everything from scratch. In
     /// case more control is required use
-    /// <seealso cref="NGraphT.Core.alg.connectivity.BiconnectivityInspector"/> directly.
-    ///
+    /// <see cref="NGraphT.Core.alg.connectivity.BiconnectivityInspector"/> directly.
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
     /// <returns>true if the graph is biconnected, false otherwise.</returns>
-    /// <seealso cref="NGraphT.Core.alg.connectivity.BiconnectivityInspector"/>
+    /// <see cref="NGraphT.Core.alg.connectivity.BiconnectivityInspector"/>
     public static bool IsBiconnected<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
         Objects.requireNonNull(graph, GraphCannotBeNull);
@@ -235,9 +235,9 @@ public abstract class GraphTests
     ///
     /// <para>
     /// This method does not performing any caching, instead recomputes everything from scratch. In
-    /// case more control is required use <seealso cref="ConnectivityInspector"/> directly.
-    ///
+    /// case more control is required use <see cref="ConnectivityInspector"/> directly.
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -254,13 +254,13 @@ public abstract class GraphTests
     ///
     /// <para>
     /// This method does not performing any caching, instead recomputes everything from scratch. In
-    /// case more control is required use <seealso cref="KosarajuStrongConnectivityInspector"/> directly.
-    ///
+    /// case more control is required use <see cref="KosarajuStrongConnectivityInspector"/> directly.
     /// </para>
+    ///
     /// <para>
-    /// In case of undirected graphs this method delegated to <seealso cref="isConnected(Graph)"/>.
-    ///
+    /// In case of undirected graphs this method delegated to <see cref="isConnected(Graph)"/>.
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -393,7 +393,7 @@ public abstract class GraphTests
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
     /// <returns>true if the graph is bipartite, false otherwise.</returns>
-    /// <seealso cref="BipartitePartitioning.isBipartite()"/>
+    /// <see cref="BipartitePartitioning.isBipartite()"/>
     public static bool IsBipartite<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
         return (new BipartitePartitioning<>(graph)).Bipartite;
@@ -408,7 +408,7 @@ public abstract class GraphTests
     /// <returns>true if the partition is a bipartite partition, false otherwise.</returns>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
-    /// <seealso cref="BipartitePartitioning.isValidPartitioning(PartitioningAlgorithm.Partitioning)"/>
+    /// <see cref="BipartitePartitioning.isValidPartitioning(PartitioningAlgorithm.Partitioning)"/>
 //JAVA TO C# CONVERTER TODO TASK: The following line could not be converted:
     @SuppressWarnings("unchecked") public static <TNode, TEdge> boolean
         IsBipartitePartition(IGraph<TNode, TEdge> graph, Set<? extends TNode> firstPartition, Set<? Extends TNode> secondPartition)
@@ -454,7 +454,7 @@ public abstract class GraphTests
     /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// </param>
     /// <returns>true if the graph is Eulerian, false otherwise.</returns>
-    /// <seealso cref="HierholzerEulerianCycle.isEulerian(Graph)"/>
+    /// <see cref="HierholzerEulerianCycle.isEulerian(Graph)"/>
     public static <TNode, TEdge> bool IsEulerian(IGraph<TNode, TEdge> graph)
     {
         Objects.requireNonNull(graph, GraphCannotBeNull);
@@ -470,7 +470,7 @@ public abstract class GraphTests
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
     /// <returns>true if the graph is chordal, false otherwise.</returns>
-    /// <seealso cref="ChordalityInspector.isChordal()"/>
+    /// <see cref="ChordalityInspector.isChordal()"/>
     public static <TNode, TEdge> bool IsChordal(IGraph<TNode, TEdge> graph)
     {
         Objects.requireNonNull(graph, GraphCannotBeNull);
@@ -491,14 +491,14 @@ public abstract class GraphTests
     /// <a href="https://en.wikipedia.org/wiki/Induced_subgraph">induced subgraph</a> $H$ that is not
     /// a complete graph, contains a 2-pair.</li>
     /// </ol>
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
     /// <returns>true if the graph is weakly chordal, false otherwise.</returns>
-    /// <seealso cref="WeakChordalityInspector.isWeaklyChordal()"/>
+    /// <see cref="WeakChordalityInspector.isWeaklyChordal()"/>
     public static <TNode, TEdge> bool IsWeaklyChordal(IGraph<TNode, TEdge> graph)
     {
         Objects.requireNonNull(graph, GraphCannotBeNull);
@@ -517,7 +517,7 @@ public abstract class GraphTests
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
     /// <returns>true if the graph meets Ore's condition, false otherwise.</returns>
-    /// <seealso cref="NGraphT.Core.alg.tour.PalmerHamiltonianCycle"/>
+    /// <see cref="NGraphT.Core.alg.tour.PalmerHamiltonianCycle"/>
     public static <TNode, TEdge> bool HasOreProperty(IGraph<TNode, TEdge> graph)
     {
         RequireUndirected(graph);
@@ -554,7 +554,7 @@ public abstract class GraphTests
     /// Tests whether an undirected graph is triangle-free (i.TEdge. no three distinct vertices form a
     /// triangle of edges).
     /// 
-    /// The implementation of this method uses <seealso cref="GraphMetrics.getNumberOfTriangles(Graph)"/>.
+    /// The implementation of this method uses <see cref="GraphMetrics.getNumberOfTriangles(Graph)"/>.
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -568,7 +568,7 @@ public abstract class GraphTests
     /// <summary>
     /// Checks that the specified graph is perfect. Due to the Strong Perfect Graph Theorem Berge
     /// Graphs are the same as perfect Graphs. The implementation of this method is delegated to
-    /// <seealso cref="NGraphT.Core.alg.cycle.BergeGraphInspector"/>
+    /// <see cref="NGraphT.Core.alg.cycle.BergeGraphInspector"/>
     /// </summary>
     /// <param name="graph"> the graph reference to check for being perfect or not.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -584,7 +584,7 @@ public abstract class GraphTests
     /// Checks that the specified graph is planar. A graph is
     /// <a href="https://en.wikipedia.org/wiki/Planar_graph">planar</a> if it can be drawn on a
     /// two-dimensional plane without any of its edges crossing. The implementation of the method is
-    /// delegated to the <seealso cref="NGraphT.Core.alg.planar.BoyerMyrvoldPlanarityInspector"/>. Also, use
+    /// delegated to the <see cref="NGraphT.Core.alg.planar.BoyerMyrvoldPlanarityInspector"/>. Also, use
     /// this class to get a planar embedding of the graph in case it is planar, or a Kuratowski
     /// subgraph as a certificate of nonplanarity.
     /// </summary>
@@ -741,8 +741,8 @@ public abstract class GraphTests
 
     /// <summary>
     /// Checks that the specified graph is directed and throws a customized
-    /// <seealso cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
-    /// {@code null} and throws a <seealso cref="System.NullReferenceException"/> if it is.
+    /// <#### cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
+    /// {@code null} and throws a <#### cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for beeing directed and not null.</param>
     /// <param name="message"> detail message to be used in the event that an exception is thrown.</param>
@@ -767,9 +767,9 @@ public abstract class GraphTests
     }
 
     /// <summary>
-    /// Checks that the specified graph is directed and throws an <seealso cref="System.ArgumentException"/> if
+    /// Checks that the specified graph is directed and throws an <#### cref="System.ArgumentException"/> if
     /// it is not. Also checks that the graph reference is not {@code null} and throws a
-    /// <seealso cref="System.NullReferenceException"/> if it is.
+    /// <#### cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for beeing directed and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -784,8 +784,8 @@ public abstract class GraphTests
 
     /// <summary>
     /// Checks that the specified graph is undirected and throws a customized
-    /// <seealso cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
-    /// {@code null} and throws a <seealso cref="System.NullReferenceException"/> if it is.
+    /// <#### cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
+    /// {@code null} and throws a <#### cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for being undirected and not null.</param>
     /// <param name="message"> detail message to be used in the event that an exception is thrown.</param>
@@ -810,9 +810,9 @@ public abstract class GraphTests
     }
 
     /// <summary>
-    /// Checks that the specified graph is undirected and throws an <seealso cref="System.ArgumentException"/>
+    /// Checks that the specified graph is undirected and throws an <#### cref="System.ArgumentException"/>
     /// if it is not. Also checks that the graph reference is not {@code null} and throws a
-    /// <seealso cref="System.NullReferenceException"/> if it is.
+    /// <#### cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for being undirected and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -827,8 +827,8 @@ public abstract class GraphTests
 
     /// <summary>
     /// Checks that the specified graph is directed or undirected and throws a customized
-    /// <seealso cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
-    /// {@code null} and throws a <seealso cref="System.NullReferenceException"/> if it is.
+    /// <#### cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
+    /// {@code null} and throws a <#### cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for beeing directed or undirected and not null.</param>
     /// <param name="message"> detail message to be used in the event that an exception is thrown.</param>
@@ -853,9 +853,9 @@ public abstract class GraphTests
     }
 
     /// <summary>
-    /// Checks that the specified graph is directed and throws an <seealso cref="System.ArgumentException"/> if
+    /// Checks that the specified graph is directed and throws an <#### cref="System.ArgumentException"/> if
     /// it is not. Also checks that the graph reference is not {@code null} and throws a
-    /// <seealso cref="System.NullReferenceException"/> if it is.
+    /// <#### cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for beeing directed and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -870,8 +870,8 @@ public abstract class GraphTests
 
     /// <summary>
     /// Checks that the specified graph is weighted and throws a customized
-    /// <seealso cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
-    /// {@code null} and throws a <seealso cref="System.NullReferenceException"/> if it is.
+    /// <#### cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
+    /// {@code null} and throws a <#### cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for being weighted and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>

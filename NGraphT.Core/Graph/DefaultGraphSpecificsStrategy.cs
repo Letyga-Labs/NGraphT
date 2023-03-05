@@ -28,7 +28,7 @@ using Specifics;
 /// Graphs constructed using this strategy require the least amount of memory, at the expense of slow
 /// edge retrievals. Methods which depend on edge retrievals, TEdge.g. getEdge(TNode u, TNode TNode), containsEdge(TNode
 /// u, TNode TNode), addEdge(TNode u, TNode TNode), etc may be relatively slow when the average degree of a vertex is
-/// high (dense graphs). For a fast implementation, use <seealso cref="FastLookupGraphSpecificsStrategy"/>.
+/// high (dense graphs). For a fast implementation, use <see cref="FastLookupGraphSpecificsStrategy"/>.
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
 /// </para>

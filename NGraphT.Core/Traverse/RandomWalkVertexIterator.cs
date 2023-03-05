@@ -34,7 +34,7 @@ using Graphs = Graphs;
 /// of the vertex. In case the user requests a weighted walk, then the probability of each edge is
 /// equal to its weight divided by the total weight of all outgoing edges. The walk can also be
 /// bounded by a maximum number of hops (edges traversed). The iterator returns
-/// <seealso cref="NoSuchElementException"/> when this bound is reached.
+/// <see cref="NoSuchElementException"/> when this bound is reached.
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
 /// </summary>

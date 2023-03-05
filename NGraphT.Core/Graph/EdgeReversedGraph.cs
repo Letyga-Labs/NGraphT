@@ -29,7 +29,7 @@ using Core;
 /// This class allows you to use a directed graph algorithm in reverse. For example, suppose you have
 /// a directed graph representing a tree, with edges from parent to child, and you want to find all
 /// of the parents of a node. To do this, simply create an edge-reversed graph and pass that as input
-/// to <seealso cref="NGraphT.Core.Traverse.DepthFirstIterator"/>.
+/// to <see cref="NGraphT.Core.Traverse.DepthFirstIterator"/>.
 /// </para>
 /// </summary>
 ///
@@ -37,7 +37,7 @@ using Core;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 ///
 /// <remarks>Author: John TNode. Sichi.</remarks>
-/// <seealso cref="AsUndirectedGraph"/>
+/// <#### cref="AsUndirectedGraph"/>
 public class EdgeReversedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGraph<TNode, TEdge>
 {
     /// <summary>
@@ -49,73 +49,73 @@ public class EdgeReversedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGr
     {
     }
 
-    /// <seealso cref="Graph.getEdge(Object, Object)"/>
+    /// <#### cref="Graph.getEdge(Object, Object)"/>
     public override TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
     {
         return base.GetEdge(targetVertex, sourceVertex);
     }
 
-    /// <seealso cref="Graph.getAllEdges(Object, Object)"/>
+    /// <#### cref="Graph.getAllEdges(Object, Object)"/>
     public override ISet<TEdge> GetAllEdges(TNode sourceVertex, TNode targetVertex)
     {
         return base.GetAllEdges(targetVertex, sourceVertex);
     }
 
-    /// <seealso cref="Graph.addEdge(Object, Object)"/>
+    /// <#### cref="Graph.addEdge(Object, Object)"/>
     public override TEdge AddEdge(TNode sourceVertex, TNode targetVertex)
     {
         return base.AddEdge(targetVertex, sourceVertex);
     }
 
-    /// <seealso cref="Graph.addEdge(Object, Object, Object)"/>
+    /// <#### cref="Graph.addEdge(Object, Object, Object)"/>
     public override bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         return base.AddEdge(targetVertex, sourceVertex, edge);
     }
 
-    /// <seealso cref="Graph.inDegreeOf(Object)"/>
+    /// <#### cref="Graph.inDegreeOf(Object)"/>
     public override int InDegreeOf(TNode vertex)
     {
         return base.OutDegreeOf(vertex);
     }
 
-    /// <seealso cref="Graph.outDegreeOf(Object)"/>
+    /// <#### cref="Graph.outDegreeOf(Object)"/>
     public override int OutDegreeOf(TNode vertex)
     {
         return base.InDegreeOf(vertex);
     }
 
-    /// <seealso cref="Graph.incomingEdgesOf(Object)"/>
+    /// <#### cref="Graph.incomingEdgesOf(Object)"/>
     public override ISet<TEdge> IncomingEdgesOf(TNode vertex)
     {
         return base.OutgoingEdgesOf(vertex);
     }
 
-    /// <seealso cref="Graph.outgoingEdgesOf(Object)"/>
+    /// <#### cref="Graph.outgoingEdgesOf(Object)"/>
     public override ISet<TEdge> OutgoingEdgesOf(TNode vertex)
     {
         return base.IncomingEdgesOf(vertex);
     }
 
-    /// <seealso cref="Graph.removeEdge(Object, Object)"/>
+    /// <#### cref="Graph.removeEdge(Object, Object)"/>
     public override TEdge RemoveEdge(TNode sourceVertex, TNode targetVertex)
     {
         return base.RemoveEdge(targetVertex, sourceVertex);
     }
 
-    /// <seealso cref="Graph.getEdgeSource(Object)"/>
+    /// <#### cref="Graph.getEdgeSource(Object)"/>
     public override TNode GetEdgeSource(TEdge edge)
     {
         return base.GetEdgeTarget(edge);
     }
 
-    /// <seealso cref="Graph.getEdgeTarget(Object)"/>
+    /// <#### cref="Graph.getEdgeTarget(Object)"/>
     public override TNode GetEdgeTarget(TEdge edge)
     {
         return base.GetEdgeSource(edge);
     }
 
-    /// <seealso cref="java.lang.Object.toString()"/>
+    /// <#### cref="java.lang.Object.toString()"/>
     public override string ToString()
     {
         return toStringFromSets(VertexSet(), EdgeSet(), Type.Directed);

@@ -147,7 +147,7 @@ public class
         return GetSeenData(node).depth;
     }
 
-    /// <seealso cref="CrossComponentIterator.provideNextVertex()"/>
+    /// <#### cref="CrossComponentIterator.provideNextVertex()"/>
     protected internal override TNode ProvideNextVertex()
     {
         return _queue.RemoveFirst();

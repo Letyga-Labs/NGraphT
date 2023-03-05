@@ -211,7 +211,7 @@ public class PrefetchIterator<TEdge> : IEnumerator<TEdge>, IEnumerator<TEdge>
     public interface INextElementFunctor<TEe>
     {
         /// <summary>
-        /// Return the next element or throw a <seealso cref="NoSuchElementException"/> if there are no more
+        /// Return the next element or throw a <#### cref="NoSuchElementException"/> if there are no more
         /// elements.
         /// </summary>
         /// <returns>the next element.</returns>

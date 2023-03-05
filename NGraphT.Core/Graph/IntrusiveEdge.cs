@@ -30,7 +30,7 @@ internal class IntrusiveEdge : ICloneable
 
     internal object Target;
 
-    /// <seealso cref="Object.clone()"/>
+    /// <#### cref="Object.clone()"/>
     public override object Clone()
     {
         try

@@ -21,7 +21,7 @@ namespace NGraphT.Core.Graph;
 using Util;
 
 /// <summary>
-/// Helper for <seealso cref="MaskSubgraph"/>.
+/// Helper for <see cref="MaskSubgraph"/>.
 /// 
 /// </summary>
 internal class MaskVertexSet<TNode> : AbstractSet<TNode>

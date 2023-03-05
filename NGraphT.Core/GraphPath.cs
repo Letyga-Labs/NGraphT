@@ -20,7 +20,7 @@ namespace NGraphT.Core;
 
 /// <summary>
 /// A GraphPath represents a <a href="http://mathworld.wolfram.com/Path.html"> path</a> in a
-/// <seealso cref="Graph"/>. Unlike some definitions, the path is not required to be a
+/// <see cref="Graph"/>. Unlike some definitions, the path is not required to be a
 /// <a href="https://en.wikipedia.org/wiki/Simple_path">Simple Path</a>.
 /// </summary>
 ///
@@ -53,12 +53,12 @@ public interface IGraphPath<TNode, TEdge>
     /// Returns the edges making up the path. The first edge in this path is incident to the start
     /// vertex. The last edge is incident to the end vertex. The vertices along the path can be
     /// obtained by traversing from the start vertex, finding its opposite across the first edge, and
-    /// then doing the same successively across subsequent edges; see <seealso cref="getVertexList()"/>.
+    /// then doing the same successively across subsequent edges; see <#### cref="getVertexList()"/>.
     ///
     /// <para>
     /// Whether or not the returned edge list is modifiable depends on the path implementation.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <returns>list of edges traversed by the path.</returns>
     IList<TEdge> EdgeList

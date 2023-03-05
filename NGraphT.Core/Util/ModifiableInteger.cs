@@ -20,19 +20,19 @@ namespace NGraphT.Core.Util;
 
 /// <summary>
 /// The <c>ModifiableInteger</c> class wraps a value of the primitive type <c>int</c> in
-/// an object, similarly to <seealso cref="java.lang.Integer"/>. An object of type
+/// an object, similarly to <see cref="java.lang.Integer"/>. An object of type
 /// <c>ModifiableInteger</c> contains a single field whose type is <c>int</c>.
 ///
 /// <para>
 /// Unlike <c>java.lang.Integer</c>, the int value which the ModifiableInteger represents can
 /// be modified. It becomes useful when used together with the collection framework. For example, if
-/// you want to have a <seealso cref="System.Collections.IList"/> of counters. You could use <c>Integer</c> but
+/// you want to have a <see cref="System.Collections.IList"/> of counters. You could use <c>Integer</c> but
 /// that would have became wasteful and inefficient if you frequently had to update the counters.
 /// </para>
 ///
 /// <para>
 /// WARNING: Because instances of this class are mutable, great care must be exercised if used as
-/// keys of a <seealso cref="System.Collections.IDictionary"/> or as values in a <seealso cref="System.Collections.Generic.ISet<object>"/> in a manner that affects
+/// keys of a <see cref="System.Collections.IDictionary"/> or as values in a <see cref="System.Collections.Generic.ISet<object>"/> in a manner that affects
 /// equals comparisons while the instances are keys in the map (or values in the set). For more see
 /// documentation of <c>Map</c> and <c>Set</c>.
 /// </para>
@@ -47,7 +47,7 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
     public int Value;
 
     /// <summary>
-    /// <b>!!! DON'T USE - Use the <seealso cref="ModifiableInteger(int)"/> constructor instead !!!</b>
+    /// <b>!!! DON'T USE - Use the <#### cref="ModifiableInteger(int)"/> constructor instead !!!</b>
     ///
     /// <para>
     /// This constructor is for the use of java.beans.XMLDecoder deserialization. The constructor is
@@ -122,7 +122,7 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
         return Integer.compare(thisVal, anotherVal);
     }
 
-    /// <seealso cref="Number.doubleValue()"/>
+    /// <#### cref="Number.doubleValue()"/>
     public override double DoubleValue()
     {
         return this.value;
@@ -146,7 +146,7 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
         return false;
     }
 
-    /// <seealso cref="Number.floatValue()"/>
+    /// <#### cref="Number.floatValue()"/>
     public override float FloatValue()
     {
         return this.value;
@@ -162,13 +162,13 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
         return this.value;
     }
 
-    /// <seealso cref="Number.intValue()"/>
+    /// <#### cref="Number.intValue()"/>
     public override int IntValue()
     {
         return this.value;
     }
 
-    /// <seealso cref="Number.longValue()"/>
+    /// <#### cref="Number.longValue()"/>
     public override long LongValue()
     {
         return this.value;
@@ -188,7 +188,7 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
     /// Returns a <c>String</c> object representing this <c>
     /// ModifiableInteger</c>'s value. The value is converted to signed decimal representation and
     /// returned as a string, exactly as if the integer value were given as an argument to the
-    /// <seealso cref="java.lang.Integer.toString(int)"/> method.
+    /// <#### cref="java.lang.Integer.toString(int)"/> method.
     /// </summary>
     /// <returns>a string representation of the value of this object in base&nbsp;10.</returns>
     public override string ToString()

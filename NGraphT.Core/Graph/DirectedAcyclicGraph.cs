@@ -29,7 +29,7 @@ using Util;
 /// <para>
 /// Implements a DAG that can be modified (vertices &amp; edges added and removed), is guaranteed to
 /// remain acyclic, and provides fast topological order iteration. An attempt to add an edge which
-/// would induce a cycle throws an <seealso cref="System.ArgumentException"/>.
+/// would induce a cycle throws an <see cref="System.ArgumentException"/>.
 /// </para>
 /// <para>
 /// This is done using a dynamic topological sort which is based on the algorithm described in "David
@@ -339,8 +339,8 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// The complexity of adding a new edge in the graph depends on the number of edges incident to
     /// the "affected region", and should in general be faster than recomputing the whole topological
     /// ordering from scratch.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <exception cref="ArgumentException"> if the vertex is not in the graph.</exception>
     /// <exception cref="GraphCycleProhibitedException"> if the vertex would induce a cycle in the graph.</exception>
@@ -367,8 +367,8 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// The complexity of adding a new edge in the graph depends on the number of edges incident to
     /// the "affected region", and should in general be faster than recomputing the whole topological
     /// ordering from scratch.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <exception cref="ArgumentException"> if the vertex is not in the graph.</exception>
     /// <exception cref="GraphCycleProhibitedException"> if the vertex would induce a cycle in the graph.</exception>
@@ -401,7 +401,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// Get the ancestors of a vertex.
     /// </summary>
     /// <param name="vertex"> the vertex to get the ancestors of.</param>
-    /// <returns><seealso cref="System.Collections.Generic.ISet<object>"/> of ancestors of a vertex.</returns>
+    /// <returns><#### cref="System.Collections.Generic.ISet<object>"/> of ancestors of a vertex.</returns>
     public virtual ISet<TNode> GetAncestors(TNode vertex)
     {
         EdgeReversedGraph<TNode, TEdge> reversedGraph = new EdgeReversedGraph<TNode, TEdge>(this);
@@ -425,7 +425,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// Get the descendants of a vertex.
     /// </summary>
     /// <param name="vertex"> the vertex to get the descendants of.</param>
-    /// <returns><seealso cref="System.Collections.Generic.ISet<object>"/> of descendants of a vertex.</returns>
+    /// <returns><#### cref="System.Collections.Generic.ISet<object>"/> of descendants of a vertex.</returns>
     public virtual ISet<TNode> GetDescendants(TNode vertex)
     {
         IEnumerator<TNode> iterator    = new DepthFirstIterator<TNode>(this, vertex);
@@ -757,7 +757,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
         /// <exception cref="NotSupportedException"> if the implementation doesn't support (or doesn't
         ///         need) clearance. For example, if the factory creates a new instance every time,
         ///         it is a waste of cycles to reset the state after the search of the Affected
-        ///         Region is done, so an UnsupportedOperationException *should* be thrown. </exception>
+        ///         Region is done, so an UnsupportedOperationException *should* be thrown.</exception>
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in C#:
 //ORIGINAL LINE: void clearVisited(int index) throws UnsupportedOperationException;
         void ClearVisited(int index);
@@ -771,10 +771,10 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     protected internal interface IVisitedStrategyFactory
     {
         /// <summary>
-        /// Create a new instance of <seealso cref="IVisitedStrategy"/>.
+        /// Create a new instance of <#### cref="IVisitedStrategy"/>.
         /// </summary>
         /// <param name="affectedRegion"> the affected region.</param>
-        /// <returns>a new instance of <seealso cref="IVisitedStrategy"/> for the affected region.</returns>
+        /// <returns>a new instance of <#### cref="IVisitedStrategy"/> for the affected region.</returns>
         IVisitedStrategy GetVisitedStrategy(Region affectedRegion);
     }
 
@@ -989,10 +989,10 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     }
 
     /// <summary>
-    /// A visited strategy which uses a <seealso cref="System.Collections.BitArray"/>.
+    /// A visited strategy which uses a <#### cref="System.Collections.BitArray"/>.
     ///
     /// <para>
-    /// This implementation is close to the performance of <seealso cref="VisitedArrayListImpl"/>, with 1/8 the
+    /// This implementation is close to the performance of <#### cref="VisitedArrayListImpl"/>, with 1/8 the
     /// memory usage.
     /// 
     /// <remarks>Author: John TNode. Sichi.</remarks>
@@ -1051,7 +1051,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     }
 
     /// <summary>
-    /// A visited strategy using an <seealso cref="System.Collections.ArrayList"/>.
+    /// A visited strategy using an <#### cref="System.Collections.ArrayList"/>.
     ///
     /// <para>
     /// This implementation seems to offer the best performance in most cases. It grows the internal
@@ -1124,7 +1124,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     }
 
     /// <summary>
-    /// A visited strategy using a <seealso cref="System.Collections.Generic.HashSet<object>"/>.
+    /// A visited strategy using a <#### cref="System.Collections.Generic.HashSet<object>"/>.
     ///
     /// <para>
     /// This implementation doesn't seem to perform as well, though I can imagine circumstances where

@@ -28,7 +28,7 @@ using Graph;
 public class SupplierUtil
 {
     /// <summary>
-    /// Supplier for <seealso cref="DefaultEdge"/>.
+    /// Supplier for <#### cref="DefaultEdge"/>.
     /// </summary>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SuppressWarnings("unchecked") public static final Supplier<DefaultEdge> DEFAULT_EDGE_SUPPLIER = (Supplier<DefaultEdge> & Serializable) DefaultEdge::new;
@@ -37,7 +37,7 @@ public class SupplierUtil
         DefaultEdgeSupplier = (Func<DefaultEdge> & Serializable) DefaultEdge::new;
 
     /// <summary>
-    /// Supplier for <seealso cref="DefaultWeightedEdge"/>.
+    /// Supplier for <#### cref="DefaultWeightedEdge"/>.
     /// </summary>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SuppressWarnings("unchecked") public static final Supplier<DefaultWeightedEdge> DEFAULT_WEIGHTED_EDGE_SUPPLIER = (Supplier<DefaultWeightedEdge> & Serializable) DefaultWeightedEdge::new;
@@ -46,7 +46,7 @@ public class SupplierUtil
         (Func<DefaultWeightedEdge> & Serializable) DefaultWeightedEdge::new;
 
     /// <summary>
-    /// Supplier for <seealso cref="object"/>.
+    /// Supplier for <#### cref="object"/>.
     /// </summary>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SuppressWarnings("unchecked") public static final Supplier<Object> OBJECT_SUPPLIER = (Supplier<Object> & Serializable) Object::new;

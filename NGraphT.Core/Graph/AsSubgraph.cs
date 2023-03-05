@@ -29,7 +29,7 @@ using Core;
 /// <c>Graph</c> interface.
 ///
 /// <para>
-/// If the base graph is a <seealso cref="IListenableGraph{TNode,TEdge}"/>, the subgraph listens on the base
+/// If the base graph is a <see cref="IListenableGraph{TNode,TEdge}"/>, the subgraph listens on the base
 /// graph and guarantees the subgraph property. If an edge or a vertex is removed from the base
 /// graph, it is automatically removed from the subgraph. Subgraph listeners are informed on such
 /// removal only if it results in a cascaded removal from the subgraph. If the subgraph has been
@@ -65,7 +65,7 @@ using Core;
 ///
 /// <para>
 /// This graph implementation guarantees deterministic vertex and edge set ordering (via
-/// <seealso cref="LinkedHashSet"/>).
+/// <see cref="LinkedHashSet"/>).
 /// </para>
 ///
 /// <para>
@@ -82,8 +82,8 @@ using Core;
 /// @param <TEdge> the edge type
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
-/// <seealso cref="Graph"/>
-/// <seealso cref="Set"/>
+/// <#### cref="Graph"/>
+/// <#### cref="Set"/>
 public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
 {
     private const string NoSuchEdgeInBase                    = "no such edge in base graph";
@@ -273,10 +273,9 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     /// <returns><c>true</c> if the vertex was added, otherwise <c>
     /// false</c>.</returns>
     /// <exception cref="NullReferenceException"> if TNode is null.</exception>
-    /// <exception cref="ArgumentException"> if the base graph does not contain the vertex
-    /// </exception>
-    /// <seealso cref="AsSubgraph"/>
-    /// <seealso cref="Graph.addVertex(Object)"/>
+    /// <exception cref="ArgumentException"> if the base graph does not contain the vertex.</exception>
+    /// <#### cref="AsSubgraph"/>
+    /// <#### cref="Graph.addVertex(Object)"/>
     public override bool AddVertex(TNode node)
     {
         if (node == null)

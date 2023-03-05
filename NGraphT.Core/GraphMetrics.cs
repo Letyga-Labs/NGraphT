@@ -34,13 +34,13 @@ public abstract class GraphMetrics
     /// graph. The diameter of a graph is defined as $\max_{TNode\in TNode}\epsilon(TNode)$, where $\epsilon(TNode)$
     /// is the eccentricity of vertex $v$. In other words, this method computes the 'longest shortest
     /// path'. Two special cases exist. If the graph has no vertices, the diameter is 0. If the graph
-    /// is disconnected, the diameter is <seealso cref="Double.POSITIVE_INFINITY"/>.
+    /// is disconnected, the diameter is <#### cref="Double.POSITIVE_INFINITY"/>.
     /// <para>
     /// For more fine-grained control over this method, or if you need additional distance metrics
-    /// such as the graph radius, consider using <seealso cref="NGraphT.Core.alg.shortestpath.GraphMeasurer"/>
+    /// such as the graph radius, consider using <#### cref="NGraphT.Core.alg.shortestpath.GraphMeasurer"/>
     /// instead.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> input graph.</param>
     /// @param <TNode> graph vertex type.</param>
@@ -55,13 +55,13 @@ public abstract class GraphMetrics
     /// Compute the <a href="http://mathworld.wolfram.com/GraphRadius.html">radius</a> of the graph.
     /// The radius of a graph is defined as $\min_{TNode\in TNode}\epsilon(TNode)$, where $\epsilon(TNode)$ is the
     /// eccentricity of vertex $v$. Two special cases exist. If the graph has no vertices, the radius
-    /// is 0. If the graph is disconnected, the diameter is <seealso cref="Double.POSITIVE_INFINITY"/>.
+    /// is 0. If the graph is disconnected, the diameter is <#### cref="Double.POSITIVE_INFINITY"/>.
     /// <para>
     /// For more fine-grained control over this method, or if you need additional distance metrics
-    /// such as the graph diameter, consider using <seealso cref="NGraphT.Core.alg.shortestpath.GraphMeasurer"/>
+    /// such as the graph diameter, consider using <#### cref="NGraphT.Core.alg.shortestpath.GraphMeasurer"/>
     /// instead.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> input graph.</param>
     /// @param <TNode> graph vertex type.</param>
@@ -93,13 +93,13 @@ public abstract class GraphMetrics
     /// An algorithm with the same worst case runtime complexity, but a potentially better average
     /// runtime complexity of $O(n^2)$ is described in: Itai, A. Rodeh, M. Finding a minimum circuit
     /// in a graph. SIAM J. Comput. Vol 7, No 4, 1987.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> input graph.</param>
     /// @param <TNode> graph vertex type.</param>
     /// @param <TEdge> graph edge type.</param>
-    /// <returns>girth of the graph, or <seealso cref="Integer.MAX_VALUE"/> if the graph is acyclic.</returns>
+    /// <returns>girth of the graph, or <#### cref="Integer.MAX_VALUE"/> if the graph is acyclic.</returns>
     public static int GetGirth<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
         const int Nil = -1;
@@ -323,8 +323,8 @@ public abstract class GraphMetrics
     /// <para>
     /// For more details of this algorithm see Ullman, Jeffrey: "Mining of Massive Datasets",
     /// Cambridge University Press, Chapter 10
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>

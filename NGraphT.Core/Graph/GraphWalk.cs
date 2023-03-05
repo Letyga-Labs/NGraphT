@@ -32,7 +32,7 @@ using Core;
 /// See <a href="http://mathworld.wolfram.com/Walk.html">http://mathworld.wolfram.com/Walk.html</a>
 /// </para>
 /// <para>
-/// GraphWalk is the default implementation of <seealso cref="GraphPath"/>.
+/// GraphWalk is the default implementation of <see cref="GraphPath"/>.
 /// </para>
 /// <para>
 /// Two special cases exist:

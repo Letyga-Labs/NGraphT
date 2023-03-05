@@ -243,7 +243,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
         return node.getValue().spanningTreeEdge;
     }
 
-    /// <seealso cref="CrossComponentIterator.isConnectedComponentExhausted()"/>
+    /// <#### cref="CrossComponentIterator.isConnectedComponentExhausted()"/>
     protected internal override bool ConnectedComponentExhausted
     {
         get
@@ -268,7 +268,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
         }
     }
 
-    /// <seealso cref="CrossComponentIterator.encounterVertex(Object, Object)"/>
+    /// <#### cref="CrossComponentIterator.encounterVertex(Object, Object)"/>
     protected internal override void EncounterVertex(TNode vertex, TEdge edge)
     {
         double shortestPathLength;
@@ -312,7 +312,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
         }
     }
 
-    /// <seealso cref="CrossComponentIterator.provideNextVertex()"/>
+    /// <#### cref="CrossComponentIterator.provideNextVertex()"/>
     protected internal override TNode ProvideNextVertex()
     {
         AddressableHeap.Handle<double, QueueEntry<TNode, TEdge>> node = _heap.deleteMin();

@@ -28,7 +28,7 @@ using Specifics;
 /// Graphs constructed using this strategy use additional data structures to improve the performance
 /// of methods which depend on edge retrievals, TEdge.g. getEdge(TNode u, TNode TNode), containsEdge(TNode u, TNode
 /// TNode),addEdge(TNode u, TNode TNode). A disadvantage is an increase in memory consumption. If memory utilization
-/// is an issue, use the <seealso cref="DefaultGraphSpecificsStrategy"/> instead.
+/// is an issue, use the <see cref="DefaultGraphSpecificsStrategy"/> instead.
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
 /// </para>

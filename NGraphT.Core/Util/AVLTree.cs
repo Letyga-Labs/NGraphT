@@ -149,8 +149,8 @@ public class AvlTree<T> : IEnumerable<T>
     /// The first part contains the nodes which are smaller than or equal to the {@code node}. The
     /// first part stays in this tree. The second part contains the nodes which are strictly greater
     /// than the {@code node}. The second part is returned as a tree.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="node"> a separating node.</param>
     /// <returns>a tree containing the nodes which are strictly greater than the {@code node}</returns>
@@ -211,8 +211,8 @@ public class AvlTree<T> : IEnumerable<T>
     /// The first part contains the nodes which are smaller than the {@code node}. The first part
     /// stays in this tree. The second part contains the nodes which are greater than or equal to the
     /// {@code node}. The second part is returned as a tree.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="node"> a separating node.</param>
     /// <returns>a tree containing the nodes which are greater than or equal to the {@code node}</returns>
@@ -236,8 +236,8 @@ public class AvlTree<T> : IEnumerable<T>
     /// Append the nodes in the {@code tree} after the nodes in this tree.
     /// <para>
     /// The result of this operation is stored in this tree.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="tree"> a tree to append.</param>
     public virtual void MergeAfter(AvlTree<T> tree)
@@ -264,8 +264,8 @@ public class AvlTree<T> : IEnumerable<T>
     /// Prepends the nodes in the {@code tree} before the nodes in this tree.
     /// <para>
     /// The result of this operation is stored in this tree.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="tree"> a tree to prepend.</param>
     public virtual void MergeBefore(AvlTree<T> tree)
@@ -448,8 +448,8 @@ public class AvlTree<T> : IEnumerable<T>
     /// <para>
     /// The algorithm is described in <i>Donald TEdge. Knuth. The art of computer programming. Second
     /// Edition. Volume 3 / Sorting and Searching, p. 474</i>.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="left"> a left subtree.</param>
     /// <param name="right"> a right subtree.</param>
@@ -489,8 +489,8 @@ public class AvlTree<T> : IEnumerable<T>
     /// <para>
     /// The algorithm is described in <i>Donald TEdge. Knuth. The art of computer programming. Second
     /// Edition. Volume 3 / Sorting and Searching, p. 474</i>.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="junctionNode"> a node between left and right subtrees.</param>
     /// <param name="left"> a left subtree.</param>

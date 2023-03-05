@@ -20,7 +20,7 @@ namespace NGraphT.Core.Graph;
 
 /// <summary>
 /// A factory for edge sets. This interface allows the creator of a graph to choose the
-/// <seealso cref="System.Collections.Generic.ISet<object>"/> implementation used internally by the graph to maintain sets of edges. This
+/// <see cref="System.Collections.Generic.ISet<object>"/> implementation used internally by the graph to maintain sets of edges. This
 /// provides control over performance tradeoffs between memory and CPU usage.
 /// </summary>
 ///

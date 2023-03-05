@@ -23,7 +23,7 @@ using Specifics;
 using Util;
 
 /// <summary>
-/// The most general implementation of the <seealso cref="NGraphT.Core.Graph"/> interface.
+/// The most general implementation of the <see cref="NGraphT.Core.Graph"/> interface.
 ///
 /// <para>
 /// Its subclasses add various restrictions to get more specific graphs. The decision whether it is
@@ -31,9 +31,9 @@ using Util;
 /// constructor for details).
 /// </para>
 /// <para>
-/// The behavior of this class can be adjusted by changing the <seealso cref="IGraphSpecificsStrategy{TNode,TEdge}"/> that is
+/// The behavior of this class can be adjusted by changing the <see cref="IGraphSpecificsStrategy{TNode,TEdge}"/> that is
 /// provided from the constructor. All implemented strategies guarantee deterministic vertex and edge
-/// set ordering (via <seealso cref="LinkedHashMap"/> and <seealso cref="LinkedHashSet"/>). The defaults are reasonable
+/// set ordering (via <see cref="LinkedHashMap"/> and <see cref="LinkedHashSet"/>). The defaults are reasonable
 /// for most use-cases, only change if you know what you are doing.
 /// </para>
 /// <para>
@@ -46,7 +46,7 @@ using Util;
 /// </para>
 /// <para>
 /// If you need support for concurrent reads and writes, consider using the
-/// <seealso cref="NGraphT.Core.Graph.Concurrent.AsSynchronizedGraph AsSynchronizedGraph wrapper"/>.
+/// <see cref="NGraphT.Core.Graph.Concurrent.AsSynchronizedGraph AsSynchronizedGraph wrapper"/>.
 /// </para>
 /// </summary>
 ///
@@ -328,9 +328,8 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// Returns a shallow copy of this graph instance. Neither edges nor vertices are cloned.
     /// </summary>
     /// <returns>a shallow copy of this graph.</returns>
-    /// <exception cref="RuntimeException"> in case the clone is not supported
-    /// </exception>
-    /// <seealso cref="java.lang.Object.clone()"/>
+    /// <exception cref="RuntimeException"> in case the clone is not supported.</exception>
+    /// <#### cref="java.lang.Object.clone()"/>
     public override object Clone()
     {
         try

@@ -21,16 +21,16 @@ namespace NGraphT.Core.Graph.Builder;
 using Core;
 
 /// <summary>
-/// A builder class for <seealso cref="Graph"/>. This is a helper class which helps adding vertices and edges
+/// A builder class for <see cref="Graph"/>. This is a helper class which helps adding vertices and edges
 /// into an already constructed graph instance.
 ///
 /// <para>
 /// Each graph implementation contains a static helper method for the construction of such a builder.
-/// For example class <seealso cref="DefaultDirectedGraph"/> contains method
-/// <seealso cref="DefaultDirectedGraph.createBuilder(Supplier)"/>.
+/// For example class <see cref="DefaultDirectedGraph"/> contains method
+/// <see cref="DefaultDirectedGraph.createBuilder(Supplier)"/>.
 /// </para>
 /// <para>
-/// See <seealso cref="GraphTypeBuilder"/> for a builder of the actual graph instance.
+/// See <see cref="GraphTypeBuilder"/> for a builder of the actual graph instance.
 /// </para>
 /// </summary>
 ///
@@ -39,7 +39,7 @@ using Core;
 /// @param <G> type of the resulting graph
 ///
 /// <remarks>Author: Andrew Chen.</remarks>
-/// <seealso cref="GraphTypeBuilder"/>
+/// <#### cref="GraphTypeBuilder"/>
 public class GraphBuilder<TNode, TEdge, TG> : AbstractGraphBuilder<TNode, TEdge, TG, GraphBuilder<TNode, TEdge, TG>>
     where TG : IGraph<TNode, TEdge>
 {
@@ -49,13 +49,13 @@ public class GraphBuilder<TNode, TEdge, TG> : AbstractGraphBuilder<TNode, TEdge,
     /// <para>
     /// The recommended way to use this constructor is: {@code new
     /// GraphBuilderBase<...>(new YourGraph<...>(...))}.
-    ///
     /// </para>
+    ///
     /// <para>
     /// NOTE: {@code baseGraph} should not be an existing graph. If you want to add an existing graph
-    /// to the graph being built, you should use the <seealso cref="addVertex(Object)"/> method.
-    ///
+    /// to the graph being built, you should use the <#### cref="addVertex(Object)"/> method.
     /// </para>
+    ///
     /// </summary>
     /// <param name="baseGraph"> the graph object to base building on.</param>
     public GraphBuilder(TG baseGraph)

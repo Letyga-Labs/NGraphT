@@ -34,7 +34,7 @@ using Util;
 /// <para>
 /// The iterator crosses components but does not track them, it only tracks visited vertices. The
 /// iterator will detect (at some point) if the graph is not a directed acyclic graph and throw a
-/// <seealso cref="NotDirectedAcyclicGraphException"/>.
+/// <see cref="NotDirectedAcyclicGraphException"/>.
 /// </para>
 /// <para>
 /// For this iterator to work correctly the graph must not be modified during iteration. Currently
@@ -63,8 +63,8 @@ public class TopologicalOrderIterator<TNode, TEdge> : AbstractGraphIterator<TNod
     /// <a href="http://mathworld.wolfram.com/Source.html">
     /// http://mathworld.wolfram.com/Source.html</a>. In case of partial order, tie-breaking is
     /// arbitrary.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> the directed graph to be iterated.</param>
     public TopologicalOrderIterator(IGraph<TNode, TEdge> graph)
@@ -80,8 +80,8 @@ public class TopologicalOrderIterator<TNode, TEdge> : AbstractGraphIterator<TNod
     /// <a href="http://mathworld.wolfram.com/Source.html">
     /// http://mathworld.wolfram.com/Source.html</a>. In case of partial order, a comparator is used
     /// to break ties.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="graph"> the directed graph to be iterated.</param>
     /// <param name="comparator"> comparator in order to break ties in case of partial order.</param>

@@ -30,7 +30,7 @@ using Core;
 /// connect the same pair of vertices) and whether it is weighted or not.
 /// </para>
 /// <para>
-/// The type of a graph can be queried on runtime using method <seealso cref="Graph.getType()"/>. This way, for
+/// The type of a graph can be queried on runtime using method <see cref="Graph.getType()"/>. This way, for
 /// example, an algorithm can have different behavior based on whether the input graph is directed or
 /// undirected, etc.
 ///
@@ -277,7 +277,7 @@ public class DefaultGraphType : IGraphType
     }
 
     /// <summary>
-    /// A builder for <seealso cref="DefaultGraphType"/>.
+    /// A builder for <#### cref="DefaultGraphType"/>.
     /// 
     /// <remarks>Author: Dimitrios Michail.</remarks>
     /// </summary>

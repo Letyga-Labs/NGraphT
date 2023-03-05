@@ -23,4 +23,8 @@
       <None Remove="generate\**" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="J2N" Version="2.0.0" />
+    </ItemGroup>
+
 </Project>

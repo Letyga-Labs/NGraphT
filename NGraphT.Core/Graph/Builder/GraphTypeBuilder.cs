@@ -23,7 +23,7 @@ using Graph;
 using Util;
 
 /// <summary>
-/// A builder class for the hierarchy of <seealso cref="Graph"/>s that the library provides.
+/// A builder class for the hierarchy of <see cref="Graph"/>s that the library provides.
 ///
 /// <para>
 /// The following example creates a directed graph which allows multiple (parallel) edges and
@@ -69,8 +69,8 @@ using Util;
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
 /// </param>
-/// <seealso cref="IGraphType"/>
-/// <seealso cref="GraphBuilder"/>
+/// <#### cref="IGraphType"/>
+/// <#### cref="GraphBuilder"/>
 public sealed class GraphTypeBuilder<TNode, TEdge>
 {
     private bool               _undirected;
@@ -266,7 +266,7 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
     }
 
     /// <summary>
-    /// Build the graph and acquire a <seealso cref="GraphBuilder"/> in order to add vertices and edges.
+    /// Build the graph and acquire a <#### cref="GraphBuilder"/> in order to add vertices and edges.
     /// </summary>
     /// <returns>a graph builder.</returns>
     public GraphBuilder<TNode, TEdge, IGraph<TNode, TEdge>> BuildGraphBuilder()

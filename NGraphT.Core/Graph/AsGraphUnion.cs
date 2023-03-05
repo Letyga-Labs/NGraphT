@@ -28,7 +28,7 @@ using Util;
 /// Read-only union of two graphs: G<sub>1</sub> and G<sub>2</sub>. If G<sub>1</sub> =
 /// (TNode<sub>1</sub>, TEdge<sub>1</sub>) and G<sub>2</sub> = (TNode<sub>2</sub>, TEdge<sub>2</sub>) then their
 /// union G = (TNode, TEdge), where TNode is the union of TNode<sub>1</sub> and TNode<sub>2</sub>, and TEdge is the union of
-/// TEdge<sub>1</sub> and TEdge<sub>2</sub>. A <seealso cref="IWeightCombiner"/> in order to calculate edge weights.
+/// TEdge<sub>1</sub> and TEdge<sub>2</sub>. A <see cref="IWeightCombiner"/> in order to calculate edge weights.
 /// </para>
 /// </summary>
 /// @param <TNode> the vertex type.</param>
@@ -87,7 +87,7 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     }
 
     /// <summary>
-    /// Construct a new graph union. The union will use the <seealso cref="IIWeightCombiner.Sum/> weight
+    /// Construct a new graph union. The union will use the <#### cref="IIWeightCombiner.Sum/> weight
     /// combiner.
     /// </summary>
     /// <param name="g1"> the first graph.</param>
@@ -454,7 +454,7 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
 
     /// <inheritdoc/>
     /// <summary>
-    /// Throws <seealso cref="System.NotSupportedException"/> since graph union is read-only.
+    /// Throws <#### cref="System.NotSupportedException"/> since graph union is read-only.
     /// </summary>
     public override void SetEdgeWeight(TEdge edge, double weight)
     {

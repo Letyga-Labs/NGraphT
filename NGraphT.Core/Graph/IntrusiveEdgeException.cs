@@ -19,7 +19,7 @@
 namespace NGraphT.Core.Graph;
 
 /// <summary>
-/// Special <seealso cref="System.Exception"/> to signal that <seealso cref="IntrusiveEdge"/> is used incorrectly.
+/// Special <see cref="System.Exception"/> to signal that <see cref="IntrusiveEdge"/> is used incorrectly.
 ///
 /// <remarks>Author: Hannes Wellmann.</remarks>
 /// </summary>

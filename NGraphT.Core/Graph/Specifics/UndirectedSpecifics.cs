@@ -27,7 +27,7 @@ using Util;
 /// memory, at the expense of slow edge retrievals. Methods which depend on edge retrievals, TEdge.g.
 /// getEdge(TNode u, TNode TNode), containsEdge(TNode u, TNode TNode), addEdge(TNode u, TNode TNode), etc may be relatively slow when the
 /// average degree of a vertex is high (dense graphs). For a fast implementation, use
-/// <seealso cref="FastLookupUndirectedSpecifics"/>.
+/// <see cref="FastLookupUndirectedSpecifics"/>.
 /// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>

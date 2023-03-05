@@ -229,14 +229,14 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
         }
 
         /// <summary>
-        /// Retrieves element from the head bucket by invoking <seealso cref="Bucket.poll()"/> or null if this
+        /// Retrieves element from the head bucket by invoking <#### cref="Bucket.poll()"/> or null if this
         /// {@code BucketList} is empty.
         /// <para>
         /// Removes the head bucket if it becomes empty after the operation.
         /// 
         /// </para>
         /// </summary>
-        /// <returns>vertex returned by <seealso cref="Bucket.poll()"/> invoked on head bucket or null if this
+        /// <returns>vertex returned by <#### cref="Bucket.poll()"/> invoked on head bucket or null if this
         ///         {@code BucketList} is empty.</returns>
         internal virtual TNode Poll()
         {

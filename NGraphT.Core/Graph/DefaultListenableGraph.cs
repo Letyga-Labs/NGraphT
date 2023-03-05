@@ -37,8 +37,8 @@ using Util;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
-/// <seealso cref="GraphListener"/>
-/// <seealso cref="VertexSetListener"/>
+/// <#### cref="GraphListener"/>
+/// <#### cref="VertexSetListener"/>
 public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IListenableGraph<TNode, TEdge>,
     ICloneable
 {
@@ -66,7 +66,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     /// <param name="g"> the backing graph.</param>
     /// <param name="reuseEvents"> whether to reuse previously fired event objects instead of creating a new
     ///        event object for each event.</param>
-    /// <exception cref="ArgumentException"> if the backing graph is already a listenable graph. </exception>
+    /// <exception cref="ArgumentException"> if the backing graph is already a listenable graph.</exception>
     public DefaultListenableGraph(IGraph<TNode, TEdge> g, bool reuseEvents)
         : base(g)
     {
@@ -400,7 +400,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     {
         internal const long SerialVersionUID = 3907207152526636089L;
 
-        /// <seealso cref="GraphEdgeChangeEvent"/>
+        /// <#### cref="GraphEdgeChangeEvent"/>
         public FlyweightEdgeEvent(object eventSource, int type, TEe edge)
             : base(eventSource, type, edge, default(TNode), default(TNode))
         {
@@ -464,7 +464,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     {
         internal const long SerialVersionUID = 3257848787857585716L;
 
-        /// <seealso cref="GraphVertexChangeEvent.GraphVertexChangeEvent(Object, int, Object)"/>
+        /// <#### cref="GraphVertexChangeEvent.GraphVertexChangeEvent(Object, int, Object)"/>
         public FlyweightVertexEvent(object eventSource, int type, TVv vertex)
             : base(eventSource, type, vertex)
         {

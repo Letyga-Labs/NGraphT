@@ -19,7 +19,7 @@
 namespace NGraphT.Core.Graph;
 
 /// <summary>
-/// Exception indicating that the vertexes supplied to <seealso cref="DirectedAcyclicGraph"/> would cause a
+/// Exception indicating that the vertexes supplied to <see cref="DirectedAcyclicGraph"/> would cause a
 /// cycle.
 ///
 /// <remarks>Author: EnderCrypt (Magnus Gunnarsson).</remarks>

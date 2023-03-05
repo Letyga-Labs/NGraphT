@@ -22,7 +22,7 @@ namespace NGraphT.Core.Graph;
 /// An uniform weights variant of the intrusive edges specifics.
 ///
 /// <para>
-/// The implementation optimizes the use of <seealso cref="DefaultEdge"/> and subclasses. For other custom user
+/// The implementation optimizes the use of <see cref="DefaultEdge"/> and subclasses. For other custom user
 /// edge types, a map is used to store vertex source and target.
 ///
 /// <remarks>Author: Barak Naveh.</remarks>

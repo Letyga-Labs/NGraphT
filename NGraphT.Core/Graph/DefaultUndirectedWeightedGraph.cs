@@ -30,7 +30,7 @@ using Util;
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 /// </param>
-/// <seealso cref="DefaultUndirectedGraph"/>
+/// <#### cref="DefaultUndirectedGraph"/>
 public class DefaultUndirectedWeightedGraph<TNode, TEdge> : DefaultUndirectedGraph<TNode, TEdge>
 {
     /// <summary>

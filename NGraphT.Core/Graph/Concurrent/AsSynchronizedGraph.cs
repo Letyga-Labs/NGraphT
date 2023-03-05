@@ -29,7 +29,7 @@ using Graph;
 /// accomplished through the created Graph.
 ///
 /// <para>
-/// Users need to manually synchronize on edge supplier (see <seealso cref="Graph.getEdgeSupplier()"/>) if
+/// Users need to manually synchronize on edge supplier (see <see cref="Graph.getEdgeSupplier()"/>) if
 /// creating an edge needs to access shared resources. Failure to follow this advice may result in
 /// non-deterministic behavior.
 /// </para>
@@ -53,7 +53,7 @@ using Graph;
 /// <para>
 /// As an alternative, a <em>copyless mode</em> is supported. When enabled, no collection copies are
 /// made at all (and hence the cache setting is ignored). This requires the caller to explicitly
-/// synchronize iteration via the <seealso cref="getLock"/> method. This approach requires quite a bit of care
+/// synchronize iteration via the <see cref="getLock"/> method. This approach requires quite a bit of care
 /// on the part of the calling application, so it is disabled by default.
 /// </para>
 ///
@@ -61,19 +61,19 @@ using Graph;
 /// Even though this graph implementation is thread-safe, callers should still be aware of potential
 /// hazards from removal methods. If calling code obtains a reference to a vertex or edge from the
 /// graph, and then calls another graph method to access information about that object, an
-/// <seealso cref="System.ArgumentException"/> may be thrown if another thread has concurrently removed that
+/// <see cref="System.ArgumentException"/> may be thrown if another thread has concurrently removed that
 /// object. Therefore, calling the remove methods concurrently with a typical algorithm is likely to
-/// cause the algorithm to fail with an <seealso cref="System.ArgumentException"/>. So really the main
+/// cause the algorithm to fail with an <see cref="System.ArgumentException"/>. So really the main
 /// concurrent read/write use case is add-only. <br>
 /// eg: If threadA tries to get all edges touching a certain vertex after threadB removes the vertex,
-/// the algorithm will be interrupted by <seealso cref="System.ArgumentException"/>.
+/// the algorithm will be interrupted by <see cref="System.ArgumentException"/>.
 /// </para>
 /// 
 /// <pre>
 /// Thread threadA = new Thread(() -&gt; {
 ///     Set vertices = graph.vertexSet();
 ///     for (Object TNode : vertices) {
-///         // <seealso cref="System.ArgumentException"/> may be thrown since other threads may have removed
+///         // <see cref="System.ArgumentException"/> may be thrown since other threads may have removed
 ///         // the vertex.
 ///         Set edges = graph.edgesOf(TNode);
 ///         doOtherThings();
@@ -92,7 +92,7 @@ using Graph;
 /// <para>
 /// 
 /// One way to avoid the hazard noted above is for the calling application to explicitly synchronize
-/// all iterations using the <seealso cref="getLock"/> method.
+/// all iterations using the <see cref="getLock"/> method.
 /// </para>
 ///
 /// <para>
@@ -1460,7 +1460,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
     }
 
     /// <summary>
-    /// A builder for <seealso cref="AsSynchronizedGraph"/>.
+    /// A builder for <#### cref="AsSynchronizedGraph"/>.
     /// </summary>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam>

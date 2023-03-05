@@ -19,7 +19,7 @@
 namespace NGraphT.Core.Util;
 
 /// <summary>
-/// Exception thrown to indicate that a <seealso cref="Supplier"/> is in an invalid state.
+/// Exception thrown to indicate that a <see cref="Supplier"/> is in an invalid state.
 ///
 /// <remarks>Author: Hannes Wellmann.</remarks>
 /// </summary>

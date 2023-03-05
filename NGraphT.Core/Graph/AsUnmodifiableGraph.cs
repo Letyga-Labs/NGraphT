@@ -50,61 +50,61 @@ public class AsUnmodifiableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     {
     }
 
-    /// <seealso cref="Graph.addEdge(Object, Object)"/>
+    /// <#### cref="Graph.addEdge(Object, Object)"/>
     public override TEdge AddEdge(TNode sourceVertex, TNode targetVertex)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <seealso cref="Graph.addEdge(Object, Object, Object)"/>
+    /// <#### cref="Graph.addEdge(Object, Object, Object)"/>
     public override bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <seealso cref="Graph.addVertex()"/>
+    /// <#### cref="Graph.addVertex()"/>
     public override TNode AddVertex()
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <seealso cref="Graph.addVertex(Object)"/>
+    /// <#### cref="Graph.addVertex(Object)"/>
     public override bool AddVertex(TNode node)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <seealso cref="Graph.removeAllEdges(Collection)"/>
+    /// <#### cref="Graph.removeAllEdges(Collection)"/>
     public virtual bool RemoveAllEdges<T1>(ICollection<T1> edges) where T1 : TEdge
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <seealso cref="Graph.removeAllEdges(Object, Object)"/>
+    /// <#### cref="Graph.removeAllEdges(Object, Object)"/>
     public override ISet<TEdge> RemoveAllEdges(TNode sourceVertex, TNode targetVertex)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <seealso cref="Graph.removeAllVertices(Collection)"/>
+    /// <#### cref="Graph.removeAllVertices(Collection)"/>
     public virtual bool RemoveAllVertices<T1>(ICollection<T1> vertices) where T1 : TNode
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <seealso cref="Graph.removeEdge(Object)"/>
+    /// <#### cref="Graph.removeEdge(Object)"/>
     public override bool RemoveEdge(TEdge edge)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <seealso cref="Graph.removeEdge(Object, Object)"/>
+    /// <#### cref="Graph.removeEdge(Object, Object)"/>
     public override TEdge RemoveEdge(TNode sourceVertex, TNode targetVertex)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <seealso cref="Graph.removeVertex(Object)"/>
+    /// <#### cref="Graph.removeVertex(Object)"/>
     public override bool RemoveVertex(TNode node)
     {
         throw new NotSupportedException(UNMODIFIABLE);

@@ -22,7 +22,7 @@ using Graph;
 using Util;
 
 /// <summary>
-/// An edge set factory which creates <seealso cref="ArrayUnenforcedSet"/> of size 1, suitable for small degree
+/// An edge set factory which creates <see cref="ArrayUnenforcedSet"/> of size 1, suitable for small degree
 /// vertices.
 /// </summary>
 ///

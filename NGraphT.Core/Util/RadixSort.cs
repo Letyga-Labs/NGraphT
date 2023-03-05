@@ -29,11 +29,11 @@ namespace NGraphT.Core.Util;
 /// </summary>
 public class RadixSort
 {
-    /// @deprecated use <seealso cref="setCutOff(int)"/> instead 
+    /// @deprecated use <#### cref="setCutOff(int)"/> instead 
     [
     Obsolete
     (
-    "use <seealso cref=\"setCutOff(int)\"/> instead"
+    "use <#### cref=\"setCutOff(int)\"/> instead"
     )
     ]
     (since = "1.5.2", forRemoval = true) public static int CutOff = 40; // @CS.suppress[StaticVariableName]

@@ -19,8 +19,8 @@
 namespace NGraphT.Core.Traverse;
 
 /// <summary>
-/// An exception to signal that <seealso cref="TopologicalOrderIterator"/> is used for a non-directed acyclic graph.
-/// Note that this class extends <seealso cref="System.ArgumentException"/> for backward compatibility
+/// An exception to signal that <see cref="TopologicalOrderIterator"/> is used for a non-directed acyclic graph.
+/// Note that this class extends <see cref="System.ArgumentException"/> for backward compatibility
 ///
 /// <remarks>Author: Kaiichiro Ota.</remarks>
 /// </summary>

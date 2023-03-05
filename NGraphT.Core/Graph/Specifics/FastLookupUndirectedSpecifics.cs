@@ -25,7 +25,7 @@ using Graph;
 /// Fast implementation of UndirectedSpecifics. This class uses additional data structures to improve
 /// the performance of methods which depend on edge retrievals, TEdge.g. getEdge(TNode u, TNode TNode),
 /// containsEdge(TNode u, TNode TNode), addEdge(TNode u, TNode TNode). A disadvantage is an increase in memory consumption.
-/// If memory utilization is an issue, use a <seealso cref="UndirectedSpecifics"/> instead.
+/// If memory utilization is an issue, use a <see cref="UndirectedSpecifics"/> instead.
 /// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>

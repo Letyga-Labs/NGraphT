@@ -30,7 +30,7 @@ public abstract class Graphs
 {
     /// <summary>
     /// Creates a new edge and adds it to the specified graph similarly to the
-    /// <seealso cref="Graph.addEdge(Object, Object)"/> method.
+    /// <see cref="Graph.addEdge(Object, Object)"/> method.
     /// </summary>
     /// <param name="g"> the graph for which the edge to be added.</param>
     /// <param name="sourceVertex"> source vertex of the edge.</param>
@@ -41,9 +41,8 @@ public abstract class Graphs
     /// </param>
     /// <returns>The newly created edge if added to the graph, otherwise <c>
     /// null</c>.</returns>
-    /// <exception cref="NotSupportedException"> if the graph has no edge supplier
-    /// </exception>
-    /// <seealso cref="Graph.addEdge(Object, Object)"/>
+    /// <exception cref="NotSupportedException"> if the graph has no edge supplier.</exception>
+    /// <see cref="Graph.addEdge(Object, Object)"/>
     public static TEdge AddEdge<TNode, TEdge>(IGraph<TNode, TEdge> g, TNode sourceVertex, TNode targetVertex, double weight)
     {
         Func<TEdge> edgeSupplier = g.EdgeSupplier;
@@ -68,7 +67,7 @@ public abstract class Graphs
     /// <summary>
     /// Adds the specified source and target vertices to the graph, if not already included, and
     /// creates a new edge and adds it to the specified graph similarly to the
-    /// <seealso cref="Graph.addEdge(Object, Object)"/> method.
+    /// <#### cref="Graph.addEdge(Object, Object)"/> method.
     /// </summary>
     /// <param name="g"> the graph for which the specified edge to be added.</param>
     /// <param name="sourceVertex"> source vertex of the edge.</param>
@@ -110,7 +109,7 @@ public abstract class Graphs
     /// <summary>
     /// Adds the specified source and target vertices to the graph, if not already included, and
     /// creates a new weighted edge and adds it to the specified graph similarly to the
-    /// <seealso cref="Graph.addEdge(Object, Object)"/> method.
+    /// <#### cref="Graph.addEdge(Object, Object)"/> method.
     /// </summary>
     /// <param name="g"> the graph for which the specified edge to be added.</param>
     /// <param name="sourceVertex"> source vertex of the edge.</param>
@@ -162,20 +161,20 @@ public abstract class Graphs
     /// Adds all the vertices and all the edges of the specified source digraph to the specified
     /// destination digraph, reversing all of the edges. If you want to do this as a linked view of
     /// the source graph (rather than by copying to a destination graph), use
-    /// <seealso cref="EdgeReversedGraph"/> instead.
+    /// <#### cref="EdgeReversedGraph"/> instead.
     ///
     /// <para>
     /// The behavior of this operation is undefined if any of the specified graphs is modified while
     /// operation is in progress.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="destination"> the graph to which vertices and edges are added.</param>
     /// <param name="source"> the graph used as source for vertices and edges to add.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// </param>
-    /// <seealso cref="EdgeReversedGraph"/>
+    /// <#### cref="EdgeReversedGraph"/>
 //JAVA TO C# CONVERTER TODO TASK: There is no C# equivalent to the Java 'super' constraint:
 //ORIGINAL LINE: public static <TNode, TEdge> void addGraphReversed(Graph<? super TNode, ? super TEdge> destination, Graph<TNode, TEdge> source)
     public static void AddGraphReversed<TNode, TEdge, T1, T2>(IGraph<T1, T2> destination, IGraph<TNode, TEdge> source)
@@ -196,7 +195,7 @@ public abstract class Graphs
     /// <summary>
     /// Adds a subset of the edges of the specified source graph to the specified destination graph.
     /// The behavior of this operation is undefined if either of the graphs is modified while the
-    /// operation is in progress. <seealso cref="addEdgeWithVertices"/> is used for the transfer, so source
+    /// operation is in progress. <#### cref="addEdgeWithVertices"/> is used for the transfer, so source
     /// vertexes will be added automatically to the target graph.
     /// </summary>
     /// <param name="destination"> the graph to which edges are to be added.</param>
@@ -231,19 +230,18 @@ public abstract class Graphs
     /// <summary>
     /// Adds all of the specified vertices to the destination graph. The behavior of this operation
     /// is undefined if the specified vertex collection is modified while the operation is in
-    /// progress. This method will invoke the <seealso cref="Graph.addVertex(Object)"/> method.
+    /// progress. This method will invoke the <#### cref="Graph.addVertex(Object)"/> method.
     /// </summary>
     /// <param name="destination"> the graph to which edges are to be added.</param>
     /// <param name="vertices"> the vertices to be added to the graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// </param>
-    /// <returns><c>true</c> if graph changed as a result of the call</returns>
+    /// <returns><c>true</c> if graph changed as a result of the call.</returns>
     /// <exception cref="NullReferenceException"> if the specified vertices contains one or more null vertices, or
     ///         if the specified vertex collection is <c>
-    /// null</c>.
-    /// </exception>
-    /// <seealso cref="Graph.addVertex(Object)"/>
+    /// null</c>.</exception>
+    /// <#### cref="Graph.addVertex(Object)"/>
 //JAVA TO C# CONVERTER TODO TASK: There is no C# equivalent to the Java 'super' constraint:
 //ORIGINAL LINE: public static <TNode, TEdge> boolean addAllVertices(Graph<? super TNode, ? super TEdge> destination, Collection<? extends TNode> vertices)
     public static bool AddAllVertices<TNode, TEdge, T1, T2, T3>(IGraph<T1, T2> destination, ICollection<T3> vertices)
@@ -264,9 +262,9 @@ public abstract class Graphs
     /// multigraph vertices may appear more than once in the returned list.
     ///
     /// <para>
-    /// The method uses <seealso cref="Graph.edgesOf(Object)"/> to traverse the graph.
-    ///
+    /// The method uses <#### cref="Graph.edgesOf(Object)"/> to traverse the graph.
     /// </para>
+    ///
     /// </summary>
     /// <param name="g"> the graph to look for neighbors in.</param>
     /// <param name="vertex"> the vertex to get the neighbors of.</param>
@@ -311,9 +309,9 @@ public abstract class Graphs
     /// graph is a multigraph, vertices may appear more than once in the returned list.
     ///
     /// <para>
-    /// The method uses <seealso cref="Graph.incomingEdgesOf(Object)"/> to traverse the graph.
-    ///
+    /// The method uses <#### cref="Graph.incomingEdgesOf(Object)"/> to traverse the graph.
     /// </para>
+    ///
     /// </summary>
     /// <param name="g"> the graph to look for predecessors in.</param>
     /// <param name="vertex"> the vertex to get the predecessors of.</param>
@@ -338,9 +336,9 @@ public abstract class Graphs
     /// is a multigraph vertices may appear more than once in the returned list.
     ///
     /// <para>
-    /// The method uses <seealso cref="Graph.outgoingEdgesOf(Object)"/> to traverse the graph.
-    ///
+    /// The method uses <#### cref="Graph.outgoingEdgesOf(Object)"/> to traverse the graph.
     /// </para>
+    ///
     /// </summary>
     /// <param name="g"> the graph to look for successors in.</param>
     /// <param name="vertex"> the vertex to get the successors of.</param>
@@ -372,7 +370,7 @@ public abstract class Graphs
     /// <returns>an undirected view of the specified graph, if it is directed, or or the specified
     ///         graph itself if it is already undirected.</returns>
     /// <exception cref="ArgumentException"> if the graph is neither directed nor undirected.</exception>
-    /// <seealso cref="AsUndirectedGraph"/>
+    /// <#### cref="AsUndirectedGraph"/>
     public static IGraph<TNode, TEdge> UndirectedGraph<TNode, TEdge>(IGraph<TNode, TEdge> g)
     {
         if (g.Type.Directed)
@@ -520,7 +518,7 @@ public abstract class Graphs
 
     /// <summary>
     /// Add edges from one source vertex to multiple target vertices. Whether duplicates are created
-    /// depends on the underlying <seealso cref="Graph"/> implementation.
+    /// depends on the underlying <#### cref="Graph"/> implementation.
     /// </summary>
     /// <param name="graph"> graph to be mutated.</param>
     /// <param name="source"> source vertex of the new edges.</param>
@@ -547,7 +545,7 @@ public abstract class Graphs
 
     /// <summary>
     /// Add edges from multiple source vertices to one target vertex. Whether duplicates are created
-    /// depends on the underlying <seealso cref="Graph"/> implementation.
+    /// depends on the underlying <#### cref="Graph"/> implementation.
     /// </summary>
     /// <param name="graph"> graph to be mutated.</param>
     /// <param name="target"> target vertex for the new edges.</param>
@@ -607,10 +605,9 @@ public abstract class Graphs
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
-    /// <exception cref="NullReferenceException"> if {@code graph} is {@code null}
-    /// </exception>
+    /// <exception cref="NullReferenceException"> if {@code graph} is {@code null}.</exception>
     /// <returns>the mapping as an object containing the {@code vertexMap} and the {@code indexList}</returns>
-    /// <seealso cref="VertexToIntegerMapping"/>
+    /// <#### cref="VertexToIntegerMapping"/>
     public static VertexToIntegerMapping<TNode> GetVertexToIntegerMapping<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
         return new VertexToIntegerMapping<TNode>(Objects.requireNonNull(graph).vertexSet());

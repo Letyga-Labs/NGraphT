@@ -19,7 +19,7 @@
 namespace NGraphT.Core.Graph;
 
 /// <summary>
-/// A default implementation for edges in a <seealso cref="Graph"/>.
+/// A default implementation for edges in a <see cref="Graph"/>.
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
 /// </summary>

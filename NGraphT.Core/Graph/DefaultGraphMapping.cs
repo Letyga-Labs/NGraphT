@@ -23,7 +23,7 @@ using Core;
 /// <summary>
 /// Implementation of the GraphMapping interface. The performance of <c>
 /// getVertex/EdgeCorrespondence</c> is based on the performance of the concrete Map class which
-/// is passed in the constructor. For example, using <seealso cref="System.Collections.Hashtable"/> will provide expected $O(1)$
+/// is passed in the constructor. For example, using <see cref="System.Collections.Hashtable"/> will provide expected $O(1)$
 /// performance.
 /// </summary>
 ///

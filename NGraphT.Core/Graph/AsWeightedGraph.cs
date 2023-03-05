@@ -66,7 +66,7 @@ public class AsWeightedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGrap
     /// </summary>
     /// <param name="graph"> the backing graph over which a weighted view is to be created.</param>
     /// <param name="weights"> the map containing the edge weights.</param>
-    /// <exception cref="NullReferenceException"> if the graph or the weights are null. </exception>
+    /// <exception cref="NullReferenceException"> if the graph or the weights are null.</exception>
     public AsWeightedGraph(IGraph<TNode, TEdge> graph, IDictionary<TEdge, double> weights)
         : this(graph, weights, graph.Type.Weighted)
     {

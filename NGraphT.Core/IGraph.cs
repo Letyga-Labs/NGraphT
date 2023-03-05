@@ -1,4 +1,4 @@
-﻿/*
+/*
  * (C) Copyright 2003-2021, by Barak Naveh and Contributors.
  *
  * JGraphT : a free Java graph-theory library
@@ -64,26 +64,26 @@ public interface IGraph<TNode, TEdge>
     ///
     /// <para>
     /// A graph uses the vertex supplier to create new vertex objects whenever a user calls method
-    /// <seealso cref="AddVertex()"/>. Users can also create the vertex in user code and then use method
-    /// <seealso cref="AddVertex(TNode)"/> to add the vertex.
-    ///
+    /// <see cref="AddVertex()"/>. Users can also create the vertex in user code and then use method
+    /// <see cref="AddVertex(TNode)"/> to add the vertex.
     /// </para>
+    ///
     /// <para>
     /// In contrast with the Supplier interface, the vertex supplier has the additional
     /// requirement that a new and distinct result is returned every time it is invoked. More
     /// specifically for a new vertex to be added in a graph <c>TNode</c> must <i>not</i> be equal
     /// to any other vertex in the graph. More formally, the graph must not contain any vertex
     /// <c>v2</c> such that <c>v2.equals(TNode)</c>.
-    ///
     /// </para>
+    ///
     /// <para>
-    /// Care must also be taken when interchanging calls to methods <seealso cref="AddVertex(TNode)"/>
-    /// and <seealso cref="AddVertex()"/>. In such a case the user must make sure never to add vertices
-    /// in the graph using method <seealso cref="AddVertex(TNode)"/>, which are going to be returned in
+    /// Care must also be taken when interchanging calls to methods <see cref="AddVertex(TNode)"/>
+    /// and <see cref="AddVertex()"/>. In such a case the user must make sure never to add vertices
+    /// in the graph using method <see cref="AddVertex(TNode)"/>, which are going to be returned in
     /// the future by the supplied vertex supplier. Such a sequence will result into an
-    /// <seealso cref="System.ArgumentException"/> when calling method <seealso cref="AddVertex()"/>.
-    ///
+    /// <see cref="System.ArgumentException"/> when calling method <see cref="AddVertex()"/>.
     /// </para>
+    ///
     /// </summary>
     /// <returns>the vertex supplier or <c>null</c> if the graph has no such supplier.</returns>
     Func<TNode> VertexSupplier { get; }
@@ -93,18 +93,18 @@ public interface IGraph<TNode, TEdge>
     ///
     /// <para>
     /// A graph uses the edge supplier to create new edge objects whenever a user calls method
-    /// <seealso cref="AddEdge(TNode,TNode)"/>. Users can also create the edge in user code and then
-    /// use method <seealso cref="AddEdge(TNode,TNode,TEdge)"/> to add the edge.
-    ///
+    /// <see cref="AddEdge(TNode,TNode)"/>. Users can also create the edge in user code and then
+    /// use method <see cref="AddEdge(TNode,TNode,TEdge)"/> to add the edge.
     /// </para>
+    ///
     /// <para>
     /// In contrast with the Supplier interface, the edge supplier has the additional
     /// requirement that a new and distinct result is returned every time it is invoked. More
     /// specifically for a new edge to be added in a graph <c>TEdge</c> must <i>not</i> be equal to
     /// any other edge in the graph (even if the graph allows edge-multiplicity). More formally, the
     /// graph must not contain any edge <c>e2</c> such that <c>e2.equals(TEdge)</c>.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <returns>the edge supplier <c>null</c> if the graph has no such supplier.</returns>
     Func<TEdge> EdgeSupplier { get; }
@@ -147,35 +147,34 @@ public interface IGraph<TNode, TEdge>
     ///
     /// <para>
     /// The source and target vertices must already be contained in this graph. If they are not found
-    /// in graph <seealso cref="System.ArgumentException"/> is thrown.
-    ///
+    /// in graph <see cref="System.ArgumentException"/> is thrown.
     /// </para>
+    ///
     /// <para>
     /// This method creates the new edge <c>TEdge</c> using this graph's edge supplier (see
-    /// <seealso cref="EdgeSupplier"/>). For the new edge to be added <c>TEdge</c> must <i>not</i> be
+    /// <see cref="EdgeSupplier"/>). For the new edge to be added <c>TEdge</c> must <i>not</i> be
     /// equal to any other edge the graph (even if the graph allows edge-multiplicity). More
     /// formally, the graph must not contain any edge <c>e2</c> such that
     /// <c>e2.equals(TEdge)</c>. If such <c>
     /// e2</c> is found then the newly created edge <c>TEdge</c> is abandoned, the method leaves
     /// this graph unchanged and returns <c>null</c>.
-    ///
     /// </para>
+    ///
     /// <para>
-    /// If the underlying graph implementation's <seealso cref="EdgeSupplier"/> returns
+    /// If the underlying graph implementation's <see cref="EdgeSupplier"/> returns
     /// <c>null</c>, then this method cannot create edges and throws an
-    /// <seealso cref="System.NotSupportedException"/>.
-    ///
+    /// <see cref="System.NotSupportedException"/>.
     /// </para>
+    ///
     /// </summary>
     /// <param name="sourceVertex"> source vertex of the edge.</param>
     /// <param name="targetVertex"> target vertex of the edge.</param>
     /// <returns>The newly created edge if added to the graph, otherwise <c>
     /// null</c>.</returns>
-    /// <exception cref="ArgumentException"> if source or target vertices are not found in the graph. </exception>
-    /// <exception cref="NullReferenceException"> if any of the specified vertices is <c>null</c>. </exception>
-    /// <exception cref="NotSupportedException"> if the graph was not initialized with an edge supplier
-    /// </exception>
-    /// <seealso cref=".EdgeSupplier"/>
+    /// <exception cref="ArgumentException"> if source or target vertices are not found in the graph.</exception>
+    /// <exception cref="NullReferenceException"> if any of the specified vertices is <c>null</c>.</exception>
+    /// <exception cref="NotSupportedException"> if the graph was not initialized with an edge supplier.</exception>
+    /// <seealso cref="EdgeSupplier"/>
     TEdge AddEdge(TNode sourceVertex, TNode targetVertex);
 
     /// <summary>
@@ -198,14 +197,12 @@ public interface IGraph<TNode, TEdge>
     /// <param name="targetVertex"> target vertex of the edge.</param>
     /// <param name="edge"> edge to be added to this graph.</param>
     /// <returns><c>true</c> if this graph did not already contain the specified edge.</returns>
-    /// <exception cref="ArgumentException"> if source or target vertices are not found in the graph. </exception>
-    /// <exception cref="ClassCastException"> if the specified edge is not assignment compatible with the class
-    ///         of edges produced by the edge factory of this graph. </exception>
-    /// <exception cref="NullReferenceException"> if any of the specified vertices is <c>
-    /// null</c>.
-    /// </exception>
-    /// <seealso cref=".addEdge(Object, Object)"/>
-    /// <seealso cref=".EdgeSupplier"/>
+    /// <exception cref="ArgumentException"> if source or target vertices are not found in the graph.</exception>
+    /// <exception cref="InvalidCastException"> if the specified edge is not assignment compatible with the class
+    ///         of edges produced by the edge factory of this graph.</exception>
+    /// <exception cref="NullReferenceException"> if any of the specified vertices is <c>null</c>.</exception>
+    /// <see cref="AddEdge(TNode,TNode)"/>
+    /// <seealso cref="EdgeSupplier"/>
     bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge);
 
     /// <summary>
@@ -213,34 +210,34 @@ public interface IGraph<TNode, TEdge>
     ///
     /// <para>
     /// This method creates the new vertex <c>TNode</c> using this graph's vertex supplier (see
-    /// <seealso cref="VertexSupplier"/>). For the new vertex to be added <c>TNode</c> must <i>not</i>
+    /// <see cref="VertexSupplier"/>). For the new vertex to be added <c>TNode</c> must <i>not</i>
     /// be equal to any other vertex in the graph. More formally, the graph must not contain any
     /// vertex <c>v2</c> such that <c>v2.equals(TNode)</c>. If such <c>
     /// v2</c> is found then the newly created vertex <c>TNode</c> is abandoned, the method
-    /// leaves this graph unchanged and throws an <seealso cref="System.ArgumentException"/>.
-    ///
+    /// leaves this graph unchanged and throws an <see cref="System.ArgumentException"/>.
     /// </para>
+    ///
     /// <para>
-    /// If the underlying graph implementation's <seealso cref="VertexSupplier"/> returns
+    /// If the underlying graph implementation's <see cref="VertexSupplier"/> returns
     /// <c>null</c>, then this method cannot create vertices and throws an
-    /// <seealso cref="System.NotSupportedException"/>.
-    ///
+    /// <see cref="System.NotSupportedException"/>.
     /// </para>
+    ///
     /// <para>
-    /// Care must also be taken when interchanging calls to methods <seealso cref="AddVertex(TNode)"/>
-    /// and <seealso cref="AddVertex()"/>. In such a case the user must make sure never to add vertices
-    /// in the graph using method <seealso cref="AddVertex(TNode)"/>, which are going to be returned in
+    /// Care must also be taken when interchanging calls to methods <see cref="AddVertex(TNode)"/>
+    /// and <see cref="AddVertex()"/>. In such a case the user must make sure never to add vertices
+    /// in the graph using method <see cref="AddVertex(TNode)"/>, which are going to be returned in
     /// the future by the supplied vertex supplier. Such a sequence will result into an
-    /// <seealso cref="System.ArgumentException"/> when calling method <seealso cref="AddVertex()"/>.
-    ///
+    /// <see cref="System.ArgumentException"/> when calling method <see cref="AddVertex()"/>.
     /// </para>
+    ///
     /// </summary>
     /// <returns>The newly created vertex if added to the graph.</returns>
-    /// <exception cref="ArgumentException"> if the graph supplier returns a vertex which is already in
-    ///         the graph.</exception>
-    /// <exception cref="NotSupportedException"> if the graph was not initialized with a vertex supplier
+    /// <exception cref="ArgumentException">
+    /// If the graph supplier returns a vertex which is already in the graph.
     /// </exception>
-    /// <seealso cref=".VertexSupplier"/>
+    /// <exception cref="NotSupportedException"> if the graph was not initialized with a vertex supplier.</exception>
+    /// <seealso cref="VertexSupplier"/>
     TNode AddVertex();
 
     /// <summary>
@@ -254,7 +251,7 @@ public interface IGraph<TNode, TEdge>
     /// <param name="node"> vertex to be added to this graph.</param>
     /// <returns><c>true</c> if this graph did not already contain the specified vertex.</returns>
     /// <exception cref="NullReferenceException"> if the specified vertex is <c>
-    /// null</c>. </exception>
+    /// null</c>.</exception>
     bool AddVertex(TNode node);
 
     /// <summary>
@@ -296,10 +293,12 @@ public interface IGraph<TNode, TEdge>
     ///
     /// <para>
     /// The graph implementation may maintain a particular set ordering (TEdge.g. via
-    /// <seealso cref="java.util.LinkedHashSet"/>) for deterministic iteration, but this is not required. It is
+    /// <see cref="java.util.LinkedHashSet"/>) for deterministic iteration, but this is not required. It is
     /// the responsibility of callers who rely on this behavior to only use graph implementations
     /// which support it.
     /// </para>
+    ///
+    /// 
     /// </summary>
     /// <returns>a set of the edges contained in this graph.</returns>
     ISet<TEdge> EdgeSet();
@@ -310,17 +309,17 @@ public interface IGraph<TNode, TEdge>
     /// <para>
     /// A degree of a vertex in an undirected graph is the number of edges touching that vertex.
     /// Edges with same source and target vertices (self-loops) are counted twice.
-    ///
     /// </para>
+    ///
     /// <para>
     /// In directed graphs this method returns the sum of the "in degree" and the "out degree".
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="vertex"> vertex whose degree is to be calculated.</param>
     /// <returns>the degree of the specified vertex.</returns>
-    /// <exception cref="ArgumentException"> if vertex is not found in the graph. </exception>
-    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>. </exception>
+    /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
+    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     /// <exception cref="ArithmeticException"> if the result overflows an int.</exception>
     int DegreeOf(TNode vertex);
 
@@ -330,8 +329,8 @@ public interface IGraph<TNode, TEdge>
     /// </summary>
     /// <param name="vertex"> the vertex for which a set of touching edges is to be returned.</param>
     /// <returns>a set of all edges touching the specified vertex.</returns>
-    /// <exception cref="ArgumentException"> if vertex is not found in the graph. </exception>
-    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>. </exception>
+    /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
+    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     ISet<TEdge> EdgesOf(TNode vertex);
 
     /// <summary>
@@ -341,18 +340,18 @@ public interface IGraph<TNode, TEdge>
     /// The "in degree" of a vertex in a directed graph is the number of inward directed edges from
     /// that vertex. See <a href="http://mathworld.wolfram.com/Indegree.html">
     /// http://mathworld.wolfram.com/Indegree.html</a>.
-    ///
     /// </para>
+    ///
     /// <para>
     /// In the case of undirected graphs this method returns the number of edges touching the vertex.
     /// Edges with same source and target vertices (self-loops) are counted twice.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="vertex"> vertex whose degree is to be calculated.</param>
     /// <returns>the degree of the specified vertex.</returns>
-    /// <exception cref="ArgumentException"> if vertex is not found in the graph. </exception>
-    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>. </exception>
+    /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
+    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     /// <exception cref="ArithmeticException"> if the result overflows an int.</exception>
     int InDegreeOf(TNode vertex);
 
@@ -362,13 +361,13 @@ public interface IGraph<TNode, TEdge>
     /// <para>
     /// In the case of undirected graphs this method returns all edges touching the vertex, thus,
     /// some of the returned edges may have their source and target vertices in the opposite order.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="vertex"> the vertex for which the list of incoming edges to be returned.</param>
     /// <returns>a set of all edges incoming into the specified vertex.</returns>
-    /// <exception cref="ArgumentException"> if vertex is not found in the graph. </exception>
-    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>. </exception>
+    /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
+    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     ISet<TEdge> IncomingEdgesOf(TNode vertex);
 
     /// <summary>
@@ -378,18 +377,18 @@ public interface IGraph<TNode, TEdge>
     /// The "out degree" of a vertex in a directed graph is the number of outward directed edges from
     /// that vertex. See <a href="http://mathworld.wolfram.com/Outdegree.html">
     /// http://mathworld.wolfram.com/Outdegree.html</a>.
-    ///
     /// </para>
+    ///
     /// <para>
     /// In the case of undirected graphs this method returns the number of edges touching the vertex.
     /// Edges with same source and target vertices (self-loops) are counted twice.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="vertex"> vertex whose degree is to be calculated.</param>
     /// <returns>the degree of the specified vertex.</returns>
-    /// <exception cref="ArgumentException"> if vertex is not found in the graph. </exception>
-    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>. </exception>
+    /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
+    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     /// <exception cref="ArithmeticException"> if the result overflows an int.</exception>
     int OutDegreeOf(TNode vertex);
 
@@ -399,27 +398,26 @@ public interface IGraph<TNode, TEdge>
     /// <para>
     /// In the case of undirected graphs this method returns all edges touching the vertex, thus,
     /// some of the returned edges may have their source and target vertices in the opposite order.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <param name="vertex"> the vertex for which the list of outgoing edges to be returned.</param>
     /// <returns>a set of all edges outgoing from the specified vertex.</returns>
-    /// <exception cref="ArgumentException"> if vertex is not found in the graph. </exception>
-    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>. </exception>
+    /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
+    /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     ISet<TEdge> OutgoingEdgesOf(TNode vertex);
 
     /// <summary>
     /// Removes all the edges in this graph that are also contained in the specified edge collection.
     /// After this call returns, this graph will contain no edges in common with the specified edges.
-    /// This method will invoke the <seealso cref="removeEdge(Object)"/> method.
+    /// This method will invoke the <see cref="removeEdge(Object)"/> method.
     /// </summary>
     /// <param name="edges"> edges to be removed from this graph.</param>
-    /// <returns><c>true</c> if this graph changed as a result of the call</returns>
+    /// <returns><c>true</c> if this graph changed as a result of the call.</returns>
     /// <exception cref="NullReferenceException"> if the specified edge collection is <c>
-    /// null</c>.
-    /// </exception>
-    /// <seealso cref=".removeEdge(Object)"/>
-    /// <seealso cref=".containsEdge(Object)"/>
+    /// null</c>.</exception>
+    /// <see cref=".removeEdge(Object)"/>
+    /// <see cref=".containsEdge(Object)"/>
 //JAVA TO C# CONVERTER WARNING: Java wildcard generics have no direct equivalent in C#:
 //ORIGINAL LINE: boolean removeAllEdges(java.util.Collection<? extends TEdge> edges);
     bool RemoveAllEdges<T1>(ICollection<T1> edges);
@@ -428,8 +426,8 @@ public interface IGraph<TNode, TEdge>
     /// Removes all the edges going from the specified source vertex to the specified target vertex,
     /// and returns a set of all removed edges. Returns <c>null</c> if any of the specified
     /// vertices does not exist in the graph. If both vertices exist but no edge is found, returns an
-    /// empty set. This method will either invoke the <seealso cref="removeEdge(Object)"/> method, or the
-    /// <seealso cref="removeEdge(Object, Object)"/> method.
+    /// empty set. This method will either invoke the <see cref="removeEdge(Object)"/> method, or the
+    /// <see cref="removeEdge(Object, Object)"/> method.
     /// </summary>
     /// <param name="sourceVertex"> source vertex of the edge.</param>
     /// <param name="targetVertex"> target vertex of the edge.</param>
@@ -439,15 +437,14 @@ public interface IGraph<TNode, TEdge>
     /// <summary>
     /// Removes all the vertices in this graph that are also contained in the specified vertex
     /// collection. After this call returns, this graph will contain no vertices in common with the
-    /// specified vertices. This method will invoke the <seealso cref="removeVertex(Object)"/> method.
+    /// specified vertices. This method will invoke the <see cref="removeVertex(Object)"/> method.
     /// </summary>
     /// <param name="vertices"> vertices to be removed from this graph.</param>
-    /// <returns><c>true</c> if this graph changed as a result of the call</returns>
+    /// <returns><c>true</c> if this graph changed as a result of the call.</returns>
     /// <exception cref="NullReferenceException"> if the specified vertex collection is <c>
-    /// null</c>.
-    /// </exception>
-    /// <seealso cref=".removeVertex(Object)"/>
-    /// <seealso cref=".containsVertex(Object)"/>
+    /// null</c>.</exception>
+    /// <see cref=".removeVertex(Object)"/>
+    /// <see cref=".containsVertex(Object)"/>
 //JAVA TO C# CONVERTER WARNING: Java wildcard generics have no direct equivalent in C#:
 //ORIGINAL LINE: boolean removeAllVertices(java.util.Collection<? extends TNode> vertices);
     bool RemoveAllVertices<T1>(ICollection<T1> vertices);
@@ -502,7 +499,7 @@ public interface IGraph<TNode, TEdge>
     ///
     /// <para>
     /// The graph implementation may maintain a particular set ordering (TEdge.g. via
-    /// <seealso cref="java.util.LinkedHashSet"/>) for deterministic iteration, but this is not required. It is
+    /// <see cref="java.util.LinkedHashSet"/>) for deterministic iteration, but this is not required. It is
     /// the responsibility of callers who rely on this behavior to only use graph implementations
     /// which support it.
     /// </para>
@@ -543,7 +540,7 @@ public interface IGraph<TNode, TEdge>
 
     /// <summary>
     /// Returns the weight assigned to a given edge. Unweighted graphs return 1.0 (as defined by
-    /// <seealso cref="DefaultEdgeWeight"/>), allowing weighted-graph algorithms to apply to them when
+    /// <see cref="DefaultEdgeWeight"/>), allowing weighted-graph algorithms to apply to them when
     /// meaningful.
     /// </summary>
     /// <param name="edge"> edge of interest.</param>
@@ -564,9 +561,9 @@ public interface IGraph<TNode, TEdge>
     /// of these vertices is <c>null</c>, a <c>NullPointerException</c> is thrown.
     /// <para>
     /// When there exist multiple edges between <c>sourceVertex</c> and
-    /// <c>targetVertex</c>, consider using <seealso cref="setEdgeWeight(Object, double)"/> instead.
-    ///
+    /// <c>targetVertex</c>, consider using <see cref="setEdgeWeight(Object, double)"/> instead.
     /// </para>
+    ///
     /// </summary>
     /// <param name="sourceVertex"> source vertex of the edge.</param>
     /// <param name="targetVertex"> target vertex of the edge.</param>
@@ -578,7 +575,7 @@ public interface IGraph<TNode, TEdge>
     }
 
     /// <summary>
-    /// Access the graph using the <seealso cref="IGraphIterables{TNode,TEdge}"/> interface. This allows accessing graphs
+    /// Access the graph using the <see cref="IGraphIterables{TNode,TEdge}"/> interface. This allows accessing graphs
     /// without the restrictions imposed by 32-bit arithmetic. Moreover, graph implementations are
     /// free to implement this interface without explicitly materializing intermediate results.
     /// </summary>

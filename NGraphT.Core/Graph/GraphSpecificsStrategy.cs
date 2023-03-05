@@ -34,8 +34,8 @@ using Specifics;
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 /// </param>
-/// <seealso cref="FastLookupGraphSpecificsStrategy"/>
-/// <seealso cref="DefaultGraphSpecificsStrategy"/>
+/// <#### cref="FastLookupGraphSpecificsStrategy"/>
+/// <#### cref="DefaultGraphSpecificsStrategy"/>
 public interface IGraphSpecificsStrategy<TNode, TEdge>
 {
     /// <summary>
@@ -44,8 +44,8 @@ public interface IGraphSpecificsStrategy<TNode, TEdge>
     ///
     /// <para>
     /// Note that it is very important to use a map implementation which respects iteration order.
-    ///
     /// </para>
+    ///
     /// </summary>
     /// <returns>a function which creates intrusive edges specifics.</returns>
     Func<IGraphType, INtrusiveEdgesSpecifics<TNode, TEdge>> IntrusiveEdgesSpecificsFactory { get; }
