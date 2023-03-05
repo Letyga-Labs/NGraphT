@@ -76,7 +76,6 @@ using Core;
 /// the user must be aware that using this implementation for certain algorithms might come with
 /// computational overhead. For certain algorithms it is better to maintain a subgraph by hand
 /// instead of using this implementation as a black box.
-///
 /// </para>
 /// </summary>
 /// @param <TNode> the vertex type.</param>

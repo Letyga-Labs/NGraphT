@@ -27,7 +27,6 @@ namespace NGraphT.Core.Graph;
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
 /// <remarks>Author: Dimitrios Michail.</remarks>
-///
 /// </para>
 /// </summary>
 ///

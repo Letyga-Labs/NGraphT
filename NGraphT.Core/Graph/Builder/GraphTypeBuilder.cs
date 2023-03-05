@@ -47,7 +47,6 @@ using Util;
 /// </pre>
 /// 
 /// </blockquote>
-///
 /// </para>
 /// <para>
 /// The builder also provides the ability to construct a graph from another graph such as:
@@ -62,7 +61,6 @@ using Util;
 /// </pre>
 /// 
 /// </blockquote>
-///
 /// </para>
 /// </summary>
 ///

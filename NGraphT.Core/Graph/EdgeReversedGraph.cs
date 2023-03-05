@@ -30,7 +30,6 @@ using Core;
 /// a directed graph representing a tree, with edges from parent to child, and you want to find all
 /// of the parents of a node. To do this, simply create an edge-reversed graph and pass that as input
 /// to <seealso cref="NGraphT.Core.Traverse.DepthFirstIterator"/>.
-///
 /// </para>
 /// </summary>
 ///

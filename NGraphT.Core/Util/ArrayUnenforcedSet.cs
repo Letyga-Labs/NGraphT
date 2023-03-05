@@ -27,7 +27,6 @@ namespace NGraphT.Core.Util;
 /// Note that for equals/hashCode, the class implements the Set behavior (unordered), not the list
 /// behavior (ordered); the fact that it subclasses ArrayList should be considered an implementation
 /// detail.
-///
 /// </para>
 /// </summary>
 /// @param <TEdge> the element type

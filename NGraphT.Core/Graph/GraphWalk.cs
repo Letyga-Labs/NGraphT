@@ -30,11 +30,9 @@ using Core;
 ///
 /// <para>
 /// See <a href="http://mathworld.wolfram.com/Walk.html">http://mathworld.wolfram.com/Walk.html</a>
-///
 /// </para>
 /// <para>
 /// GraphWalk is the default implementation of <seealso cref="GraphPath"/>.
-///
 /// </para>
 /// <para>
 /// Two special cases exist:
@@ -44,13 +42,11 @@ using Core;
 /// <li>An empty Graphwalk has empty edge and vertex lists, and the start and end vertex are both
 /// null.</li>
 /// </ol>
-///
 /// </para>
 /// <para>
 /// This class is implemented as a light-weight data structure; this class does not verify whether
 /// the sequence of edges or the sequence of vertices provided during construction forms an actual
 /// walk. It is the responsibility of the invoking class to provide correct input data.
-///
 /// </para>
 /// <para>
 /// Note: Serialization of a GraphWalk implies the serialization of the entire underlying graph.

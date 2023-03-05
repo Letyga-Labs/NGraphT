@@ -30,19 +30,16 @@ using Util;
 /// For more information see
 /// <a href="https://en.wikipedia.org/wiki/Topological_sorting">wikipedia</a> or
 /// <a href="http://mathworld.wolfram.com/TopologicalSort.html">wolfram</a>.
-///
 /// </para>
 /// <para>
 /// The iterator crosses components but does not track them, it only tracks visited vertices. The
 /// iterator will detect (at some point) if the graph is not a directed acyclic graph and throw a
 /// <seealso cref="NotDirectedAcyclicGraphException"/>.
-///
 /// </para>
 /// <para>
 /// For this iterator to work correctly the graph must not be modified during iteration. Currently
 /// there are no means to ensure that, nor to fail-fast. The results of such modifications are
 /// undefined.
-///
 /// </para>
 /// </summary>
 ///

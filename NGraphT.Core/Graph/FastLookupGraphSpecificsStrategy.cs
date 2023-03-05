@@ -31,7 +31,6 @@ using Specifics;
 /// is an issue, use the <seealso cref="DefaultGraphSpecificsStrategy"/> instead.
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
-///
 /// </para>
 /// </summary>
 ///

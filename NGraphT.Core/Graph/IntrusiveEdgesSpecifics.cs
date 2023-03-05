@@ -24,7 +24,6 @@ namespace NGraphT.Core.Graph;
 /// <para>
 /// Since the library supports edges which can be any user defined object, we need to provide
 /// explicit support for storing vertex source, target and weight.
-///
 /// </para>
 /// </summary>
 ///

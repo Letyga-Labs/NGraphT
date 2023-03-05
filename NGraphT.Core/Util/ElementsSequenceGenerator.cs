@@ -26,7 +26,6 @@ namespace NGraphT.Core.Util;
 /// has an equal probability to be generated. This implementation is based on the
 /// <a href="https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle"> Fisher-Yates algorithm</a>.
 /// The generator is unbiased meaning the every permutation is equally likely.
-///
 /// </para>
 /// </summary>
 /// @param <T> element type

@@ -29,14 +29,12 @@ using Util;
 /// Its subclasses add various restrictions to get more specific graphs. The decision whether it is
 /// directed or undirected is decided at construction time and cannot be later modified (see
 /// constructor for details).
-///
 /// </para>
 /// <para>
 /// The behavior of this class can be adjusted by changing the <seealso cref="IGraphSpecificsStrategy{TNode,TEdge}"/> that is
 /// provided from the constructor. All implemented strategies guarantee deterministic vertex and edge
 /// set ordering (via <seealso cref="LinkedHashMap"/> and <seealso cref="LinkedHashSet"/>). The defaults are reasonable
 /// for most use-cases, only change if you know what you are doing.
-///
 /// </para>
 /// <para>
 /// The default graph implementations are not safe for concurrent reads and writes from different
@@ -45,12 +43,10 @@ using Util;
 /// against the same graph from different threads are safe. (Note that the {@link NGraphT.Core.Graph
 /// Graph interface} itself makes no such guarantee, so for non-default implementations, different
 /// rules may apply.)
-///
 /// </para>
 /// <para>
 /// If you need support for concurrent reads and writes, consider using the
 /// <seealso cref="NGraphT.Core.Graph.Concurrent.AsSynchronizedGraph AsSynchronizedGraph wrapper"/>.
-///
 /// </para>
 /// </summary>
 ///

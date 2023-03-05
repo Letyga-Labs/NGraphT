@@ -18,7 +18,7 @@
 
 namespace NGraphT.Core;
 
-using Graph;
+using NGraphT.Core.Graph;
 
 /// <summary>
 /// The root interface in the graph hierarchy. A mathematical graph-theory graph object
@@ -50,7 +50,6 @@ using Graph;
 /// <para>
 /// For guidelines on vertex and edge classes, see
 /// <a href="https://github.com/jgrapht/jgrapht/wiki/EqualsAndHashCode">this wiki page</a>.
-///
 /// </para>
 /// </summary>
 ///
@@ -60,6 +59,56 @@ using Graph;
 /// <remarks>Author: Barak Naveh.</remarks>
 public interface IGraph<TNode, TEdge>
 {
+    /// <summary>
+    /// Return the vertex supplier that the graph uses whenever it needs to create new vertices.
+    ///
+    /// <para>
+    /// A graph uses the vertex supplier to create new vertex objects whenever a user calls method
+    /// <seealso cref="AddVertex()"/>. Users can also create the vertex in user code and then use method
+    /// <seealso cref="AddVertex(TNode)"/> to add the vertex.
+    ///
+    /// </para>
+    /// <para>
+    /// In contrast with the Supplier interface, the vertex supplier has the additional
+    /// requirement that a new and distinct result is returned every time it is invoked. More
+    /// specifically for a new vertex to be added in a graph <c>TNode</c> must <i>not</i> be equal
+    /// to any other vertex in the graph. More formally, the graph must not contain any vertex
+    /// <c>v2</c> such that <c>v2.equals(TNode)</c>.
+    ///
+    /// </para>
+    /// <para>
+    /// Care must also be taken when interchanging calls to methods <seealso cref="AddVertex(TNode)"/>
+    /// and <seealso cref="AddVertex()"/>. In such a case the user must make sure never to add vertices
+    /// in the graph using method <seealso cref="AddVertex(TNode)"/>, which are going to be returned in
+    /// the future by the supplied vertex supplier. Such a sequence will result into an
+    /// <seealso cref="System.ArgumentException"/> when calling method <seealso cref="AddVertex()"/>.
+    ///
+    /// </para>
+    /// </summary>
+    /// <returns>the vertex supplier or <c>null</c> if the graph has no such supplier.</returns>
+    Func<TNode> VertexSupplier { get; }
+
+    /// <summary>
+    /// Return the edge supplier that the graph uses whenever it needs to create new edges.
+    ///
+    /// <para>
+    /// A graph uses the edge supplier to create new edge objects whenever a user calls method
+    /// <seealso cref="AddEdge(TNode,TNode)"/>. Users can also create the edge in user code and then
+    /// use method <seealso cref="AddEdge(TNode,TNode,TEdge)"/> to add the edge.
+    ///
+    /// </para>
+    /// <para>
+    /// In contrast with the Supplier interface, the edge supplier has the additional
+    /// requirement that a new and distinct result is returned every time it is invoked. More
+    /// specifically for a new edge to be added in a graph <c>TEdge</c> must <i>not</i> be equal to
+    /// any other edge in the graph (even if the graph allows edge-multiplicity). More formally, the
+    /// graph must not contain any edge <c>e2</c> such that <c>e2.equals(TEdge)</c>.
+    ///
+    /// </para>
+    /// </summary>
+    /// <returns>the edge supplier <c>null</c> if the graph has no such supplier.</returns>
+    Func<TEdge> EdgeSupplier { get; }
+
     /// <summary>
     /// Returns a set of all edges connecting source vertex to target vertex if such vertices exist
     /// in this graph. If any of the vertices does not exist or is <c>null</c>, returns
@@ -78,7 +127,7 @@ public interface IGraph<TNode, TEdge>
     /// <summary>
     /// Returns an edge connecting source vertex to target vertex if such vertices and such edge
     /// exist in this graph. Otherwise returns <c>
-    /// null</c>. If any of the specified vertices is <c>null</c> returns <c>null</c>
+    /// null</c>. If any of the specified vertices is <c>null</c> returns <c>null</c>.
     ///
     /// <para>
     /// In undirected graphs, the returned edge may have its source and target vertices in the
@@ -89,56 +138,6 @@ public interface IGraph<TNode, TEdge>
     /// <param name="targetVertex"> target vertex of the edge.</param>
     /// <returns>an edge connecting source vertex to target vertex.</returns>
     TEdge GetEdge(TNode sourceVertex, TNode targetVertex);
-
-    /// <summary>
-    /// Return the vertex supplier that the graph uses whenever it needs to create new vertices.
-    ///
-    /// <para>
-    /// A graph uses the vertex supplier to create new vertex objects whenever a user calls method
-    /// <seealso cref="Graph.addVertex()"/>. Users can also create the vertex in user code and then use method
-    /// <seealso cref="Graph.addVertex(Object)"/> to add the vertex.
-    ///
-    /// </para>
-    /// <para>
-    /// In contrast with the <seealso cref="Supplier"/> interface, the vertex supplier has the additional
-    /// requirement that a new and distinct result is returned every time it is invoked. More
-    /// specifically for a new vertex to be added in a graph <c>TNode</c> must <i>not</i> be equal
-    /// to any other vertex in the graph. More formally, the graph must not contain any vertex
-    /// <c>v2</c> such that <c>v2.equals(TNode)</c>.
-    ///
-    /// </para>
-    /// <para>
-    /// Care must also be taken when interchanging calls to methods <seealso cref="Graph.addVertex(Object)"/>
-    /// and <seealso cref="Graph.addVertex()"/>. In such a case the user must make sure never to add vertices
-    /// in the graph using method <seealso cref="Graph.addVertex(Object)"/>, which are going to be returned in
-    /// the future by the supplied vertex supplier. Such a sequence will result into an
-    /// <seealso cref="System.ArgumentException"/> when calling method <seealso cref="Graph.addVertex()"/>.
-    ///
-    /// </para>
-    /// </summary>
-    /// <returns>the vertex supplier or <c>null</c> if the graph has no such supplier.</returns>
-    Func<TNode> VertexSupplier { get; }
-
-    /// <summary>
-    /// Return the edge supplier that the graph uses whenever it needs to create new edges.
-    ///
-    /// <para>
-    /// A graph uses the edge supplier to create new edge objects whenever a user calls method
-    /// <seealso cref="Graph.addEdge(Object, Object)"/>. Users can also create the edge in user code and then
-    /// use method <seealso cref="Graph.addEdge(Object, Object, Object)"/> to add the edge.
-    ///
-    /// </para>
-    /// <para>
-    /// In contrast with the <seealso cref="Supplier"/> interface, the edge supplier has the additional
-    /// requirement that a new and distinct result is returned every time it is invoked. More
-    /// specifically for a new edge to be added in a graph <c>TEdge</c> must <i>not</i> be equal to
-    /// any other edge in the graph (even if the graph allows edge-multiplicity). More formally, the
-    /// graph must not contain any edge <c>e2</c> such that <c>e2.equals(TEdge)</c>.
-    ///
-    /// </para>
-    /// </summary>
-    /// <returns>the edge supplier <c>null</c> if the graph has no such supplier.</returns>
-    Func<TEdge> EdgeSupplier { get; }
 
     /// <summary>
     /// Creates a new edge in this graph, going from the source vertex to the target vertex, and
@@ -153,7 +152,7 @@ public interface IGraph<TNode, TEdge>
     /// </para>
     /// <para>
     /// This method creates the new edge <c>TEdge</c> using this graph's edge supplier (see
-    /// <seealso cref="getEdgeSupplier()"/>). For the new edge to be added <c>TEdge</c> must <i>not</i> be
+    /// <seealso cref="EdgeSupplier"/>). For the new edge to be added <c>TEdge</c> must <i>not</i> be
     /// equal to any other edge the graph (even if the graph allows edge-multiplicity). More
     /// formally, the graph must not contain any edge <c>e2</c> such that
     /// <c>e2.equals(TEdge)</c>. If such <c>
@@ -162,7 +161,7 @@ public interface IGraph<TNode, TEdge>
     ///
     /// </para>
     /// <para>
-    /// If the underlying graph implementation's <seealso cref="getEdgeSupplier()"/> returns
+    /// If the underlying graph implementation's <seealso cref="EdgeSupplier"/> returns
     /// <c>null</c>, then this method cannot create edges and throws an
     /// <seealso cref="System.NotSupportedException"/>.
     ///
@@ -176,7 +175,7 @@ public interface IGraph<TNode, TEdge>
     /// <exception cref="NullReferenceException"> if any of the specified vertices is <c>null</c>. </exception>
     /// <exception cref="NotSupportedException"> if the graph was not initialized with an edge supplier
     /// </exception>
-    /// <seealso cref=".getEdgeSupplier()"/>
+    /// <seealso cref=".EdgeSupplier"/>
     TEdge AddEdge(TNode sourceVertex, TNode targetVertex);
 
     /// <summary>
@@ -206,7 +205,7 @@ public interface IGraph<TNode, TEdge>
     /// null</c>.
     /// </exception>
     /// <seealso cref=".addEdge(Object, Object)"/>
-    /// <seealso cref=".getEdgeSupplier()"/>
+    /// <seealso cref=".EdgeSupplier"/>
     bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge);
 
     /// <summary>
@@ -214,7 +213,7 @@ public interface IGraph<TNode, TEdge>
     ///
     /// <para>
     /// This method creates the new vertex <c>TNode</c> using this graph's vertex supplier (see
-    /// <seealso cref="getVertexSupplier()"/>). For the new vertex to be added <c>TNode</c> must <i>not</i>
+    /// <seealso cref="VertexSupplier"/>). For the new vertex to be added <c>TNode</c> must <i>not</i>
     /// be equal to any other vertex in the graph. More formally, the graph must not contain any
     /// vertex <c>v2</c> such that <c>v2.equals(TNode)</c>. If such <c>
     /// v2</c> is found then the newly created vertex <c>TNode</c> is abandoned, the method
@@ -222,17 +221,17 @@ public interface IGraph<TNode, TEdge>
     ///
     /// </para>
     /// <para>
-    /// If the underlying graph implementation's <seealso cref="getVertexSupplier()"/> returns
+    /// If the underlying graph implementation's <seealso cref="VertexSupplier"/> returns
     /// <c>null</c>, then this method cannot create vertices and throws an
     /// <seealso cref="System.NotSupportedException"/>.
     ///
     /// </para>
     /// <para>
-    /// Care must also be taken when interchanging calls to methods <seealso cref="Graph.addVertex(Object)"/>
-    /// and <seealso cref="Graph.addVertex()"/>. In such a case the user must make sure never to add vertices
-    /// in the graph using method <seealso cref="Graph.addVertex(Object)"/>, which are going to be returned in
+    /// Care must also be taken when interchanging calls to methods <seealso cref="AddVertex(TNode)"/>
+    /// and <seealso cref="AddVertex()"/>. In such a case the user must make sure never to add vertices
+    /// in the graph using method <seealso cref="AddVertex(TNode)"/>, which are going to be returned in
     /// the future by the supplied vertex supplier. Such a sequence will result into an
-    /// <seealso cref="System.ArgumentException"/> when calling method <seealso cref="Graph.addVertex()"/>.
+    /// <seealso cref="System.ArgumentException"/> when calling method <seealso cref="AddVertex()"/>.
     ///
     /// </para>
     /// </summary>
@@ -241,7 +240,7 @@ public interface IGraph<TNode, TEdge>
     ///         the graph.</exception>
     /// <exception cref="NotSupportedException"> if the graph was not initialized with a vertex supplier
     /// </exception>
-    /// <seealso cref=".getVertexSupplier()"/>
+    /// <seealso cref=".VertexSupplier"/>
     TNode AddVertex();
 
     /// <summary>

@@ -32,7 +32,6 @@ using Core;
 /// instance, the edges of a graph representing a road network might have two weights associated with
 /// them: a travel time and a travel distance. Instead of creating two weighted graphs of the same
 /// network, one would simply create two weighted views of the same underlying graph.
-///
 /// </para>
 /// <para>
 /// This class offers two ways to associate a weight with an edge:
@@ -47,7 +46,6 @@ using Core;
 /// 
 /// Finally, the view provides a @link{setEdgeWeight} method. This method behaves differently
 /// depending on how the view is constructed. See @link{setEdgeWeight} for details.
-///
 /// </para>
 /// </summary>
 ///

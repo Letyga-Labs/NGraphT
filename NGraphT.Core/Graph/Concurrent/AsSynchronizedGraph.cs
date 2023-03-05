@@ -93,7 +93,6 @@ using Graph;
 /// 
 /// One way to avoid the hazard noted above is for the calling application to explicitly synchronize
 /// all iterations using the <seealso cref="getLock"/> method.
-///
 /// </para>
 ///
 /// <para>

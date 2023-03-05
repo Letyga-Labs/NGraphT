@@ -28,7 +28,6 @@ using Specifics;
 /// Such a strategy can be used to adjust the internals of the default graph implementations.
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
-///
 /// </para>
 /// </summary>
 ///

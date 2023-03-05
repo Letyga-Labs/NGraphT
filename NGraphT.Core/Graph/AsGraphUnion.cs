@@ -29,7 +29,6 @@ using Util;
 /// (TNode<sub>1</sub>, TEdge<sub>1</sub>) and G<sub>2</sub> = (TNode<sub>2</sub>, TEdge<sub>2</sub>) then their
 /// union G = (TNode, TEdge), where TNode is the union of TNode<sub>1</sub> and TNode<sub>2</sub>, and TEdge is the union of
 /// TEdge<sub>1</sub> and TEdge<sub>2</sub>. A <seealso cref="IWeightCombiner"/> in order to calculate edge weights.
-///
 /// </para>
 /// </summary>
 /// @param <TNode> the vertex type.</param>

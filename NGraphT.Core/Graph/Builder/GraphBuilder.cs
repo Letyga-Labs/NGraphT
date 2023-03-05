@@ -28,11 +28,9 @@ using Core;
 /// Each graph implementation contains a static helper method for the construction of such a builder.
 /// For example class <seealso cref="DefaultDirectedGraph"/> contains method
 /// <seealso cref="DefaultDirectedGraph.createBuilder(Supplier)"/>.
-///
 /// </para>
 /// <para>
 /// See <seealso cref="GraphTypeBuilder"/> for a builder of the actual graph instance.
-///
 /// </para>
 /// </summary>
 ///

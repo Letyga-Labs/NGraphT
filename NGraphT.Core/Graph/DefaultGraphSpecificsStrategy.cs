@@ -31,7 +31,6 @@ using Specifics;
 /// high (dense graphs). For a fast implementation, use <seealso cref="FastLookupGraphSpecificsStrategy"/>.
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
-///
 /// </para>
 /// </summary>
 ///

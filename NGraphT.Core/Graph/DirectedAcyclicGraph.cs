@@ -30,7 +30,6 @@ using Util;
 /// Implements a DAG that can be modified (vertices &amp; edges added and removed), is guaranteed to
 /// remain acyclic, and provides fast topological order iteration. An attempt to add an edge which
 /// would induce a cycle throws an <seealso cref="System.ArgumentException"/>.
-///
 /// </para>
 /// <para>
 /// This is done using a dynamic topological sort which is based on the algorithm described in "David
@@ -42,19 +41,16 @@ using Util;
 /// notably in that the topological ordering is stored by default using two hash maps, which will
 /// have some effects on the runtime, but also allow for vertex addition and removal. This storage
 /// mechanism can be adjusted by subclasses.
-///
 /// </para>
 /// <para>
 /// The complexity of adding a new edge in the graph depends on the number of edges incident to the
 /// "affected region", and should in general be faster than recomputing the whole topological
 /// ordering from scratch. For details about the complexity parameters and running times, see the
 /// previously mentioned paper.
-///
 /// </para>
 /// <para>
 /// This class makes no claims to thread safety, and concurrent usage from multiple threads will
 /// produce undefined results.
-///
 /// </para>
 /// </summary>
 ///

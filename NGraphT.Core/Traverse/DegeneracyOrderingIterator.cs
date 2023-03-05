@@ -29,17 +29,14 @@ using Graphs = Graphs;
 /// contains a vertex of degree at most $d.$ If a graph has degeneracy $d$, then it has a degeneracy
 /// ordering, an ordering such that each vertex has $d$ or fewer neighbors that come later in the
 /// ordering.
-///
 /// </para>
 /// <para>
 /// The iterator crosses components but does not track them, it only tracks visited vertices.
-///
 /// </para>
 /// <para>
 /// The iterator treats the input graph as undirected even if the graph is directed. Moreover, it
 /// completely ignores self-loops, meaning that it operates as if self-loops do not contribute to the
 /// degree of a vertex.
-///
 /// </para>
 /// </summary>
 ///

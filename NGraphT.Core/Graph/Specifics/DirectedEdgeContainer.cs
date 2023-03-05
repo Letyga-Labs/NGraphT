@@ -26,7 +26,6 @@ using Graph;
 /// <para>
 /// In this edge container we use array lists to minimize memory toll. However, for high-degree
 /// vertices we replace the entire edge container with a direct access subclass (to be implemented).
-///
 /// </para>
 /// </summary>
 ///

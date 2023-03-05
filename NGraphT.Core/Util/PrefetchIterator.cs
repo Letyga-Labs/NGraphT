@@ -26,7 +26,6 @@ namespace NGraphT.Core.Util;
 /// Many classes which implement an iterator face a common problem: if there is no easy way to
 /// calculate hasNext() other than to call getNext(), then they save the result for fetching in the
 /// next call to getNext(). This utility helps in doing just that.
-///
 /// </para>
 /// <para>
 /// <b>Usage:</b> The new iterator class will hold this class as a member variable and forward the
@@ -66,7 +65,6 @@ namespace NGraphT.Core.Util;
 ///      }
 ///  }</c>
 /// </pre>
-///
 /// </para>
 /// </summary>
 /// @param <TEdge> the element type

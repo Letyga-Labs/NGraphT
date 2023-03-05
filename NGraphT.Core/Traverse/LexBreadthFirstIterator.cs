@@ -49,7 +49,6 @@ using CollectionUtil = Util.CollectionUtil;
 /// </para>
 /// <para>
 /// Note: only vertex events are fired by this iterator.
-///
 /// </para>
 /// </summary>
 /// @param <TNode> the graph vertex type.</param>

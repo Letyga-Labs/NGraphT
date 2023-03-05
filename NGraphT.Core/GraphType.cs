@@ -26,7 +26,6 @@ namespace NGraphT.Core;
 /// or mixed, whether it contain self-loops (a self-loop is an edge where the source vertex is the
 /// same as the target vertex), whether it contain multiple (parallel) edges (multiple edges which
 /// connect the same pair of vertices) and whether it is weighted or not.
-///
 /// </para>
 /// <para>
 /// The type of a graph can be queried on runtime using method <seealso cref="Graph.getType()"/>. This way, for

@@ -45,7 +45,6 @@ namespace NGraphT.Core.Util;
 /// <para>
 /// This implementation gives users access to the tree nodes which hold the inserted elements. The
 /// user is able to store the tree nodes references but isn't able to modify them.
-///
 /// </para>
 /// </summary>
 /// @param <T> the key data type
