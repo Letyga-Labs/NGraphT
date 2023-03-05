@@ -1,5 +1,7 @@
 # NGraphT
 
+![NGraphT Logo](Docs/logo.png)
+
 An unofficial port of the wonderful [JGraphT](https://github.com/jgrapht/jgrapht) library to .NET 6.
 
 For documentation or any other project information please refer 
