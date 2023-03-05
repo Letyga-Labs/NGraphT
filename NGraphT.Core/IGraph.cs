@@ -203,7 +203,7 @@ public interface IGraph<TNode, TEdge>
     ///
     /// <para>
     /// The source and target vertices must already be contained in this graph. If they are not found
-    /// in graph IllegalArgumentException is thrown.
+    /// in graph ArgumentException is thrown.
     /// </para>
     /// </summary>
     /// <param name="sourceVertex"> source vertex of the edge.</param>
@@ -214,7 +214,7 @@ public interface IGraph<TNode, TEdge>
     /// <exception cref="InvalidCastException"> if the specified edge is not assignment compatible with the class
     ///         of edges produced by the edge factory of this graph.</exception>
     /// <exception cref="NullReferenceException"> if any of the specified vertices is <c>null</c>.</exception>
-    /// <see cref="AddEdge(TNode,TNode)"/>
+    /// <seealso cref="AddEdge(TNode,TNode)"/>
     /// <seealso cref="EdgeSupplier"/>
     bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge);
 

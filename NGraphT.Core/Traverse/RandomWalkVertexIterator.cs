@@ -40,7 +40,7 @@ using Graphs = Graphs;
 /// <remarks>Author: Dimitrios Michail.</remarks>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
-/// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+/// <typeparam name="TEdge">The graph edge type.</typeparam>
 public class RandomWalkVertexIterator<TNode, TEdge> : IEnumerator<TNode>
 {
     private readonly Random                     _rng;

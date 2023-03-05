@@ -26,7 +26,7 @@ using Util;
 /// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
-/// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+/// <typeparam name="TEdge">The graph edge type.</typeparam>
 public class SimpleWeightedGraph<TNode, TEdge> : SimpleGraph<TNode, TEdge>
 {
     /// <summary>
@@ -53,7 +53,7 @@ public class SimpleWeightedGraph<TNode, TEdge> : SimpleGraph<TNode, TEdge>
     /// </summary>
     /// <param name="edgeClass"> class on which to base factory for edges.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>a builder for this kind of graph.</returns>
 //JAVA TO C# CONVERTER WARNING: Java wildcard generics have no direct equivalent in C#:
 //ORIGINAL LINE: public static <TNode, TEdge> GraphBuilder<TNode, TEdge, ? extends SimpleWeightedGraph<TNode, TEdge>> createBuilder(Class edgeClass)
@@ -73,7 +73,7 @@ public class SimpleWeightedGraph<TNode, TEdge> : SimpleGraph<TNode, TEdge>
     /// </summary>
     /// <param name="edgeSupplier"> the edge supplier.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>a builder for this kind of graph.</returns>
 //JAVA TO C# CONVERTER WARNING: Java wildcard generics have no direct equivalent in C#:
 //ORIGINAL LINE: public static <TNode, TEdge> GraphBuilder<TNode, TEdge, ? extends SimpleWeightedGraph<TNode, TEdge>> createBuilder(Supplier<TEdge> edgeSupplier)

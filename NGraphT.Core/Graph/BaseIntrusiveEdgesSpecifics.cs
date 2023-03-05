@@ -29,7 +29,7 @@ using Util;
 /// <remarks>Author: Dimitrios Michail.</remarks>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
-/// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+/// <typeparam name="TEdge">The graph edge type.</typeparam>
 /// <typeparam name="IE"> the intrusive edge type.</typeparam>
 public abstract class BaseIntrusiveEdgesSpecifics<TNode, TEdge, TIe> where TIe : IntrusiveEdge
 {

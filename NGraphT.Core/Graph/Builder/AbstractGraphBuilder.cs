@@ -26,7 +26,7 @@ using Graph;
 /// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
-/// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+/// <typeparam name="TEdge">The graph edge type.</typeparam>
 /// <typeparam name="G"> type of the resulting graph.</typeparam>
 /// @param <B> type of this builder
 ///
@@ -183,7 +183,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     /// <param name="source"> source vertex of the edge.</param>
     /// <param name="target"> target vertex of the edge.</param>
     /// <returns>this builder object.</returns>
-    /// <see cref="Graph.removeVertex(Object)"/>
+    /// <seealso cref="Graph.removeVertex(Object)"/>
     public virtual TB RemoveEdge(TNode source, TNode target)
     {
         Graph.removeEdge(source, target);
@@ -196,7 +196,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     /// </summary>
     /// <param name="edge"> edge to be removed from this graph, if present.</param>
     /// <returns>this builder object.</returns>
-    /// <see cref="Graph.removeEdge(Object)"/>
+    /// <seealso cref="Graph.removeEdge(Object)"/>
     public virtual TB RemoveEdge(TEdge edge)
     {
         Graph.removeEdge(edge);
@@ -211,7 +211,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     /// <param name="target"> target vertex of the edge.</param>
     /// <param name="weight"> weight of the edge.</param>
     /// <returns>this builder object.</returns>
-    /// <see cref="Graphs.addEdgeWithVertices(Graph, Object, Object, double)"/>
+    /// <seealso cref="Graphs.addEdgeWithVertices(Graph, Object, Object, double)"/>
     public virtual TB AddEdge(TNode source, TNode target, double weight)
     {
         Graphs.AddEdgeWithVertices(Graph, source, target, weight);
@@ -227,8 +227,8 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     /// <param name="edge"> edge to be added to this graph.</param>
     /// <param name="weight"> weight of the edge.</param>
     /// <returns>this builder object.</returns>
-    /// <see cref=".addEdge(Object, Object, Object)"/>
-    /// <see cref="Graph.setEdgeWeight(Object, double)"/>
+    /// <seealso cref=".addEdge(Object, Object, Object)"/>
+    /// <seealso cref="Graph.setEdgeWeight(Object, double)"/>
     public virtual TB AddEdge(TNode source, TNode target, TEdge edge, double weight)
     {
         AddEdge(source, target, edge); // adds vertices if needed
@@ -251,7 +251,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     /// builder object after calling this method is undefined behaviour.
     /// </summary>
     /// <returns>the built unmodifiable graph.</returns>
-    /// <see cref=".build()"/>
+    /// <seealso cref=".build()"/>
     public virtual IGraph<TNode, TEdge> BuildAsUnmodifiable()
     {
         return new AsUnmodifiableGraph<TNode, TEdge>(Graph);

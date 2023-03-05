@@ -40,7 +40,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is empty, false otherwise.</returns>
     public static bool IsEmpty<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -54,7 +54,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> a graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if a graph is simple, false otherwise.</returns>
     public static bool IsSimple<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -89,7 +89,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> a graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if a graph has self-loops, false otherwise.</returns>
     public static bool HasSelfLoops<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -118,7 +118,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> a graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if a graph has multiple edges, false otherwise.</returns>
     public static bool HasMultipleEdges<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -154,7 +154,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is complete, false otherwise.</returns>
     public static bool IsComplete<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -199,7 +199,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is connected, false otherwise.</returns>
     /// <seealso cref="ConnectivityInspector"/>
     public static bool IsConnected<TNode, TEdge>(IGraph<TNode, TEdge> graph)
@@ -221,9 +221,9 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is biconnected, false otherwise.</returns>
-    /// <see cref="NGraphT.Core.alg.connectivity.BiconnectivityInspector"/>
+    /// <seealso cref="NGraphT.Core.alg.connectivity.BiconnectivityInspector"/>
     public static bool IsBiconnected<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
         Objects.requireNonNull(graph, GraphCannotBeNull);
@@ -241,7 +241,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is weakly connected, false otherwise.</returns>
     /// <seealso cref="ConnectivityInspector"/>
     public static bool IsWeaklyConnected<TNode, TEdge>(IGraph<TNode, TEdge> graph)
@@ -264,7 +264,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is strongly connected, false otherwise.</returns>
     /// <seealso cref="KosarajuStrongConnectivityInspector"/>
     public static bool IsStronglyConnected<TNode, TEdge>(IGraph<TNode, TEdge> graph)
@@ -285,7 +285,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is tree, false otherwise.</returns>
     public static bool IsTree<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -304,7 +304,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is forest, false otherwise.</returns>
     public static bool IsForest<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -329,7 +329,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is overfull, false otherwise.</returns>
     public static bool IsOverfull<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -350,7 +350,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is a split graph, false otherwise.</returns>
     public static bool IsSplit<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -391,9 +391,9 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is bipartite, false otherwise.</returns>
-    /// <see cref="BipartitePartitioning.isBipartite()"/>
+    /// <seealso cref="BipartitePartitioning.isBipartite()"/>
     public static bool IsBipartite<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
         return (new BipartitePartitioning<>(graph)).Bipartite;
@@ -407,8 +407,8 @@ public abstract class GraphTests
     /// <param name="secondPartition"> the second vertices partition.</param>
     /// <returns>true if the partition is a bipartite partition, false otherwise.</returns>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
-    /// <see cref="BipartitePartitioning.isValidPartitioning(PartitioningAlgorithm.Partitioning)"/>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
+    /// <seealso cref="BipartitePartitioning.isValidPartitioning(PartitioningAlgorithm.Partitioning)"/>
 //JAVA TO C# CONVERTER TODO TASK: The following line could not be converted:
     @SuppressWarnings("unchecked") public static <TNode, TEdge> boolean
         IsBipartitePartition(IGraph<TNode, TEdge> graph, Set<? extends TNode> firstPartition, Set<? Extends TNode> secondPartition)
@@ -427,7 +427,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is cubic, false otherwise.</returns>
     public static <TNode, TEdge> bool IsCubic(IGraph<TNode, TEdge> graph)
     {
@@ -453,7 +453,7 @@ public abstract class GraphTests
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is Eulerian, false otherwise.</returns>
-    /// <see cref="HierholzerEulerianCycle.isEulerian(Graph)"/>
+    /// <seealso cref="HierholzerEulerianCycle.isEulerian(Graph)"/>
     public static <TNode, TEdge> bool IsEulerian(IGraph<TNode, TEdge> graph)
     {
         Objects.requireNonNull(graph, GraphCannotBeNull);
@@ -467,9 +467,9 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is chordal, false otherwise.</returns>
-    /// <see cref="ChordalityInspector.isChordal()"/>
+    /// <seealso cref="ChordalityInspector.isChordal()"/>
     public static <TNode, TEdge> bool IsChordal(IGraph<TNode, TEdge> graph)
     {
         Objects.requireNonNull(graph, GraphCannotBeNull);
@@ -495,9 +495,9 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is weakly chordal, false otherwise.</returns>
-    /// <see cref="WeakChordalityInspector.isWeaklyChordal()"/>
+    /// <seealso cref="WeakChordalityInspector.isWeaklyChordal()"/>
     public static <TNode, TEdge> bool IsWeaklyChordal(IGraph<TNode, TEdge> graph)
     {
         Objects.requireNonNull(graph, GraphCannotBeNull);
@@ -514,9 +514,9 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph meets Ore's condition, false otherwise.</returns>
-    /// <see cref="NGraphT.Core.alg.tour.PalmerHamiltonianCycle"/>
+    /// <seealso cref="NGraphT.Core.alg.tour.PalmerHamiltonianCycle"/>
     public static <TNode, TEdge> bool HasOreProperty(IGraph<TNode, TEdge> graph)
     {
         RequireUndirected(graph);
@@ -557,7 +557,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is triangle-free, false otherwise.</returns>
     public static <TNode, TEdge> bool IsTriangleFree(IGraph<TNode, TEdge> graph)
     {
@@ -567,11 +567,11 @@ public abstract class GraphTests
     /// <summary>
     /// Checks that the specified graph is perfect. Due to the Strong Perfect Graph Theorem Berge
     /// Graphs are the same as perfect Graphs. The implementation of this method is delegated to
-    /// <see cref="NGraphT.Core.alg.cycle.BergeGraphInspector"/>
+    /// <seealso cref="NGraphT.Core.alg.cycle.BergeGraphInspector"/>
     /// </summary>
     /// <param name="graph"> the graph reference to check for being perfect or not.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is perfect, false otherwise.</returns>
     public static <TNode, TEdge> bool IsPerfect(IGraph<TNode, TEdge> graph)
     {
@@ -589,7 +589,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the graph to test planarity of.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the graph is planar, false otherwise.</returns>
     /// <seealso cref="PlanarityTestingAlgorithm"/>
     /// <seealso cref="BoyerMyrvoldPlanarityInspector"/>
@@ -607,7 +607,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the graph to test.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the {@code graph} is a Kuratowski subdivision, false otherwise.</returns>
     public static <TNode, TEdge> bool IsKuratowskiSubdivision(IGraph<TNode, TEdge> graph)
     {
@@ -619,7 +619,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the graph to test.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the {@code graph} is a $K_{3,3}$ subdivision, false otherwise.</returns>
     public static <TNode, TEdge> bool IsK33Subdivision(IGraph<TNode, TEdge> graph)
     {
@@ -660,7 +660,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the graph to test.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>true if the {@code graph} is a $K_5$ subdivision, false otherwise.</returns>
     public static <TNode, TEdge> bool IsK5Subdivision(IGraph<TNode, TEdge> graph)
     {
@@ -703,7 +703,7 @@ public abstract class GraphTests
     /// <param name="startVertex"> the start vertex.</param>
     /// <param name="degree"> the degree of desired vertices.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>all vertices of the {@code graph} reachable from {@code startVertex}, which have
     ///         degree {@code degree}</returns>
     private static <TNode, TEdge> ISet<TNode> ReachableWithDegree(IGraph<TNode, TEdge> graph, TNode startVertex, int degree)
@@ -746,7 +746,7 @@ public abstract class GraphTests
     /// <param name="graph"> the graph reference to check for beeing directed and not null.</param>
     /// <param name="message"> detail message to be used in the event that an exception is thrown.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>{@code graph} if directed and not {@code null}</returns>
     /// <exception cref="NullReferenceException"> if {@code graph} is {@code null} </exception>
     /// <exception cref="ArgumentException"> if {@code graph} is not directed.</exception>
@@ -772,7 +772,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the graph reference to check for beeing directed and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>{@code graph} if directed and not {@code null}</returns>
     /// <exception cref="NullReferenceException"> if {@code graph} is {@code null} </exception>
     /// <exception cref="ArgumentException"> if {@code graph} is not directed.</exception>
@@ -789,7 +789,7 @@ public abstract class GraphTests
     /// <param name="graph"> the graph reference to check for being undirected and not null.</param>
     /// <param name="message"> detail message to be used in the event that an exception is thrown.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>{@code graph} if undirected and not {@code null}</returns>
     /// <exception cref="NullReferenceException"> if {@code graph} is {@code null} </exception>
     /// <exception cref="ArgumentException"> if {@code graph} is not undirected.</exception>
@@ -815,7 +815,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the graph reference to check for being undirected and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>{@code graph} if undirected and not {@code null}</returns>
     /// <exception cref="NullReferenceException"> if {@code graph} is {@code null} </exception>
     /// <exception cref="ArgumentException"> if {@code graph} is not undirected.</exception>
@@ -832,7 +832,7 @@ public abstract class GraphTests
     /// <param name="graph"> the graph reference to check for beeing directed or undirected and not null.</param>
     /// <param name="message"> detail message to be used in the event that an exception is thrown.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>{@code graph} if directed and not {@code null}</returns>
     /// <exception cref="NullReferenceException"> if {@code graph} is {@code null} </exception>
     /// <exception cref="ArgumentException"> if {@code graph} is mixed.</exception>
@@ -858,7 +858,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the graph reference to check for beeing directed and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>{@code graph} if directed and not {@code null}</returns>
     /// <exception cref="NullReferenceException"> if {@code graph} is {@code null} </exception>
     /// <exception cref="ArgumentException"> if {@code graph} is mixed.</exception>
@@ -874,7 +874,7 @@ public abstract class GraphTests
     /// </summary>
     /// <param name="graph"> the graph reference to check for being weighted and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     /// <returns>{@code graph} if directed and not {@code null}</returns>
     /// <exception cref="NullReferenceException"> if {@code graph} is {@code null} </exception>
     /// <exception cref="ArgumentException"> if {@code graph} is not weighted.</exception>

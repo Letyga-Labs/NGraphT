@@ -7,20 +7,18 @@
 
     <ItemGroup>
       <Compile Remove="alg\**" />
-      <Compile Remove="event\**" />
       <Compile Remove="generate\**" />
       <Compile Remove="GraphMetrics.cs" />
+      <Compile Remove="GraphTests.cs" />
     </ItemGroup>
 
     <ItemGroup>
       <EmbeddedResource Remove="alg\**" />
-      <EmbeddedResource Remove="event\**" />
       <EmbeddedResource Remove="generate\**" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="alg\**" />
-      <None Remove="event\**" />
       <None Remove="generate\**" />
     </ItemGroup>
 

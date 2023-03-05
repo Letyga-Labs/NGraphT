@@ -35,7 +35,7 @@ using Core;
 /// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
-/// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+/// <typeparam name="TEdge">The graph edge type.</typeparam>
 /// @param <G> type of the resulting graph
 ///
 /// <remarks>Author: Andrew Chen.</remarks>

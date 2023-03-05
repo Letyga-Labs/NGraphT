@@ -71,13 +71,13 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     {
     }
 
-    /// <see cref="Graph.containsEdge(Object, Object)"/>
+    /// <seealso cref="Graph.containsEdge(Object, Object)"/>
     public virtual bool ContainsEdge(TNode sourceVertex, TNode targetVertex)
     {
         return GetEdge(sourceVertex, targetVertex) != null;
     }
 
-    /// <see cref="Graph.removeAllEdges(Collection)"/>
+    /// <seealso cref="Graph.removeAllEdges(Collection)"/>
     public virtual bool RemoveAllEdges<T1>(ICollection<T1> edges) where T1 : TEdge
     {
         var modified = false;
@@ -90,7 +90,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
         return modified;
     }
 
-    /// <see cref="Graph.removeAllEdges(Object, Object)"/>
+    /// <seealso cref="Graph.removeAllEdges(Object, Object)"/>
     public virtual ISet<TEdge> RemoveAllEdges(TNode sourceVertex, TNode targetVertex)
     {
         var removed = GetAllEdges(sourceVertex, targetVertex);
@@ -104,7 +104,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
         return removed;
     }
 
-    /// <see cref="Graph.removeAllVertices(Collection)"/>
+    /// <seealso cref="Graph.removeAllVertices(Collection)"/>
     public virtual bool RemoveAllVertices<T1>(ICollection<T1> vertices) where T1 : TNode
     {
         var modified = false;
@@ -158,8 +158,8 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// </summary>
     /// <param name="edges"> edges to be removed from this graph.</param>
     /// <returns><c>true</c> if this graph changed as a result of the call.</returns>
-    /// <see cref="Graph.removeEdge(Object)"/>
-    /// <see cref="Graph.containsEdge(Object)"/>
+    /// <seealso cref="Graph.removeEdge(Object)"/>
+    /// <seealso cref="Graph.containsEdge(Object)"/>
     protected internal virtual bool RemoveAllEdges(TEdge[] edges)
     {
         var modified = false;
@@ -232,7 +232,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// edges weights.
     /// </summary>
     /// <returns>the hash code value this graph.</returns>
-    /// <see cref="Object.hashCode()"/>
+    /// <seealso cref="Object.hashCode()"/>
     public override int GetHashCode()
     {
         var hash = VertexSet().GetHashCode();
@@ -271,7 +271,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// </summary>
     /// <param name="obj"> object to be compared for equality with this graph.</param>>
     /// <returns><c>true</c> if the specified object is equal to this graph.</returns>
-    /// <see cref="Object.equals(Object)"/>
+    /// <seealso cref="Object.equals(Object)"/>
     public override bool Equals(object obj)
     {
         if (this == obj)

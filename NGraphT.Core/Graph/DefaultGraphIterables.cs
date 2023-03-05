@@ -28,7 +28,7 @@ using Core;
 /// <remarks>Author: Dimitrios Michail.</remarks>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
-/// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+/// <typeparam name="TEdge">The graph edge type.</typeparam>
 public class DefaultGraphIterables<TNode, TEdge> : IGraphIterables<TNode, TEdge>
 {
     ///<summary>

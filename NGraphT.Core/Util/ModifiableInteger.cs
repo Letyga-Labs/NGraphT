@@ -122,7 +122,7 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
         return Integer.compare(thisVal, anotherVal);
     }
 
-    /// <see cref="Number.doubleValue()"/>
+    /// <seealso cref="Number.doubleValue()"/>
     public override double DoubleValue()
     {
         return this.value;
@@ -146,7 +146,7 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
         return false;
     }
 
-    /// <see cref="Number.floatValue()"/>
+    /// <seealso cref="Number.floatValue()"/>
     public override float FloatValue()
     {
         return this.value;
@@ -162,13 +162,13 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
         return this.value;
     }
 
-    /// <see cref="Number.intValue()"/>
+    /// <seealso cref="Number.intValue()"/>
     public override int IntValue()
     {
         return this.value;
     }
 
-    /// <see cref="Number.longValue()"/>
+    /// <seealso cref="Number.longValue()"/>
     public override long LongValue()
     {
         return this.value;

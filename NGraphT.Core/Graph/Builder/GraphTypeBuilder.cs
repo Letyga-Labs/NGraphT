@@ -95,7 +95,7 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
     ///</summary>
     ///<returns>the graph type builder.</returns>
     ///<typeparam name="TNode">The graph vertex type.</typeparam>
-    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam>
     public static GraphTypeBuilder<TNode, TEdge> Directed<TNode, TEdge>()
     {
         return new GraphTypeBuilder<TNode, TEdge>(true, false);
@@ -106,7 +106,7 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
     ///</summary>
     ///<returns>the graph type builder.</returns>
     ///<typeparam name="TNode">The graph vertex type.</typeparam>
-    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam>
     public static GraphTypeBuilder<TNode, TEdge> Undirected<TNode, TEdge>()
     {
         return new GraphTypeBuilder<TNode, TEdge>(false, true);
@@ -117,7 +117,7 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
     ///</summary>
     ///<returns>the graph type builder.</returns>
     ///<typeparam name="TNode">The graph vertex type.</typeparam>
-    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam>
     public static GraphTypeBuilder<TNode, TEdge> Mixed<TNode, TEdge>()
     {
         return new GraphTypeBuilder<TNode, TEdge>(true, true);
@@ -129,7 +129,7 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
     ///<param name="type"> the graph type.</param>
     ///<returns>the graph type builder.</returns>
     ///<typeparam name="TNode">The graph vertex type.</typeparam>
-    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam>
     public static GraphTypeBuilder<TNode, TEdge> ForGraphType<TNode, TEdge>(IGraphType type)
     {
         var builder =
@@ -147,7 +147,7 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
     ///<param name="graph"> a graph.</param>
     ///<returns>a type builder.</returns>
     ///<typeparam name="TNode">The graph vertex type.</typeparam>
-    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam>
     public static GraphTypeBuilder<TNode, TEdge> ForGraph<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
         GraphTypeBuilder<TNode, TEdge> builder = ForGraphType(graph.Type);

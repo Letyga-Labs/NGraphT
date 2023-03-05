@@ -380,7 +380,6 @@ resharper_csharp_trailing_comma_in_multiline_lists = true
 resharper_csharp_trailing_comma_in_singleline_lists = true
 resharper_csharp_wrap_after_declaration_lpar = true
 resharper_csharp_wrap_arguments_style = chop_if_long
-resharper_csharp_wrap_before_declaration_rpar = true
 resharper_csharp_wrap_before_invocation_rpar = true
 resharper_csharp_wrap_parameters_style = chop_if_long
 resharper_enforce_line_ending_style = true
@@ -549,6 +548,9 @@ dotnet_diagnostic.s4457.severity = none
 
 # S125: Remove commented out code
 dotnet_diagnostic.s125.severity = none
+
+# S3267: Loops should be simplified with "LINQ" expressions
+dotnet_diagnostic.s3267.severity = none
 
 ## ----------------------------------------------------------------------------
 ##                               F# rules

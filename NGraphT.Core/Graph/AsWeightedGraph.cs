@@ -50,7 +50,7 @@ using Core;
 /// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
-/// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+/// <typeparam name="TEdge">The graph edge type.</typeparam>
 public class AsWeightedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGraph<TNode, TEdge>
 {
     private const    long                       SerialVersionUID = -6838132233557L;

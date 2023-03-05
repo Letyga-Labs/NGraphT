@@ -35,7 +35,7 @@ using Specifics;
 /// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
-/// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+/// <typeparam name="TEdge">The graph edge type.</typeparam>
 public class FastLookupGraphSpecificsStrategy<TNode, TEdge> : IGraphSpecificsStrategy<TNode, TEdge>
 {
     public virtual Func<IGraphType, INtrusiveEdgesSpecifics<TNode, TEdge>> IntrusiveEdgesSpecificsFactory

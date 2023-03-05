@@ -147,7 +147,7 @@ public class
         return GetSeenData(node).depth;
     }
 
-    /// <see cref="CrossComponentIterator.provideNextVertex()"/>
+    /// <seealso cref="CrossComponentIterator.provideNextVertex()"/>
     protected internal override TNode ProvideNextVertex()
     {
         return _queue.RemoveFirst();
@@ -156,7 +156,7 @@ public class
     /// <summary>
     /// Data kept for discovered vertices.
     /// </summary>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    /// <typeparam name="TEdge">The graph edge type.</typeparam>
     protected internal class SearchNodeData<TEdge>
     {
         internal readonly TEdge Edge;

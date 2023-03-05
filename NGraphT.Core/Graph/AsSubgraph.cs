@@ -275,7 +275,7 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     /// <exception cref="NullReferenceException"> if TNode is null.</exception>
     /// <exception cref="ArgumentException"> if the base graph does not contain the vertex.</exception>
     /// <seealso cref="AsSubgraph"/>
-    /// <see cref="Graph.addVertex(Object)"/>
+    /// <seealso cref="Graph.addVertex(Object)"/>
     public override bool AddVertex(TNode node)
     {
         if (node == null)

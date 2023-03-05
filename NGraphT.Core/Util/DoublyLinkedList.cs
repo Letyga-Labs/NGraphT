@@ -1060,7 +1060,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         /// Returns the next <see cref="IListNode{TNode}"/> in the list and advances the cursor position.
         /// </summary>
         /// <returns>the next {@code ListNode}</returns>
-        /// <see cref="ListIterator.next()"/>
+        /// <seealso cref="ListIterator.next()"/>
         IListNode<TEdge> NextNode();
     }
 
@@ -1092,7 +1092,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         /// backwards.
         /// </summary>
         /// <returns>the previous {@code ListNode}</returns>
-        /// <see cref="ListIterator.previous()"/>
+        /// <seealso cref="ListIterator.previous()"/>
         IListNode<TEdge> PreviousNode();
     }
 

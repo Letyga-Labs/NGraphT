@@ -28,7 +28,7 @@ using Core;
 /// <para>
 /// The metric for <i>closest</i> here is the weighted path length from a start vertex, i.TEdge.
 /// Graph.getEdgeWeight(Edge) is summed to calculate path length. Negative edge weights will result
-/// in an IllegalArgumentException. Optionally, path length may be bounded by a finite radius. A
+/// in an ArgumentException. Optionally, path length may be bounded by a finite radius. A
 /// custom heap implementation can be specified during the construction time. Pairing heap is used by
 /// default.
 /// </para>
@@ -243,7 +243,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
         return node.getValue().spanningTreeEdge;
     }
 
-    /// <see cref="CrossComponentIterator.isConnectedComponentExhausted()"/>
+    /// <seealso cref="CrossComponentIterator.isConnectedComponentExhausted()"/>
     protected internal override bool ConnectedComponentExhausted
     {
         get
@@ -268,7 +268,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
         }
     }
 
-    /// <see cref="CrossComponentIterator.encounterVertex(Object, Object)"/>
+    /// <seealso cref="CrossComponentIterator.encounterVertex(Object, Object)"/>
     protected internal override void EncounterVertex(TNode vertex, TEdge edge)
     {
         double shortestPathLength;
@@ -312,7 +312,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
         }
     }
 
-    /// <see cref="CrossComponentIterator.provideNextVertex()"/>
+    /// <seealso cref="CrossComponentIterator.provideNextVertex()"/>
     protected internal override TNode ProvideNextVertex()
     {
         AddressableHeap.Handle<double, QueueEntry<TNode, TEdge>> node = _heap.deleteMin();

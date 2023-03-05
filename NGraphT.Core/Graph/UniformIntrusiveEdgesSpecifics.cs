@@ -31,7 +31,7 @@ namespace NGraphT.Core.Graph;
 /// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
-/// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+/// <typeparam name="TEdge">The graph edge type.</typeparam>
 public class UniformIntrusiveEdgesSpecifics<TNode, TEdge> : BaseIntrusiveEdgesSpecifics<TNode, TEdge, IntrusiveEdge>,
     INtrusiveEdgesSpecifics<TNode, TEdge>
 {

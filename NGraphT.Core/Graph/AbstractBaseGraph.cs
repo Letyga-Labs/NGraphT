@@ -327,7 +327,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// </summary>
     /// <returns>a shallow copy of this graph.</returns>
     /// <exception cref="RuntimeException"> in case the clone is not supported.</exception>
-    /// <see cref="java.lang.Object.clone()"/>
+    /// <seealso cref="java.lang.Object.clone()"/>
     public override object Clone()
     {
         try
