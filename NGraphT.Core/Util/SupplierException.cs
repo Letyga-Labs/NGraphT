@@ -20,9 +20,9 @@ namespace NGraphT.Core.Util;
 
 /// <summary>
 /// Exception thrown to indicate that a <see cref="Supplier"/> is in an invalid state.
+/// </summary>
 ///
 /// <remarks>Author: Hannes Wellmann.</remarks>
-/// </summary>
 public class SupplierException : ArgumentException
 {
     public SupplierException(string message, Exception cause)

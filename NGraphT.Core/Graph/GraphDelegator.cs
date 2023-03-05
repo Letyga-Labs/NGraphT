@@ -50,7 +50,7 @@ public class GraphDelegator<TNode, TEdge> : AbstractGraph<TNode, TEdge>, IGraph<
     private readonly Func<TEdge>   _edgeSupplier;
 
     /// <summary>
-    /// Constructor
+    /// Constructor.
     /// </summary>
     /// <param name="graph"> the backing graph (the delegate).</param>
     public GraphDelegator(IGraph<TNode, TEdge> graph)
@@ -58,7 +58,7 @@ public class GraphDelegator<TNode, TEdge> : AbstractGraph<TNode, TEdge>, IGraph<
     {
     }
 
-    /// 
+    ///
     /// <param name="graph"> the backing graph (the delegate).</param>
     /// <param name="vertexSupplier"> vertex supplier for the delegator. Can be null in which case the
     ///        backing graph vertex supplier will be used.</param>

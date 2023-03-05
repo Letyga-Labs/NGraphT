@@ -21,9 +21,9 @@ namespace NGraphT.Core.Graph;
 /// <summary>
 /// Exception indicating that the vertexes supplied to <see cref="DirectedAcyclicGraph"/> would cause a
 /// cycle.
+/// </summary>
 ///
 /// <remarks>Author: EnderCrypt (Magnus Gunnarsson).</remarks>
-/// </summary>
 public class GraphCycleProhibitedException : ArgumentException
 {
     public GraphCycleProhibitedException()

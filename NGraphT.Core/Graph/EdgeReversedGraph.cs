@@ -37,85 +37,85 @@ using Core;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 ///
 /// <remarks>Author: John TNode. Sichi.</remarks>
-/// <#### cref="AsUndirectedGraph"/>
+/// <seealso cref="AsUndirectedGraph"/>
 public class EdgeReversedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGraph<TNode, TEdge>
 {
-    /// <summary>
-    /// Creates a new EdgeReversedGraph.
-    /// </summary>
-    /// <param name="g"> the base (backing) graph on which the edge-reversed view will be based.</param>
+    ///<summary>
+    ///Creates a new EdgeReversedGraph.
+    ///</summary>
+    ///<param name="g"> the base (backing) graph on which the edge-reversed view will be based.</param>
     public EdgeReversedGraph(IGraph<TNode, TEdge> g)
         : base(g)
     {
     }
 
-    /// <#### cref="Graph.getEdge(Object, Object)"/>
+    ///<see cref="Graph.getEdge(Object, Object)"/>
     public override TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
     {
         return base.GetEdge(targetVertex, sourceVertex);
     }
 
-    /// <#### cref="Graph.getAllEdges(Object, Object)"/>
+    ///<see cref="Graph.getAllEdges(Object, Object)"/>
     public override ISet<TEdge> GetAllEdges(TNode sourceVertex, TNode targetVertex)
     {
         return base.GetAllEdges(targetVertex, sourceVertex);
     }
 
-    /// <#### cref="Graph.addEdge(Object, Object)"/>
+    ///<see cref="Graph.addEdge(Object, Object)"/>
     public override TEdge AddEdge(TNode sourceVertex, TNode targetVertex)
     {
         return base.AddEdge(targetVertex, sourceVertex);
     }
 
-    /// <#### cref="Graph.addEdge(Object, Object, Object)"/>
+    ///<see cref="Graph.addEdge(Object, Object, Object)"/>
     public override bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         return base.AddEdge(targetVertex, sourceVertex, edge);
     }
 
-    /// <#### cref="Graph.inDegreeOf(Object)"/>
+    ///<see cref="Graph.inDegreeOf(Object)"/>
     public override int InDegreeOf(TNode vertex)
     {
         return base.OutDegreeOf(vertex);
     }
 
-    /// <#### cref="Graph.outDegreeOf(Object)"/>
+    ///<see cref="Graph.outDegreeOf(Object)"/>
     public override int OutDegreeOf(TNode vertex)
     {
         return base.InDegreeOf(vertex);
     }
 
-    /// <#### cref="Graph.incomingEdgesOf(Object)"/>
+    ///<see cref="Graph.incomingEdgesOf(Object)"/>
     public override ISet<TEdge> IncomingEdgesOf(TNode vertex)
     {
         return base.OutgoingEdgesOf(vertex);
     }
 
-    /// <#### cref="Graph.outgoingEdgesOf(Object)"/>
+    ///<see cref="Graph.outgoingEdgesOf(Object)"/>
     public override ISet<TEdge> OutgoingEdgesOf(TNode vertex)
     {
         return base.IncomingEdgesOf(vertex);
     }
 
-    /// <#### cref="Graph.removeEdge(Object, Object)"/>
+    ///<see cref="Graph.removeEdge(Object, Object)"/>
     public override TEdge RemoveEdge(TNode sourceVertex, TNode targetVertex)
     {
         return base.RemoveEdge(targetVertex, sourceVertex);
     }
 
-    /// <#### cref="Graph.getEdgeSource(Object)"/>
+    ///<see cref="Graph.getEdgeSource(Object)"/>
     public override TNode GetEdgeSource(TEdge edge)
     {
         return base.GetEdgeTarget(edge);
     }
 
-    /// <#### cref="Graph.getEdgeTarget(Object)"/>
+    ///<see cref="Graph.getEdgeTarget(Object)"/>
     public override TNode GetEdgeTarget(TEdge edge)
     {
         return base.GetEdgeSource(edge);
     }
 
-    /// <#### cref="java.lang.Object.toString()"/>
+    ///<see cref="java.lang.Object.toString()"/>
     public override string ToString()
     {
         return toStringFromSets(VertexSet(), EdgeSet(), Type.Directed);

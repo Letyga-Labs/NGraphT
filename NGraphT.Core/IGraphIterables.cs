@@ -18,7 +18,7 @@
 
 namespace NGraphT.Core;
 
-using Util;
+using NGraphT.Core.Util;
 
 /// <summary>
 /// Presents a graph as a collection of views suitable for graphs which contain a very large number
@@ -57,7 +57,7 @@ public interface IGraphIterables<TNode, TEdge>
     /// <returns>an iterable over the edges of the graph.</returns>
     IEnumerable<TEdge> Edges()
     {
-        return new LiveIterableWrapper<>(() => getGraph().edgeSet());
+        return new LiveIterableWrapper<TEdge>(() => Graph.EdgeSet());
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ public interface IGraphIterables<TNode, TEdge>
     /// <returns>the number of edges.</returns>
     long EdgeCount()
     {
-        return getGraph().edgeSet().size();
+        return Graph.EdgeSet().Count;
     }
 
     /// <summary>
@@ -83,7 +83,7 @@ public interface IGraphIterables<TNode, TEdge>
     /// <returns>an iterable view of the vertices contained in this graph.</returns>
     IEnumerable<TNode> Vertices()
     {
-        return new LiveIterableWrapper<>(() => getGraph().vertexSet());
+        return new LiveIterableWrapper<TNode>(() => Graph.VertexSet());
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ public interface IGraphIterables<TNode, TEdge>
     /// <returns>the number of vertices.</returns>
     long VertexCount()
     {
-        return getGraph().vertexSet().size();
+        return Graph.VertexSet().Count;
     }
 
     /// <summary>
@@ -107,7 +107,7 @@ public interface IGraphIterables<TNode, TEdge>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     IEnumerable<TEdge> EdgesOf(TNode vertex)
     {
-        return new LiveIterableWrapper<>(() => getGraph().edgesOf(vertex));
+        return new LiveIterableWrapper<TEdge>(() => Graph.EdgesOf(vertex));
     }
 
     /// <summary>
@@ -129,7 +129,7 @@ public interface IGraphIterables<TNode, TEdge>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     long DegreeOf(TNode vertex)
     {
-        return getGraph().degreeOf(vertex);
+        return Graph.DegreeOf(vertex);
     }
 
     /// <summary>
@@ -150,7 +150,7 @@ public interface IGraphIterables<TNode, TEdge>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     IEnumerable<TEdge> IncomingEdgesOf(TNode vertex)
     {
-        return new LiveIterableWrapper<>(() => getGraph().incomingEdgesOf(vertex));
+        return new LiveIterableWrapper<TEdge>(() => Graph.IncomingEdgesOf(vertex));
     }
 
     /// <summary>
@@ -174,7 +174,7 @@ public interface IGraphIterables<TNode, TEdge>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     long InDegreeOf(TNode vertex)
     {
-        return getGraph().inDegreeOf(vertex);
+        return Graph.InDegreeOf(vertex);
     }
 
     /// <summary>
@@ -195,7 +195,7 @@ public interface IGraphIterables<TNode, TEdge>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     IEnumerable<TEdge> OutgoingEdgesOf(TNode vertex)
     {
-        return new LiveIterableWrapper<>(() => getGraph().outgoingEdgesOf(vertex));
+        return new LiveIterableWrapper<TEdge>(() => Graph.OutgoingEdgesOf(vertex));
     }
 
     /// <summary>
@@ -219,14 +219,14 @@ public interface IGraphIterables<TNode, TEdge>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     long OutDegreeOf(TNode vertex)
     {
-        return getGraph().outDegreeOf(vertex);
+        return Graph.OutDegreeOf(vertex);
     }
 
     /// <summary>
     /// Returns an iterable view over all edges connecting source vertex to target vertex if such
     /// vertices exist in this graph. The returned iterators are live views. If the graph is modified
     /// while an iteration is in progress, the results of the iteration are undefined.
-    /// 
+    ///
     /// If any of the vertices does not exist or is <c>null</c>, returns <c>null</c>. If
     /// both vertices exist but no edges found, returns an iterable which returns exhausted
     /// iterators.
@@ -243,6 +243,6 @@ public interface IGraphIterables<TNode, TEdge>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     IEnumerable<TEdge> AllEdges(TNode sourceVertex, TNode targetVertex)
     {
-        return new LiveIterableWrapper<>(() => getGraph().getAllEdges(sourceVertex, targetVertex));
+        return new LiveIterableWrapper<TEdge>(() => Graph.GetAllEdges(sourceVertex, targetVertex));
     }
 }

@@ -37,7 +37,7 @@ public class WeightedIntrusiveEdgesSpecifics<TNode, TEdge> :
     INtrusiveEdgesSpecifics<TNode, TEdge>
 {
     /// <summary>
-    /// Constructor
+    /// Constructor.
     /// </summary>
     /// <param name="map"> the map to use for storage.</param>
     public WeightedIntrusiveEdgesSpecifics(IDictionary<TEdge, IntrusiveWeightedEdge> map)

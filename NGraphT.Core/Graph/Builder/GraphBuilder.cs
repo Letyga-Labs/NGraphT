@@ -39,25 +39,25 @@ using Core;
 /// @param <G> type of the resulting graph
 ///
 /// <remarks>Author: Andrew Chen.</remarks>
-/// <#### cref="GraphTypeBuilder"/>
+/// <seealso cref="GraphTypeBuilder"/>
 public class GraphBuilder<TNode, TEdge, TG> : AbstractGraphBuilder<TNode, TEdge, TG, GraphBuilder<TNode, TEdge, TG>>
     where TG : IGraph<TNode, TEdge>
 {
-    /// <summary>
-    /// Creates a builder based on {@code baseGraph}. {@code baseGraph} must be mutable.
+    ///<summary>
+    ///Creates a builder based on {@code baseGraph}. {@code baseGraph} must be mutable.
     ///
-    /// <para>
-    /// The recommended way to use this constructor is: {@code new
-    /// GraphBuilderBase<...>(new YourGraph<...>(...))}.
-    /// </para>
+    ///<para>
+    ///The recommended way to use this constructor is: {@code new
+    ///GraphBuilderBase<...>(new YourGraph<...>(...))}.
+    ///</para>
     ///
-    /// <para>
-    /// NOTE: {@code baseGraph} should not be an existing graph. If you want to add an existing graph
-    /// to the graph being built, you should use the <#### cref="addVertex(Object)"/> method.
-    /// </para>
+    ///<para>
+    ///NOTE: {@code baseGraph} should not be an existing graph. If you want to add an existing graph
+    ///to the graph being built, you should use the <see cref="addVertex(Object)"/> method.
+    ///</para>
     ///
-    /// </summary>
-    /// <param name="baseGraph"> the graph object to base building on.</param>
+    ///</summary>
+    ///<param name="baseGraph"> the graph object to base building on.</param>
     public GraphBuilder(TG baseGraph)
         : base(baseGraph)
     {

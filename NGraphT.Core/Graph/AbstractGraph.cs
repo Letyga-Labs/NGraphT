@@ -32,7 +32,7 @@ using Util;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
-/// <#### cref="Graph"/>
+/// <seealso cref="Graph"/>
 public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
 {
     public abstract IGraphIterables<TNode, TEdge> Iterables();
@@ -71,13 +71,13 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     {
     }
 
-    /// <#### cref="Graph.containsEdge(Object, Object)"/>
+    /// <see cref="Graph.containsEdge(Object, Object)"/>
     public virtual bool ContainsEdge(TNode sourceVertex, TNode targetVertex)
     {
         return GetEdge(sourceVertex, targetVertex) != null;
     }
 
-    /// <#### cref="Graph.removeAllEdges(Collection)"/>
+    /// <see cref="Graph.removeAllEdges(Collection)"/>
     public virtual bool RemoveAllEdges<T1>(ICollection<T1> edges) where T1 : TEdge
     {
         var modified = false;
@@ -90,10 +90,10 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
         return modified;
     }
 
-    /// <#### cref="Graph.removeAllEdges(Object, Object)"/>
+    /// <see cref="Graph.removeAllEdges(Object, Object)"/>
     public virtual ISet<TEdge> RemoveAllEdges(TNode sourceVertex, TNode targetVertex)
     {
-        ISet<TEdge> removed = GetAllEdges(sourceVertex, targetVertex);
+        var removed = GetAllEdges(sourceVertex, targetVertex);
         if (removed == null)
         {
             return null;
@@ -104,7 +104,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
         return removed;
     }
 
-    /// <#### cref="Graph.removeAllVertices(Collection)"/>
+    /// <see cref="Graph.removeAllVertices(Collection)"/>
     public virtual bool RemoveAllVertices<T1>(ICollection<T1> vertices) where T1 : TNode
     {
         var modified = false;
@@ -131,8 +131,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// <summary>
     /// Ensures that the specified vertex exists in this graph, or else throws exception.
     /// </summary>
-    /// <param name="node"> vertex
-    /// </param>
+    /// <param name="node"> vertex.</param>>
     /// <returns><c>true</c> if this assertion holds.</returns>
     /// <exception cref="NullReferenceException"> if specified vertex is <c>null</c>.</exception>
     /// <exception cref="ArgumentException"> if specified vertex does not exist in this graph.</exception>
@@ -155,12 +154,12 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// <summary>
     /// Removes all the edges in this graph that are also contained in the specified edge array.
     /// After this call returns, this graph will contain no edges in common with the specified edges.
-    /// This method will invoke the <#### cref="Graph.removeEdge(Object)"/> method.
+    /// This method will invoke the <see cref="Graph.removeEdge(Object)"/> method.
     /// </summary>
     /// <param name="edges"> edges to be removed from this graph.</param>
     /// <returns><c>true</c> if this graph changed as a result of the call.</returns>
-    /// <#### cref="Graph.removeEdge(Object)"/>
-    /// <#### cref="Graph.containsEdge(Object)"/>
+    /// <see cref="Graph.removeEdge(Object)"/>
+    /// <see cref="Graph.containsEdge(Object)"/>
     protected internal virtual bool RemoveAllEdges(TEdge[] edges)
     {
         var modified = false;
@@ -179,8 +178,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// <param name="vertexSet"> the vertex set TNode to be printed.</param>
     /// <param name="edgeSet"> the edge set TEdge to be printed.</param>
     /// <param name="directed"> true to use parens for each edge (representing directed); false to use curly
-    ///        braces (representing undirected)
-    /// </param>
+    ///        braces (representing undirected).</param>>
     /// <returns>a string representation of (TNode,TEdge)</returns>
     protected internal virtual string ToStringFromSets<T1, T2>(
         ICollection<T1> vertexSet,
@@ -234,7 +232,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// edges weights.
     /// </summary>
     /// <returns>the hash code value this graph.</returns>
-    /// <#### cref="Object.hashCode()"/>
+    /// <see cref="Object.hashCode()"/>
     public override int GetHashCode()
     {
         var hash = VertexSet().GetHashCode();
@@ -271,10 +269,9 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// the given object is also a graph, the two graphs are instances of the same graph class, have
     /// identical vertices and edges sets with the same weights.
     /// </summary>
-    /// <param name="obj"> object to be compared for equality with this graph
-    /// </param>
+    /// <param name="obj"> object to be compared for equality with this graph.</param>>
     /// <returns><c>true</c> if the specified object is equal to this graph.</returns>
-    /// <#### cref="Object.equals(Object)"/>
+    /// <see cref="Object.equals(Object)"/>
     public override bool Equals(object obj)
     {
         if (this == obj)

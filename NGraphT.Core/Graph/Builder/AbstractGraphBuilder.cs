@@ -27,7 +27,7 @@ using Graph;
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
-/// @param <G> type of the resulting graph.</param>
+/// <typeparam name="G"> type of the resulting graph.</typeparam>
 /// @param <B> type of this builder
 ///
 /// <remarks>Author: Andrew Chen.</remarks>
@@ -36,38 +36,36 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
 {
     protected internal readonly TG Graph;
 
-    /// <summary>
-    /// Creates a builder based on {@code baseGraph}. {@code baseGraph} must be mutable.
-    /// </summary>
-    /// <param name="baseGraph"> the graph object to base building on.</param>
+    ///<summary>
+    ///Creates a builder based on {@code baseGraph}. {@code baseGraph} must be mutable.
+    ///</summary>
+    ///<param name="baseGraph"> the graph object to base building on.</param>
     public AbstractGraphBuilder(TG baseGraph)
     {
         Graph = baseGraph;
     }
 
-    /// <returns>the {@code this} object.</returns>
+    ///<returns>the {@code this} object.</returns>
     protected internal abstract TB Self();
 
-    /// <summary>
-    /// Adds {@code vertex} to the graph being built.
-    /// </summary>
-    /// <param name="vertex"> the vertex to add
-    /// </param>
-    /// <returns>this builder object.</returns>
-    /// <#### cref="Graph.addVertex(Object)"/>
+    ///<summary>
+    ///Adds {@code vertex} to the graph being built.
+    ///</summary>
+    ///<param name="vertex"> the vertex to add.</param>>
+    ///<returns>this builder object.</returns>
+    ///<see cref="Graph.addVertex(Object)"/>
     public virtual TB AddVertex(TNode vertex)
     {
         Graph.addVertex(vertex);
         return Self();
     }
 
-    /// <summary>
-    /// Adds each vertex of {@code vertices} to the graph being built.
-    /// </summary>
-    /// <param name="vertices"> the vertices to add
-    /// </param>
-    /// <returns>this builder object.</returns>
-    /// <#### cref=".addVertex(Object)"/>
+    ///<summary>
+    ///Adds each vertex of {@code vertices} to the graph being built.
+    ///</summary>
+    ///<param name="vertices"> the vertices to add.</param>>
+    ///<returns>this builder object.</returns>
+    ///<see cref=".addVertex(Object)"/>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SafeVarargs public final B addVertices(TNode... vertices)
     public TB AddVertices(params TNode[] vertices)
@@ -80,29 +78,29 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
         return Self();
     }
 
-    /// <summary>
-    /// Adds an edge to the graph being built. The source and target vertices are added to the graph,
-    /// if not already included.
-    /// </summary>
-    /// <param name="source"> source vertex of the edge.</param>
-    /// <param name="target"> target vertex of the edge.</param>
-    /// <returns>this builder object.</returns>
-    /// <#### cref="Graphs.addEdgeWithVertices(Graph, Object, Object)"/>
+    ///<summary>
+    ///Adds an edge to the graph being built. The source and target vertices are added to the graph,
+    ///if not already included.
+    ///</summary>
+    ///<param name="source"> source vertex of the edge.</param>
+    ///<param name="target"> target vertex of the edge.</param>
+    ///<returns>this builder object.</returns>
+    ///<see cref="Graphs.addEdgeWithVertices(Graph, Object, Object)"/>
     public virtual TB AddEdge(TNode source, TNode target)
     {
         Graphs.addEdgeWithVertices(Graph, source, target);
         return Self();
     }
 
-    /// <summary>
-    /// Adds the specified edge to the graph being built. The source and target vertices are added to
-    /// the graph, if not already included.
-    /// </summary>
-    /// <param name="source"> source vertex of the edge.</param>
-    /// <param name="target"> target vertex of the edge.</param>
-    /// <param name="edge"> edge to be added to this graph.</param>
-    /// <returns>this builder object.</returns>
-    /// <#### cref="Graph.addEdge(Object, Object, Object)"/>
+    ///<summary>
+    ///Adds the specified edge to the graph being built. The source and target vertices are added to
+    ///the graph, if not already included.
+    ///</summary>
+    ///<param name="source"> source vertex of the edge.</param>
+    ///<param name="target"> target vertex of the edge.</param>
+    ///<param name="edge"> edge to be added to this graph.</param>
+    ///<returns>this builder object.</returns>
+    ///<see cref="Graph.addEdge(Object, Object, Object)"/>
     public virtual TB AddEdge(TNode source, TNode target, TEdge edge)
     {
         AddVertex(source);
@@ -111,15 +109,15 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
         return Self();
     }
 
-    /// <summary>
-    /// Adds a chain of edges to the graph being built. The vertices are added to the graph, if not
-    /// already included.
-    /// </summary>
-    /// <param name="first"> the first vertex.</param>
-    /// <param name="second"> the second vertex.</param>
-    /// <param name="rest"> the remaining vertices.</param>
-    /// <returns>this builder object.</returns>
-    /// <#### cref=".addEdge(Object, Object)"/>
+    ///<summary>
+    ///Adds a chain of edges to the graph being built. The vertices are added to the graph, if not
+    ///already included.
+    ///</summary>
+    ///<param name="first"> the first vertex.</param>
+    ///<param name="second"> the second vertex.</param>
+    ///<param name="rest"> the remaining vertices.</param>
+    ///<returns>this builder object.</returns>
+    ///<see cref=".addEdge(Object, Object)"/>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SafeVarargs public final B addEdgeChain(TNode first, TNode second, TNode... rest)
     public TB AddEdgeChain(TNode first, TNode second, params TNode[] rest)
@@ -135,39 +133,37 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
         return Self();
     }
 
-    /// <summary>
-    /// Adds all the vertices and all the edges of the {@code sourceGraph} to the graph being built.
-    /// </summary>
-    /// <param name="sourceGraph"> the source graph.</param>
-    /// <returns>this builder object.</returns>
-    /// <#### cref="Graphs.addGraph(Graph, Graph)"/>
+    ///<summary>
+    ///Adds all the vertices and all the edges of the {@code sourceGraph} to the graph being built.
+    ///</summary>
+    ///<param name="sourceGraph"> the source graph.</param>
+    ///<returns>this builder object.</returns>
+    ///<see cref="Graphs.addGraph(Graph, Graph)"/>
     public virtual TB AddGraph<T1, T2>(IGraph<T1, T2> sourceGraph) where T1 : TNode where T2 : TEdge
     {
         Graphs.AddGraph(Graph, sourceGraph);
         return Self();
     }
 
-    /// <summary>
-    /// Removes {@code vertex} from the graph being built, if such vertex exist in graph.
-    /// </summary>
-    /// <param name="vertex"> the vertex to remove
-    /// </param>
-    /// <returns>this builder object.</returns>
-    /// <#### cref="Graph.removeVertex(Object)"/>
+    ///<summary>
+    ///Removes {@code vertex} from the graph being built, if such vertex exist in graph.
+    ///</summary>
+    ///<param name="vertex"> the vertex to remove.</param>>
+    ///<returns>this builder object.</returns>
+    ///<see cref="Graph.removeVertex(Object)"/>
     public virtual TB RemoveVertex(TNode vertex)
     {
         Graph.removeVertex(vertex);
         return Self();
     }
 
-    /// <summary>
-    /// Removes each vertex of {@code vertices} from the graph being built, if such vertices exist in
-    /// graph.
-    /// </summary>
-    /// <param name="vertices"> the vertices to remove
-    /// </param>
-    /// <returns>this builder object.</returns>
-    /// <#### cref=".removeVertex(Object)"/>
+    ///<summary>
+    ///Removes each vertex of {@code vertices} from the graph being built, if such vertices exist in
+    ///graph.
+    ///</summary>
+    ///<param name="vertices"> the vertices to remove.</param>>
+    ///<returns>this builder object.</returns>
+    ///<see cref=".removeVertex(Object)"/>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SafeVarargs public final B removeVertices(TNode... vertices)
     public TB RemoveVertices(params TNode[] vertices)
@@ -180,14 +176,14 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
         return Self();
     }
 
-    /// <summary>
-    /// Removes an edge going from source vertex to target vertex from the graph being built, if such
+    ///<summary>
+    ///Removes an edge going from source vertex to target vertex from the graph being built, if such
     /// vertices and such edge exist in the graph.
     /// </summary>
     /// <param name="source"> source vertex of the edge.</param>
     /// <param name="target"> target vertex of the edge.</param>
     /// <returns>this builder object.</returns>
-    /// <#### cref="Graph.removeVertex(Object)"/>
+    /// <see cref="Graph.removeVertex(Object)"/>
     public virtual TB RemoveEdge(TNode source, TNode target)
     {
         Graph.removeEdge(source, target);
@@ -200,7 +196,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     /// </summary>
     /// <param name="edge"> edge to be removed from this graph, if present.</param>
     /// <returns>this builder object.</returns>
-    /// <#### cref="Graph.removeEdge(Object)"/>
+    /// <see cref="Graph.removeEdge(Object)"/>
     public virtual TB RemoveEdge(TEdge edge)
     {
         Graph.removeEdge(edge);
@@ -215,7 +211,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     /// <param name="target"> target vertex of the edge.</param>
     /// <param name="weight"> weight of the edge.</param>
     /// <returns>this builder object.</returns>
-    /// <#### cref="Graphs.addEdgeWithVertices(Graph, Object, Object, double)"/>
+    /// <see cref="Graphs.addEdgeWithVertices(Graph, Object, Object, double)"/>
     public virtual TB AddEdge(TNode source, TNode target, double weight)
     {
         Graphs.AddEdgeWithVertices(Graph, source, target, weight);
@@ -231,8 +227,8 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     /// <param name="edge"> edge to be added to this graph.</param>
     /// <param name="weight"> weight of the edge.</param>
     /// <returns>this builder object.</returns>
-    /// <#### cref=".addEdge(Object, Object, Object)"/>
-    /// <#### cref="Graph.setEdgeWeight(Object, double)"/>
+    /// <see cref=".addEdge(Object, Object, Object)"/>
+    /// <see cref="Graph.setEdgeWeight(Object, double)"/>
     public virtual TB AddEdge(TNode source, TNode target, TEdge edge, double weight)
     {
         AddEdge(source, target, edge); // adds vertices if needed
@@ -255,7 +251,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     /// builder object after calling this method is undefined behaviour.
     /// </summary>
     /// <returns>the built unmodifiable graph.</returns>
-    /// <#### cref=".build()"/>
+    /// <see cref=".build()"/>
     public virtual IGraph<TNode, TEdge> BuildAsUnmodifiable()
     {
         return new AsUnmodifiableGraph<TNode, TEdge>(Graph);

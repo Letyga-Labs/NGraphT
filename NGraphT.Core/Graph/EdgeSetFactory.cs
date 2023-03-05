@@ -30,14 +30,13 @@ namespace NGraphT.Core.Graph;
 /// <remarks>Author: John TNode. Sichi.</remarks>
 public interface IEdgeSetFactory<TNode, TEdge>
 {
-    /// <summary>
-    /// Create a new edge set for a particular vertex.
-    /// </summary>
-    /// <param name="vertex"> the vertex for which the edge set is being created; sophisticated factories may
-    ///        be able to use this information to choose an optimal set representation (TEdge.g.
-    ///        ArrayUnenforcedSet for a vertex expected to have low degree, and LinkedHashSet for a
-    ///        vertex expected to have high degree)
-    /// </param>
-    /// <returns>new set.</returns>
+    ///<summary>
+    ///Create a new edge set for a particular vertex.
+    ///</summary>
+    ///<param name="vertex"> the vertex for which the edge set is being created; sophisticated factories may
+    ///       be able to use this information to choose an optimal set representation (TEdge.g.
+    ///       ArrayUnenforcedSet for a vertex expected to have low degree, and LinkedHashSet for a
+    ///       vertex expected to have high degree).</param>>
+    ///<returns>new set.</returns>
     ISet<TEdge> CreateEdgeSet(TNode vertex);
 }

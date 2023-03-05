@@ -277,8 +277,8 @@ public class DefaultGraphType : IGraphType
     }
 
     /// <summary>
-    /// A builder for <#### cref="DefaultGraphType"/>.
-    /// 
+    /// A builder for <see cref="DefaultGraphType"/>.
+    ///
     /// <remarks>Author: Dimitrios Michail.</remarks>
     /// </summary>
     public class Builder

@@ -29,84 +29,84 @@ namespace NGraphT.Core.Graph.Specifics;
 /// <remarks>Author: Barak Naveh.</remarks>
 public interface ISpecifics<TNode, TEdge>
 {
-    /// <summary>
-    /// Adds a vertex.
-    /// </summary>
-    /// <param name="vertex"> vertex to be added.</param>
-    /// <returns>true if the vertex was added, false if the vertex was already present.</returns>
+    ///<summary>
+    ///Adds a vertex.
+    ///</summary>
+    ///<param name="vertex"> vertex to be added.</param>
+    ///<returns>true if the vertex was added, false if the vertex was already present.</returns>
     bool AddVertex(TNode vertex);
 
-    /// <summary>
-    /// Get the vertex set.
-    /// </summary>
-    /// <returns>the vertex set.</returns>
+    ///<summary>
+    ///Get the vertex set.
+    ///</summary>
+    ///<returns>the vertex set.</returns>
     ISet<TNode> VertexSet { get; }
 
-    /// <summary>
-    /// Returns a set of all edges connecting source vertex to target vertex if such vertices exist
-    /// in this graph. If any of the vertices does not exist or is <c>null</c>, returns
-    /// <c>null</c>. If both vertices exist but no edges found, returns an empty set.
-    /// </summary>
-    /// <param name="sourceVertex"> source vertex of the edge.</param>
-    /// <param name="targetVertex"> target vertex of the edge.</param>
-    /// <returns>a set of all edges connecting source vertex to target vertex.</returns>
+    ///<summary>
+    ///Returns a set of all edges connecting source vertex to target vertex if such vertices exist
+    ///in this graph. If any of the vertices does not exist or is <c>null</c>, returns
+    ///<c>null</c>. If both vertices exist but no edges found, returns an empty set.
+    ///</summary>
+    ///<param name="sourceVertex"> source vertex of the edge.</param>
+    ///<param name="targetVertex"> target vertex of the edge.</param>
+    ///<returns>a set of all edges connecting source vertex to target vertex.</returns>
     ISet<TEdge> GetAllEdges(TNode sourceVertex, TNode targetVertex);
 
-    /// <summary>
-    /// Returns an edge connecting source vertex to target vertex if such vertices and such edge
-    /// exist in this graph. Otherwise returns <c>
-    /// null</c>. If any of the specified vertices is <c>null</c> returns <c>null</c>
+    ///<summary>
+    ///Returns an edge connecting source vertex to target vertex if such vertices and such edge
+    ///exist in this graph. Otherwise returns <c>
+    ///null</c>. If any of the specified vertices is <c>null</c> returns <c>null</c>
     ///
-    /// <para>
-    /// In undirected graphs, the returned edge may have its source and target vertices in the
-    /// opposite order.
-    /// </para>
-    /// </summary>
-    /// <param name="sourceVertex"> source vertex of the edge.</param>
-    /// <param name="targetVertex"> target vertex of the edge.</param>
-    /// <returns>an edge connecting source vertex to target vertex.</returns>
+    ///<para>
+    ///In undirected graphs, the returned edge may have its source and target vertices in the
+    ///opposite order.
+    ///</para>
+    ///</summary>
+    ///<param name="sourceVertex"> source vertex of the edge.</param>
+    ///<param name="targetVertex"> target vertex of the edge.</param>
+    ///<returns>an edge connecting source vertex to target vertex.</returns>
     TEdge GetEdge(TNode sourceVertex, TNode targetVertex);
 
-    /// <summary>
-    /// Adds the specified edge to the edge containers of its source and target vertices.
-    /// </summary>
-    /// <param name="sourceVertex"> the source vertex.</param>
-    /// <param name="targetVertex"> the target vertex.</param>
-    /// <param name="edge"> the edge.</param>
-    /// <returns>true if the edge was added, false otherwise.</returns>
+    ///<summary>
+    ///Adds the specified edge to the edge containers of its source and target vertices.
+    ///</summary>
+    ///<param name="sourceVertex"> the source vertex.</param>
+    ///<param name="targetVertex"> the target vertex.</param>
+    ///<param name="edge"> the edge.</param>
+    ///<returns>true if the edge was added, false otherwise.</returns>
     bool AddEdgeToTouchingVertices(TNode sourceVertex, TNode targetVertex, TEdge edge);
 
-    /// <summary>
-    /// Adds the specified edge to the edge containers of its source and target vertices only if the
-    /// edge is not already in the graph.
-    /// </summary>
-    /// <param name="sourceVertex"> the source vertex.</param>
-    /// <param name="targetVertex"> the target vertex.</param>
-    /// <param name="edge"> the edge.</param>
-    /// <returns>true if the edge was added, false otherwise.</returns>
+    ///<summary>
+    ///Adds the specified edge to the edge containers of its source and target vertices only if the
+    ///edge is not already in the graph.
+    ///</summary>
+    ///<param name="sourceVertex"> the source vertex.</param>
+    ///<param name="targetVertex"> the target vertex.</param>
+    ///<param name="edge"> the edge.</param>
+    ///<returns>true if the edge was added, false otherwise.</returns>
     bool AddEdgeToTouchingVerticesIfAbsent(TNode sourceVertex, TNode targetVertex, TEdge edge);
 
-    /// <summary>
-    /// Creates an edge given an edge supplier and adds it to the edge containers of its source and
-    /// target vertices only if the graph does not contain other edges with the same source and
-    /// target vertices.
-    /// </summary>
-    /// <param name="sourceVertex"> the source vertex.</param>
-    /// <param name="targetVertex"> the target vertex.</param>
-    /// <param name="edgeSupplier"> the function which will create the edge.</param>
-    /// <returns>the newly created edge or null if an edge with the same source and target vertices
-    ///         was already present.</returns>
+    ///<summary>
+    ///Creates an edge given an edge supplier and adds it to the edge containers of its source and
+    ///target vertices only if the graph does not contain other edges with the same source and
+    ///target vertices.
+    ///</summary>
+    ///<param name="sourceVertex"> the source vertex.</param>
+    ///<param name="targetVertex"> the target vertex.</param>
+    ///<param name="edgeSupplier"> the function which will create the edge.</param>
+    ///<returns>the newly created edge or null if an edge with the same source and target vertices
+    ///        was already present.</returns>
     TEdge CreateEdgeToTouchingVerticesIfAbsent(TNode sourceVertex, TNode targetVertex, Func<TEdge> edgeSupplier);
 
-    /// <summary>
-    /// Returns the degree of the specified vertex. A degree of a vertex in an undirected graph is
-    /// the number of edges touching that vertex.
-    /// </summary>
-    /// <param name="vertex"> vertex whose degree is to be calculated.</param>
-    /// <returns>the degree of the specified vertex.</returns>
+    ///<summary>
+    ///Returns the degree of the specified vertex. A degree of a vertex in an undirected graph is
+    ///the number of edges touching that vertex.
+    ///</summary>
+    ///<param name="vertex"> vertex whose degree is to be calculated.</param>
+    ///<returns>the degree of the specified vertex.</returns>
     int DegreeOf(TNode vertex);
 
-    /// <summary>
+    ///<summary>
     /// Returns a set of all edges touching the specified vertex. If no edges are touching the
     /// specified vertex returns an empty set.
     /// </summary>

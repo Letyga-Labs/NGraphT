@@ -33,22 +33,22 @@ namespace NGraphT.Core.Graph;
 /// <remarks>Author: Dimitrios Michail.</remarks>
 public interface INtrusiveEdgesSpecifics<TNode, TEdge>
 {
-    /// <summary>
-    /// Get the source vertex of an edge.
-    /// </summary>
-    /// <param name="edge"> the edge.</param>
-    /// <returns>the source vertex.</returns>
+    ///<summary>
+    ///Get the source vertex of an edge.
+    ///</summary>
+    ///<param name="edge"> the edge.</param>
+    ///<returns>the source vertex.</returns>
     TNode GetEdgeSource(TEdge edge);
 
-    /// <summary>
-    /// Get the target vertex of an edge.
-    /// </summary>
-    /// <param name="edge"> the edge.</param>
-    /// <returns>the target vertex.</returns>
+    ///<summary>
+    ///Get the target vertex of an edge.
+    ///</summary>
+    ///<param name="edge"> the edge.</param>
+    ///<returns>the target vertex.</returns>
     TNode GetEdgeTarget(TEdge edge);
 
-    /// <summary>
-    /// Add a new edge.
+    ///<summary>
+    ///Add a new edge.
     /// </summary>
     /// <param name="edge"> the edge to add.</param>
     /// <param name="sourceVertex"> the source vertex.</param>
@@ -57,14 +57,14 @@ public interface INtrusiveEdgesSpecifics<TNode, TEdge>
     bool Add(TEdge edge, TNode sourceVertex, TNode targetVertex);
 
     /// <summary>
-    /// Check if an edge exists
+    /// Check if an edge exists.
     /// </summary>
     /// <param name="edge"> the input edge.</param>
     /// <returns>true if an edge exists, false otherwise.</returns>
     bool ContainsEdge(TEdge edge);
 
     /// <summary>
-    /// Get the edge set
+    /// Get the edge set.
     /// </summary>
     /// <returns>the edge set.</returns>
     ISet<TEdge> EdgeSet { get; }
@@ -83,7 +83,7 @@ public interface INtrusiveEdgesSpecifics<TNode, TEdge>
     double GetEdgeWeight(TEdge edge);
 
     /// <summary>
-    /// Set the edge weight
+    /// Set the edge weight.
     /// </summary>
     /// <param name="edge"> the edge.</param>
     /// <param name="weight"> the new weight.</param>

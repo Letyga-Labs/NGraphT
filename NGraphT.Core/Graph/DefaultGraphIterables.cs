@@ -23,31 +23,31 @@ using Core;
 /// <summary>
 /// The default implementation of the graph iterables which simply delegates to the set
 /// implementations.
+/// </summary>
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
-/// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
 public class DefaultGraphIterables<TNode, TEdge> : IGraphIterables<TNode, TEdge>
 {
-    /// <summary>
-    /// The underlying graph
-    /// </summary>
+    ///<summary>
+    ///The underlying graph.
+    ///</summary>
     protected internal IGraph<TNode, TEdge> Graph;
 
-    /// <summary>
-    /// Create new graph iterables
-    /// </summary>
+    ///<summary>
+    ///Create new graph iterables.
+    ///</summary>
     public DefaultGraphIterables()
         : this(null)
     {
     }
 
-    /// <summary>
-    /// Create new graph iterables
-    /// </summary>
-    /// <param name="graph"> the underlying graph.</param>
+    ///<summary>
+    ///Create new graph iterables.
+    ///</summary>
+    ///<param name="graph"> the underlying graph.</param>
     public DefaultGraphIterables(IGraph<TNode, TEdge> graph)
     {
         this.graph = Objects.requireNonNull(graph);

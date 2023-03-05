@@ -59,30 +59,30 @@ public class AsWeightedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGrap
     private readonly bool                       _writeWeightsThrough;
     private readonly bool                       _cacheWeights;
 
-    /// <summary>
-    /// Constructor for AsWeightedGraph where the weights are provided through a map. Invocations of
-    /// the @link{setEdgeWeight} method will update the map. Moreover, calls to @link{setEdgeWeight}
-    /// are propagated to the underlying graph.
-    /// </summary>
-    /// <param name="graph"> the backing graph over which a weighted view is to be created.</param>
-    /// <param name="weights"> the map containing the edge weights.</param>
-    /// <exception cref="NullReferenceException"> if the graph or the weights are null.</exception>
+    ///<summary>
+    ///Constructor for AsWeightedGraph where the weights are provided through a map. Invocations of
+    ///the @link{setEdgeWeight} method will update the map. Moreover, calls to @link{setEdgeWeight}
+    ///are propagated to the underlying graph.
+    ///</summary>
+    ///<param name="graph"> the backing graph over which a weighted view is to be created.</param>
+    ///<param name="weights"> the map containing the edge weights.</param>
+    ///<exception cref="NullReferenceException"> if the graph or the weights are null.</exception>
     public AsWeightedGraph(IGraph<TNode, TEdge> graph, IDictionary<TEdge, double> weights)
         : this(graph, weights, graph.Type.Weighted)
     {
     }
 
-    /// <summary>
-    /// Constructor for AsWeightedGraph which allows weight write propagation to be requested
-    /// explicitly.
-    /// </summary>
-    /// <param name="graph"> the backing graph over which an weighted view is to be created.</param>
-    /// <param name="weights"> the map containing the edge weights.</param>
-    /// <param name="writeWeightsThrough"> if set to true, the weights will get propagated to the backing
-    ///        graph in the <c>setEdgeWeight()</c> method.</param>
-    /// <exception cref="NullReferenceException"> if the graph or the weights are null.</exception>
-    /// <exception cref="ArgumentException"> if <c>writeWeightsThrough</c> is set to true and
-    ///         <c>graph</c> is not a weighted graph.</exception>
+    ///<summary>
+    ///Constructor for AsWeightedGraph which allows weight write propagation to be requested
+    ///explicitly.
+    ///</summary>
+    ///<param name="graph"> the backing graph over which an weighted view is to be created.</param>
+    ///<param name="weights"> the map containing the edge weights.</param>
+    ///<param name="writeWeightsThrough"> if set to true, the weights will get propagated to the backing
+    ///       graph in the <c>setEdgeWeight()</c> method.</param>
+    ///<exception cref="NullReferenceException"> if the graph or the weights are null.</exception>
+    ///<exception cref="ArgumentException"> if <c>writeWeightsThrough</c> is set to true and
+    ///        <c>graph</c> is not a weighted graph.</exception>
     public AsWeightedGraph(IGraph<TNode, TEdge> graph, IDictionary<TEdge, double> weights, bool writeWeightsThrough)
         : base(graph)
     {
@@ -97,13 +97,13 @@ public class AsWeightedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGrap
         }
     }
 
-    /// <summary>
-    /// Constructor for AsWeightedGraph which uses a weight function to compute edge weights. When
-    /// the weight of an edge is queried, the weight function is invoked. If
-    /// <c>cacheWeights</c> is set to <c>true</c>, the weight of an edge returned by the
-    /// <c>weightFunction</c> after its first invocation is stored in a map. The weight of an
-    /// edge returned by subsequent calls to @link{getEdgeWeight} for the same edge will then be
-    /// retrieved directly from the map, instead of re-invoking the weight function. If
+    ///<summary>
+    ///Constructor for AsWeightedGraph which uses a weight function to compute edge weights. When
+    ///the weight of an edge is queried, the weight function is invoked. If
+    ///<c>cacheWeights</c> is set to <c>true</c>, the weight of an edge returned by the
+    ///<c>weightFunction</c> after its first invocation is stored in a map. The weight of an
+    ///edge returned by subsequent calls to @link{getEdgeWeight} for the same edge will then be
+    ///retrieved directly from the map, instead of re-invoking the weight function. If
     /// <c>cacheWeights</c> is set to <c>false</c>, each invocation of
     /// the @link{getEdgeWeight} method will invoke the weight function. Caching the edge weights is
     /// particularly useful when pre-computing all edge weights is expensive and it is expected that

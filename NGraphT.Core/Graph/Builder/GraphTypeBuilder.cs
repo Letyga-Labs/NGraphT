@@ -69,8 +69,8 @@ using Util;
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
 /// </param>
-/// <#### cref="IGraphType"/>
-/// <#### cref="GraphBuilder"/>
+/// <seealso cref="IGraphType"/>
+/// <seealso cref="GraphBuilder"/>
 public sealed class GraphTypeBuilder<TNode, TEdge>
 {
     private bool               _undirected;
@@ -90,49 +90,49 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
         _allowingSelfLoops     = false;
     }
 
-    /// <summary>
-    /// Create a graph type builder for a directed graph.
-    /// </summary>
-    /// <returns>the graph type builder.</returns>
-    /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<summary>
+    ///Create a graph type builder for a directed graph.
+    ///</summary>
+    ///<returns>the graph type builder.</returns>
+    ///<typeparam name="TNode">The graph vertex type.</typeparam>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
     public static GraphTypeBuilder<TNode, TEdge> Directed<TNode, TEdge>()
     {
         return new GraphTypeBuilder<TNode, TEdge>(true, false);
     }
 
-    /// <summary>
-    /// Create a graph type builder for an undirected graph.
-    /// </summary>
-    /// <returns>the graph type builder.</returns>
-    /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<summary>
+    ///Create a graph type builder for an undirected graph.
+    ///</summary>
+    ///<returns>the graph type builder.</returns>
+    ///<typeparam name="TNode">The graph vertex type.</typeparam>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
     public static GraphTypeBuilder<TNode, TEdge> Undirected<TNode, TEdge>()
     {
         return new GraphTypeBuilder<TNode, TEdge>(false, true);
     }
 
-    /// <summary>
-    /// Create a graph type builder for a mixed graph.
-    /// </summary>
-    /// <returns>the graph type builder.</returns>
-    /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<summary>
+    ///Create a graph type builder for a mixed graph.
+    ///</summary>
+    ///<returns>the graph type builder.</returns>
+    ///<typeparam name="TNode">The graph vertex type.</typeparam>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
     public static GraphTypeBuilder<TNode, TEdge> Mixed<TNode, TEdge>()
     {
         return new GraphTypeBuilder<TNode, TEdge>(true, true);
     }
 
-    /// <summary>
-    /// Create a graph type builder which will create a graph with the same type as the one provided.
-    /// </summary>
-    /// <param name="type"> the graph type.</param>
-    /// <returns>the graph type builder.</returns>
-    /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<summary>
+    ///Create a graph type builder which will create a graph with the same type as the one provided.
+    ///</summary>
+    ///<param name="type"> the graph type.</param>
+    ///<returns>the graph type builder.</returns>
+    ///<typeparam name="TNode">The graph vertex type.</typeparam>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
     public static GraphTypeBuilder<TNode, TEdge> ForGraphType<TNode, TEdge>(IGraphType type)
     {
-        GraphTypeBuilder<TNode, TEdge> builder =
+        var builder =
             new GraphTypeBuilder<TNode, TEdge>(type.Directed || type.Mixed, type.Undirected || type.Mixed);
         builder._weighted              = type.Weighted;
         builder._allowingSelfLoops     = type.AllowingSelfLoops;
@@ -140,14 +140,14 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
         return builder;
     }
 
-    /// <summary>
-    /// Create a graph type builder which will create the same graph type as the parameter graph. The
-    /// new graph will use the same vertex and edge suppliers as the input graph.
-    /// </summary>
-    /// <param name="graph"> a graph.</param>
-    /// <returns>a type builder.</returns>
-    /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<summary>
+    ///Create a graph type builder which will create the same graph type as the parameter graph. The
+    ///new graph will use the same vertex and edge suppliers as the input graph.
+    ///</summary>
+    ///<param name="graph"> a graph.</param>
+    ///<returns>a type builder.</returns>
+    ///<typeparam name="TNode">The graph vertex type.</typeparam>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
     public static GraphTypeBuilder<TNode, TEdge> ForGraph<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
         GraphTypeBuilder<TNode, TEdge> builder = ForGraphType(graph.Type);
@@ -156,45 +156,45 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
         return builder;
     }
 
-    /// <summary>
-    /// Set whether the graph will be weighted or not.
-    /// </summary>
-    /// <param name="weighted"> if true the graph will be weighted.</param>
-    /// <returns>the graph type builder.</returns>
+    ///<summary>
+    ///Set whether the graph will be weighted or not.
+    ///</summary>
+    ///<param name="weighted"> if true the graph will be weighted.</param>
+    ///<returns>the graph type builder.</returns>
     public GraphTypeBuilder<TNode, TEdge> Weighted(bool weighted)
     {
         _weighted = weighted;
         return this;
     }
 
-    /// <summary>
-    /// Set whether the graph will allow self loops (edges with same source and target vertices).
-    /// </summary>
-    /// <param name="allowingSelfLoops"> if true the graph will allow self-loops.</param>
-    /// <returns>the graph type builder.</returns>
+    ///<summary>
+    ///Set whether the graph will allow self loops (edges with same source and target vertices).
+    ///</summary>
+    ///<param name="allowingSelfLoops"> if true the graph will allow self-loops.</param>
+    ///<returns>the graph type builder.</returns>
     public GraphTypeBuilder<TNode, TEdge> AllowingSelfLoops(bool allowingSelfLoops)
     {
         _allowingSelfLoops = allowingSelfLoops;
         return this;
     }
 
-    /// <summary>
-    /// Set whether the graph will allow multiple (parallel) edges between the same two vertices.
-    /// </summary>
-    /// <param name="allowingMultipleEdges"> if true the graph will allow multiple (parallel) edges.</param>
-    /// <returns>the graph type builder.</returns>
+    ///<summary>
+    ///Set whether the graph will allow multiple (parallel) edges between the same two vertices.
+    ///</summary>
+    ///<param name="allowingMultipleEdges"> if true the graph will allow multiple (parallel) edges.</param>
+    ///<returns>the graph type builder.</returns>
     public GraphTypeBuilder<TNode, TEdge> AllowingMultipleEdges(bool allowingMultipleEdges)
     {
         _allowingMultipleEdges = allowingMultipleEdges;
         return this;
     }
 
-    /// <summary>
-    /// Set the vertex supplier.
-    /// </summary>
-    /// <param name="vertexSupplier"> the vertex supplier to use.</param>
-    /// <returns>the graph type builder.</returns>
-    /// @param <V1> the graph vertex type.</param>
+    ///<summary>
+    ///Set the vertex supplier.
+    ///</summary>
+    ///<param name="vertexSupplier"> the vertex supplier to use.</param>
+    ///<returns>the graph type builder.</returns>
+    ///<typeparam name="V1"> the graph vertex type.</typeparam>
     public GraphTypeBuilder<TV1, TEdge> VertexSupplier<TV1>(Func<TV1> vertexSupplier) where TV1 : TNode
     {
         GraphTypeBuilder<TV1, TEdge> newBuilder = TypeUtil.UncheckedCast(this);
@@ -202,12 +202,12 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
         return newBuilder;
     }
 
-    /// <summary>
-    /// Set the edge supplier.
-    /// </summary>
-    /// <param name="edgeSupplier"> the edge supplier to use.</param>
-    /// <returns>the graph type builder.</returns>
-    /// @param <E1> the graph edge type.</param>
+    ///<summary>
+    ///Set the edge supplier.
+    ///</summary>
+    ///<param name="edgeSupplier"> the edge supplier to use.</param>
+    ///<returns>the graph type builder.</returns>
+    ///<typeparam name="E1"> the graph edge type.</typeparam>
     public GraphTypeBuilder<TNode, TE1> EdgeSupplier<TE1>(Func<TE1> edgeSupplier) where TE1 : TEdge
     {
         GraphTypeBuilder<TNode, TE1> newBuilder = TypeUtil.UncheckedCast(this);
@@ -215,12 +215,12 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
         return newBuilder;
     }
 
-    /// <summary>
-    /// Set the vertex class.
-    /// </summary>
-    /// <param name="vertexClass"> the vertex class.</param>
-    /// <returns>the graph type builder.</returns>
-    /// @param <V1> the graph vertex type.</param>
+    ///<summary>
+    ///Set the vertex class.
+    ///</summary>
+    ///<param name="vertexClass"> the vertex class.</param>
+    ///<returns>the graph type builder.</returns>
+    ///<typeparam name="V1"> the graph vertex type.</typeparam>
     public GraphTypeBuilder<TV1, TEdge> VertexClass<TV1>(Type vertexClass) where TV1 : TNode
     {
         GraphTypeBuilder<TV1, TEdge> newBuilder = TypeUtil.UncheckedCast(this);
@@ -233,7 +233,7 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
     /// </summary>
     /// <param name="edgeClass"> the edge class.</param>
     /// <returns>the graph type builder.</returns>
-    /// @param <E1> the graph edge type.</param>
+    /// <typeparam name="E1"> the graph edge type.</typeparam>
     public GraphTypeBuilder<TNode, TE1> EdgeClass<TE1>(Type edgeClass) where TE1 : TEdge
     {
         GraphTypeBuilder<TNode, TE1> newBuilder = TypeUtil.UncheckedCast(this);
@@ -266,7 +266,7 @@ public sealed class GraphTypeBuilder<TNode, TEdge>
     }
 
     /// <summary>
-    /// Build the graph and acquire a <#### cref="GraphBuilder"/> in order to add vertices and edges.
+    /// Build the graph and acquire a <see cref="GraphBuilder"/> in order to add vertices and edges.
     /// </summary>
     /// <returns>a graph builder.</returns>
     public GraphBuilder<TNode, TEdge, IGraph<TNode, TEdge>> BuildGraphBuilder()

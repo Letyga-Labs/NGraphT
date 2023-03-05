@@ -20,9 +20,9 @@ namespace NGraphT.Core.Graph;
 
 /// <summary>
 /// Special <see cref="System.Exception"/> to signal that <see cref="IntrusiveEdge"/> is used incorrectly.
+/// </summary>
 ///
 /// <remarks>Author: Hannes Wellmann.</remarks>
-/// </summary>
 public class IntrusiveEdgeException : Exception
 {
     public IntrusiveEdgeException<TNode>(TNode source, TNode target) : base("Edge already associated with source <"

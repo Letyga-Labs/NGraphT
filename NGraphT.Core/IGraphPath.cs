@@ -16,6 +16,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
+using NGraphT.Core.DotNetUtil;
+
 namespace NGraphT.Core;
 
 /// <summary>
@@ -53,7 +55,7 @@ public interface IGraphPath<TNode, TEdge>
     /// Returns the edges making up the path. The first edge in this path is incident to the start
     /// vertex. The last edge is incident to the end vertex. The vertices along the path can be
     /// obtained by traversing from the start vertex, finding its opposite across the first edge, and
-    /// then doing the same successively across subsequent edges; see <#### cref="getVertexList()"/>.
+    /// then doing the same successively across subsequent edges; see <see cref="VertexList"/>.
     ///
     /// <para>
     /// Whether or not the returned edge list is modifiable depends on the path implementation.
@@ -65,23 +67,16 @@ public interface IGraphPath<TNode, TEdge>
     {
         get
         {
-            IList<TNode> vertexList = this.getVertexList();
-            if (vertexList.size() < 2)
+            var vertexList = VertexList;
+            if (vertexList.Count < 2)
             {
-                return Collections.emptyList();
+                return Array.Empty<TEdge>();
             }
 
-            IGraph<TNode, TEdge>    g              = this.getGraph();
-            IList<TEdge>       edgeList       = new List<>();
-            IEnumerator<TNode> vertexIterator = vertexList.iterator();
-            TNode              u              = vertexIterator.next();
-            while (vertexIterator.hasNext())
-            {
-                TNode node = vertexIterator.next();
-                edgeList.add(g.getEdge(u, node));
-                u = node;
-            }
-
+            var g = Graph;
+            var edgeList = vertexList.Pairwise()
+                .Select(it => g.GetEdge(it.Previous, it.Current))
+                .ToList();
             return edgeList;
         }
     }
@@ -94,31 +89,31 @@ public interface IGraphPath<TNode, TEdge>
     {
         get
         {
-            IList<TEdge> edgeList = this.getEdgeList();
+            var edgeList = EdgeList;
 
-            if (edgeList.isEmpty())
+            if (!edgeList.Any())
             {
-                TNode startVertex = getStartVertex();
-                if (startVertex != null && startVertex.Equals(getEndVertex()))
+                var startVertex = StartVertex;
+                if (startVertex != null && startVertex.Equals(EndVertex))
                 {
-                    return Collections.singletonList(startVertex);
+                    return new List<TNode> { startVertex, };
                 }
                 else
                 {
-                    return Collections.emptyList();
+                    return Array.Empty<TNode>();
                 }
             }
 
-            IGraph<TNode, TEdge> g    = this.getGraph();
-            IList<TNode>    list = new List<>();
-            TNode           node    = this.getStartVertex();
-            list.add(node);
-            for (TEdge TEdge :
-            edgeList)
+            var g    = Graph;
+            var list = new List<TNode>();
+            var node = StartVertex;
+            list.Add(node);
+            foreach (var edge in edgeList)
             {
-                node = Graphs.getOppositeVertex(g, TEdge, node);
-                list.add(node);
+                node = Graphs.GetOppositeVertex(g, edge, node);
+                list.Add(node);
             }
+
             return list;
         }
     }
@@ -135,11 +130,5 @@ public interface IGraphPath<TNode, TEdge>
     /// Returns the length of the path, measured in the number of edges.
     /// </summary>
     /// <returns>the length of the path, measured in the number of edges.</returns>
-    int Length
-    {
-        get
-        {
-            return getEdgeList().size();
-        }
-    }
+    int Length => EdgeList.Count;
 }

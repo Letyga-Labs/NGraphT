@@ -35,10 +35,10 @@ namespace NGraphT.Core.Graph;
 public class UniformIntrusiveEdgesSpecifics<TNode, TEdge> : BaseIntrusiveEdgesSpecifics<TNode, TEdge, IntrusiveEdge>,
     INtrusiveEdgesSpecifics<TNode, TEdge>
 {
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="map"> the map to use for storage.</param>
+    ///<summary>
+    ///Constructor.
+    ///</summary>
+    ///<param name="map"> the map to use for storage.</param>
     public UniformIntrusiveEdgesSpecifics(IDictionary<TEdge, IntrusiveEdge> map)
         : base(map)
     {

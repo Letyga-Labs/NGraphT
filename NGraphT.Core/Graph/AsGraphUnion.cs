@@ -31,7 +31,7 @@ using Util;
 /// TEdge<sub>1</sub> and TEdge<sub>2</sub>. A <see cref="IWeightCombiner"/> in order to calculate edge weights.
 /// </para>
 /// </summary>
-/// @param <TNode> the vertex type.</param>
+/// <typeparam name="TNode"> the vertex type.</typeparam>
 /// @param <TEdge> the edge type
 ///
 /// <remarks>Author: Ilya Razenshteyn.</remarks>
@@ -46,12 +46,12 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     public virtual   Type { get; }
     private readonly IWeightCombiner _operator;
 
-    /// <summary>
-    /// Construct a new graph union.
-    /// </summary>
-    /// <param name="g1"> the first graph.</param>
-    /// <param name="g2"> the second graph.</param>
-    /// <param name="operator"> the weight combiner (policy for edge weight calculation) </param>
+    ///<summary>
+    ///Construct a new graph union.
+    ///</summary>
+    ///<param name="g1"> the first graph.</param>
+    ///<param name="g2"> the second graph.</param>
+    ///<param name="operator"> the weight combiner (policy for edge weight calculation) </param>
     public AsGraphUnion(IGraph<TNode, TEdge> g1, IGraph<TNode, TEdge> g2, IWeightCombiner @operator)
     {
         _g1    = GraphTests.RequireDirectedOrUndirected(g1);
@@ -86,18 +86,18 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
             .AllowMultipleEdges(true).Weighted(true).Modifiable(false).Build();
     }
 
-    /// <summary>
-    /// Construct a new graph union. The union will use the <#### cref="IIWeightCombiner.Sum/> weight
-    /// combiner.
-    /// </summary>
-    /// <param name="g1"> the first graph.</param>
-    /// <param name="g2"> the second graph.</param>
+    ///<summary>
+    ///Construct a new graph union. The union will use the <see cref="IIWeightCombiner.Sum/> weight
+    ///combiner.
+    ///</summary>
+    ///<param name="g1"> the first graph.</param>
+    ///<param name="g2"> the second graph.</param>
     public AsGraphUnion(IGraph<TNode, TEdge> g1, IGraph<TNode, TEdge> g2)
         : this(g1, g2, IWeightCombiner.Sum)
     {
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> GetAllEdges(TNode sourceVertex, TNode targetVertex)
     {
         var inG1 = _g1.ContainsVertex(sourceVertex) && _g1.ContainsVertex(targetVertex);
@@ -121,7 +121,7 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         return java.util.Collections.emptySet();
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
     {
         var res = default(TEdge);
@@ -138,8 +138,8 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         return res;
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
+    ///<inheritdoc/>
+    ///<exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override Func<TNode> VertexSupplier
     {
         get
@@ -148,8 +148,8 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
+    ///<inheritdoc/>
+    ///<exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override Func<TEdge> EdgeSupplier
     {
         get
@@ -158,53 +158,53 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
+    ///<inheritdoc/>
+    ///<exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override TEdge AddEdge(TNode sourceVertex, TNode targetVertex)
     {
         throw new NotSupportedException(ReadOnly);
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
+    ///<inheritdoc/>
+    ///<exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         throw new NotSupportedException(ReadOnly);
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
+    ///<inheritdoc/>
+    ///<exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override TNode AddVertex()
     {
         throw new NotSupportedException(ReadOnly);
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
+    ///<inheritdoc/>
+    ///<exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override bool AddVertex(TNode node)
     {
         throw new NotSupportedException(ReadOnly);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool ContainsEdge(TEdge edge)
     {
         return _g1.ContainsEdge(edge) || _g2.ContainsEdge(edge);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool ContainsVertex(TNode node)
     {
         return _g1.ContainsVertex(node) || _g2.ContainsVertex(node);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> EdgeSet()
     {
         return new UnmodifiableUnionSet<TEdge>(_g1.EdgeSet(), _g2.EdgeSet());
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> EdgesOf(TNode vertex)
     {
         var inG1 = _g1.ContainsVertex(vertex);
@@ -228,7 +228,7 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> IncomingEdgesOf(TNode vertex)
     {
         var inG1 = _g1.ContainsVertex(vertex);
@@ -252,7 +252,7 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> OutgoingEdgesOf(TNode vertex)
     {
         var inG1 = _g1.ContainsVertex(vertex);
@@ -276,7 +276,7 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override int DegreeOf(TNode vertex)
     {
         if (Type.Mixed)
@@ -297,7 +297,7 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         else if (Type.Undirected)
         {
             var                degree = 0;
-            IEnumerator<TEdge> it     = EdgesOf(vertex).GetEnumerator();
+            var it     = EdgesOf(vertex).GetEnumerator();
             while (it.MoveNext())
             {
                 var edge = it.Current;
@@ -316,7 +316,7 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override int InDegreeOf(TNode vertex)
     {
         if (Type.Mixed)
@@ -344,7 +344,7 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override int OutDegreeOf(TNode vertex)
     {
         if (Type.Mixed)
@@ -372,21 +372,21 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
+    ///<inheritdoc/>
+    ///<exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override TEdge RemoveEdge(TNode sourceVertex, TNode targetVertex)
     {
         throw new NotSupportedException(ReadOnly);
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
+    ///<inheritdoc/>
+    ///<exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override bool RemoveEdge(TEdge edge)
     {
         throw new NotSupportedException(ReadOnly);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override bool RemoveVertex(TNode node)
     {
@@ -454,7 +454,7 @@ public class AsGraphUnion<TNode, TEdge> : AbstractGraph<TNode, TEdge>
 
     /// <inheritdoc/>
     /// <summary>
-    /// Throws <#### cref="System.NotSupportedException"/> since graph union is read-only.
+    /// Throws <see cref="System.NotSupportedException"/> since graph union is read-only.
     /// </summary>
     public override void SetEdgeWeight(TEdge edge, double weight)
     {

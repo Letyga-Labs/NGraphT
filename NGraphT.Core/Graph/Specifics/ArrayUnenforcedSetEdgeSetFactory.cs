@@ -32,7 +32,7 @@ using Util;
 /// <remarks>Author: Barak Naveh.</remarks>
 public class ArrayUnenforcedSetEdgeSetFactory<TNode, TEdge> : IEdgeSetFactory<TNode, TEdge>
 {
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TEdge> CreateEdgeSet(TNode vertex)
     {
         // NOTE: use size 1 to keep memory usage under control

@@ -52,21 +52,21 @@ public class AsUndirectedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGr
 {
     private const string NoEdgeAdd = "this graph does not support edge addition";
 
-    /// <summary>
-    /// Constructor for AsUndirectedGraph.
-    /// </summary>
-    /// <param name="g"> the backing directed graph over which an undirected view is to be created.</param>
-    /// <exception cref="ArgumentException"> if the graph is not directed.</exception>
+    ///<summary>
+    ///Constructor for AsUndirectedGraph.
+    ///</summary>
+    ///<param name="g"> the backing directed graph over which an undirected view is to be created.</param>
+    ///<exception cref="ArgumentException"> if the graph is not directed.</exception>
     public AsUndirectedGraph(IGraph<TNode, TEdge> g)
         : base(g)
     {
         GraphTests.RequireDirected(g);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> GetAllEdges(TNode sourceVertex, TNode targetVertex)
     {
-        ISet<TEdge> forwardList = base.GetAllEdges(sourceVertex, targetVertex);
+        var forwardList = base.GetAllEdges(sourceVertex, targetVertex);
 
         if (sourceVertex.Equals(targetVertex))
         {
@@ -74,7 +74,7 @@ public class AsUndirectedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGr
             return forwardList;
         }
 
-        ISet<TEdge> reverseList = base.GetAllEdges(targetVertex, sourceVertex);
+        var reverseList = base.GetAllEdges(targetVertex, sourceVertex);
         ISet<TEdge> list        = new ArrayUnenforcedSet<TEdge>(forwardList.Count + reverseList.Count);
         list.addAll(forwardList);
         list.addAll(reverseList);
@@ -82,7 +82,7 @@ public class AsUndirectedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGr
         return list;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
     {
         var edge = base.GetEdge(sourceVertex, targetVertex);
@@ -96,51 +96,51 @@ public class AsUndirectedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGr
         return base.GetEdge(targetVertex, sourceVertex);
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
+    ///<inheritdoc/>
+    ///<exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override TEdge AddEdge(TNode sourceVertex, TNode targetVertex)
     {
         throw new NotSupportedException(NoEdgeAdd);
     }
 
-    /// <inheritdoc/>
-    /// <exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
+    ///<inheritdoc/>
+    ///<exception cref="NotSupportedException"> always, since operation is unsupported.</exception>
     public override bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         throw new NotSupportedException(NoEdgeAdd);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override int DegreeOf(TNode vertex)
     {
         return base.DegreeOf(vertex);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> IncomingEdgesOf(TNode vertex)
     {
         return base.EdgesOf(vertex);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override int InDegreeOf(TNode vertex)
     {
         return base.DegreeOf(vertex);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> OutgoingEdgesOf(TNode vertex)
     {
         return base.EdgesOf(vertex);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override int OutDegreeOf(TNode vertex)
     {
         return base.DegreeOf(vertex);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override IGraphType Type
     {
         get
@@ -149,7 +149,7 @@ public class AsUndirectedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGr
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override string ToString()
     {
         return base.toStringFromSets(VertexSet(), EdgeSet(), false);

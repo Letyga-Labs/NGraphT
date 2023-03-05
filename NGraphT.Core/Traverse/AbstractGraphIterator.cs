@@ -46,7 +46,7 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
     protected internal          bool                        ReuseEvents;
 
     /// <summary>
-    /// Create a new iterator
+    /// Create a new iterator.
     /// </summary>
     /// <param name="graph"> the graph.</param>
     public AbstractGraphIterator(IGraph<TNode, TEdge> graph)
@@ -216,7 +216,7 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
 
     /// <summary>
     /// A reusable edge event.
-    /// 
+    ///
     /// <remarks>Author: Barak Naveh.</remarks>
     /// </summary>
     internal class FlyweightEdgeEvent<TEdge> : EdgeTraversalEvent<TEdge>
@@ -248,7 +248,7 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
 
     /// <summary>
     /// A reusable vertex event.
-    /// 
+    ///
     /// <remarks>Author: Barak Naveh.</remarks>
     /// </summary>
     internal class FlyweightVertexEvent<TNode> : VertexTraversalEvent<TNode>

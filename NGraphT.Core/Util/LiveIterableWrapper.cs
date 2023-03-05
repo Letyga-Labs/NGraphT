@@ -20,49 +20,31 @@ namespace NGraphT.Core.Util;
 
 /// <summary>
 /// A wrapper around a supplier of an iterable.
+/// </summary>
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
-/// </summary>
-/// @param <TEdge> the element type.</param>
+/// <typeparam name="TEdge"> the element type.</typeparam>
 public class LiveIterableWrapper<TEdge> : IEnumerable<TEdge>
 {
-    private Func<IEnumerable<TEdge>> _supplier;
-
     /// <summary>
-    /// Create a new wrapper
-    /// </summary>
-    public LiveIterableWrapper()
-        : this(null)
-    {
-    }
-
-    /// <summary>
-    /// Create a new wrapper
+    /// Create a new wrapper.
     /// </summary>
     /// <param name="supplier"> the supplier which provides the iterable.</param>
     public LiveIterableWrapper(Func<IEnumerable<TEdge>> supplier)
     {
-        _supplier = Objects.requireNonNull(supplier);
-    }
+        ArgumentNullException.ThrowIfNull(supplier);
 
-    public virtual IEnumerator<TEdge> GetEnumerator()
-    {
-        return _supplier.get().GetEnumerator();
+        Supplier = supplier;
     }
 
     /// <summary>
-    /// Get the supplier
+    /// Get the supplier.
     /// </summary>
     /// <returns>the supplier.</returns>
-    public virtual Func<IEnumerable<TEdge>> Supplier
+    public virtual Func<IEnumerable<TEdge>> Supplier { get; }
+
+    public virtual IEnumerator<TEdge> GetEnumerator()
     {
-        get
-        {
-            return _supplier;
-        }
-        set
-        {
-            _supplier = value;
-        }
+        return Supplier().GetEnumerator();
     }
 }

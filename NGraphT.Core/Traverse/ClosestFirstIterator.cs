@@ -170,7 +170,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
         {
             // prime the heap by processing the first start vertex
             HasNext();
-            IEnumerator<TNode> iter = startVertices.GetEnumerator();
+            var iter = startVertices.GetEnumerator();
 //JAVA TO C# CONVERTER TODO TASK: Java iterators are only converted within the context of 'while' and 'for' loops:
             if (iter.hasNext())
             {
@@ -243,7 +243,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
         return node.getValue().spanningTreeEdge;
     }
 
-    /// <#### cref="CrossComponentIterator.isConnectedComponentExhausted()"/>
+    /// <see cref="CrossComponentIterator.isConnectedComponentExhausted()"/>
     protected internal override bool ConnectedComponentExhausted
     {
         get
@@ -268,7 +268,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
         }
     }
 
-    /// <#### cref="CrossComponentIterator.encounterVertex(Object, Object)"/>
+    /// <see cref="CrossComponentIterator.encounterVertex(Object, Object)"/>
     protected internal override void EncounterVertex(TNode vertex, TEdge edge)
     {
         double shortestPathLength;
@@ -312,7 +312,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
         }
     }
 
-    /// <#### cref="CrossComponentIterator.provideNextVertex()"/>
+    /// <see cref="CrossComponentIterator.provideNextVertex()"/>
     protected internal override TNode ProvideNextVertex()
     {
         AddressableHeap.Handle<double, QueueEntry<TNode, TEdge>> node = _heap.deleteMin();

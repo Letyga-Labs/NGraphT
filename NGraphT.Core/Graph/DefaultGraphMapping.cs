@@ -39,14 +39,14 @@ public class DefaultGraphMapping<TNode, TEdge> : IGraphMapping<TNode, TEdge>
     private IGraph<TNode, TEdge> _graph1;
     private IGraph<TNode, TEdge> _graph2;
 
-    /// <summary>
-    /// The maps themselves are used. There is no defensive-copy. Assumption: The key and value in
-    /// the mappings are of valid graph objects. It is not checked.
-    /// </summary>
-    /// <param name="g1ToG2"> vertex mapping from the first graph to the second.</param>
-    /// <param name="g2ToG1"> vertex mapping from the second graph to the first.</param>
-    /// <param name="g1"> the first graph.</param>
-    /// <param name="g2"> the second graph.</param>
+    ///<summary>
+    ///The maps themselves are used. There is no defensive-copy. Assumption: The key and value in
+    ///the mappings are of valid graph objects. It is not checked.
+    ///</summary>
+    ///<param name="g1ToG2"> vertex mapping from the first graph to the second.</param>
+    ///<param name="g2ToG1"> vertex mapping from the second graph to the first.</param>
+    ///<param name="g1"> the first graph.</param>
+    ///<param name="g2"> the second graph.</param>
     public DefaultGraphMapping(
         IDictionary<TNode, TNode> g1ToG2,
         IDictionary<TNode, TNode> g2ToG1,

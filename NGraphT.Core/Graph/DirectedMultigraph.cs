@@ -30,8 +30,8 @@ using Util;
 /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
 public class DirectedMultigraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge>
 {
-    /// <summary>
-    /// Creates a new graph.
+    ///<summary>
+    ///Creates a new graph.
     /// </summary>
     /// <param name="edgeClass"> class on which to base the edge supplier.</param>
     public DirectedMultigraph(Type edgeClass)

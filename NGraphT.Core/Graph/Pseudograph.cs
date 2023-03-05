@@ -32,21 +32,21 @@ using Util;
 /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
 public class Pseudograph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge>
 {
-    /// <summary>
-    /// Creates a new graph.
-    /// </summary>
-    /// <param name="edgeClass"> class on which to base the edge supplier.</param>
+    ///<summary>
+    ///Creates a new graph.
+    ///</summary>
+    ///<param name="edgeClass"> class on which to base the edge supplier.</param>
     public Pseudograph(Type edgeClass)
         : this(null, SupplierUtil.CreateSupplier(edgeClass), false)
     {
     }
 
-    /// <summary>
-    /// Creates a new graph.
-    /// </summary>
-    /// <param name="vertexSupplier"> the vertex supplier, can be null.</param>
-    /// <param name="edgeSupplier"> the edge supplier, can be null.</param>
-    /// <param name="weighted"> whether the graph is weighted or not.</param>
+    ///<summary>
+    ///Creates a new graph.
+    ///</summary>
+    ///<param name="vertexSupplier"> the vertex supplier, can be null.</param>
+    ///<param name="edgeSupplier"> the edge supplier, can be null.</param>
+    ///<param name="weighted"> whether the graph is weighted or not.</param>
     public Pseudograph(Func<TNode> vertexSupplier, Func<TEdge> edgeSupplier, bool weighted)
         : base(vertexSupplier,
             edgeSupplier,
@@ -56,13 +56,13 @@ public class Pseudograph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge>
     {
     }
 
-    /// <summary>
-    /// Create a builder for this kind of graph.
-    /// </summary>
-    /// <param name="edgeClass"> class on which to base factory for edges.</param>
-    /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
-    /// <returns>a builder for this kind of graph.</returns>
+    ///<summary>
+    ///Create a builder for this kind of graph.
+    ///</summary>
+    ///<param name="edgeClass"> class on which to base factory for edges.</param>
+    ///<typeparam name="TNode">The graph vertex type.</typeparam>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<returns>a builder for this kind of graph.</returns>
 //JAVA TO C# CONVERTER WARNING: Java wildcard generics have no direct equivalent in C#:
 //ORIGINAL LINE: public static <TNode, TEdge> GraphBuilder<TNode, TEdge, ? extends Pseudograph<TNode, TEdge>> createBuilder(Class edgeClass)
     public static GraphBuilder<TNode, TEdge, Pseudograph<TNode, TEdge>> CreateBuilder<TNode, TEdge>(Type edgeClass)
@@ -74,13 +74,13 @@ public class Pseudograph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge>
         );
     }
 
-    /// <summary>
-    /// Create a builder for this kind of graph.
-    /// </summary>
-    /// <param name="edgeSupplier"> the edge supplier of the new graph.</param>
-    /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
-    /// <returns>a builder for this kind of graph.</returns>
+    ///<summary>
+    ///Create a builder for this kind of graph.
+    ///</summary>
+    ///<param name="edgeSupplier"> the edge supplier of the new graph.</param>
+    ///<typeparam name="TNode">The graph vertex type.</typeparam>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<returns>a builder for this kind of graph.</returns>
 //JAVA TO C# CONVERTER WARNING: Java wildcard generics have no direct equivalent in C#:
 //ORIGINAL LINE: public static <TNode, TEdge> GraphBuilder<TNode, TEdge, ? extends Pseudograph<TNode, TEdge>> createBuilder(Supplier<TEdge> edgeSupplier)
     public static GraphBuilder<TNode, TEdge, Pseudograph<TNode, TEdge>> CreateBuilder<TNode, TEdge>(

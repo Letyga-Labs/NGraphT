@@ -41,7 +41,7 @@ using Util;
 /// Note: only vertex events are fired by this iterator.
 /// </para>
 /// </summary>
-/// @param <TNode> the graph vertex type.</param>
+/// <typeparam name="TNode"> the graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam>.
 /// <remarks>Author: Timofey Chudakov.</remarks>
 public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
@@ -166,7 +166,7 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     {
         if (_remainingVertices > 0)
         {
-            ISet<TNode> bucket = _buckets[_maxCardinality];
+            var bucket = _buckets[_maxCardinality];
             TNode       vertex = bucket.GetEnumerator().next();
             RemoveFromBucket(vertex);
             if (bucket.Count == 0)

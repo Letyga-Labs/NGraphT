@@ -24,9 +24,9 @@ using Core;
 /// IntrusiveEdge extension for weighted edges. IntrusiveWeightedEdge encapsulates the internals for
 /// the default weighted edge implementation. It is not intended to be referenced directly (which is
 /// why it's not public); use DefaultWeightedEdge for that.
+/// </summary>
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
-/// </summary>
 internal class IntrusiveWeightedEdge : IntrusiveEdge
 {
     internal double Weight = Graph.DEFAULT_EDGE_WEIGHT;

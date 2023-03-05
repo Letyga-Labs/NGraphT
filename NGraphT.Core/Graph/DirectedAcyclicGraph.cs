@@ -68,38 +68,38 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     // this update count is used to keep internal topological iterators honest
     private long _topoModCount = 0;
 
-    /// <summary>
-    /// The visited strategy factory to use. Subclasses can change this.
-    /// </summary>
+    ///<summary>
+    ///The visited strategy factory to use. Subclasses can change this.
+    ///</summary>
     private readonly IVisitedStrategyFactory _visitedStrategyFactory;
 
-    /// <summary>
-    /// Construct a directed acyclic graph.
-    /// </summary>
-    /// <param name="edgeClass"> the edge class.</param>
+    ///<summary>
+    ///Construct a directed acyclic graph.
+    ///</summary>
+    ///<param name="edgeClass"> the edge class.</param>
     public DirectedAcyclicGraph(Type edgeClass)
         : this(null, SupplierUtil.CreateSupplier(edgeClass), false, false)
     {
     }
 
-    /// <summary>
-    /// Construct a directed acyclic graph.
-    /// </summary>
-    /// <param name="vertexSupplier"> the vertex supplier.</param>
-    /// <param name="edgeSupplier"> the edge supplier.</param>
-    /// <param name="weighted"> if true the graph will be weighted, otherwise not.</param>
+    ///<summary>
+    ///Construct a directed acyclic graph.
+    ///</summary>
+    ///<param name="vertexSupplier"> the vertex supplier.</param>
+    ///<param name="edgeSupplier"> the edge supplier.</param>
+    ///<param name="weighted"> if true the graph will be weighted, otherwise not.</param>
     public DirectedAcyclicGraph(Func<TNode> vertexSupplier, Func<TEdge> edgeSupplier, bool weighted)
         : this(vertexSupplier, edgeSupplier, new VisitedBitSetImpl(), new TopoVertexBiMap<TNode>(), weighted, false)
     {
     }
 
-    /// <summary>
-    /// Construct a directed acyclic graph.
-    /// </summary>
-    /// <param name="vertexSupplier"> the vertex supplier.</param>
-    /// <param name="edgeSupplier"> the edge supplier.</param>
-    /// <param name="weighted"> if true the graph will be weighted, otherwise not.</param>
-    /// <param name="allowMultipleEdges"> if true the graph will allow multiple edges, otherwise not.</param>
+    ///<summary>
+    ///Construct a directed acyclic graph.
+    ///</summary>
+    ///<param name="vertexSupplier"> the vertex supplier.</param>
+    ///<param name="edgeSupplier"> the edge supplier.</param>
+    ///<param name="weighted"> if true the graph will be weighted, otherwise not.</param>
+    ///<param name="allowMultipleEdges"> if true the graph will allow multiple edges, otherwise not.</param>
     public DirectedAcyclicGraph(
         Func<TNode> vertexSupplier,
         Func<TEdge> edgeSupplier,
@@ -116,14 +116,14 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     {
     }
 
-    /// <summary>
-    /// Construct a directed acyclic graph.
-    /// </summary>
-    /// <param name="vertexSupplier"> the vertex supplier.</param>
-    /// <param name="edgeSupplier"> the edge supplier.</param>
-    /// <param name="weighted"> if true the graph will be weighted, otherwise not.</param>
-    /// <param name="allowMultipleEdges"> if true the graph will allow multiple edges, otherwise not.</param>
-    /// <param name="graphSpecificsStrategy"> strategy for constructing low-level graph specifics.</param>
+    ///<summary>
+    ///Construct a directed acyclic graph.
+    ///</summary>
+    ///<param name="vertexSupplier"> the vertex supplier.</param>
+    ///<param name="edgeSupplier"> the edge supplier.</param>
+    ///<param name="weighted"> if true the graph will be weighted, otherwise not.</param>
+    ///<param name="allowMultipleEdges"> if true the graph will allow multiple edges, otherwise not.</param>
+    ///<param name="graphSpecificsStrategy"> strategy for constructing low-level graph specifics.</param>
     public DirectedAcyclicGraph(
         Func<TNode>                    vertexSupplier,
         Func<TEdge>                    edgeSupplier,
@@ -142,16 +142,16 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     {
     }
 
-    /// <summary>
-    /// Construct a directed acyclic graph.
-    /// </summary>
-    /// <param name="vertexSupplier"> the vertex supplier.</param>
-    /// <param name="edgeSupplier"> the edge supplier.</param>
-    /// <param name="visitedStrategyFactory"> the visited strategy factory. Subclasses can change this
-    ///        implementation to adjust the performance tradeoffs.</param>
-    /// <param name="topoOrderMap"> the topological order map. For performance reasons, subclasses can change
-    ///        the way this class stores the topological order.</param>
-    /// <param name="weighted"> if true the graph will be weighted, otherwise not.</param>
+    ///<summary>
+    ///Construct a directed acyclic graph.
+    ///</summary>
+    ///<param name="vertexSupplier"> the vertex supplier.</param>
+    ///<param name="edgeSupplier"> the edge supplier.</param>
+    ///<param name="visitedStrategyFactory"> the visited strategy factory. Subclasses can change this
+    ///       implementation to adjust the performance tradeoffs.</param>
+    ///<param name="topoOrderMap"> the topological order map. For performance reasons, subclasses can change
+    ///       the way this class stores the topological order.</param>
+    ///<param name="weighted"> if true the graph will be weighted, otherwise not.</param>
     protected internal DirectedAcyclicGraph(
         Func<TNode>      vertexSupplier,
         Func<TEdge>      edgeSupplier,
@@ -163,9 +163,9 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     {
     }
 
-    /// <summary>
-    /// Construct a directed acyclic graph.
-    /// </summary>
+    ///<summary>
+    ///Construct a directed acyclic graph.
+    ///</summary>
     /// <param name="vertexSupplier"> the vertex supplier.</param>
     /// <param name="edgeSupplier"> the edge supplier.</param>
     /// <param name="visitedStrategyFactory"> the visited strategy factory. Subclasses can change this
@@ -401,10 +401,10 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// Get the ancestors of a vertex.
     /// </summary>
     /// <param name="vertex"> the vertex to get the ancestors of.</param>
-    /// <returns><#### cref="System.Collections.Generic.ISet<object>"/> of ancestors of a vertex.</returns>
+    /// <returns><see cref="System.Collections.Generic.ISet<object>"/> of ancestors of a vertex.</returns>
     public virtual ISet<TNode> GetAncestors(TNode vertex)
     {
-        EdgeReversedGraph<TNode, TEdge> reversedGraph = new EdgeReversedGraph<TNode, TEdge>(this);
+        var reversedGraph = new EdgeReversedGraph<TNode, TEdge>(this);
         IEnumerator<TNode>              iterator      = new DepthFirstIterator<TNode>(reversedGraph, vertex);
         ISet<TNode>                     ancestors     = new HashSet<TNode>();
 
@@ -425,7 +425,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// Get the descendants of a vertex.
     /// </summary>
     /// <param name="vertex"> the vertex to get the descendants of.</param>
-    /// <returns><#### cref="System.Collections.Generic.ISet<object>"/> of descendants of a vertex.</returns>
+    /// <returns><see cref="System.Collections.Generic.ISet<object>"/> of descendants of a vertex.</returns>
     public virtual ISet<TNode> GetDescendants(TNode vertex)
     {
         IEnumerator<TNode> iterator    = new DepthFirstIterator<TNode>(this, vertex);
@@ -471,8 +471,8 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
             ISet<TNode> db = new HashSet<TNode>();
 
             // discovery
-            Region           affectedRegion = new Region(lb.Value, ub.Value);
-            IVisitedStrategy visited        = _visitedStrategyFactory.GetVisitedStrategy(affectedRegion);
+            var           affectedRegion = new Region(lb.Value, ub.Value);
+            var visited        = _visitedStrategyFactory.GetVisitedStrategy(affectedRegion);
 
             // throws CycleFoundException if there is a cycle
             DfsF(targetVertex, df, visited, affectedRegion);
@@ -488,19 +488,18 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
 
     /// <summary>
     /// Depth first search forward, building up the set (df) of forward-connected vertices in the
-    /// Affected Region
+    /// Affected Region.
     /// </summary>
     /// <param name="initialVertex"> the vertex being visited.</param>
     /// <param name="df"> the set we are populating with forward connected vertices in the Affected Region.</param>
     /// <param name="visited"> a simple data structure that lets us know if we already visited a node with a
-    ///        given topo index
-    /// </param>
+    ///        given topo index.</param>>
     /// <exception cref="CycleFoundException"> if a cycle is discovered.</exception>
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in C#:
 //ORIGINAL LINE: private void dfsF(TNode initialVertex, Set<TNode> df, VisitedStrategy visited, Region affectedRegion) throws CycleFoundException
     private void DfsF(TNode initialVertex, ISet<TNode> df, IVisitedStrategy visited, Region affectedRegion)
     {
-        LinkedList<TNode> vertices = new LinkedList<TNode>();
+        var vertices = new LinkedList<TNode>();
         vertices.AddFirst(initialVertex);
 
         while (vertices.Count > 0)
@@ -557,14 +556,14 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
 
     /// <summary>
     /// Depth first search backward, building up the set (db) of back-connected vertices in the
-    /// Affected Region
+    /// Affected Region.
     /// </summary>
     /// <param name="initialVertex"> the vertex being visited.</param>
     /// <param name="db"> the set we are populating with back-connected vertices in the AR.</param>
     /// <param name="visited"> </param>
     private void DfsB(TNode initialVertex, ISet<TNode> db, IVisitedStrategy visited, Region affectedRegion)
     {
-        LinkedList<TNode> vertices = new LinkedList<TNode>();
+        var vertices = new LinkedList<TNode>();
         vertices.AddFirst(initialVertex);
 
         while (vertices.Count > 0)
@@ -619,7 +618,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
 
         // we have to cast to the generic type, can't do "new TNode[size]" in java
         // 5;
-        TNode[] bigL   = (TNode[])new object[df.Count + db.Count];
+        var bigL   = (TNode[])new object[df.Count + db.Count];
         var     lIndex = 0; // this index is used for the sole purpose of pushing
         // into
 
@@ -685,7 +684,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// An interface for storing the topological ordering.
     /// </summary>
     /// @param <TNode> the graph vertex type
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     protected internal interface ITopoOrderMap<TNode>
     {
@@ -731,7 +730,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// <para>
     /// Vertices are indexed by their topological index, to avoid using the vertex type in the
     /// interface.
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </para>
     /// </summary>
@@ -765,22 +764,22 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
 
     /// <summary>
     /// A visited strategy factory.
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
     protected internal interface IVisitedStrategyFactory
     {
         /// <summary>
-        /// Create a new instance of <#### cref="IVisitedStrategy"/>.
+        /// Create a new instance of <see cref="IVisitedStrategy"/>.
         /// </summary>
         /// <param name="affectedRegion"> the affected region.</param>
-        /// <returns>a new instance of <#### cref="IVisitedStrategy"/> for the affected region.</returns>
+        /// <returns>a new instance of <see cref="IVisitedStrategy"/> for the affected region.</returns>
         IVisitedStrategy GetVisitedStrategy(Region affectedRegion);
     }
 
     /// <summary>
     /// A dual map implementation of the topological order map.
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
         protected internal class TopoVertexBiMap<TNode> : ITopoOrderMap<TNode>
@@ -835,7 +834,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// An implementation of the topological order map which for performance and flexibility uses an
     /// ArrayList for topological index to vertex mapping, and a HashMap for vertex to topological
     /// index mapping.
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
         protected internal class TopoVertexMap : ITopoOrderMap<TNode>
@@ -915,7 +914,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
 
     /// <summary>
     /// An inclusive range of indices: [start, finish].
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
         protected internal class Region
@@ -989,12 +988,12 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     }
 
     /// <summary>
-    /// A visited strategy which uses a <#### cref="System.Collections.BitArray"/>.
+    /// A visited strategy which uses a <see cref="System.Collections.BitArray"/>.
     ///
     /// <para>
-    /// This implementation is close to the performance of <#### cref="VisitedArrayListImpl"/>, with 1/8 the
+    /// This implementation is close to the performance of <see cref="VisitedArrayListImpl"/>, with 1/8 the
     /// memory usage.
-    /// 
+    ///
     /// <remarks>Author: John TNode. Sichi.</remarks>
     /// </para>
     /// </summary>
@@ -1051,14 +1050,14 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     }
 
     /// <summary>
-    /// A visited strategy using an <#### cref="System.Collections.ArrayList"/>.
+    /// A visited strategy using an <see cref="System.Collections.ArrayList"/>.
     ///
     /// <para>
     /// This implementation seems to offer the best performance in most cases. It grows the internal
     /// ArrayList as needed to be as large as |AR|, so it will be more memory intensive than the
     /// HashSet implementation, and unlike the Array implementation, it will hold on to that memory
     /// (it expands, but never contracts).
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </para>
     /// </summary>
@@ -1124,13 +1123,13 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     }
 
     /// <summary>
-    /// A visited strategy using a <#### cref="System.Collections.Generic.HashSet<object>"/>.
+    /// A visited strategy using a <see cref="System.Collections.Generic.HashSet<object>"/>.
     ///
     /// <para>
     /// This implementation doesn't seem to perform as well, though I can imagine circumstances where
     /// it should shine (lots and lots of vertices). It also should have the lowest memory footprint
     /// as it only uses storage for indices that have been visited.
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </para>
     /// </summary>
@@ -1180,7 +1179,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// <para>
     /// This implementation, somewhat to my surprise, is slower than the ArrayList version, probably
     /// due to its reallocation of the underlying array for every topology reorder that is required.
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </para>
     /// </summary>
@@ -1249,7 +1248,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
 
     /// <summary>
     /// Exception used in dfsF when a cycle is found
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
     private class CycleFoundException : Exception
@@ -1259,7 +1258,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
 
     /// <summary>
     /// Comparator for vertices based on their topological ordering
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
         private class TopoComparator : IComparer<TNode>
@@ -1282,7 +1281,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
 
     /// <summary>
     /// An iterator which follows topological order
-    /// 
+    ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
     private class TopoIterator : IEnumerator<TNode>

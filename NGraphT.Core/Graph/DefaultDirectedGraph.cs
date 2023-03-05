@@ -32,8 +32,8 @@ using Util;
 ///  </param>
 public class DefaultDirectedGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge>
 {
-    /// <summary>
-    /// Creates a new graph.
+    ///<summary>
+    ///Creates a new graph.
     /// </summary>
     /// <param name="edgeClass"> class on which to base the edge supplier.</param>
     public DefaultDirectedGraph(Type edgeClass)

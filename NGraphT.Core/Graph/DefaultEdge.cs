@@ -20,16 +20,16 @@ namespace NGraphT.Core.Graph;
 
 /// <summary>
 /// A default implementation for edges in a <see cref="Graph"/>.
+/// </summary>
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
-/// </summary>
 public class DefaultEdge : IntrusiveEdge
 {
-    /// <summary>
-    /// Retrieves the source of this edge. This is protected, for use by subclasses only (TEdge.g. for
-    /// implementing toString).
-    /// </summary>
-    /// <returns>source of this edge.</returns>
+    ///<summary>
+    ///Retrieves the source of this edge. This is protected, for use by subclasses only (TEdge.g. for
+    ///implementing toString).
+    ///</summary>
+    ///<returns>source of this edge.</returns>
     protected internal virtual object Source
     {
         get
@@ -38,8 +38,8 @@ public class DefaultEdge : IntrusiveEdge
         }
     }
 
-    /// <summary>
-    /// Retrieves the target of this edge. This is protected, for use by subclasses only (TEdge.g. for
+    ///<summary>
+    ///Retrieves the target of this edge. This is protected, for use by subclasses only (TEdge.g. for
     /// implementing toString).
     /// </summary>
     /// <returns>target of this edge.</returns>

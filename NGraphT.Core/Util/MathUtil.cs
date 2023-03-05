@@ -20,10 +20,10 @@ namespace NGraphT.Core.Util;
 
 /// <summary>
 /// Math Utilities.
+/// </summary>
 ///
 /// <remarks>Author: Assaf Lehr.</remarks>
-/// </summary>
-public class MathUtil
+public static class MathUtil
 {
     /// <summary>
     /// Calculate the factorial of $n$.

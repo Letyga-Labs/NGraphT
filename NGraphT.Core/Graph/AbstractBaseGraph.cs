@@ -88,8 +88,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// </summary>
     /// <param name="vertexSupplier"> the vertex supplier, can be null.</param>
     /// <param name="edgeSupplier"> the edge supplier, can be null.</param>
-    /// <param name="type"> the graph type
-    /// </param>
+    /// <param name="type"> the graph type.</param>>
     /// <exception cref="ArgumentException"> if the graph type is mixed.</exception>
     protected internal AbstractBaseGraph(
         Func<TNode> vertexSupplier,
@@ -106,8 +105,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// <param name="vertexSupplier"> the vertex supplier, can be null.</param>
     /// <param name="edgeSupplier"> the edge supplier, can be null.</param>
     /// <param name="type"> the graph type.</param>
-    /// <param name="graphSpecificsStrategy"> strategy for constructing low-level graph specifics
-    /// </param>
+    /// <param name="graphSpecificsStrategy"> strategy for constructing low-level graph specifics.</param>>
     /// <exception cref="ArgumentException"> if the graph type is mixed.</exception>
     protected internal AbstractBaseGraph(
         Func<TNode>                    vertexSupplier,
@@ -329,7 +327,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// </summary>
     /// <returns>a shallow copy of this graph.</returns>
     /// <exception cref="RuntimeException"> in case the clone is not supported.</exception>
-    /// <#### cref="java.lang.Object.clone()"/>
+    /// <see cref="java.lang.Object.clone()"/>
     public override object Clone()
     {
         try

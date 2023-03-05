@@ -57,19 +57,19 @@ public class AvlTree<T> : IEnumerable<T>
     private TreeNode<T> _virtualRoot = new TreeNode<T>(default(T));
 
     /// <summary>
-    /// Modification tracker
+    /// Modification tracker.
     /// </summary>
     private int _modCount = 0;
 
     /// <summary>
-    /// Constructs an empty tree
+    /// Constructs an empty tree.
     /// </summary>
     public AvlTree()
     {
     }
 
     /// <summary>
-    /// Constructor for internal usage
+    /// Constructor for internal usage.
     /// </summary>
     /// <param name="root"> the root of the newly create tree.</param>
     private AvlTree(TreeNode<T> root)
@@ -85,7 +85,7 @@ public class AvlTree<T> : IEnumerable<T>
     /// <returns>a tree node holding the {@code value}</returns>
     public virtual TreeNode<T> AddMax(T value)
     {
-        TreeNode<T> newMax = new TreeNode<T>(value);
+        var newMax = new TreeNode<T>(value);
         AddMaxNode(newMax);
         return newMax;
     }
@@ -105,26 +105,26 @@ public class AvlTree<T> : IEnumerable<T>
         }
         else
         {
-            TreeNode<T> max = Max;
+            var max = Max;
             max.SetRightChild(newMax);
             Balance(max);
         }
     }
 
     /// <summary>
-    /// Adds the {@code value} as a minimum element to this tree
+    /// Adds the {@code value} as a minimum element to this tree.
     /// </summary>
     /// <param name="value"> a value to add as a tree min.</param>
     /// <returns>a tree node holding the {@code value}</returns>
     public virtual TreeNode<T> AddMin(T value)
     {
-        TreeNode<T> newMin = new TreeNode<T>(value);
+        var newMin = new TreeNode<T>(value);
         AddMinNode(newMin);
         return newMin;
     }
 
     /// <summary>
-    /// Adds the {@code newMin} as a minimum node to this tree
+    /// Adds the {@code newMin} as a minimum node to this tree.
     /// </summary>
     /// <param name="newMin"> a node to add as a tree min.</param>
     public virtual void AddMinNode(TreeNode<T> newMin)
@@ -137,7 +137,7 @@ public class AvlTree<T> : IEnumerable<T>
         }
         else
         {
-            TreeNode<T> min = Min;
+            var min = Min;
             min.SetLeftChild(newMin);
             Balance(min);
         }
@@ -184,7 +184,7 @@ public class AvlTree<T> : IEnumerable<T>
         else
         {
             // insert node as a left subtree max
-            TreeNode<T> t = left;
+            var t = left;
             while (t.right != null)
             {
                 t = t.right;
@@ -220,11 +220,11 @@ public class AvlTree<T> : IEnumerable<T>
     {
         RegisterModification();
 
-        TreeNode<T> predecessor = Predecessor(node);
+        var predecessor = Predecessor(node);
         if (predecessor == null)
         {
             // node is a minimum node
-            AvlTree<T> tree = new AvlTree<T>();
+            var tree = new AvlTree<T>();
             Swap(tree);
             return tree;
         }
@@ -253,8 +253,8 @@ public class AvlTree<T> : IEnumerable<T>
             return;
         }
 
-        TreeNode<T> junctionNode = tree.RemoveMin();
-        TreeNode<T> treeRoot     = tree.Root;
+        var junctionNode = tree.RemoveMin();
+        var treeRoot     = tree.Root;
         tree.Clear();
 
         MakeRoot(Merge(junctionNode, Root, treeRoot));
@@ -278,7 +278,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Removes the minimum node in this tree. Returns {@code null} if this tree is empty
+    /// Removes the minimum node in this tree. Returns {@code null} if this tree is empty.
     /// </summary>
     /// <returns>the removed node or {@code null} if this tree is empty.</returns>
     public virtual TreeNode<T> RemoveMin()
@@ -290,7 +290,7 @@ public class AvlTree<T> : IEnumerable<T>
             return null;
         }
 
-        TreeNode<T> min = Min;
+        var min = Min;
         // min.parent != null
         if (min.parent == _virtualRoot)
         {
@@ -307,7 +307,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Removes the maximum node in this tree. Returns {@code null} if this tree is empty
+    /// Removes the maximum node in this tree. Returns {@code null} if this tree is empty.
     /// </summary>
     /// <returns>the removed node or {@code null} if this tree is empty.</returns>
     public virtual TreeNode<T> RemoveMax()
@@ -318,7 +318,7 @@ public class AvlTree<T> : IEnumerable<T>
             return null;
         }
 
-        TreeNode<T> max = Max;
+        var max = Max;
         if (max.parent == _virtualRoot)
         {
             MakeRoot(max.left);
@@ -391,7 +391,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Check if this tree is empty
+    /// Check if this tree is empty.
     /// </summary>
     /// <returns>{@code true} if this tree is empty, {@code false otherwise}</returns>
     public virtual bool Empty
@@ -417,7 +417,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Returns the size of this tree
+    /// Returns the size of this tree.
     /// </summary>
     /// <returns>the size of this tree.</returns>
     public virtual int Size
@@ -429,7 +429,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Makes the {@code node} the root of this tree
+    /// Makes the {@code node} the root of this tree.
     /// </summary>
     /// <param name="node"> a new root of this tree.</param>
     private void MakeRoot(TreeNode<T> node)
@@ -582,7 +582,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Performs a node balancing on the path from {@code node} up until the root
+    /// Performs a node balancing on the path from {@code node} up until the root.
     /// </summary>
     /// <param name="node"> a node to start tree balancing from.</param>
     private void Balance(TreeNode<T> node)
@@ -591,7 +591,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Performs a node balancing on the path from {@code node} up until the {@code stop} node
+    /// Performs a node balancing on the path from {@code node} up until the {@code stop} node.
     /// </summary>
     /// <param name="node"> a node to start tree balancing from.</param>
     /// <param name="stop"> a node to stop balancing at (this node is not being balanced) </param>
@@ -648,7 +648,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Registers a modifying operation
+    /// Registers a modifying operation.
     /// </summary>
     private void RegisterModification()
     {
@@ -659,9 +659,9 @@ public class AvlTree<T> : IEnumerable<T>
     public override string ToString()
     {
         var builder = new StringBuilder();
-        for (IEnumerator<TreeNode<T>> i = NodeIterator(); i.MoveNext();)
+        for (var i = NodeIterator(); i.MoveNext();)
         {
-            TreeNode<T> node = i.Current;
+            var node = i.Current;
             builder.Append(node.ToString()).Append("\n");
         }
 
@@ -772,7 +772,7 @@ public class AvlTree<T> : IEnumerable<T>
                 throw new NoSuchElementException();
             }
 
-            TreeNode<T> result = NextNode;
+            var result = NextNode;
             NextNode = outerInstance.Successor(NextNode);
             return result;
         }
@@ -792,7 +792,7 @@ public class AvlTree<T> : IEnumerable<T>
     /// <summary>
     /// Container holding the values stored in the tree.
     /// </summary>
-    /// @param <T> a tree node value type.</param>
+    /// <typeparam name="T"> a tree node value type.</typeparam>
     public class TreeNode<T>
     {
         /// <summary>
@@ -875,7 +875,7 @@ public class AvlTree<T> : IEnumerable<T>
         {
             get
             {
-                TreeNode<T> current = this;
+                var current = this;
                 while (current.parent != null)
                 {
                     current = current.parent;

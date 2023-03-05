@@ -20,12 +20,12 @@ namespace NGraphT.Core;
 
 /// <summary>
 /// A collection of utilities to test for various graph properties.
+/// </summary>
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
 /// <remarks>Author: Dimitrios Michail.</remarks>
 /// <remarks>Author: Joris Kinable.</remarks>
 /// <remarks>Author: Alexandru Valeanu.</remarks>
-/// </summary>
 public abstract class GraphTests
 {
     private const string GraphCannotBeNull               = "Graph cannot be null";
@@ -452,7 +452,6 @@ public abstract class GraphTests
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam>
-    /// </param>
     /// <returns>true if the graph is Eulerian, false otherwise.</returns>
     /// <see cref="HierholzerEulerianCycle.isEulerian(Graph)"/>
     public static <TNode, TEdge> bool IsEulerian(IGraph<TNode, TEdge> graph)
@@ -507,7 +506,7 @@ public abstract class GraphTests
 
     /// <summary>
     /// Tests whether an undirected graph meets Ore's condition to be Hamiltonian.
-    /// 
+    ///
     /// Let $G$ be a (finite and simple) graph with $n \geq 3$ vertices. We denote by $deg(TNode)$ the
     /// degree of a vertex $v$ in $G$, i.TEdge. the number of incident edges in $G$ to $v$. Then, Ore's
     /// theorem states that if $deg(TNode) + deg(w) \geq n$ for every pair of distinct non-adjacent
@@ -553,7 +552,7 @@ public abstract class GraphTests
     /// <summary>
     /// Tests whether an undirected graph is triangle-free (i.TEdge. no three distinct vertices form a
     /// triangle of edges).
-    /// 
+    ///
     /// The implementation of this method uses <see cref="GraphMetrics.getNumberOfTriangles(Graph)"/>.
     /// </summary>
     /// <param name="graph"> the input graph.</param>
@@ -604,7 +603,7 @@ public abstract class GraphTests
     /// Checks whether the {@code graph} is a <a href=
     /// "https://en.wikipedia.org/wiki/Kuratowski%27s_theorem#Kuratowski_subgraphs">Kuratowski
     /// subdivision</a>. Effectively checks whether the {@code graph} is a $K_{3,3}$ subdivision or
-    /// $K_{5}$ subdivision
+    /// $K_{5}$ subdivision.
     /// </summary>
     /// <param name="graph"> the graph to test.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -741,8 +740,8 @@ public abstract class GraphTests
 
     /// <summary>
     /// Checks that the specified graph is directed and throws a customized
-    /// <#### cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
-    /// {@code null} and throws a <#### cref="System.NullReferenceException"/> if it is.
+    /// <see cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
+    /// {@code null} and throws a <see cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for beeing directed and not null.</param>
     /// <param name="message"> detail message to be used in the event that an exception is thrown.</param>
@@ -767,9 +766,9 @@ public abstract class GraphTests
     }
 
     /// <summary>
-    /// Checks that the specified graph is directed and throws an <#### cref="System.ArgumentException"/> if
+    /// Checks that the specified graph is directed and throws an <see cref="System.ArgumentException"/> if
     /// it is not. Also checks that the graph reference is not {@code null} and throws a
-    /// <#### cref="System.NullReferenceException"/> if it is.
+    /// <see cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for beeing directed and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -784,8 +783,8 @@ public abstract class GraphTests
 
     /// <summary>
     /// Checks that the specified graph is undirected and throws a customized
-    /// <#### cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
-    /// {@code null} and throws a <#### cref="System.NullReferenceException"/> if it is.
+    /// <see cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
+    /// {@code null} and throws a <see cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for being undirected and not null.</param>
     /// <param name="message"> detail message to be used in the event that an exception is thrown.</param>
@@ -810,9 +809,9 @@ public abstract class GraphTests
     }
 
     /// <summary>
-    /// Checks that the specified graph is undirected and throws an <#### cref="System.ArgumentException"/>
+    /// Checks that the specified graph is undirected and throws an <see cref="System.ArgumentException"/>
     /// if it is not. Also checks that the graph reference is not {@code null} and throws a
-    /// <#### cref="System.NullReferenceException"/> if it is.
+    /// <see cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for being undirected and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -827,8 +826,8 @@ public abstract class GraphTests
 
     /// <summary>
     /// Checks that the specified graph is directed or undirected and throws a customized
-    /// <#### cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
-    /// {@code null} and throws a <#### cref="System.NullReferenceException"/> if it is.
+    /// <see cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
+    /// {@code null} and throws a <see cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for beeing directed or undirected and not null.</param>
     /// <param name="message"> detail message to be used in the event that an exception is thrown.</param>
@@ -853,9 +852,9 @@ public abstract class GraphTests
     }
 
     /// <summary>
-    /// Checks that the specified graph is directed and throws an <#### cref="System.ArgumentException"/> if
+    /// Checks that the specified graph is directed and throws an <see cref="System.ArgumentException"/> if
     /// it is not. Also checks that the graph reference is not {@code null} and throws a
-    /// <#### cref="System.NullReferenceException"/> if it is.
+    /// <see cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for beeing directed and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
@@ -870,8 +869,8 @@ public abstract class GraphTests
 
     /// <summary>
     /// Checks that the specified graph is weighted and throws a customized
-    /// <#### cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
-    /// {@code null} and throws a <#### cref="System.NullReferenceException"/> if it is.
+    /// <see cref="System.ArgumentException"/> if it is not. Also checks that the graph reference is not
+    /// {@code null} and throws a <see cref="System.NullReferenceException"/> if it is.
     /// </summary>
     /// <param name="graph"> the graph reference to check for being weighted and not null.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>

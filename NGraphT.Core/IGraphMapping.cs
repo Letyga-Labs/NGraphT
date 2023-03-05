@@ -32,22 +32,20 @@ namespace NGraphT.Core;
 public interface IGraphMapping<TNode, TEdge>
 {
     /// <summary>
-    /// Gets the mapped value where the key is <c>vertex</c>
+    /// Gets the mapped value where the key is <c>vertex</c>.
     /// </summary>
     /// <param name="vertex"> vertex in one of the graphs.</param>
     /// <param name="forward"> if true, uses mapping from graph1 to graph2; if false, use mapping from graph2
-    ///        to graph1
-    /// </param>
+    ///        to graph1.</param>>
     /// <returns>corresponding vertex in other graph, or null if none.</returns>
     TNode GetVertexCorrespondence(TNode vertex, bool forward);
 
     /// <summary>
-    /// Gets the mapped value where the key is <c>edge</c>
+    /// Gets the mapped value where the key is <c>edge</c>.
     /// </summary>
     /// <param name="edge"> edge in one of the graphs.</param>
     /// <param name="forward"> if true, uses mapping from graph1 to graph2; if false, use mapping from graph2
-    ///        to graph1
-    /// </param>
+    ///        to graph1.</param>>
     /// <returns>corresponding edge in other graph, or null if none.</returns>
     TEdge GetEdgeCorrespondence(TEdge edge, bool forward);
 }

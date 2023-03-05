@@ -72,16 +72,16 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
 
     protected internal double Weight;
 
-    /// <summary>
-    /// Creates a walk defined by a sequence of edges. A walk defined by its edges can be specified
-    /// for non-simple graphs. Edge repetition is permitted, the start and end point points ($v_0$
-    /// and $v_k$) can be different.
-    /// </summary>
-    /// <param name="graph"> the graph.</param>
-    /// <param name="startVertex"> the starting vertex.</param>
-    /// <param name="endVertex"> the last vertex of the path.</param>
-    /// <param name="edgeList"> the list of edges of the path.</param>
-    /// <param name="weight"> the total weight of the path.</param>
+    ///<summary>
+    ///Creates a walk defined by a sequence of edges. A walk defined by its edges can be specified
+    ///for non-simple graphs. Edge repetition is permitted, the start and end point points ($v_0$
+    ///and $v_k$) can be different.
+    ///</summary>
+    ///<param name="graph"> the graph.</param>
+    ///<param name="startVertex"> the starting vertex.</param>
+    ///<param name="endVertex"> the last vertex of the path.</param>
+    ///<param name="edgeList"> the list of edges of the path.</param>
+    ///<param name="weight"> the total weight of the path.</param>
     public GraphWalk(
         IGraph<TNode, TEdge> graph,
         TNode                startVertex,
@@ -93,14 +93,14 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
     {
     }
 
-    /// <summary>
-    /// Creates a walk defined by a sequence of vertices. Note that the input graph must be simple,
-    /// otherwise the vertex sequence does not necessarily define a unique path. Furthermore, all
-    /// vertices must be pairwise adjacent.
-    /// </summary>
-    /// <param name="graph"> the graph.</param>
-    /// <param name="vertexList"> the list of vertices of the path.</param>
-    /// <param name="weight"> the total weight of the path.</param>
+    ///<summary>
+    ///Creates a walk defined by a sequence of vertices. Note that the input graph must be simple,
+    ///otherwise the vertex sequence does not necessarily define a unique path. Furthermore, all
+    ///vertices must be pairwise adjacent.
+    ///</summary>
+    ///<param name="graph"> the graph.</param>
+    ///<param name="vertexList"> the list of vertices of the path.</param>
+    ///<param name="weight"> the total weight of the path.</param>
     public GraphWalk(IGraph<TNode, TEdge> graph, IList<TNode> vertexList, double weight)
         : this(graph,
             (vertexList.Count == 0 ? null : vertexList[0]),
@@ -112,19 +112,19 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
     {
     }
 
-    /// <summary>
-    /// Creates a walk defined by both a sequence of edges and a sequence of vertices. Note that both
-    /// the sequence of edges and the sequence of vertices must describe the same path! This is not
-    /// verified during the construction of the walk. This constructor makes it possible to store
-    /// both a vertex and an edge view of the same walk, thereby saving computational overhead when
-    /// switching from one to the other.
-    /// </summary>
-    /// <param name="graph"> the graph.</param>
-    /// <param name="startVertex"> the starting vertex.</param>
-    /// <param name="endVertex"> the last vertex of the path.</param>
-    /// <param name="vertexList"> the list of vertices of the path.</param>
-    /// <param name="edgeList"> the list of edges of the path.</param>
-    /// <param name="weight"> the total weight of the path.</param>
+    ///<summary>
+    ///Creates a walk defined by both a sequence of edges and a sequence of vertices. Note that both
+    ///the sequence of edges and the sequence of vertices must describe the same path! This is not
+    ///verified during the construction of the walk. This constructor makes it possible to store
+    ///both a vertex and an edge view of the same walk, thereby saving computational overhead when
+    ///switching from one to the other.
+    ///</summary>
+    ///<param name="graph"> the graph.</param>
+    ///<param name="startVertex"> the starting vertex.</param>
+    ///<param name="endVertex"> the last vertex of the path.</param>
+    ///<param name="vertexList"> the list of vertices of the path.</param>
+    ///<param name="edgeList"> the list of edges of the path.</param>
+    ///<param name="weight"> the total weight of the path.</param>
     public GraphWalk(
         IGraph<TNode, TEdge> graph,
         TNode                startVertex,
@@ -259,7 +259,7 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
 
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SuppressWarnings("unchecked") GraphWalk<TNode, TEdge> other = (GraphWalk<TNode, TEdge>) o;
-        GraphWalk<TNode, TEdge> other = (GraphWalk<TNode, TEdge>)o;
+        var other = (GraphWalk<TNode, TEdge>)o;
         if (Empty && other.Empty)
         {
             return true;
@@ -313,14 +313,14 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// Reverses the direction of the walk. In case of directed/mixed graphs, the arc directions will
-    /// be reversed. An exception is thrown if reversing an arc $(u,TNode)$ is impossible because arc
-    /// $(TNode,u)$ is not present in the graph. The weight of the resulting walk equals the sum of edge
-    /// weights in the walk.
-    /// </summary>
-    /// <exception cref="InvalidGraphWalkException"> if the path is invalid.</exception>
-    /// <returns>a reversed GraphWalk.</returns>
+    ///<summary>
+    ///Reverses the direction of the walk. In case of directed/mixed graphs, the arc directions will
+    ///be reversed. An exception is thrown if reversing an arc $(u,TNode)$ is impossible because arc
+    ///$(TNode,u)$ is not present in the graph. The weight of the resulting walk equals the sum of edge
+    ///weights in the walk.
+    ///</summary>
+    ///<exception cref="InvalidGraphWalkException"> if the path is invalid.</exception>
+    ///<returns>a reversed GraphWalk.</returns>
     public virtual GraphWalk<TNode, TEdge> Reverse()
     {
         return Reverse(null);
@@ -408,7 +408,7 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
         }
 
         // Update weight of reversed walk
-        GraphWalk<TNode, TEdge> gw =
+        var gw =
             new GraphWalk<TNode, TEdge>(this.graph, this.endVertex, this.startVertex, revVertexList, revEdgeList, 0);
         if (walkWeightCalculator == null)
         {
@@ -425,7 +425,7 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
     /// <summary>
     /// Concatenates the specified GraphWalk to the end of this GraphWalk. This action can only be
     /// performed if the end vertex of this GraphWalk is the same as the start vertex of the
-    /// extending GraphWalk
+    /// extending GraphWalk.
     /// </summary>
     /// <param name="extension"> GraphPath used for the concatenation.</param>
     /// <param name="walkWeightCalculator"> Function used to calculate the weight of the GraphWalk obtained
@@ -465,7 +465,7 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
             ((List<TEdge>)concatEdgeList).AddRange(extension.EdgeList);
         }
 
-        GraphWalk<TNode, TEdge> gw = new GraphWalk<TNode, TEdge>(this.graph,
+        var gw = new GraphWalk<TNode, TEdge>(this.graph,
             startVertex,
             extension.EndVertex,
             concatVertexList,
@@ -617,8 +617,8 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
     /// Convenience method which creates an empty walk.
     /// </summary>
     /// <param name="graph"> input graph.</param>
-    /// @param <TNode> vertex type.</param>
-    /// @param <TEdge> edge type.</param>
+    /// <typeparam name="TNode"> vertex type.</typeparam>
+    /// <typeparam name="TEdge"> edge type.</typeparam>
     /// <returns>an empty walk.</returns>
     public static GraphWalk<TNode, TEdge> EmptyWalk<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -636,8 +636,8 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
     /// </summary>
     /// <param name="graph"> input graph.</param>
     /// <param name="node"> single vertex.</param>
-    /// @param <TNode> vertex type.</param>
-    /// @param <TEdge> edge type.</param>
+    /// <typeparam name="TNode"> vertex type.</typeparam>
+    /// <typeparam name="TEdge"> edge type.</typeparam>
     /// <returns>an empty walk.</returns>
     public static GraphWalk<TNode, TEdge> SingletonWalk<TNode, TEdge>(IGraph<TNode, TEdge> graph, TNode node)
     {
@@ -650,8 +650,8 @@ public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
     /// <param name="graph"> input graph.</param>
     /// <param name="node"> single vertex.</param>
     /// <param name="weight"> weight of the path.</param>
-    /// @param <TNode> vertex type.</param>
-    /// @param <TEdge> edge type.</param>
+    /// <typeparam name="TNode"> vertex type.</typeparam>
+    /// <typeparam name="TEdge"> edge type.</typeparam>
     /// <returns>an empty walk.</returns>
     public static GraphWalk<TNode, TEdge> SingletonWalk<TNode, TEdge>(
         IGraph<TNode, TEdge> graph,

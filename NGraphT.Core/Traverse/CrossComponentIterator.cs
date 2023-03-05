@@ -24,8 +24,8 @@ using Core;
 /// <summary>
 /// Provides a cross-connected-component traversal functionality for iterator subclasses.
 /// </summary>
-/// @param <TNode> vertex type.</param>
-/// @param <TEdge> edge type.</param>
+/// <typeparam name="TNode"> vertex type.</typeparam>
+/// <typeparam name="TEdge"> edge type.</typeparam>
 /// @param <D> type of data associated to seen vertices
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
@@ -70,7 +70,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     private TNode _startVertex;
 
     /// <summary>
-    /// The connected component state
+    /// The connected component state.
     /// </summary>
     private int _state = CcsBeforeComponent;
 
@@ -141,7 +141,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
         /*
          * Initialize start vertex
          */
-        IEnumerator<TNode> it = crossComponentTraversal ? EntireGraphVertexIterator : _startVertexIterator;
+        var it = crossComponentTraversal ? EntireGraphVertexIterator : _startVertexIterator;
         // pick a start vertex if possible
 //JAVA TO C# CONVERTER TODO TASK: Java iterators are only converted within the context of 'while' and 'for' loops:
         if (it.hasNext())
@@ -177,7 +177,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
                 }
             }
 
-            IEnumerator<TNode> it = CrossComponentTraversal ? EntireGraphVertexIterator : _startVertexIterator;
+            var it = CrossComponentTraversal ? EntireGraphVertexIterator : _startVertexIterator;
             while (it != null && it.MoveNext())
             {
                 var node = it.Current;
@@ -294,8 +294,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// <summary>
     /// Determines whether a vertex has been seen yet by this traversal.
     /// </summary>
-    /// <param name="vertex"> vertex in question
-    /// </param>
+    /// <param name="vertex"> vertex in question.</param>>
     /// <returns><c>true</c> if vertex has already been seen.</returns>
     protected internal virtual bool IsSeenVertex(TNode vertex)
     {

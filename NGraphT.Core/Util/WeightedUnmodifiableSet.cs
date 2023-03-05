@@ -33,7 +33,7 @@ public class WeightedUnmodifiableSet<TEdge> : AbstractSet<TEdge>
     public readonly double      Weight;
 
     /// <summary>
-    /// Constructs a WeightedUnmodifiableSet instance
+    /// Constructs a WeightedUnmodifiableSet instance.
     /// </summary>
     /// <param name="backingSet"> underlying set.</param>
     public WeightedUnmodifiableSet(ISet<TEdge> backingSet)
@@ -43,7 +43,7 @@ public class WeightedUnmodifiableSet<TEdge> : AbstractSet<TEdge>
     }
 
     /// <summary>
-    /// Constructs a WeightedUnmodifiableSet instance
+    /// Constructs a WeightedUnmodifiableSet instance.
     /// </summary>
     /// <param name="backingSet"> underlying set.</param>
     /// <param name="weight"> weight of the set.</param>
@@ -147,7 +147,7 @@ public class WeightedUnmodifiableSet<TEdge> : AbstractSet<TEdge>
 
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SuppressWarnings("unchecked") WeightedUnmodifiableSet<TEdge> other = (WeightedUnmodifiableSet<TEdge>) o;
-        WeightedUnmodifiableSet<TEdge> other = (WeightedUnmodifiableSet<TEdge>)o;
+        var other = (WeightedUnmodifiableSet<TEdge>)o;
         return BackingSet.SetEquals(other.BackingSet);
     }
 

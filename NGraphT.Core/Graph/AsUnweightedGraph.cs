@@ -40,11 +40,11 @@ public class AsUnweightedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IGr
     private const long   SerialVersionUID         = -5186421272597767751L;
     private const string EdgeWeightIsNotSupported = "Edge weight is not supported";
 
-    /// <summary>
-    /// Constructor for AsUnweightedGraph.
-    /// </summary>
-    /// <param name="g"> the backing directed graph over which an undirected view is to be created.</param>
-    /// <exception cref="NullReferenceException"> if the graph is null.</exception>
+    ///<summary>
+    ///Constructor for AsUnweightedGraph.
+    ///</summary>
+    ///<param name="g"> the backing directed graph over which an undirected view is to be created.</param>
+    ///<exception cref="NullReferenceException"> if the graph is null.</exception>
     public AsUnweightedGraph(IGraph<TNode, TEdge> g)
         : base(Objects.requireNonNull(g))
     {

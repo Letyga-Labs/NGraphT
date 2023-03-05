@@ -23,12 +23,11 @@ using Graph;
 /// <summary>
 /// Helper class for suppliers.
 ///
-/// <remarks>Author: Dimitrios Michail.</remarks>
-/// </summary>
+/// <remarks>Author: (.*).</remarks>
 public class SupplierUtil
 {
     /// <summary>
-    /// Supplier for <#### cref="DefaultEdge"/>.
+    /// Supplier for <see cref="DefaultEdge"/>.
     /// </summary>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SuppressWarnings("unchecked") public static final Supplier<DefaultEdge> DEFAULT_EDGE_SUPPLIER = (Supplier<DefaultEdge> & Serializable) DefaultEdge::new;
@@ -37,7 +36,7 @@ public class SupplierUtil
         DefaultEdgeSupplier = (Func<DefaultEdge> & Serializable) DefaultEdge::new;
 
     /// <summary>
-    /// Supplier for <#### cref="DefaultWeightedEdge"/>.
+    /// Supplier for <see cref="DefaultWeightedEdge"/>.
     /// </summary>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SuppressWarnings("unchecked") public static final Supplier<DefaultWeightedEdge> DEFAULT_WEIGHTED_EDGE_SUPPLIER = (Supplier<DefaultWeightedEdge> & Serializable) DefaultWeightedEdge::new;
@@ -46,7 +45,7 @@ public class SupplierUtil
         (Func<DefaultWeightedEdge> & Serializable) DefaultWeightedEdge::new;
 
     /// <summary>
-    /// Supplier for <#### cref="object"/>.
+    /// Supplier for <see cref="object"/>.
     /// </summary>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SuppressWarnings("unchecked") public static final Supplier<Object> OBJECT_SUPPLIER = (Supplier<Object> & Serializable) Object::new;
@@ -58,7 +57,7 @@ public class SupplierUtil
     /// </summary>
     /// <param name="clazz"> the class.</param>
     /// <returns>the supplier.</returns>
-    /// @param <T> the type of results supplied by this supplier.</param>
+    /// <typeparam name="T"> the type of results supplied by this supplier.</typeparam>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SuppressWarnings("unchecked") public static <T> Supplier<T> createSupplier(Class clazz)
     public static Func<T> CreateSupplier<T>(Type clazz)

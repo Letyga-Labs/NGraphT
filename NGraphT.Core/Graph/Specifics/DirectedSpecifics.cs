@@ -41,13 +41,13 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
     protected internal IDictionary<TNode, DirectedEdgeContainer<TNode, TEdge>> VertexMap;
     protected internal IEdgeSetFactory<TNode, TEdge>                           EdgeSetFactory;
 
-    /// <summary>
-    /// Construct a new directed specifics.
-    /// </summary>
-    /// <param name="graph"> the graph for which these specifics are for.</param>
-    /// <param name="vertexMap"> map for the storage of vertex edge sets. Needs to have a predictable
-    ///        iteration order.</param>
-    /// <param name="edgeSetFactory"> factory for the creation of vertex edge sets.</param>
+    ///<summary>
+    ///Construct a new directed specifics.
+    ///</summary>
+    ///<param name="graph"> the graph for which these specifics are for.</param>
+    ///<param name="vertexMap"> map for the storage of vertex edge sets. Needs to have a predictable
+    ///       iteration order.</param>
+    ///<param name="edgeSetFactory"> factory for the creation of vertex edge sets.</param>
     public DirectedSpecifics(
         IGraph<TNode, TEdge>                                    graph,
         IDictionary<TNode, DirectedEdgeContainer<TNode, TEdge>> vertexMap,
@@ -59,10 +59,10 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         EdgeSetFactory = Objects.requireNonNull(edgeSetFactory);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual bool AddVertex(TNode node)
     {
-        DirectedEdgeContainer<TNode, TEdge> ec = VertexMap[node];
+        var ec = VertexMap[node];
         if (ec == null)
         {
             VertexMap[node] = new DirectedEdgeContainer<TNode, TEdge>(EdgeSetFactory, node);
@@ -72,7 +72,7 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         return false;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TNode> VertexSet
     {
         get
@@ -81,7 +81,7 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TEdge> GetAllEdges(TNode sourceVertex, TNode targetVertex)
     {
         ISet<TEdge> edges = null;
@@ -90,7 +90,7 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         {
             edges = new ArrayUnenforcedSet<TEdge>();
 
-            DirectedEdgeContainer<TNode, TEdge> ec = GetEdgeContainer(sourceVertex);
+            var ec = GetEdgeContainer(sourceVertex);
 
             foreach (var edge in ec.Outgoing)
             {
@@ -104,12 +104,12 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         return edges;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
     {
         if (Graph.ContainsVertex(sourceVertex) && Graph.ContainsVertex(targetVertex))
         {
-            DirectedEdgeContainer<TNode, TEdge> ec = GetEdgeContainer(sourceVertex);
+            var ec = GetEdgeContainer(sourceVertex);
 
             foreach (var edge in ec.Outgoing)
             {
@@ -123,7 +123,7 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         return default(TEdge);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual bool AddEdgeToTouchingVertices(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         GetEdgeContainer(sourceVertex).AddOutgoingEdge(edge);
@@ -134,7 +134,7 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
     public virtual bool AddEdgeToTouchingVerticesIfAbsent(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         // lookup for edge with same source and target
-        DirectedEdgeContainer<TNode, TEdge> ec = GetEdgeContainer(sourceVertex);
+        var ec = GetEdgeContainer(sourceVertex);
         foreach (var outEdge in ec.Outgoing)
         {
             if (Graph.GetEdgeTarget(outEdge).Equals(targetVertex))
@@ -157,7 +157,7 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
     )
     {
         // lookup for edge with same source and target
-        DirectedEdgeContainer<TNode, TEdge> ec = GetEdgeContainer(sourceVertex);
+        var ec = GetEdgeContainer(sourceVertex);
         foreach (var edge in ec.Outgoing)
         {
             if (Graph.GetEdgeTarget(edge).Equals(targetVertex))
@@ -174,16 +174,16 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         return edge;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual int DegreeOf(TNode vertex)
     {
         return InDegreeOf(vertex) + OutDegreeOf(vertex);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TEdge> EdgesOf(TNode vertex)
     {
-        ArrayUnenforcedSet<TEdge> inAndOut = new ArrayUnenforcedSet<TEdge>(GetEdgeContainer(vertex).Incoming);
+        var inAndOut = new ArrayUnenforcedSet<TEdge>(GetEdgeContainer(vertex).Incoming);
 
         if (Graph.Type.AllowingSelfLoops)
         {
@@ -204,45 +204,45 @@ public class DirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         return Collections.unmodifiableSet(inAndOut);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual int InDegreeOf(TNode vertex)
     {
         return GetEdgeContainer(vertex).Incoming.Count;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TEdge> IncomingEdgesOf(TNode vertex)
     {
         return GetEdgeContainer(vertex).UnmodifiableIncomingEdges;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual int OutDegreeOf(TNode vertex)
     {
         return GetEdgeContainer(vertex).Outgoing.Count;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TEdge> OutgoingEdgesOf(TNode vertex)
     {
         return GetEdgeContainer(vertex).UnmodifiableOutgoingEdges;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual void RemoveEdgeFromTouchingVertices(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         GetEdgeContainer(sourceVertex).RemoveOutgoingEdge(edge);
         GetEdgeContainer(targetVertex).RemoveIncomingEdge(edge);
     }
 
-    /// <summary>
-    /// Get the edge container for specified vertex.
-    /// </summary>
-    /// <param name="vertex"> a vertex in this graph.</param>
-    /// <returns>an edge container.</returns>
+    ///<summary>
+    ///Get the edge container for specified vertex.
+    ///</summary>
+    ///<param name="vertex"> a vertex in this graph.</param>
+    ///<returns>an edge container.</returns>
     protected internal virtual DirectedEdgeContainer<TNode, TEdge> GetEdgeContainer(TNode vertex)
     {
-        DirectedEdgeContainer<TNode, TEdge> ec = VertexMap[vertex];
+        var ec = VertexMap[vertex];
 
         if (ec == null)
         {

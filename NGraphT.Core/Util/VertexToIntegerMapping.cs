@@ -25,9 +25,9 @@ namespace NGraphT.Core.Util;
 /// <para>
 /// This class computes the mapping only once, on instantiation. It does not support live updates.
 /// </para>
+/// </summary>
 ///
 /// <remarks>Author: Alexandru Valeanu.</remarks>
-/// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
 public class VertexToIntegerMapping<TNode>

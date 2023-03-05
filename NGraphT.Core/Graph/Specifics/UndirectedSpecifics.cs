@@ -41,13 +41,13 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
     protected internal IDictionary<TNode, UndirectedEdgeContainer<TNode, TEdge>> VertexMap;
     protected internal IEdgeSetFactory<TNode, TEdge>                             EdgeSetFactory;
 
-    /// <summary>
-    /// Construct a new undirected specifics.
-    /// </summary>
-    /// <param name="graph"> the graph for which these specifics are for.</param>
-    /// <param name="vertexMap"> map for the storage of vertex edge sets. Needs to have a predictable
-    ///        iteration order.</param>
-    /// <param name="edgeSetFactory"> factory for the creation of vertex edge sets.</param>
+    ///<summary>
+    ///Construct a new undirected specifics.
+    ///</summary>
+    ///<param name="graph"> the graph for which these specifics are for.</param>
+    ///<param name="vertexMap"> map for the storage of vertex edge sets. Needs to have a predictable
+    ///       iteration order.</param>
+    ///<param name="edgeSetFactory"> factory for the creation of vertex edge sets.</param>
     public UndirectedSpecifics(
         IGraph<TNode, TEdge>                                      graph,
         IDictionary<TNode, UndirectedEdgeContainer<TNode, TEdge>> vertexMap,
@@ -59,10 +59,10 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         EdgeSetFactory = Objects.requireNonNull(edgeSetFactory);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual bool AddVertex(TNode node)
     {
-        UndirectedEdgeContainer<TNode, TEdge> ec = VertexMap[node];
+        var ec = VertexMap[node];
         if (ec == null)
         {
             VertexMap[node] = new UndirectedEdgeContainer<TNode, TEdge>(EdgeSetFactory, node);
@@ -72,7 +72,7 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         return false;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TNode> VertexSet
     {
         get
@@ -81,7 +81,7 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TEdge> GetAllEdges(TNode sourceVertex, TNode targetVertex)
     {
         ISet<TEdge> edges = null;
@@ -104,7 +104,7 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         return edges;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
     {
         if (Graph.ContainsVertex(sourceVertex) && Graph.ContainsVertex(targetVertex))
@@ -148,7 +148,7 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
     public virtual bool AddEdgeToTouchingVerticesIfAbsent(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         // lookup for edge with same source and target
-        UndirectedEdgeContainer<TNode, TEdge> ec = GetEdgeContainer(sourceVertex);
+        var ec = GetEdgeContainer(sourceVertex);
         foreach (var edge in ec.VertexEdges)
         {
             if (IsEqualsStraightOrInverted(sourceVertex, targetVertex, edge))
@@ -170,7 +170,7 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
     )
     {
         // lookup for edge with same source and target
-        UndirectedEdgeContainer<TNode, TEdge> ec = GetEdgeContainer(sourceVertex);
+        var ec = GetEdgeContainer(sourceVertex);
         foreach (var edge in ec.VertexEdges)
         {
             if (IsEqualsStraightOrInverted(sourceVertex, targetVertex, edge))
@@ -187,7 +187,7 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         return edge;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual int DegreeOf(TNode vertex)
     {
         if (Graph.Type.AllowingSelfLoops)
@@ -196,7 +196,7 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
              * Then we must count, and add loops twice
              */
             var         degree = 0;
-            ISet<TEdge> edges  = GetEdgeContainer(vertex).VertexEdges;
+            var edges  = GetEdgeContainer(vertex).VertexEdges;
 
             foreach (var edge in edges)
             {
@@ -218,37 +218,37 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TEdge> EdgesOf(TNode vertex)
     {
         return GetEdgeContainer(vertex).UnmodifiableVertexEdges;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual int InDegreeOf(TNode vertex)
     {
         return DegreeOf(vertex);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TEdge> IncomingEdgesOf(TNode vertex)
     {
         return GetEdgeContainer(vertex).UnmodifiableVertexEdges;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual int OutDegreeOf(TNode vertex)
     {
         return DegreeOf(vertex);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual ISet<TEdge> OutgoingEdgesOf(TNode vertex)
     {
         return GetEdgeContainer(vertex).UnmodifiableVertexEdges;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual void RemoveEdgeFromTouchingVertices(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         GetEdgeContainer(sourceVertex).RemoveEdge(edge);
@@ -259,15 +259,14 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// Get the edge container for a specified vertex.
-    /// </summary>
-    /// <param name="vertex"> a vertex in this graph
-    /// </param>
-    /// <returns>an edge container.</returns>
+    ///<summary>
+    ///Get the edge container for a specified vertex.
+    ///</summary>
+    ///<param name="vertex"> a vertex in this graph.</param>>
+    ///<returns>an edge container.</returns>
     protected internal virtual UndirectedEdgeContainer<TNode, TEdge> GetEdgeContainer(TNode vertex)
     {
-        UndirectedEdgeContainer<TNode, TEdge> ec = VertexMap[vertex];
+        var ec = VertexMap[vertex];
 
         if (ec == null)
         {

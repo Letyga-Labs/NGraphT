@@ -33,8 +33,8 @@ using Util;
 /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
 public class WeightedPseudograph<TNode, TEdge> : Pseudograph<TNode, TEdge>
 {
-    /// <summary>
-    /// Creates a new weighted graph.
+    ///<summary>
+    ///Creates a new weighted graph.
     /// </summary>
     /// <param name="edgeClass"> class on which to base the edge supplier.</param>
     public WeightedPseudograph(Type edgeClass)

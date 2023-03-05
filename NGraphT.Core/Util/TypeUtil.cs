@@ -21,17 +21,16 @@ namespace NGraphT.Core.Util;
 /// <summary>
 /// TypeUtil isolates type-unsafety so that code which uses it for legitimate reasons can stay
 /// warning-free.
+/// </summary>
 ///
 /// <remarks>Author: John TNode. Sichi.</remarks>
-/// </summary>
 public class TypeUtil
 {
     /// <summary>
     /// Casts an object to a type.
     /// </summary>
     /// <param name="o"> object to be cast.</param>
-    /// @param <T> the type of the result
-    /// </param>
+    /// <typeparam name="T"> the type of the result.</typeparam>>
     /// <returns>the result of the cast.</returns>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
 //ORIGINAL LINE: @SuppressWarnings("unchecked") public static <T> T uncheckedCast(Object o)

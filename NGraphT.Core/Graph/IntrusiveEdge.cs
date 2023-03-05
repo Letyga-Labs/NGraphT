@@ -21,16 +21,16 @@ namespace NGraphT.Core.Graph;
 /// <summary>
 /// IntrusiveEdge encapsulates the internals for the default edge implementation. It is not intended
 /// to be referenced directly (which is why it's not public); use DefaultEdge for that.
+/// </summary>
 ///
 /// <remarks>Author: John TNode. Sichi.</remarks>
-/// </summary>
 internal class IntrusiveEdge : ICloneable
 {
     internal object Source;
 
     internal object Target;
 
-    /// <#### cref="Object.clone()"/>
+    /// <see cref="Object.clone()"/>
     public override object Clone()
     {
         try

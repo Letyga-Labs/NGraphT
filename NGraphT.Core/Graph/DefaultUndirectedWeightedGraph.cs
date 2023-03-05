@@ -30,35 +30,35 @@ using Util;
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 /// </param>
-/// <#### cref="DefaultUndirectedGraph"/>
+/// <seealso cref="DefaultUndirectedGraph"/>
 public class DefaultUndirectedWeightedGraph<TNode, TEdge> : DefaultUndirectedGraph<TNode, TEdge>
 {
-    /// <summary>
-    /// Creates a new graph.
-    /// </summary>
-    /// <param name="edgeClass"> class on which to base the edge supplier.</param>
+    ///<summary>
+    ///Creates a new graph.
+    ///</summary>
+    ///<param name="edgeClass"> class on which to base the edge supplier.</param>
     public DefaultUndirectedWeightedGraph(Type edgeClass)
         : this(null, SupplierUtil.CreateSupplier(edgeClass))
     {
     }
 
-    /// <summary>
-    /// Creates a new graph.
-    /// </summary>
-    /// <param name="vertexSupplier"> the vertex supplier, can be null.</param>
-    /// <param name="edgeSupplier"> the edge supplier, can be null.</param>
+    ///<summary>
+    ///Creates a new graph.
+    ///</summary>
+    ///<param name="vertexSupplier"> the vertex supplier, can be null.</param>
+    ///<param name="edgeSupplier"> the edge supplier, can be null.</param>
     public DefaultUndirectedWeightedGraph(Func<TNode> vertexSupplier, Func<TEdge> edgeSupplier)
         : base(vertexSupplier, edgeSupplier, true)
     {
     }
 
-    /// <summary>
-    /// Create a builder for this kind of graph.
-    /// </summary>
-    /// <param name="edgeClass"> class on which to base factory for edges.</param>
-    /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
-    /// <returns>a builder for this kind of graph.</returns>
+    ///<summary>
+    ///Create a builder for this kind of graph.
+    ///</summary>
+    ///<param name="edgeClass"> class on which to base factory for edges.</param>
+    ///<typeparam name="TNode">The graph vertex type.</typeparam>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<returns>a builder for this kind of graph.</returns>
 //JAVA TO C# CONVERTER WARNING: Java wildcard generics have no direct equivalent in C#:
 //ORIGINAL LINE: public static <TNode, TEdge> GraphBuilder<TNode, TEdge, ? extends DefaultUndirectedWeightedGraph<TNode, TEdge>> createBuilder(Class edgeClass)
     public static GraphBuilder<TNode, TEdge, DefaultUndirectedWeightedGraph<TNode, TEdge>> CreateBuilder<TNode, TEdge>(
@@ -72,13 +72,13 @@ public class DefaultUndirectedWeightedGraph<TNode, TEdge> : DefaultUndirectedGra
         );
     }
 
-    /// <summary>
-    /// Create a builder for this kind of graph.
-    /// </summary>
-    /// <param name="edgeSupplier"> the edge supplier.</param>
-    /// <typeparam name="TNode">The graph vertex type.</typeparam>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
-    /// <returns>a builder for this kind of graph.</returns>
+    ///<summary>
+    ///Create a builder for this kind of graph.
+    ///</summary>
+    ///<param name="edgeSupplier"> the edge supplier.</param>
+    ///<typeparam name="TNode">The graph vertex type.</typeparam>
+    ///<typeparam name="TEdge">The graph edge type.</typeparam> </param>
+    ///<returns>a builder for this kind of graph.</returns>
 //JAVA TO C# CONVERTER WARNING: Java wildcard generics have no direct equivalent in C#:
 //ORIGINAL LINE: public static <TNode, TEdge> GraphBuilder<TNode, TEdge, ? extends DefaultUndirectedWeightedGraph<TNode, TEdge>> createBuilder(Supplier<TEdge> edgeSupplier)
     public static GraphBuilder<TNode, TEdge, DefaultUndirectedWeightedGraph<TNode, TEdge>> CreateBuilder<TNode, TEdge>(

@@ -34,7 +34,7 @@ public class ArrayUtil
     /// <summary>
     /// Reverses the order of the elements in the specified range within the given array.
     /// </summary>
-    /// @param <TNode> the type of elements in the array.</param>
+    /// <typeparam name="TNode"> the type of elements in the array.</typeparam>
     /// <param name="arr"> the array.</param>
     /// <param name="from"> the index of the first element (inclusive) inside the range to reverse.</param>
     /// <param name="to"> the index of the last element (inclusive) inside the range to reverse.</param>
@@ -65,7 +65,7 @@ public class ArrayUtil
     /// <summary>
     /// Swaps the two elements at the specified indices in the given array.
     /// </summary>
-    /// @param <TNode> the type of elements in the array.</param>
+    /// <typeparam name="TNode"> the type of elements in the array.</typeparam>
     /// <param name="arr"> the array.</param>
     /// <param name="i"> the index of the first element.</param>
     /// <param name="j"> the index of the second element.</param>

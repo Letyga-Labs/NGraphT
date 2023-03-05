@@ -35,7 +35,7 @@ internal class MaskVertexSet<TNode> : AbstractSet<TNode>
         _mask      = mask;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool Contains(object o)
     {
         if (!_vertexSet.Contains(o))
@@ -47,19 +47,19 @@ internal class MaskVertexSet<TNode> : AbstractSet<TNode>
         return !_mask.test(node);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override IEnumerator<TNode> Iterator()
     {
         return _vertexSet.Where(_mask.negate()).GetEnumerator();
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override int Size()
     {
         return (int)_vertexSet.Where(_mask.negate()).Count();
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool Empty
     {
         get

@@ -57,8 +57,7 @@ public interface IWeightCombiner
     /// Combines two weights.
     /// </summary>
     /// <param name="a"> first weight.</param>
-    /// <param name="b"> second weight
-    /// </param>
+    /// <param name="b"> second weight.</param>>
     /// <returns>result of the operator.</returns>
     double Combine(double a, double b);
 }

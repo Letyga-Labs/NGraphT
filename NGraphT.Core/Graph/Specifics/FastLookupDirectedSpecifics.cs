@@ -34,21 +34,21 @@ using Graph;
 /// <remarks>Author: Joris Kinable.</remarks>
 public class FastLookupDirectedSpecifics<TNode, TEdge> : DirectedSpecifics<TNode, TEdge>
 {
-    /// <summary>
-    /// Maps a pair of vertices &lt;u,TNode&gt; to a set of edges {(u,TNode)}. In case of a multigraph, all
-    /// edges which touch both u and TNode are included in the set.
-    /// </summary>
+    ///<summary>
+    ///Maps a pair of vertices &lt;u,TNode&gt; to a set of edges {(u,TNode)}. In case of a multigraph, all
+    ///edges which touch both u and TNode are included in the set.
+    ///</summary>
     protected internal IDictionary<Pair<TNode, TNode>, ISet<TEdge>> TouchingVerticesToEdgeMap;
 
-    /// <summary>
-    /// Construct a new fast lookup directed specifics.
-    /// </summary>
-    /// <param name="graph"> the graph for which these specifics are for.</param>
-    /// <param name="vertexMap"> map for the storage of vertex edge sets. Needs to have a predictable
-    ///        iteration order.</param>
-    /// <param name="touchingVerticesToEdgeMap"> Additional map for caching. No need for a predictable
-    ///        iteration order.</param>
-    /// <param name="edgeSetFactory"> factory for the creation of vertex edge sets.</param>
+    ///<summary>
+    ///Construct a new fast lookup directed specifics.
+    ///</summary>
+    ///<param name="graph"> the graph for which these specifics are for.</param>
+    ///<param name="vertexMap"> map for the storage of vertex edge sets. Needs to have a predictable
+    ///       iteration order.</param>
+    ///<param name="touchingVerticesToEdgeMap"> Additional map for caching. No need for a predictable
+    ///       iteration order.</param>
+    ///<param name="edgeSetFactory"> factory for the creation of vertex edge sets.</param>
     public FastLookupDirectedSpecifics(
         IGraph<TNode, TEdge>                                    graph,
         IDictionary<TNode, DirectedEdgeContainer<TNode, TEdge>> vertexMap,
@@ -64,14 +64,14 @@ public class FastLookupDirectedSpecifics<TNode, TEdge> : DirectedSpecifics<TNode
     {
         if (Graph.ContainsVertex(sourceVertex) && Graph.ContainsVertex(targetVertex))
         {
-            ISet<TEdge> edges = TouchingVerticesToEdgeMap[new Pair<TEdge>(sourceVertex, targetVertex)];
+            var edges = TouchingVerticesToEdgeMap[new Pair<TEdge>(sourceVertex, targetVertex)];
             if (edges == null)
             {
                 return java.util.Collections.emptySet();
             }
             else
             {
-                ISet<TEdge> edgeSet = EdgeSetFactory.CreateEdgeSet(sourceVertex);
+                var edgeSet = EdgeSetFactory.CreateEdgeSet(sourceVertex);
                 edgeSet.addAll(edges);
                 return edgeSet;
             }
@@ -84,7 +84,7 @@ public class FastLookupDirectedSpecifics<TNode, TEdge> : DirectedSpecifics<TNode
 
     public override TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
     {
-        ISet<TEdge> edges = TouchingVerticesToEdgeMap[new Pair<TEdge>(sourceVertex, targetVertex)];
+        var edges = TouchingVerticesToEdgeMap[new Pair<TEdge>(sourceVertex, targetVertex)];
         if (edges == null || edges.Count == 0)
         {
             return default(TEdge);
@@ -143,16 +143,16 @@ public class FastLookupDirectedSpecifics<TNode, TEdge> : DirectedSpecifics<TNode
         RemoveFromIndex(sourceVertex, targetVertex, edge);
     }
 
-    /// <summary>
-    /// Add an edge to the index.
-    /// </summary>
-    /// <param name="sourceVertex"> the source vertex.</param>
-    /// <param name="targetVertex"> the target vertex.</param>
-    /// <param name="edge"> the edge.</param>
+    ///<summary>
+    ///Add an edge to the index.
+    ///</summary>
+    ///<param name="sourceVertex"> the source vertex.</param>
+    ///<param name="targetVertex"> the target vertex.</param>
+    ///<param name="edge"> the edge.</param>
     protected internal virtual void AddToIndex(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         Pair<TNode, TNode> vertexPair = new Pair<TNode, TNode>(sourceVertex, targetVertex);
-        ISet<TEdge>        edgeSet    = TouchingVerticesToEdgeMap[vertexPair];
+        var        edgeSet    = TouchingVerticesToEdgeMap[vertexPair];
         if (edgeSet != null)
         {
             edgeSet.Add(edge);
@@ -165,16 +165,16 @@ public class FastLookupDirectedSpecifics<TNode, TEdge> : DirectedSpecifics<TNode
         }
     }
 
-    /// <summary>
-    /// Remove an edge from the index.
-    /// </summary>
-    /// <param name="sourceVertex"> the source vertex.</param>
-    /// <param name="targetVertex"> the target vertex.</param>
-    /// <param name="edge"> the edge.</param>
+    ///<summary>
+    ///Remove an edge from the index.
+    ///</summary>
+    ///<param name="sourceVertex"> the source vertex.</param>
+    ///<param name="targetVertex"> the target vertex.</param>
+    ///<param name="edge"> the edge.</param>
     protected internal virtual void RemoveFromIndex(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         Pair<TNode, TNode> vertexPair = new Pair<TNode, TNode>(sourceVertex, targetVertex);
-        ISet<TEdge>        edgeSet    = TouchingVerticesToEdgeMap[vertexPair];
+        var        edgeSet    = TouchingVerticesToEdgeMap[vertexPair];
         if (edgeSet != null)
         {
             edgeSet.remove(edge);

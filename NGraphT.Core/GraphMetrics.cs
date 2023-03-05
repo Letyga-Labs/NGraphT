@@ -19,14 +19,14 @@
  */
 namespace NGraphT.Core;
 
-using Util;
+using NGraphT.Core.Util;
 
 /// <summary>
 /// Collection of methods which provide numerical graph information.
+/// </summary>
 ///
 /// <remarks>Author: Joris Kinable.</remarks>
 /// <remarks>Author: Alexandru Valeanu.</remarks>
-/// </summary>
 public abstract class GraphMetrics
 {
     /// <summary>
@@ -34,17 +34,17 @@ public abstract class GraphMetrics
     /// graph. The diameter of a graph is defined as $\max_{TNode\in TNode}\epsilon(TNode)$, where $\epsilon(TNode)$
     /// is the eccentricity of vertex $v$. In other words, this method computes the 'longest shortest
     /// path'. Two special cases exist. If the graph has no vertices, the diameter is 0. If the graph
-    /// is disconnected, the diameter is <#### cref="Double.POSITIVE_INFINITY"/>.
+    /// is disconnected, the diameter is <see cref="Double.POSITIVE_INFINITY"/>.
     /// <para>
     /// For more fine-grained control over this method, or if you need additional distance metrics
-    /// such as the graph radius, consider using <#### cref="NGraphT.Core.alg.shortestpath.GraphMeasurer"/>
+    /// such as the graph radius, consider using <see cref="NGraphT.Core.alg.shortestpath.GraphMeasurer"/>
     /// instead.
     /// </para>
     ///
     /// </summary>
     /// <param name="graph"> input graph.</param>
-    /// @param <TNode> graph vertex type.</param>
-    /// @param <TEdge> graph edge type.</param>
+    /// <typeparam name="TNode"> graph vertex type.</typeparam>
+    /// <typeparam name="TEdge"> graph edge type.</typeparam>
     /// <returns>the diameter of the graph.</returns>
     public static double GetDiameter<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -55,17 +55,17 @@ public abstract class GraphMetrics
     /// Compute the <a href="http://mathworld.wolfram.com/GraphRadius.html">radius</a> of the graph.
     /// The radius of a graph is defined as $\min_{TNode\in TNode}\epsilon(TNode)$, where $\epsilon(TNode)$ is the
     /// eccentricity of vertex $v$. Two special cases exist. If the graph has no vertices, the radius
-    /// is 0. If the graph is disconnected, the diameter is <#### cref="Double.POSITIVE_INFINITY"/>.
+    /// is 0. If the graph is disconnected, the diameter is <see cref="Double.POSITIVE_INFINITY"/>.
     /// <para>
     /// For more fine-grained control over this method, or if you need additional distance metrics
-    /// such as the graph diameter, consider using <#### cref="NGraphT.Core.alg.shortestpath.GraphMeasurer"/>
+    /// such as the graph diameter, consider using <see cref="NGraphT.Core.alg.shortestpath.GraphMeasurer"/>
     /// instead.
     /// </para>
     ///
     /// </summary>
     /// <param name="graph"> input graph.</param>
-    /// @param <TNode> graph vertex type.</param>
-    /// @param <TEdge> graph edge type.</param>
+    /// <typeparam name="TNode"> graph vertex type.</typeparam>
+    /// <typeparam name="TEdge"> graph edge type.</typeparam>
     /// <returns>the diameter of the graph.</returns>
     public static double GetRadius<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
@@ -97,9 +97,9 @@ public abstract class GraphMetrics
     ///
     /// </summary>
     /// <param name="graph"> input graph.</param>
-    /// @param <TNode> graph vertex type.</param>
-    /// @param <TEdge> graph edge type.</param>
-    /// <returns>girth of the graph, or <#### cref="Integer.MAX_VALUE"/> if the graph is acyclic.</returns>
+    /// <typeparam name="TNode"> graph vertex type.</typeparam>
+    /// <typeparam name="TEdge"> graph edge type.</typeparam>
+    /// <returns>girth of the graph, or <see cref="Integer.MAX_VALUE"/> if the graph is acyclic.</returns>
     public static int GetGirth<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {
         const int Nil = -1;

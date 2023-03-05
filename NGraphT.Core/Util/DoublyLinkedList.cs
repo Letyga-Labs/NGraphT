@@ -86,7 +86,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     {
         if (!Empty)
         {
-            ListNodeImpl<TEdge> node = _head;
+            var node = _head;
             do
             {
                 ListNodeImpl<TEdge> next    = node.next;
@@ -137,7 +137,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
 
         for (ListNodeIteratorImpl it = new DoublyLinkedList.ListNodeIteratorImpl(list, 0); it.MoveNext();)
         {
-            ListNodeImpl<TEdge> node = it.NextNode();
+            var node = it.NextNode();
             Debug.Assert(node.List == list);
             node.List = this;
         }
@@ -228,9 +228,9 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
         else
         {
-            ListNodeImpl<TEdge> refNode = (index == previousSize) ? _head : GetNodeAt(index);
+            var refNode = (index == previousSize) ? _head : GetNodeAt(index);
 
-            ListNodeImpl<TEdge> listTail = list.Tail();
+            var listTail = list.Tail();
             Link(refNode.prev, list._head); // changes list.tail()
             Link(listTail,     refNode);
 
@@ -297,7 +297,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// <exception cref="NullReferenceException"> if {@code node} is {@code null} </exception>
     public virtual void AddNode(int index, IListNode<TEdge> node)
     {
-        ListNodeImpl<TEdge> nodeImpl = (ListNodeImpl<TEdge>)node;
+        var nodeImpl = (ListNodeImpl<TEdge>)node;
         if (index == _size)
         {
             // also true if this is empty
@@ -305,7 +305,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
         else
         {
-            ListNodeImpl<TEdge> successor = index == 0 ? _head : GetNodeAt(index);
+            var successor = index == 0 ? _head : GetNodeAt(index);
             LinkBefore(nodeImpl, successor);
             if (_head == successor)
             {
@@ -358,8 +358,8 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// <exception cref="NullReferenceException"> if {@code successor} or {@code node} is {@code null} </exception>
     public virtual void AddNodeBefore(IListNode<TEdge> node, IListNode<TEdge> successor)
     {
-        ListNodeImpl<TEdge> successorImpl = (ListNodeImpl<TEdge>)successor;
-        ListNodeImpl<TEdge> nodeImpl      = (ListNodeImpl<TEdge>)node;
+        var successorImpl = (ListNodeImpl<TEdge>)successor;
+        var nodeImpl      = (ListNodeImpl<TEdge>)node;
 
         if (successorImpl.List != this)
         {
@@ -489,7 +489,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
             return -1;
         }
 
-        ListNodeImpl<TEdge> current = _head;
+        var current = _head;
         for (var i = 0; i < _size; i++)
         {
             if (current == node)
@@ -588,8 +588,8 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         if (!Empty)
         {
             var                 index     = 0;
-            ListNodeImpl<TEdge> firstNode = first();
-            ListNodeImpl<TEdge> node      = firstNode;
+            var firstNode = first();
+            var node      = firstNode;
             do
             {
                 if (Equals(node.value, element))
@@ -681,7 +681,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// <inheritdoc/>
     public override TEdge Remove(int index)
     {
-        IListNode<TEdge> node = GetNode(index);
+        var node = GetNode(index);
         RemoveNode(node);
         return node.Value;
     }
@@ -799,7 +799,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// <inheritdoc/>
     public override bool RemoveFirstOccurrence(object o)
     {
-        IListNode<TEdge> node = NodeOf(o);
+        var node = NodeOf(o);
         if (node != null)
         {
             RemoveNode(node);
@@ -812,7 +812,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// <inheritdoc/>
     public override bool RemoveLastOccurrence(object o)
     {
-        IListNode<TEdge> node = LastNodeOf(o);
+        var node = LastNodeOf(o);
         if (node != null)
         {
             RemoveNode(node);
@@ -883,8 +883,8 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
             return;
         }
 
-        ListNodeImpl<TEdge> newHead = Tail();
-        ListNodeImpl<TEdge> current = _head;
+        var newHead = Tail();
+        var current = _head;
         do
         {
             ListNodeImpl<TEdge> next = current.next;
@@ -959,7 +959,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// <returns>a circular {@code NodeIterator} iterating forward from {@code firstElement}</returns>
     public virtual INodeIterator<TEdge> CircularIterator(TEdge firstElement)
     {
-        ListNodeImpl<TEdge> startNode = (ListNodeImpl<TEdge>)NodeOf(firstElement);
+        var startNode = (ListNodeImpl<TEdge>)NodeOf(firstElement);
         if (startNode == null)
         {
             throw new NoSuchElementException();
@@ -986,7 +986,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// <returns>a circular {@code NodeIterator} iterating backwards from {@code firstElement}</returns>
     public virtual INodeIterator<TEdge> ReverseCircularIterator(TEdge firstElement)
     {
-        ListNodeImpl<TEdge> startNode = (ListNodeImpl<TEdge>)NodeOf(firstElement);
+        var startNode = (ListNodeImpl<TEdge>)NodeOf(firstElement);
         if (startNode == null)
         {
             throw new NoSuchElementException();
@@ -1042,10 +1042,10 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// An extension of the <see cref="System.Collections.IEnumerator"/> interface for <#### cref="DoublyLinkedList DoublyLinkedLists"/>
-    /// exposing their <#### cref="IListNode{TNode}"/>.
+    /// An extension of the <see cref="System.Collections.IEnumerator"/> interface for <see cref="DoublyLinkedList DoublyLinkedLists"/>
+    /// exposing their <see cref="IListNode{TNode}"/>.
     /// </summary>
-    /// @param <TEdge> the list element type.</param>
+    /// <typeparam name="TEdge"> the list element type.</typeparam>
     public interface INodeIterator<TEdge> : IEnumerator<TEdge>
     {
         /// <summary>
@@ -1057,18 +1057,18 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// Returns the next <#### cref="IListNode{TNode}"/> in the list and advances the cursor position.
+        /// Returns the next <see cref="IListNode{TNode}"/> in the list and advances the cursor position.
         /// </summary>
         /// <returns>the next {@code ListNode}</returns>
-        /// <#### cref="ListIterator.next()"/>
+        /// <see cref="ListIterator.next()"/>
         IListNode<TEdge> NextNode();
     }
 
     /// <summary>
-    /// An extension of the <#### cref="System.Collections.IEnumerator"/> interface for {@link DoublyLinkedList
-    /// DoublyLinkedLists} exposing their <#### cref="IListNode{TNode}"/>.
+    /// An extension of the <see cref="System.Collections.IEnumerator"/> interface for {@link DoublyLinkedList
+    /// DoublyLinkedLists} exposing their <see cref="IListNode{TNode}"/>.
     /// </summary>
-    /// @param <TEdge> the list element type.</param>
+    /// <typeparam name="TEdge"> the list element type.</typeparam>
     public interface IListNodeIterator<TEdge> : IEnumerator<TEdge>, INodeIterator<TEdge>
     {
         /// <summary>
@@ -1088,16 +1088,16 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// Returns the previous <#### cref="IListNode{TNode}"/> in the list and moves the cursor position
+        /// Returns the previous <see cref="IListNode{TNode}"/> in the list and moves the cursor position
         /// backwards.
         /// </summary>
         /// <returns>the previous {@code ListNode}</returns>
-        /// <#### cref="ListIterator.previous()"/>
+        /// <see cref="ListIterator.previous()"/>
         IListNode<TEdge> PreviousNode();
     }
 
     /// <summary>
-    /// An implementation of the <#### cref="DoublyLinkedList.ListNodeIterator"/> interface.
+    /// An implementation of the <see cref="DoublyLinkedList.ListNodeIterator"/> interface.
     /// </summary>
     private class ListNodeIteratorImpl : IListNodeIterator<TEdge>
     {
@@ -1310,8 +1310,8 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// Returns a <#### cref="INodeIterator{TEdge}"/> that iterates in reverse order, assuming the cursor of the
-    /// specified <#### cref="IListNodeIterator{TEdge}"/> is behind the tail of the list.
+    /// Returns a <see cref="INodeIterator{TEdge}"/> that iterates in reverse order, assuming the cursor of the
+    /// specified <see cref="IListNodeIterator{TEdge}"/> is behind the tail of the list.
     /// </summary>
     private static INodeIterator<TEdge> ReverseIterator<TEdge>(IListNodeIterator<TEdge> listIterator)
     {
@@ -1354,13 +1354,13 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// Container for the elements stored in a <#### cref="DoublyLinkedList"/>.
+    /// Container for the elements stored in a <see cref="DoublyLinkedList"/>.
     /// <para>
-    /// A <#### cref="IListNode{TNode}"/> is either contained exactly once in exactly one {@code DoublyLinkedList}
+    /// A <see cref="IListNode{TNode}"/> is either contained exactly once in exactly one {@code DoublyLinkedList}
     /// or contained in no {@code DoublyLinkedList}.
     /// </para>
     /// </summary>
-    /// @param <TNode> the type of the element stored in this node.</param>
+    /// <typeparam name="TNode"> the type of the element stored in this node.</typeparam>
     public interface IListNode<TNode>
     {
         /// <summary>
@@ -1383,7 +1383,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// The default <#### cref="IListNode{TNode}"/> implementation that enables checks and enforcement of a single
+    /// The default <see cref="IListNode{TNode}"/> implementation that enables checks and enforcement of a single
     /// container list policy.
     /// </summary>
     private class ListNodeImpl<TNode> : IListNode<TNode>

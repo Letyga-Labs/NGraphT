@@ -41,76 +41,76 @@ public class AsUnmodifiableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
 {
     private const string UNMODIFIABLE = "this graph is unmodifiable";
 
-    /// <summary>
-    /// Creates a new unmodifiable graph based on the specified backing graph.
-    /// </summary>
-    /// <param name="g"> the backing graph on which an unmodifiable graph is to be created.</param>
+    ///<summary>
+    ///Creates a new unmodifiable graph based on the specified backing graph.
+    ///</summary>
+    ///<param name="g"> the backing graph on which an unmodifiable graph is to be created.</param>
     public AsUnmodifiableGraph(IGraph<TNode, TEdge> g)
         : base(g)
     {
     }
 
-    /// <#### cref="Graph.addEdge(Object, Object)"/>
+    ///<see cref="Graph.addEdge(Object, Object)"/>
     public override TEdge AddEdge(TNode sourceVertex, TNode targetVertex)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <#### cref="Graph.addEdge(Object, Object, Object)"/>
+    ///<see cref="Graph.addEdge(Object, Object, Object)"/>
     public override bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <#### cref="Graph.addVertex()"/>
+    ///<see cref="Graph.addVertex()"/>
     public override TNode AddVertex()
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <#### cref="Graph.addVertex(Object)"/>
+    ///<see cref="Graph.addVertex(Object)"/>
     public override bool AddVertex(TNode node)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <#### cref="Graph.removeAllEdges(Collection)"/>
+    ///<see cref="Graph.removeAllEdges(Collection)"/>
     public virtual bool RemoveAllEdges<T1>(ICollection<T1> edges) where T1 : TEdge
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <#### cref="Graph.removeAllEdges(Object, Object)"/>
+    ///<see cref="Graph.removeAllEdges(Object, Object)"/>
     public override ISet<TEdge> RemoveAllEdges(TNode sourceVertex, TNode targetVertex)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <#### cref="Graph.removeAllVertices(Collection)"/>
+    ///<see cref="Graph.removeAllVertices(Collection)"/>
     public virtual bool RemoveAllVertices<T1>(ICollection<T1> vertices) where T1 : TNode
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <#### cref="Graph.removeEdge(Object)"/>
+    ///<see cref="Graph.removeEdge(Object)"/>
     public override bool RemoveEdge(TEdge edge)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <#### cref="Graph.removeEdge(Object, Object)"/>
+    ///<see cref="Graph.removeEdge(Object, Object)"/>
     public override TEdge RemoveEdge(TNode sourceVertex, TNode targetVertex)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <#### cref="Graph.removeVertex(Object)"/>
+    ///<see cref="Graph.removeVertex(Object)"/>
     public override bool RemoveVertex(TNode node)
     {
         throw new NotSupportedException(UNMODIFIABLE);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override IGraphType Type
     {
         get

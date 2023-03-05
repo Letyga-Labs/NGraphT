@@ -129,7 +129,7 @@ public class TopologicalOrderIterator<TNode, TEdge> : AbstractGraphIterator<TNod
 
     /// <summary>
     /// {@inheritDoc}
-    /// 
+    ///
     /// Always returns true since the iterator does not care about components.
     /// </summary>
     public override bool CrossComponentTraversal

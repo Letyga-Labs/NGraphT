@@ -37,8 +37,8 @@ using Util;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
-/// <#### cref="GraphListener"/>
-/// <#### cref="VertexSetListener"/>
+/// <seealso cref="GraphListener"/>
+/// <seealso cref="VertexSetListener"/>
 public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, IListenableGraph<TNode, TEdge>,
     ICloneable
 {
@@ -48,25 +48,25 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     private FlyweightVertexEvent<TNode>        _reuseableVertexEvent;
     private bool                               _reuseEvents;
 
-    /// <summary>
-    /// Creates a new listenable graph.
-    /// </summary>
-    /// <param name="g"> the backing graph.</param>
+    ///<summary>
+    ///Creates a new listenable graph.
+    ///</summary>
+    ///<param name="g"> the backing graph.</param>
     public DefaultListenableGraph(IGraph<TNode, TEdge> g)
         : this(g, false)
     {
     }
 
-    /// <summary>
-    /// Creates a new listenable graph. If the <c>reuseEvents</c> flag is set to
-    /// <c>true</c> this class will reuse previously fired events and will not create a new
-    /// object for each event. This option increases performance but should be used with care,
-    /// especially in multithreaded environment.
-    /// </summary>
-    /// <param name="g"> the backing graph.</param>
-    /// <param name="reuseEvents"> whether to reuse previously fired event objects instead of creating a new
-    ///        event object for each event.</param>
-    /// <exception cref="ArgumentException"> if the backing graph is already a listenable graph.</exception>
+    ///<summary>
+    ///Creates a new listenable graph. If the <c>reuseEvents</c> flag is set to
+    ///<c>true</c> this class will reuse previously fired events and will not create a new
+    ///object for each event. This option increases performance but should be used with care,
+    ///especially in multithreaded environment.
+    ///</summary>
+    ///<param name="g"> the backing graph.</param>
+    ///<param name="reuseEvents"> whether to reuse previously fired event objects instead of creating a new
+    ///       event object for each event.</param>
+    ///<exception cref="ArgumentException"> if the backing graph is already a listenable graph.</exception>
     public DefaultListenableGraph(IGraph<TNode, TEdge> g, bool reuseEvents)
         : base(g)
     {
@@ -83,13 +83,13 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// If the <c>reuseEvents</c> flag is set to <c>true</c> this class will reuse
-    /// previously fired events and will not create a new object for each event. This option
-    /// increases performance but should be used with care, especially in multithreaded environment.
-    /// </summary>
-    /// <param name="reuseEvents"> whether to reuse previously fired event objects instead of creating a new
-    ///        event object for each event.</param>
+    ///<summary>
+    ///If the <c>reuseEvents</c> flag is set to <c>true</c> this class will reuse
+    ///previously fired events and will not create a new object for each event. This option
+    ///increases performance but should be used with care, especially in multithreaded environment.
+    ///</summary>
+    ///<param name="reuseEvents"> whether to reuse previously fired event objects instead of creating a new
+    ///       event object for each event.</param>
     public virtual bool ReuseEvents
     {
         set
@@ -219,7 +219,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     {
         if (ContainsVertex(node))
         {
-            ISet<TEdge> touchingEdgesList = EdgesOf(node);
+            var touchingEdgesList = EdgesOf(node);
 
             // copy set to avoid ConcurrentModificationException
             removeAllEdges(new List<>(touchingEdgesList));
@@ -251,13 +251,13 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         _vertexSetListeners.Remove(l);
     }
 
-    /// <summary>
-    /// Notify listeners that the specified edge was added.
-    /// </summary>
-    /// <param name="edge"> the edge that was added.</param>
-    /// <param name="source"> edge source.</param>
-    /// <param name="target"> edge target.</param>
-    /// <param name="weight"> edge weight.</param>
+    ///<summary>
+    ///Notify listeners that the specified edge was added.
+    ///</summary>
+    ///<param name="edge"> the edge that was added.</param>
+    ///<param name="source"> edge source.</param>
+    ///<param name="target"> edge target.</param>
+    ///<param name="weight"> edge weight.</param>
     protected internal virtual void FireEdgeAdded(TEdge edge, TNode source, TNode target, double weight)
     {
         GraphEdgeChangeEvent<TNode, TEdge> edge =
@@ -269,13 +269,13 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// Notify listeners that the specified edge was removed.
-    /// </summary>
-    /// <param name="edge"> the edge that was removed.</param>
-    /// <param name="source"> edge source.</param>
-    /// <param name="target"> edge target.</param>
-    /// <param name="weight"> edge weight.</param>
+    ///<summary>
+    ///Notify listeners that the specified edge was removed.
+    ///</summary>
+    ///<param name="edge"> the edge that was removed.</param>
+    ///<param name="source"> edge source.</param>
+    ///<param name="target"> edge target.</param>
+    ///<param name="weight"> edge weight.</param>
     protected internal virtual void FireEdgeRemoved(TEdge edge, TNode source, TNode target, double weight)
     {
         GraphEdgeChangeEvent<TNode, TEdge> edge =
@@ -287,13 +287,13 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// Notify listeners that the weight of an edge has changed.
-    /// </summary>
-    /// <param name="edge"> the edge whose weight has changed.</param>
-    /// <param name="source"> edge source.</param>
-    /// <param name="target"> edge target.</param>
-    /// <param name="weight"> the edge weight.</param>
+    ///<summary>
+    ///Notify listeners that the weight of an edge has changed.
+    ///</summary>
+    ///<param name="edge"> the edge whose weight has changed.</param>
+    ///<param name="source"> edge source.</param>
+    ///<param name="target"> edge target.</param>
+    ///<param name="weight"> the edge weight.</param>
     protected internal virtual void FireEdgeWeightUpdated(TEdge edge, TNode source, TNode target, double weight)
     {
         GraphEdgeChangeEvent<TNode, TEdge> edge =
@@ -305,10 +305,10 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// Notify listeners that the specified vertex was added.
-    /// </summary>
-    /// <param name="vertex"> the vertex that was added.</param>
+    ///<summary>
+    ///Notify listeners that the specified vertex was added.
+    ///</summary>
+    ///<param name="vertex"> the vertex that was added.</param>
     protected internal virtual void FireVertexAdded(TNode vertex)
     {
         GraphVertexChangeEvent<TNode> edge = CreateGraphVertexChangeEvent(GraphVertexChangeEvent.VERTEX_ADDED, vertex);
@@ -324,10 +324,10 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// Notify listeners that the specified vertex was removed.
-    /// </summary>
-    /// <param name="vertex"> the vertex that was removed.</param>
+    ///<summary>
+    ///Notify listeners that the specified vertex was removed.
+    ///</summary>
+    ///<param name="vertex"> the vertex that was removed.</param>
     protected internal virtual void FireVertexRemoved(TNode vertex)
     {
         GraphVertexChangeEvent<TNode>
@@ -391,25 +391,25 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// A reuseable edge event.
-    /// 
-    /// <remarks>Author: Barak Naveh.</remarks>
-    /// </summary>
+    ///<summary>
+    ///A reuseable edge event.
+    ///
+    ///<remarks>Author: Barak Naveh.</remarks>
+    ///</summary>
     private class FlyweightEdgeEvent<TVv, TEe> : GraphEdgeChangeEvent<TVv, TEe>
     {
         internal const long SerialVersionUID = 3907207152526636089L;
 
-        /// <#### cref="GraphEdgeChangeEvent"/>
+        ///<see cref="GraphEdgeChangeEvent"/>
         public FlyweightEdgeEvent(object eventSource, int type, TEe edge)
             : base(eventSource, type, edge, default(TNode), default(TNode))
         {
         }
 
-        /// <summary>
-        /// Sets the edge of this event.
-        /// </summary>
-        /// <param name="edge"> the edge to be set.</param>
+        ///<summary>
+        ///Sets the edge of this event.
+        ///</summary>
+        ///<param name="edge"> the edge to be set.</param>
         protected internal virtual TEe Edge
         {
             set
@@ -442,10 +442,10 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
             }
         }
 
-        /// <summary>
-        /// Set the event type of this event.
-        /// </summary>
-        /// <param name="type"> the type to be set.</param>
+        ///<summary>
+        ///Set the event type of this event.
+        ///</summary>
+        ///<param name="type"> the type to be set.</param>
         protected internal virtual int Type
         {
             set
@@ -455,22 +455,22 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// A reuseable vertex event.
-    /// 
-    /// <remarks>Author: Barak Naveh.</remarks>
-    /// </summary>
+    ///<summary>
+    ///A reuseable vertex event.
+    ///
+    ///<remarks>Author: Barak Naveh.</remarks>
+    ///</summary>
     private class FlyweightVertexEvent<TVv> : GraphVertexChangeEvent<TVv>
     {
         internal const long SerialVersionUID = 3257848787857585716L;
 
-        /// <#### cref="GraphVertexChangeEvent.GraphVertexChangeEvent(Object, int, Object)"/>
+        ///<see cref="GraphVertexChangeEvent.GraphVertexChangeEvent(Object, int, Object)"/>
         public FlyweightVertexEvent(object eventSource, int type, TVv vertex)
             : base(eventSource, type, vertex)
         {
         }
 
-        /// <summary>
+        ///<summary>
         /// Set the event type of this event.
         /// </summary>
         /// <param name="type"> type to be set.</param>

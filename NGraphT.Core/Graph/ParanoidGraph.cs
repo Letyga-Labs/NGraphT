@@ -32,23 +32,23 @@ using Core;
 /// <remarks>Author: John Sichi.</remarks>
 public class ParanoidGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
 {
-    /// <summary>
-    /// Create a new paranoid graph.
-    /// </summary>
-    /// <param name="g"> the underlying wrapped graph.</param>
+    ///<summary>
+    ///Create a new paranoid graph.
+    ///</summary>
+    ///<param name="g"> the underlying wrapped graph.</param>
     public ParanoidGraph(IGraph<TNode, TEdge> g)
         : base(g)
     {
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         VerifyAdd(EdgeSet(), edge);
         return base.AddEdge(sourceVertex, targetVertex, edge);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool AddVertex(TNode node)
     {
         VerifyAdd(VertexSet(), node);

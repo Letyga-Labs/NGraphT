@@ -118,23 +118,23 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
 
     private ICacheStrategy<TNode, TEdge> _cacheStrategy;
 
-    /// <summary>
-    /// Constructor for AsSynchronizedGraph with default settings (cache disabled, non-fair mode, and
-    /// copyless mode disabled).
-    /// </summary>
-    /// <param name="g"> the backing graph (the delegate) </param>
+    ///<summary>
+    ///Constructor for AsSynchronizedGraph with default settings (cache disabled, non-fair mode, and
+    ///copyless mode disabled).
+    ///</summary>
+    ///<param name="g"> the backing graph (the delegate) </param>
     public AsSynchronizedGraph(IGraph<TNode, TEdge> g)
         : this(g, false, false, false)
     {
     }
 
-    /// <summary>
-    /// Constructor for AsSynchronizedGraph with specified properties.
-    /// </summary>
-    /// <param name="g"> the backing graph (the delegate) </param>
-    /// <param name="cacheEnable"> a flag describing whether a cache will be used.</param>
-    /// <param name="fair"> a flag describing whether fair mode will be used.</param>
-    /// <param name="copyless"> a flag describing whether copyless mode will be used.</param>
+    ///<summary>
+    ///Constructor for AsSynchronizedGraph with specified properties.
+    ///</summary>
+    ///<param name="g"> the backing graph (the delegate) </param>
+    ///<param name="cacheEnable"> a flag describing whether a cache will be used.</param>
+    ///<param name="fair"> a flag describing whether fair mode will be used.</param>
+    ///<param name="copyless"> a flag describing whether copyless mode will be used.</param>
     private AsSynchronizedGraph(IGraph<TNode, TEdge> g, bool cacheEnable, bool fair, bool copyless)
         : base(g)
     {
@@ -156,7 +156,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         _allVerticesSet = new CopyOnDemandSet<TNode>(base.VertexSet(), Lock, copyless);
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> GetAllEdges(TNode sourceVertex, TNode targetVertex)
     {
         Lock.readLock().@lock();
@@ -170,7 +170,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
     {
         Lock.readLock().@lock();
@@ -184,7 +184,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override TEdge AddEdge(TNode sourceVertex, TNode targetVertex)
     {
         Lock.writeLock().@lock();
@@ -204,7 +204,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         Lock.writeLock().@lock();
@@ -224,7 +224,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool AddVertex(TNode node)
     {
         Lock.writeLock().@lock();
@@ -244,7 +244,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool ContainsEdge(TNode sourceVertex, TNode targetVertex)
     {
         Lock.readLock().@lock();
@@ -258,7 +258,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool ContainsEdge(TEdge edge)
     {
         Lock.readLock().@lock();
@@ -272,7 +272,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool ContainsVertex(TNode node)
     {
         Lock.readLock().@lock();
@@ -286,7 +286,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override int DegreeOf(TNode vertex)
     {
         Lock.readLock().@lock();
@@ -300,13 +300,13 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> EdgeSet()
     {
         return _allEdgesSet;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> EdgesOf(TNode vertex)
     {
         Lock.readLock().@lock();
@@ -320,7 +320,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override int InDegreeOf(TNode vertex)
     {
         Lock.readLock().@lock();
@@ -334,7 +334,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> IncomingEdgesOf(TNode vertex)
     {
         Lock.readLock().@lock();
@@ -348,7 +348,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override int OutDegreeOf(TNode vertex)
     {
         Lock.readLock().@lock();
@@ -362,7 +362,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> OutgoingEdgesOf(TNode vertex)
     {
         Lock.readLock().@lock();
@@ -376,7 +376,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual bool RemoveAllEdges<T1>(ICollection<T1> edges) where T1 : TEdge
     {
         Lock.writeLock().@lock();
@@ -390,7 +390,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TEdge> RemoveAllEdges(TNode sourceVertex, TNode targetVertex)
     {
         Lock.writeLock().@lock();
@@ -404,7 +404,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public virtual bool RemoveAllVertices<T1>(ICollection<T1> vertices) where T1 : TNode
     {
         Lock.writeLock().@lock();
@@ -418,7 +418,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool RemoveEdge(TEdge edge)
     {
         Lock.writeLock().@lock();
@@ -438,7 +438,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override TEdge RemoveEdge(TNode sourceVertex, TNode targetVertex)
     {
         Lock.writeLock().@lock();
@@ -458,7 +458,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override bool RemoveVertex(TNode node)
     {
         Lock.writeLock().@lock();
@@ -479,7 +479,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override string ToString()
     {
         Lock.readLock().@lock();
@@ -493,13 +493,13 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override ISet<TNode> VertexSet()
     {
         return _allVerticesSet;
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override TNode GetEdgeSource(TEdge edge)
     {
         Lock.readLock().@lock();
@@ -513,7 +513,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override TNode GetEdgeTarget(TEdge edge)
     {
         Lock.readLock().@lock();
@@ -527,7 +527,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override double GetEdgeWeight(TEdge edge)
     {
         Lock.readLock().@lock();
@@ -541,7 +541,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <inheritdoc/>
+    ///<inheritdoc/>
     public override void SetEdgeWeight(TEdge edge, double weight)
     {
         Lock.writeLock().@lock();
@@ -555,11 +555,11 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <summary>
-    /// Return whether the graph uses cache for <c>edgesOf</c>, <c>incomingEdgesOf</c>
-    /// and <c>outgoingEdgesOf</c> methods.
-    /// </summary>
-    /// <returns><c>true</c> if cache is in use, <c>false</c> if cache is not in use.</returns>
+    ///<summary>
+    ///Return whether the graph uses cache for <c>edgesOf</c>, <c>incomingEdgesOf</c>
+    ///and <c>outgoingEdgesOf</c> methods.
+    ///</summary>
+    ///<returns><c>true</c> if cache is in use, <c>false</c> if cache is not in use.</returns>
     public virtual bool CacheEnabled
     {
         get
@@ -576,10 +576,10 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <summary>
-    /// Return whether copyless mode is used for collection-returning methods.
-    /// </summary>
-    /// <returns><c>true</c> if the graph uses copyless mode, <c>false</c> otherwise.</returns>
+    ///<summary>
+    ///Return whether copyless mode is used for collection-returning methods.
+    ///</summary>
+    ///<returns><c>true</c> if the graph uses copyless mode, <c>false</c> otherwise.</returns>
     public virtual bool Copyless
     {
         get
@@ -588,9 +588,9 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
     }
 
-    /// <summary>
-    /// Set the cache strategy for <c>edgesOf</c>, <c>incomingEdgesOf</c> and
-    /// <c>outgoingEdgesOf</c> methods.
+    ///<summary>
+    ///Set the cache strategy for <c>edgesOf</c>, <c>incomingEdgesOf</c> and
+    ///<c>outgoingEdgesOf</c> methods.
     /// </summary>
     /// <param name="cacheEnabled"> a flag whether to use cache for those methods, if <c>true</c>,
     ///        cache will be used for those methods, otherwise cache will not be used.</param>
@@ -721,7 +721,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
     /// </para>
     /// </summary>
     /// @param <TEdge> the class of the objects in the set
-    /// 
+    ///
     /// <remarks>Author: CHEN Kui.</remarks>
         private class CopyOnDemandSet<TEdge> : ISet<TEdge>
     {
@@ -1340,7 +1340,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         /// </summary>
         public virtual ISet<TEdge> EdgesOf(TNode vertex)
         {
-            ISet<TEdge> s = EdgesOfMap[vertex];
+            var s = EdgesOfMap[vertex];
             if (s != null)
             {
                 return s;
@@ -1356,7 +1356,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         /// </summary>
         public virtual ISet<TEdge> IncomingEdgesOf(TNode vertex)
         {
-            ISet<TEdge> s = IncomingEdgesMap[vertex];
+            var s = IncomingEdgesMap[vertex];
             if (s != null)
             {
                 return s;
@@ -1372,7 +1372,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         /// </summary>
         public virtual ISet<TEdge> OutgoingEdgesOf(TNode vertex)
         {
-            ISet<TEdge> s = OutgoingEdgesMap[vertex];
+            var s = OutgoingEdgesMap[vertex];
             if (s != null)
             {
                 return s;
@@ -1460,11 +1460,11 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
     }
 
     /// <summary>
-    /// A builder for <#### cref="AsSynchronizedGraph"/>.
+    /// A builder for <see cref="AsSynchronizedGraph"/>.
     /// </summary>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam>
-    /// 
+    ///
     /// <remarks>Author: CHEN Kui.</remarks>
     public class Builder<TNode, TEdge>
     {

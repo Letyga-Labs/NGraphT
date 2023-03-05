@@ -21,16 +21,16 @@ namespace NGraphT.Core.Graph;
 /// <summary>
 /// A default implementation for edges in a weighted graph. All access to the weight of an edge must
 /// go through the graph interface, which is why this class doesn't expose any public methods.
+/// </summary>
 ///
 /// <remarks>Author: John TNode. Sichi.</remarks>
-/// </summary>
 public class DefaultWeightedEdge : IntrusiveWeightedEdge
 {
-    /// <summary>
-    /// Retrieves the source of this edge. This is protected, for use by subclasses only (TEdge.g. for
-    /// implementing toString).
-    /// </summary>
-    /// <returns>source of this edge.</returns>
+    ///<summary>
+    ///Retrieves the source of this edge. This is protected, for use by subclasses only (TEdge.g. for
+    ///implementing toString).
+    ///</summary>
+    ///<returns>source of this edge.</returns>
     protected internal virtual object Source
     {
         get
@@ -39,11 +39,11 @@ public class DefaultWeightedEdge : IntrusiveWeightedEdge
         }
     }
 
-    /// <summary>
-    /// Retrieves the target of this edge. This is protected, for use by subclasses only (TEdge.g. for
-    /// implementing toString).
-    /// </summary>
-    /// <returns>target of this edge.</returns>
+    ///<summary>
+    ///Retrieves the target of this edge. This is protected, for use by subclasses only (TEdge.g. for
+    ///implementing toString).
+    ///</summary>
+    ///<returns>target of this edge.</returns>
     protected internal virtual object Target
     {
         get
@@ -52,11 +52,11 @@ public class DefaultWeightedEdge : IntrusiveWeightedEdge
         }
     }
 
-    /// <summary>
-    /// Retrieves the weight of this edge. This is protected, for use by subclasses only (TEdge.g. for
-    /// implementing toString).
-    /// </summary>
-    /// <returns>weight of this edge.</returns>
+    ///<summary>
+    ///Retrieves the weight of this edge. This is protected, for use by subclasses only (TEdge.g. for
+    ///implementing toString).
+    ///</summary>
+    ///<returns>weight of this edge.</returns>
     protected internal virtual double Weight
     {
         get

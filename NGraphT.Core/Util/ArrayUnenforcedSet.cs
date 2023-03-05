@@ -35,7 +35,7 @@ namespace NGraphT.Core.Util;
 public class ArrayUnenforcedSet<TEdge> : List<TEdge>, ISet<TEdge>
 {
     /// <summary>
-    /// Constructs a new empty set
+    /// Constructs a new empty set.
     /// </summary>
     public ArrayUnenforcedSet()
         : base()

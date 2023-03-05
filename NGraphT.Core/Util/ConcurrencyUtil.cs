@@ -24,7 +24,7 @@ namespace NGraphT.Core.Util;
 public class ConcurrencyUtil
 {
     /// <summary>
-    /// Creates a <#### cref="ThreadPoolExecutor"/> with fixed number of threads which is equal to
+    /// Creates a <see cref="ThreadPoolExecutor"/> with fixed number of threads which is equal to
     /// {@code parallelism}.
     /// </summary>
     /// <param name="parallelism"> number of threads for the executor.</param>
@@ -37,7 +37,7 @@ public class ConcurrencyUtil
     /// <summary>
     /// Shuts down the {@code executor}. This operation puts the {@code service} into a state where
     /// every subsequent task submitted to the {@code service} will be rejected. This method calls
-    /// <#### cref="shutdownExecutionService(ExecutorService, long, TimeUnit)"/> with $time =
+    /// <see cref="shutdownExecutionService(ExecutorService, long, TimeUnit)"/> with $time =
     /// Long.MAX_VALUE$ and $timeUnit = TimeUnit.MILLISECONDS$.
     /// </summary>
     /// <param name="service"> service to be shut down.</param>

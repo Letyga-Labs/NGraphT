@@ -36,9 +36,9 @@ namespace NGraphT.Core.Util;
 /// equals comparisons while the instances are keys in the map (or values in the set). For more see
 /// documentation of <c>Map</c> and <c>Set</c>.
 /// </para>
+/// </summary>
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
-/// </summary>
 public class ModifiableInteger : Number, IComparable<ModifiableInteger>
 {
     /// <summary>
@@ -47,7 +47,7 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
     public int Value;
 
     /// <summary>
-    /// <b>!!! DON'T USE - Use the <#### cref="ModifiableInteger(int)"/> constructor instead !!!</b>
+    /// <b>!!! DON'T USE - Use the <see cref="ModifiableInteger(int)"/> constructor instead !!!</b>
     ///
     /// <para>
     /// This constructor is for the use of java.beans.XMLDecoder deserialization. The constructor is
@@ -122,7 +122,7 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
         return Integer.compare(thisVal, anotherVal);
     }
 
-    /// <#### cref="Number.doubleValue()"/>
+    /// <see cref="Number.doubleValue()"/>
     public override double DoubleValue()
     {
         return this.value;
@@ -146,7 +146,7 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
         return false;
     }
 
-    /// <#### cref="Number.floatValue()"/>
+    /// <see cref="Number.floatValue()"/>
     public override float FloatValue()
     {
         return this.value;
@@ -162,13 +162,13 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
         return this.value;
     }
 
-    /// <#### cref="Number.intValue()"/>
+    /// <see cref="Number.intValue()"/>
     public override int IntValue()
     {
         return this.value;
     }
 
-    /// <#### cref="Number.longValue()"/>
+    /// <see cref="Number.longValue()"/>
     public override long LongValue()
     {
         return this.value;
@@ -188,7 +188,7 @@ public class ModifiableInteger : Number, IComparable<ModifiableInteger>
     /// Returns a <c>String</c> object representing this <c>
     /// ModifiableInteger</c>'s value. The value is converted to signed decimal representation and
     /// returned as a string, exactly as if the integer value were given as an argument to the
-    /// <#### cref="java.lang.Integer.toString(int)"/> method.
+    /// <see cref="java.lang.Integer.toString(int)"/> method.
     /// </summary>
     /// <returns>a string representation of the value of this object in base&nbsp;10.</returns>
     public override string ToString()

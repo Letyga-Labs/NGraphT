@@ -78,12 +78,12 @@ using Core;
 /// instead of using this implementation as a black box.
 /// </para>
 /// </summary>
-/// @param <TNode> the vertex type.</param>
+/// <typeparam name="TNode"> the vertex type.</typeparam>
 /// @param <TEdge> the edge type
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
-/// <#### cref="Graph"/>
-/// <#### cref="Set"/>
+/// <seealso cref="Graph"/>
+/// <seealso cref="Set"/>
 public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
 {
     private const string NoSuchEdgeInBase                    = "no such edge in base graph";
@@ -100,14 +100,14 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
 
     private ISet<TNode> _unmodifiableVertexSet = null;
 
-    /// <summary>
-    /// Creates a new subgraph.
-    /// </summary>
-    /// <param name="base"> the base (backing) graph on which the subgraph will be based.</param>
-    /// <param name="vertexSubset"> vertices to include in the subgraph. If <c>null</c> then all
-    ///        vertices are included.</param>
-    /// <param name="edgeSubset"> edges to in include in the subgraph. If <c>null</c> then all the
-    ///        edges whose vertices found in the graph are included.</param>
+    ///<summary>
+    ///Creates a new subgraph.
+    ///</summary>
+    ///<param name="base"> the base (backing) graph on which the subgraph will be based.</param>
+    ///<param name="vertexSubset"> vertices to include in the subgraph. If <c>null</c> then all
+    ///       vertices are included.</param>
+    ///<param name="edgeSubset"> edges to in include in the subgraph. If <c>null</c> then all the
+    ///       edges whose vertices found in the graph are included.</param>
 //JAVA TO C# CONVERTER TODO TASK: Wildcard generics in method parameters are not converted:
 //ORIGINAL LINE: public AsSubgraph(Graph<TNode, TEdge> super, Set<? extends TNode> vertexSubset, Set<? extends TEdge> edgeSubset)
     public AsSubgraph(IGraph<TNode, TEdge> @base, ISet<TNode> vertexSubset, ISet<TEdge> edgeSubset)
@@ -127,14 +127,14 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         Initialize(vertexSubset, edgeSubset);
     }
 
-    /// <summary>
-    /// Creates a new induced subgraph. The subgraph will keep track of edges being added to its
-    /// vertex subset as well as deletion of edges and vertices. If base it not listenable, this is
-    /// identical to the call Subgraph(base, vertexSubset, null).
-    /// </summary>
-    /// <param name="base"> the base (backing) graph on which the subgraph will be based.</param>
-    /// <param name="vertexSubset"> vertices to include in the subgraph. If <c>null</c> then all
-    ///        vertices are included.</param>
+    ///<summary>
+    ///Creates a new induced subgraph. The subgraph will keep track of edges being added to its
+    ///vertex subset as well as deletion of edges and vertices. If base it not listenable, this is
+    ///identical to the call Subgraph(base, vertexSubset, null).
+    ///</summary>
+    ///<param name="base"> the base (backing) graph on which the subgraph will be based.</param>
+    ///<param name="vertexSubset"> vertices to include in the subgraph. If <c>null</c> then all
+    ///       vertices are included.</param>
 //JAVA TO C# CONVERTER TODO TASK: Wildcard generics in method parameters are not converted:
 //ORIGINAL LINE: public AsSubgraph(Graph<TNode, TEdge> super, Set<? extends TNode> vertexSubset)
     public AsSubgraph(IGraph<TNode, TEdge> @base, ISet<TNode> vertexSubset)
@@ -142,8 +142,8 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     {
     }
 
-    /// <summary>
-    /// Creates a new induced Subgraph with all vertices included. The subgraph will keep track of
+    ///<summary>
+    ///Creates a new induced Subgraph with all vertices included. The subgraph will keep track of
     /// edges being added to its vertex subset as well as deletion of edges and vertices. If base is
     /// not listenable, this is identical to the call Subgraph(base, null, null).
     /// </summary>
@@ -171,7 +171,7 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     /// <inheritdoc/>
     public override TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
     {
-        ISet<TEdge> edges = GetAllEdges(sourceVertex, targetVertex);
+        var edges = GetAllEdges(sourceVertex, targetVertex);
 
         if (edges == null)
         {
@@ -225,7 +225,7 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
             throw new ArgumentException(NoSuchEdgeInBase);
         }
 
-        ISet<TEdge> edges = Base.GetAllEdges(sourceVertex, targetVertex);
+        var edges = Base.GetAllEdges(sourceVertex, targetVertex);
 
         foreach (var edge in edges)
         {
@@ -274,8 +274,8 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     /// false</c>.</returns>
     /// <exception cref="NullReferenceException"> if TNode is null.</exception>
     /// <exception cref="ArgumentException"> if the base graph does not contain the vertex.</exception>
-    /// <#### cref="AsSubgraph"/>
-    /// <#### cref="Graph.addVertex(Object)"/>
+    /// <seealso cref="AsSubgraph"/>
+    /// <see cref="Graph.addVertex(Object)"/>
     public override bool AddVertex(TNode node)
     {
         if (node == null)
@@ -339,7 +339,7 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         if (BaseType.Undirected)
         {
             var                degree = 0;
-            IEnumerator<TEdge> it     = Base.EdgesOf(vertex).Where(edgeSet.contains).GetEnumerator();
+            var it     = Base.EdgesOf(vertex).Where(edgeSet.contains).GetEnumerator();
             while (it.MoveNext())
             {
                 var edge = it.Current;
@@ -532,7 +532,7 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
 
     /// <summary>
     /// An internal listener on the base graph.
-    /// 
+    ///
     /// <remarks>Author: Barak Naveh.</remarks>
     /// </summary>
         private class BaseGraphListener : GraphListener<TNode, TEdge>

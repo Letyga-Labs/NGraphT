@@ -34,33 +34,33 @@ using Specifics;
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 /// </param>
-/// <#### cref="FastLookupGraphSpecificsStrategy"/>
-/// <#### cref="DefaultGraphSpecificsStrategy"/>
+/// <seealso cref="FastLookupGraphSpecificsStrategy"/>
+/// <seealso cref="DefaultGraphSpecificsStrategy"/>
 public interface IGraphSpecificsStrategy<TNode, TEdge>
 {
-    /// <summary>
-    /// Get a function which creates the intrusive edges specifics. The factory will accept the graph
-    /// type as a parameter.
+    ///<summary>
+    ///Get a function which creates the intrusive edges specifics. The factory will accept the graph
+    ///type as a parameter.
     ///
-    /// <para>
-    /// Note that it is very important to use a map implementation which respects iteration order.
-    /// </para>
+    ///<para>
+    ///Note that it is very important to use a map implementation which respects iteration order.
+    ///</para>
     ///
-    /// </summary>
-    /// <returns>a function which creates intrusive edges specifics.</returns>
+    ///</summary>
+    ///<returns>a function which creates intrusive edges specifics.</returns>
     Func<IGraphType, INtrusiveEdgesSpecifics<TNode, TEdge>> IntrusiveEdgesSpecificsFactory { get; }
 
-    /// <summary>
-    /// Get a function which creates the specifics. The factory will accept the graph type as a
-    /// parameter.
-    /// </summary>
-    /// <returns>a function which creates intrusive edges specifics.</returns>
+    ///<summary>
+    ///Get a function which creates the specifics. The factory will accept the graph type as a
+    ///parameter.
+    ///</summary>
+    ///<returns>a function which creates intrusive edges specifics.</returns>
     Func<IGraph<TNode, TEdge>, IGraphType, ISpecifics<TNode, TEdge>> SpecificsFactory { get; }
 
-    /// <summary>
-    /// Get an edge set factory.
-    /// </summary>
-    /// <returns>an edge set factory.</returns>
+    ///<summary>
+    ///Get an edge set factory.
+    ///</summary>
+    ///<returns>an edge set factory.</returns>
     IEdgeSetFactory<TNode, TEdge> EdgeSetFactory
     {
         get

@@ -25,8 +25,8 @@ namespace NGraphT.Core;
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 /// </param>
-/// <#### cref="GraphListener"/>
-/// <#### cref="VertexSetListener"
+/// <seealso cref="GraphListener"/>
+/// <see cref="VertexSetListener"
 ///
 /// <remarks>Author: Barak Naveh/>.</remarks>
 public interface IListenableGraph<TNode, TEdge> : IGraph<TNode, TEdge>

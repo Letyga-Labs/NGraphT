@@ -49,13 +49,13 @@ public class UnmodifiableUnionSet<TEdge> : AbstractSet<TEdge>
 
     /// <summary>
     /// {@inheritDoc}
-    /// 
+    ///
     /// Since the view is live, this operation is no longer a constant time operation.
     /// </summary>
     public override int Size()
     {
-        SetSizeOrdering ordering = OrderSetsBySize();
-        ISet<TEdge>     bigger   = ordering.Bigger;
+        var ordering = OrderSetsBySize();
+        var     bigger   = ordering.Bigger;
         var             count    = ordering.BiggerSize;
         foreach (var edge in ordering.Smaller)
         {

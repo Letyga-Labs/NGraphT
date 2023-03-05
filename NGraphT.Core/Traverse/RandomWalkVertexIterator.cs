@@ -35,9 +35,9 @@ using Graphs = Graphs;
 /// equal to its weight divided by the total weight of all outgoing edges. The walk can also be
 /// bounded by a maximum number of hops (edges traversed). The iterator returns
 /// <see cref="NoSuchElementException"/> when this bound is reached.
+/// </summary>
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
-/// </summary>
 ///
 /// <typeparam name="TNode">The graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam> </param>
@@ -52,7 +52,7 @@ public class RandomWalkVertexIterator<TNode, TEdge> : IEnumerator<TNode>
     private          TNode                      _nextVertex;
 
     /// <summary>
-    /// Create a new iterator
+    /// Create a new iterator.
     /// </summary>
     /// <param name="graph"> the graph.</param>
     /// <param name="vertex"> the starting vertex.</param>
@@ -62,7 +62,7 @@ public class RandomWalkVertexIterator<TNode, TEdge> : IEnumerator<TNode>
     }
 
     /// <summary>
-    /// Create a new iterator
+    /// Create a new iterator.
     /// </summary>
     /// <param name="graph"> the graph.</param>
     /// <param name="vertex"> the starting vertex.</param>
@@ -73,7 +73,7 @@ public class RandomWalkVertexIterator<TNode, TEdge> : IEnumerator<TNode>
     }
 
     /// <summary>
-    /// Create a new iterator
+    /// Create a new iterator.
     /// </summary>
     /// <param name="graph"> the graph.</param>
     /// <param name="vertex"> the starting vertex.</param>

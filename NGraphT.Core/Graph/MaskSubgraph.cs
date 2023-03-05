@@ -133,7 +133,7 @@ public class MaskSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         else
         {
             var                degree = 0;
-            IEnumerator<TEdge> it     = EdgesOf(vertex).GetEnumerator();
+            var it     = EdgesOf(vertex).GetEnumerator();
             while (it.MoveNext())
             {
                 var edge = it.Current;
@@ -206,7 +206,7 @@ public class MaskSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     /// <inheritdoc/>
     public override TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
     {
-        ISet<TEdge> edges = GetAllEdges(sourceVertex, targetVertex);
+        var edges = GetAllEdges(sourceVertex, targetVertex);
 
         if (edges == null)
         {

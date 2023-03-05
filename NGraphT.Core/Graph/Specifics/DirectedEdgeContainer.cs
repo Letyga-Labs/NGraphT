@@ -49,10 +49,10 @@ public class DirectedEdgeContainer<TNode, TEdge>
         Outgoing = edgeSetFactory.CreateEdgeSet(vertex);
     }
 
-    /// <summary>
-    /// A lazy build of unmodifiable incoming edge set.
-    /// </summary>
-    /// <returns>an unmodifiable version of the incoming edge set.</returns>
+    ///<summary>
+    ///A lazy build of unmodifiable incoming edge set.
+    ///</summary>
+    ///<returns>an unmodifiable version of the incoming edge set.</returns>
     public virtual ISet<TEdge> UnmodifiableIncomingEdges
     {
         get
@@ -66,10 +66,10 @@ public class DirectedEdgeContainer<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// A lazy build of unmodifiable outgoing edge set.
-    /// </summary>
-    /// <returns>an unmodifiable version of the outgoing edge set.</returns>
+    ///<summary>
+    ///A lazy build of unmodifiable outgoing edge set.
+    ///</summary>
+    ///<returns>an unmodifiable version of the outgoing edge set.</returns>
     public virtual ISet<TEdge> UnmodifiableOutgoingEdges
     {
         get
@@ -83,37 +83,37 @@ public class DirectedEdgeContainer<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// Add an incoming edge.
-    /// </summary>
-    /// <param name="edge"> the edge to add.</param>
+    ///<summary>
+    ///Add an incoming edge.
+    ///</summary>
+    ///<param name="edge"> the edge to add.</param>
     public virtual void AddIncomingEdge(TEdge edge)
     {
         Incoming.Add(edge);
     }
 
-    /// <summary>
-    /// Add an outgoing edge.
-    /// </summary>
-    /// <param name="edge"> the edge to add.</param>
+    ///<summary>
+    ///Add an outgoing edge.
+    ///</summary>
+    ///<param name="edge"> the edge to add.</param>
     public virtual void AddOutgoingEdge(TEdge edge)
     {
         Outgoing.Add(edge);
     }
 
-    /// <summary>
-    /// Remove an incoming edge.
-    /// </summary>
-    /// <param name="edge"> the edge to remove.</param>
+    ///<summary>
+    ///Remove an incoming edge.
+    ///</summary>
+    ///<param name="edge"> the edge to remove.</param>
     public virtual void RemoveIncomingEdge(TEdge edge)
     {
         Incoming.remove(edge);
     }
 
-    /// <summary>
-    /// Remove an outgoing edge.
-    /// </summary>
-    /// <param name="edge"> the edge to remove.</param>
+    ///<summary>
+    ///Remove an outgoing edge.
+    ///</summary>
+    ///<param name="edge"> the edge to remove.</param>
     public virtual void RemoveOutgoingEdge(TEdge edge)
     {
         Outgoing.remove(edge);

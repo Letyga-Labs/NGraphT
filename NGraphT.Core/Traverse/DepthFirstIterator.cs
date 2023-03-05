@@ -141,7 +141,7 @@ public class DepthFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, TE
 
     protected internal override void EncounterVertexAgain(TNode vertex, TEdge edge)
     {
-        VisitColor color = GetSeenData(vertex);
+        var color = GetSeenData(vertex);
         if (color != VisitColor.White)
         {
             // We've already visited this vertex; no need to mess with the

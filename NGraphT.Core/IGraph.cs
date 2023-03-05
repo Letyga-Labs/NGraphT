@@ -60,6 +60,19 @@ using NGraphT.Core.Graph;
 public interface IGraph<TNode, TEdge>
 {
     /// <summary>
+    /// The default weight for an edge.
+    /// </summary>
+    public const double DefaultEdgeWeight = 1.0;
+
+    /// <summary>
+    /// Get the graph type. The graph type can be used to query for additional metadata such as
+    /// whether the graph supports directed or undirected edges, self-loops, multiple (parallel)
+    /// edges, weights, etc.
+    /// </summary>
+    /// <returns>the graph type.</returns>
+    IGraphType Type { get; }
+
+    /// <summary>
     /// Return the vertex supplier that the graph uses whenever it needs to create new vertices.
     ///
     /// <para>
@@ -293,12 +306,10 @@ public interface IGraph<TNode, TEdge>
     ///
     /// <para>
     /// The graph implementation may maintain a particular set ordering (TEdge.g. via
-    /// <see cref="java.util.LinkedHashSet"/>) for deterministic iteration, but this is not required. It is
-    /// the responsibility of callers who rely on this behavior to only use graph implementations
+    /// <see cref="J2N.Collections.Generic.LinkedHashSet{T}"/>) for deterministic iteration, but this is not required.
+    /// It is the responsibility of callers who rely on this behavior to only use graph implementations
     /// which support it.
     /// </para>
-    ///
-    /// 
     /// </summary>
     /// <returns>a set of the edges contained in this graph.</returns>
     ISet<TEdge> EdgeSet();
@@ -410,24 +421,22 @@ public interface IGraph<TNode, TEdge>
     /// <summary>
     /// Removes all the edges in this graph that are also contained in the specified edge collection.
     /// After this call returns, this graph will contain no edges in common with the specified edges.
-    /// This method will invoke the <see cref="removeEdge(Object)"/> method.
+    /// This method will invoke the <see cref="RemoveEdge(TEdge)"/> method.
     /// </summary>
     /// <param name="edges"> edges to be removed from this graph.</param>
     /// <returns><c>true</c> if this graph changed as a result of the call.</returns>
     /// <exception cref="NullReferenceException"> if the specified edge collection is <c>
     /// null</c>.</exception>
-    /// <see cref=".removeEdge(Object)"/>
-    /// <see cref=".containsEdge(Object)"/>
-//JAVA TO C# CONVERTER WARNING: Java wildcard generics have no direct equivalent in C#:
-//ORIGINAL LINE: boolean removeAllEdges(java.util.Collection<? extends TEdge> edges);
-    bool RemoveAllEdges<T1>(ICollection<T1> edges);
+    /// <seealso cref="RemoveEdge(TEdge)"/>
+    /// <seealso cref="ContainsEdge(TEdge)"/>
+    bool RemoveAllEdges(ICollection<TEdge> edges);
 
     /// <summary>
     /// Removes all the edges going from the specified source vertex to the specified target vertex,
     /// and returns a set of all removed edges. Returns <c>null</c> if any of the specified
     /// vertices does not exist in the graph. If both vertices exist but no edge is found, returns an
-    /// empty set. This method will either invoke the <see cref="removeEdge(Object)"/> method, or the
-    /// <see cref="removeEdge(Object, Object)"/> method.
+    /// empty set. This method will either invoke the <see cref="RemoveEdge(TEdge)"/> method, or the
+    /// <see cref="RemoveEdge(TNode,TNode)"/> method.
     /// </summary>
     /// <param name="sourceVertex"> source vertex of the edge.</param>
     /// <param name="targetVertex"> target vertex of the edge.</param>
@@ -437,17 +446,15 @@ public interface IGraph<TNode, TEdge>
     /// <summary>
     /// Removes all the vertices in this graph that are also contained in the specified vertex
     /// collection. After this call returns, this graph will contain no vertices in common with the
-    /// specified vertices. This method will invoke the <see cref="removeVertex(Object)"/> method.
+    /// specified vertices. This method will invoke the <see cref="RemoveVertex"/> method.
     /// </summary>
     /// <param name="vertices"> vertices to be removed from this graph.</param>
     /// <returns><c>true</c> if this graph changed as a result of the call.</returns>
     /// <exception cref="NullReferenceException"> if the specified vertex collection is <c>
     /// null</c>.</exception>
-    /// <see cref=".removeVertex(Object)"/>
-    /// <see cref=".containsVertex(Object)"/>
-//JAVA TO C# CONVERTER WARNING: Java wildcard generics have no direct equivalent in C#:
-//ORIGINAL LINE: boolean removeAllVertices(java.util.Collection<? extends TNode> vertices);
-    bool RemoveAllVertices<T1>(ICollection<T1> vertices);
+    /// <seealso cref="RemoveVertex"/>
+    /// <seealso cref="ContainsVertex"/>
+    bool RemoveAllVertices(ICollection<TNode> vertices);
 
     /// <summary>
     /// Removes an edge going from source vertex to target vertex, if such vertices and such edge
@@ -499,8 +506,8 @@ public interface IGraph<TNode, TEdge>
     ///
     /// <para>
     /// The graph implementation may maintain a particular set ordering (TEdge.g. via
-    /// <see cref="java.util.LinkedHashSet"/>) for deterministic iteration, but this is not required. It is
-    /// the responsibility of callers who rely on this behavior to only use graph implementations
+    /// <see cref="J2N.Collections.Generic.LinkedHashSet{T}"/>) for deterministic iteration, but this is not required.
+    /// It is the responsibility of callers who rely on this behavior to only use graph implementations
     /// which support it.
     /// </para>
     /// </summary>
@@ -511,8 +518,7 @@ public interface IGraph<TNode, TEdge>
     /// Returns the source vertex of an edge. For an undirected graph, source and target are
     /// distinguishable designations (but without any mathematical meaning).
     /// </summary>
-    /// <param name="edge"> edge of interest
-    /// </param>
+    /// <param name="edge"> edge of interest.</param>>
     /// <returns>source vertex.</returns>
     TNode GetEdgeSource(TEdge edge);
 
@@ -520,23 +526,9 @@ public interface IGraph<TNode, TEdge>
     /// Returns the target vertex of an edge. For an undirected graph, source and target are
     /// distinguishable designations (but without any mathematical meaning).
     /// </summary>
-    /// <param name="edge"> edge of interest
-    /// </param>
+    /// <param name="edge"> edge of interest.</param>>
     /// <returns>target vertex.</returns>
     TNode GetEdgeTarget(TEdge edge);
-
-    /// <summary>
-    /// Get the graph type. The graph type can be used to query for additional metadata such as
-    /// whether the graph supports directed or undirected edges, self-loops, multiple (parallel)
-    /// edges, weights, etc.
-    /// </summary>
-    /// <returns>the graph type.</returns>
-    IGraphType Type { get; }
-
-    /// <summary>
-    /// The default weight for an edge.
-    /// </summary>
-    public static double DefaultEdgeWeight = 1.0;
 
     /// <summary>
     /// Returns the weight assigned to a given edge. Unweighted graphs return 1.0 (as defined by
@@ -561,7 +553,7 @@ public interface IGraph<TNode, TEdge>
     /// of these vertices is <c>null</c>, a <c>NullPointerException</c> is thrown.
     /// <para>
     /// When there exist multiple edges between <c>sourceVertex</c> and
-    /// <c>targetVertex</c>, consider using <see cref="setEdgeWeight(Object, double)"/> instead.
+    /// <c>targetVertex</c>, consider using <see cref="SetEdgeWeight(TEdge,double)"/> instead.
     /// </para>
     ///
     /// </summary>
@@ -571,7 +563,7 @@ public interface IGraph<TNode, TEdge>
     /// <exception cref="NotSupportedException"> if the graph does not support weights.</exception>
     void SetEdgeWeight(TNode sourceVertex, TNode targetVertex, double weight)
     {
-        this.setEdgeWeight(this.getEdge(sourceVertex, targetVertex), weight);
+        SetEdgeWeight(GetEdge(sourceVertex, targetVertex), weight);
     }
 
     /// <summary>

@@ -42,66 +42,66 @@ public class CollectionUtil
     /// occur".
     /// </para>
     /// </summary>
-    /// @param <K> the type of keys in the returned {@code HashMap} </param>
-    /// @param <TNode> the type of values in the returned {@code HashMap} </param>
+    /// <typeparam name="K"> the type of keys in the returned {@code HashMap} </typeparam>
+    /// <typeparam name="TNode"> the type of values in the returned {@code HashMap} </typeparam>
     /// <param name="expectedSize"> of mappings that will be put into the returned {@code HashMap} </param>
     /// <returns>an empty {@code HashMap} with sufficient capacity to hold expectedSize mappings.</returns>
-    /// <#### cref="HashMap"/>
+    /// <seealso cref="HashMap"/>
     public static Dictionary<TK, TNode> NewHashMapWithExpectedSize<TK, TNode>(int expectedSize)
     {
         return new Dictionary<TK, TNode>(CapacityForSize(expectedSize));
     }
 
     /// <summary>
-    /// Returns a <#### cref="LinkedHashMap"/> with an initial capacity that is sufficient to hold
+    /// Returns a <see cref="LinkedHashMap"/> with an initial capacity that is sufficient to hold
     /// {@code expectedSize} mappings without rehashing its internal backing storage.
     /// <para>
-    /// Because {@code LinkedHashMap} extends <#### cref="System.Collections.Hashtable"/> it inherits the issue that the capacity
+    /// Because {@code LinkedHashMap} extends <see cref="System.Collections.Hashtable"/> it inherits the issue that the capacity
     /// is not equivalent to the number of mappings it can hold without rehashing. See
-    /// <#### cref="newHashMapWithExpectedSize(int)"/> for details.
+    /// <see cref="newHashMapWithExpectedSize(int)"/> for details.
     /// </para>
     /// </summary>
-    /// @param <K> the type of keys in the returned {@code LinkedHashMap} </param>
-    /// @param <TNode> the type of values in the returned {@code LinkedHashMap} </param>
+    /// <typeparam name="K"> the type of keys in the returned {@code LinkedHashMap} </typeparam>
+    /// <typeparam name="TNode"> the type of values in the returned {@code LinkedHashMap} </typeparam>
     /// <param name="expectedSize"> of mappings that will be put into the returned {@code LinkedHashMap} </param>
     /// <returns>an empty {@code LinkedHashMap} with sufficient capacity to hold expectedSize mappings.</returns>
-    /// <#### cref="HashMap"/>
+    /// <seealso cref="HashMap"/>
     public static LinkedHashMap<TK, TNode> NewLinkedHashMapWithExpectedSize<TK, TNode>(int expectedSize)
     {
         return new LinkedHashMap<TK, TNode>(CapacityForSize(expectedSize));
     }
 
     /// <summary>
-    /// Returns a <#### cref="System.Collections.Generic.HashSet<object>"/> with an initial capacity that is sufficient to hold
+    /// Returns a <see cref="System.Collections.Generic.HashSet<object>"/> with an initial capacity that is sufficient to hold
     /// {@code expectedSize} elements without rehashing its internal backing storage.
     /// <para>
-    /// Because a {@code HashSet} is backed by a <#### cref="System.Collections.Hashtable"/> it inherits the issue that the
+    /// Because a {@code HashSet} is backed by a <see cref="System.Collections.Hashtable"/> it inherits the issue that the
     /// capacity is not equivalent to the number of elements it can hold without rehashing. See
-    /// <#### cref="newHashMapWithExpectedSize(int)"/> for details.
+    /// <see cref="newHashMapWithExpectedSize(int)"/> for details.
     /// </para>
     /// </summary>
-    /// @param <TEdge> the type of elements in the returned {@code HashSet} </param>
+    /// <typeparam name="TEdge"> the type of elements in the returned {@code HashSet} </typeparam>
     /// <param name="expectedSize"> of elements that will be add to the returned {@code HashSet} </param>
     /// <returns>an empty {@code HashSet} with sufficient capacity to hold expectedSize elements.</returns>
-    /// <#### cref="HashMap"/>
+    /// <seealso cref="HashMap"/>
     public static HashSet<TEdge> NewHashSetWithExpectedSize<TEdge>(int expectedSize)
     {
         return new HashSet<TEdge>(CapacityForSize(expectedSize));
     }
 
     /// <summary>
-    /// Returns a <#### cref="LinkedHashSet"/> with an initial capacity that is sufficient to hold
+    /// Returns a <see cref="LinkedHashSet"/> with an initial capacity that is sufficient to hold
     /// {@code expectedSize} elements without rehashing its internal backing storage.
     /// <para>
-    /// Because a {@code LinkedHashSet} is backed by a <#### cref="System.Collections.Hashtable"/> it inherits the issue that the
+    /// Because a {@code LinkedHashSet} is backed by a <see cref="System.Collections.Hashtable"/> it inherits the issue that the
     /// capacity is not equivalent to the number of elements it can hold without rehashing. See
-    /// <#### cref="newHashMapWithExpectedSize(int)"/> for details.
+    /// <see cref="newHashMapWithExpectedSize(int)"/> for details.
     /// </para>
     /// </summary>
-    /// @param <TEdge> the type of elements in the returned {@code LinkedHashSet} </param>
+    /// <typeparam name="TEdge"> the type of elements in the returned {@code LinkedHashSet} </typeparam>
     /// <param name="expectedSize"> of elements that will be add to the returned {@code LinkedHashSet} </param>
     /// <returns>an empty {@code LinkedHashSet} with sufficient capacity to hold expectedSize elements.</returns>
-    /// <#### cref="HashMap"/>
+    /// <seealso cref="HashMap"/>
     public static LinkedHashSet<TEdge> NewLinkedHashSetWithExpectedSize<TEdge>(int expectedSize)
     {
         return new LinkedHashSet<TEdge>(CapacityForSize(expectedSize));
@@ -116,10 +116,10 @@ public class CollectionUtil
     /// <summary>
     /// Returns from the given {@code Iterable} the element with the given {@code index}.
     /// <para>
-    /// The order to which the index applies is that defined by the <#### cref="Iterable.iterator()"/>.
+    /// The order to which the index applies is that defined by the <see cref="Iterable.iterator()"/>.
     /// </para>
     /// </summary>
-    /// @param <TEdge> the type of elements in the {@code Iterable} </param>
+    /// <typeparam name="TEdge"> the type of elements in the {@code Iterable} </typeparam>
     /// <param name="iterable"> the Iterable from which the element at {@code index} is returned.</param>
     /// <param name="index"> the index of the returned element.</param>
     /// <returns>the element with {@code index} in the {@code iterable}</returns>
@@ -130,7 +130,7 @@ public class CollectionUtil
             return ((IList<TEdge>)iterable)[index];
         }
 
-        IEnumerator<TEdge> it = iterable.GetEnumerator();
+        var it = iterable.GetEnumerator();
 //JAVA TO C# CONVERTER TODO TASK: Java iterators are only converted within the context of 'while' and 'for' loops:
         for (var i = 0; i < index && it.hasNext(); i++)
         {

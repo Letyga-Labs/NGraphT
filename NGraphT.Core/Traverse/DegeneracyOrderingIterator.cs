@@ -52,7 +52,7 @@ public class DegeneracyOrderingIterator<TNode, TEdge> : AbstractGraphIterator<TN
     private TNode                   _cur;
 
     /// <summary>
-    /// Constructor
+    /// Constructor.
     /// </summary>
     /// <param name="graph"> the graph to be iterated.</param>
 //JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
@@ -102,7 +102,7 @@ public class DegeneracyOrderingIterator<TNode, TEdge> : AbstractGraphIterator<TN
 
     /// <summary>
     /// {@inheritDoc}
-    /// 
+    ///
     /// Always returns true since the iterator does not care about components.
     /// </summary>
     public override bool CrossComponentTraversal
@@ -165,7 +165,7 @@ public class DegeneracyOrderingIterator<TNode, TEdge> : AbstractGraphIterator<TN
 
         if (_minDegree < _buckets.Length)
         {
-            ISet<TNode> b    = _buckets[_minDegree];
+            var b    = _buckets[_minDegree];
             TNode       node = b.GetEnumerator().next();
             b.remove(node);
             _degrees.Remove(node);

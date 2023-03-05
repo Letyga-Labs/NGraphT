@@ -51,7 +51,7 @@ using CollectionUtil = Util.CollectionUtil;
 /// Note: only vertex events are fired by this iterator.
 /// </para>
 /// </summary>
-/// @param <TNode> the graph vertex type.</param>
+/// <typeparam name="TNode"> the graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam>.
 /// <remarks>Author: Timofey Chudakov.</remarks>
 public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
@@ -181,7 +181,7 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
     /// Data structure for performing lexicographical breadth-first search. Allows to add and
     /// retrieve vertices from buckets, update their buckets after a new vertex has been added to the
     /// LexBFS order. Labels aren't used explicitly, which results in time and space optimization.
-    /// 
+    ///
     /// <remarks>Author: Timofey Chudakov.</remarks>
     /// </summary>
     internal class BucketList
@@ -229,14 +229,14 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
         }
 
         /// <summary>
-        /// Retrieves element from the head bucket by invoking <#### cref="Bucket.poll()"/> or null if this
+        /// Retrieves element from the head bucket by invoking <see cref="Bucket.poll()"/> or null if this
         /// {@code BucketList} is empty.
         /// <para>
         /// Removes the head bucket if it becomes empty after the operation.
-        /// 
+        ///
         /// </para>
         /// </summary>
-        /// <returns>vertex returned by <#### cref="Bucket.poll()"/> invoked on head bucket or null if this
+        /// <returns>vertex returned by <see cref="Bucket.poll()"/> invoked on head bucket or null if this
         ///         {@code BucketList} is empty.</returns>
         internal virtual TNode Poll()
         {
@@ -275,7 +275,7 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
             ISet<Bucket> visitedBuckets = new HashSet<Bucket>();
             foreach (var vertex in vertices)
             {
-                Bucket bucket = BucketMap[vertex];
+                var bucket = BucketMap[vertex];
                 if (visitedBuckets.Contains(bucket))
                 {
                     bucket.Prev.AddVertex(vertex);
@@ -284,7 +284,7 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
                 else
                 {
                     visitedBuckets.Add(bucket);
-                    Bucket newBucket = new Bucket(this, vertex);
+                    var newBucket = new Bucket(this, vertex);
                     newBucket.InsertBefore(bucket);
                     BucketMap[vertex] = newBucket;
                     if (Head == bucket)

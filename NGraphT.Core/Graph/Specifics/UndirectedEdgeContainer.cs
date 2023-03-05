@@ -45,10 +45,10 @@ public class UndirectedEdgeContainer<TNode, TEdge>
         VertexEdges = edgeSetFactory.CreateEdgeSet(vertex);
     }
 
-    /// <summary>
-    /// A lazy build of unmodifiable list of vertex edges
-    /// </summary>
-    /// <returns>an unmodifiable set of vertex edges.</returns>
+    ///<summary>
+    ///A lazy build of unmodifiable list of vertex edges.
+    ///</summary>
+    ///<returns>an unmodifiable set of vertex edges.</returns>
     public virtual ISet<TEdge> UnmodifiableVertexEdges
     {
         get
@@ -62,28 +62,28 @@ public class UndirectedEdgeContainer<TNode, TEdge>
         }
     }
 
-    /// <summary>
-    /// Add a vertex edge
-    /// </summary>
-    /// <param name="edge"> the edge to add.</param>
+    ///<summary>
+    ///Add a vertex edge.
+    ///</summary>
+    ///<param name="edge"> the edge to add.</param>
     public virtual void AddEdge(TEdge edge)
     {
         VertexEdges.Add(edge);
     }
 
-    /// <summary>
-    /// Get number of vertex edges
-    /// </summary>
-    /// <returns>the number of vertex edges.</returns>
+    ///<summary>
+    ///Get number of vertex edges.
+    ///</summary>
+    ///<returns>the number of vertex edges.</returns>
     public virtual int EdgeCount()
     {
         return VertexEdges.Count;
     }
 
-    /// <summary>
-    /// Remove a vertex edge
-    /// </summary>
-    /// <param name="edge"> the edge to remove.</param>
+    ///<summary>
+    ///Remove a vertex edge.
+    ///</summary>
+    ///<param name="edge"> the edge to remove.</param>
     public virtual void RemoveEdge(TEdge edge)
     {
         VertexEdges.remove(edge);
