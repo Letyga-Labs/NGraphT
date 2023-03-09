@@ -16,6 +16,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
+using NGraphT.Core.Event;
+
 namespace NGraphT.Core;
 
 /// <summary>
@@ -26,31 +28,31 @@ namespace NGraphT.Core;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 ///
 /// <remarks>Author: Barak Naveh/>.</remarks>
-/// <seealso cref="GraphListener"/>
-/// <seealso cref="VertexSetListener"/>
+/// <seealso cref="IGraphListener{TNode,TEdge}"/>
+/// <seealso cref="IVertexSetListener{TNode}"/>
 public interface IListenableGraph<TNode, TEdge> : IGraph<TNode, TEdge>
 {
     /// <summary>
     /// Adds the specified graph listener to this graph, if not already present.
     /// </summary>
     /// <param name="l"> the listener to be added.</param>
-    void AddGraphListener(GraphListener<TNode, TEdge> l);
+    void AddGraphListener(IGraphListener<TNode, TEdge> l);
 
     /// <summary>
     /// Adds the specified vertex set listener to this graph, if not already present.
     /// </summary>
     /// <param name="l"> the listener to be added.</param>
-    void AddVertexSetListener(VertexSetListener<TNode> l);
+    void AddVertexSetListener(IVertexSetListener<TNode> l);
 
     /// <summary>
     /// Removes the specified graph listener from this graph, if present.
     /// </summary>
     /// <param name="l"> the listener to be removed.</param>
-    void RemoveGraphListener(GraphListener<TNode, TEdge> l);
+    void RemoveGraphListener(IGraphListener<TNode, TEdge> l);
 
     /// <summary>
     /// Removes the specified vertex set listener from this graph, if present.
     /// </summary>
     /// <param name="l"> the listener to be removed.</param>
-    void RemoveVertexSetListener(VertexSetListener<TNode> l);
+    void RemoveVertexSetListener(IVertexSetListener<TNode> l);
 }

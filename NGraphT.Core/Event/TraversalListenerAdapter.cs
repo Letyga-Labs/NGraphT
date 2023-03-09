@@ -15,42 +15,47 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
-namespace NGraphT.Core.Event
+
+namespace NGraphT.Core.Event;
+
+/// <summary>
+/// An empty do-nothing implementation of the <seealso cref="ITraversalListener{TNode,TEdge}"/> interface used for
+/// subclasses.
+/// </summary>
+///
+/// <typeparam name="TNode">the graph vertex type.</typeparam>
+/// <typeparam name="TEdge">the graph edge type.</typeparam>
+///
+/// <remarks>Author: Barak Naveh.</remarks>
+public class TraversalListenerAdapter<TNode, TEdge> : ITraversalListener<TNode, TEdge>
 {
-    /// <summary>
-    /// An empty do-nothing implementation of the <seealso cref="TraversalListener"/> interface used for
-    /// subclasses.
-    /// </summary>
-    /// @param <V> the graph vertex type </param>
-    /// @param <E> the graph edge type
-    /// 
-    /// @author Barak Naveh </param>
-    public class TraversalListenerAdapter<V, E> : TraversalListener<V, E>
+    /// <inheritdoc />
+    public virtual void ConnectedComponentFinished(ConnectedComponentTraversalEventArgs e)
     {
-        /// <seealso cref="TraversalListener.connectedComponentFinished(ConnectedComponentTraversalEvent)"/>
-        public virtual void ConnectedComponentFinished(ConnectedComponentTraversalEvent e)
-        {
-        }
-
-        /// <seealso cref="TraversalListener.connectedComponentStarted(ConnectedComponentTraversalEvent)"/>
-        public virtual void ConnectedComponentStarted(ConnectedComponentTraversalEvent e)
-        {
-        }
-
-        /// <seealso cref="TraversalListener.edgeTraversed(EdgeTraversalEvent)"/>
-        public virtual void EdgeTraversed(EdgeTraversalEvent<E> e)
-        {
-        }
-
-        /// <seealso cref="TraversalListener.vertexTraversed(VertexTraversalEvent)"/>
-        public virtual void VertexTraversed(VertexTraversalEvent<V> e)
-        {
-        }
-
-        /// <seealso cref="TraversalListener.vertexFinished(VertexTraversalEvent)"/>
-        public virtual void VertexFinished(VertexTraversalEvent<V> e)
-        {
-        }
+        // empty
     }
 
+    /// <inheritdoc />
+    public virtual void ConnectedComponentStarted(ConnectedComponentTraversalEventArgs e)
+    {
+        // empty
+    }
+
+    /// <inheritdoc />
+    public virtual void EdgeTraversed(EdgeTraversalEventArgs<TEdge> e)
+    {
+        // empty
+    }
+
+    /// <inheritdoc />
+    public virtual void VertexTraversed(VertexTraversalEventArgs<TNode> e)
+    {
+        // empty
+    }
+
+    /// <inheritdoc />
+    public virtual void VertexFinished(VertexTraversalEventArgs<TNode> e)
+    {
+        // empty
+    }
 }
