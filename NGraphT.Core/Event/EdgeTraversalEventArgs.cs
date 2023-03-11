@@ -37,5 +37,5 @@ public class EdgeTraversalEventArgs<TEdge> : EventArgs
     /// <summary>
     /// The traversed edge.
     /// </summary>
-    public TEdge Edge { get; protected set; }
+    public virtual TEdge Edge { get; protected set; }
 }

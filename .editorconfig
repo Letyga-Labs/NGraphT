@@ -18,6 +18,7 @@ csharp_style_prefer_utf8_string_literals = true:suggestion
 csharp_style_var_elsewhere = true:suggestion
 csharp_style_var_for_built_in_types = true:suggestion
 csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_using_directive_placement = outside_namespace
 
 dotnet_naming_rule.constant_locals_must_be_camel_case_rule.import_to_resharper = True
 dotnet_naming_rule.constant_locals_must_be_camel_case_rule.resharper_description = constant_locals_must_be_camel_case
@@ -541,6 +542,12 @@ dotnet_diagnostic.sa1516.severity = none
 
 # SA1111: Closing parenthesis should be on line of last parameter
 dotnet_diagnostic.sa1111.severity = none
+
+# SA1405: Debug.Assert should provide message text
+dotnet_diagnostic.sa1405.severity = none
+
+# SA1515: Single-line comment should be preceded by blank line
+dotnet_diagnostic.sa1515.severity = none
 
 ## ----------------------------------------------------------------------------
 ##                               Sonar Qube rules

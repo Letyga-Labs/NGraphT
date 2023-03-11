@@ -16,12 +16,11 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
+using System.Diagnostics.CodeAnalysis;
 using NGraphT.Core.Util;
+using Java2Net = J2N.Collections.Generic;
 
 namespace NGraphT.Core.Traverse;
-
-using Core;
-using Graphs = Graphs;
 
 /// <summary>
 /// A degeneracy ordering iterator.
@@ -32,9 +31,11 @@ using Graphs = Graphs;
 /// ordering, an ordering such that each vertex has $d$ or fewer neighbors that come later in the
 /// ordering.
 /// </para>
+///
 /// <para>
 /// The iterator crosses components but does not track them, it only tracks visited vertices.
 /// </para>
+///
 /// <para>
 /// The iterator treats the input graph as undirected even if the graph is directed. Moreover, it
 /// completely ignores self-loops, meaning that it operates as if self-loops do not contribute to the
@@ -46,25 +47,24 @@ using Graphs = Graphs;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
-public class DegeneracyOrderingIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
+public sealed class DegeneracyOrderingIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
+    where TNode : class
+    where TEdge : class
 {
-    private ISet<TNode>[]           _buckets;
-    private IDictionary<TNode, int> _degrees;
-    private int                     _minDegree;
-    private TNode                   _cur;
+    private readonly ISet<TNode>[]           _buckets;
+    private readonly IDictionary<TNode, int> _degrees;
+
+    private int    _minDegree;
+    private TNode? _current;
 
     /// <summary>
     /// Constructor.
     /// </summary>
     /// <param name="graph"> the graph to be iterated.</param>
-//JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
-//ORIGINAL LINE: @SuppressWarnings("unchecked") public DegeneracyOrderingIterator(NGraphT.Core.Graph<TNode, TEdge> graph)
     public DegeneracyOrderingIterator(IGraph<TNode, TEdge> graph)
         : base(graph)
     {
-        /*
-         * Count degrees, but skip self-loops
-         */
+        // Count degrees, but skip self-loops
         _minDegree = int.MaxValue;
         var maxDegree = 0;
         _degrees = new Dictionary<TNode, int>();
@@ -87,13 +87,11 @@ public class DegeneracyOrderingIterator<TNode, TEdge> : AbstractGraphIterator<TN
 
         _minDegree = Math.Min(_minDegree, maxDegree);
 
-        /*
-         * Create buckets
-         */
-        _buckets = (ISet<TNode>[])Array.CreateInstance(typeof(ISet<object>), maxDegree + 1);
+        // Create buckets
+        _buckets = new ISet<TNode>[maxDegree + 1];
         for (var i = 0; i < _buckets.Length; i++)
         {
-            _buckets[i] = new LinkedHashSet<TNode>();
+            _buckets[i] = new Java2Net.LinkedHashSet<TNode>();
         }
 
         foreach (var node in graph.VertexSet())
@@ -109,95 +107,73 @@ public class DegeneracyOrderingIterator<TNode, TEdge> : AbstractGraphIterator<TN
     /// </summary>
     public override bool CrossComponentTraversal
     {
-        get
-        {
-            return true;
-        }
+        get => true;
         set
         {
             if (!value)
             {
-                throw new ArgumentException("Iterator is always cross-component");
+                throw new ArgumentException("Iterator is always cross-component", nameof(value));
             }
         }
     }
 
+    [SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations")]
+    public override TNode Current => _current ?? throw new NoSuchElementException();
 
-    public override bool HasNext()
+    public override bool MoveNext()
     {
-        if (_cur != null)
+        var previous = _current;
+        if (previous != null && NListeners != 0)
         {
-            return true;
+            FireVertexFinished(CreateVertexTraversalEvent(previous));
         }
 
-        _cur = Advance();
-        if (_cur != null && NListeners != 0)
+        _current = Advance();
+        if (_current != null && NListeners != 0)
         {
-            FireVertexTraversed(CreateVertexTraversalEvent(_cur));
+            FireVertexTraversed(CreateVertexTraversalEvent(_current));
         }
 
-        return _cur != null;
+        return _current != null;
     }
 
-    public override TNode Next()
-    {
-        if (!HasNext())
-        {
-            throw new NoSuchElementException();
-        }
-
-        var result = _cur;
-        _cur = default(TNode);
-        if (NListeners != 0)
-        {
-            FireVertexFinished(CreateVertexTraversalEvent(result));
-        }
-
-        return result;
-    }
-
-    private TNode Advance()
+    private TNode? Advance()
     {
         while (_minDegree < _buckets.Length && _buckets[_minDegree].Count == 0)
         {
             _minDegree++;
         }
 
-        var result = default(TNode);
-
-        if (_minDegree < _buckets.Length)
+        if (_minDegree >= _buckets.Length)
         {
-            var b    = _buckets[_minDegree];
-            TNode       node = b.GetEnumerator().next();
-            b.remove(node);
-            _degrees.Remove(node);
-
-            foreach (TEdge edge in graph.EdgesOf(node))
-            {
-                var u = Graphs.GetOppositeVertex(graph, edge, node);
-
-                if (node.Equals(u))
-                {
-                    // ignore self-loop
-                    continue;
-                }
-
-                if (_degrees.ContainsKey(u))
-                {
-                    var uDegree = _degrees[u];
-                    if (uDegree > _minDegree)
-                    {
-                        _buckets[uDegree].remove(u);
-                        uDegree--;
-                        _degrees[u] = uDegree;
-                        _buckets[uDegree].Add(u);
-                    }
-                }
-            }
-
-            result = node;
+            return null;
         }
 
-        return result;
+        var b    = _buckets[_minDegree];
+        var node = b.First();
+        b.Remove(node);
+        _degrees.Remove(node);
+
+        foreach (var edge in Graph.EdgesOf(node))
+        {
+            var u = Graphs.GetOppositeVertex(Graph, edge, node);
+
+            if (node.Equals(u) || !_degrees.ContainsKey(u))
+            {
+                // ignore self-loop
+                continue;
+            }
+
+            var uDegree = _degrees[u];
+            if (uDegree > _minDegree)
+            {
+                _buckets[uDegree].Remove(u);
+                uDegree--;
+                _degrees[u] = uDegree;
+                _buckets[uDegree].Add(u);
+            }
+        }
+
+        return node;
     }
 }

@@ -24,7 +24,7 @@ namespace NGraphT.Core.Util;
 /// </summary>
 ///
 /// <remarks>Author: John TNode. Sichi.</remarks>
-public class TypeUtil
+public static class TypeUtil
 {
     /// <summary>
     /// Casts an object to a type.
@@ -32,10 +32,8 @@ public class TypeUtil
     /// <param name="o"> object to be cast.</param>
     /// <typeparam name="T"> the type of the result.</typeparam>>
     /// <returns>the result of the cast.</returns>
-//JAVA TO C# CONVERTER TODO TASK: Most Java annotations will not have direct .NET equivalent attributes:
-//ORIGINAL LINE: @SuppressWarnings("unchecked") public static <T> T uncheckedCast(Object o)
-    public static T UncheckedCast<T>(object o)
+    public static T UncheckedCast<T>(object? o)
     {
-        return (T)o;
+        return (T)o!;
     }
 }

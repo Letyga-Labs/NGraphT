@@ -19,15 +19,15 @@
 namespace NGraphT.Core.Traverse;
 
 /// <summary>
-/// An exception to signal that <see cref="TopologicalOrderIterator"/> is used for a non-directed acyclic graph.
-/// Note that this class extends <see cref="System.ArgumentException"/> for backward compatibility
+/// An exception to signal that <see cref="TopologicalOrderIterator{TNode,TEdge}"/>
+/// is used for a non-directed acyclic graph.
+/// Note that this class extends <see cref="System.ArgumentException"/> for backward compatibility.
 /// </summary>
 ///
 /// <remarks>Author: Kaiichiro Ota.</remarks>
 public class NotDirectedAcyclicGraphException : ArgumentException
 {
     private const string GraphIsNotADag = "Graph is not a DAG";
-
 
     public NotDirectedAcyclicGraphException()
         : base(GraphIsNotADag)

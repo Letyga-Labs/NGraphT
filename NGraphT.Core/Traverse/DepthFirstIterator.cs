@@ -19,9 +19,6 @@
  */
 namespace NGraphT.Core.Traverse;
 
-using Core;
-using Util;
-
 /// <summary>
 /// A depth-first iterator for a directed or undirected graph.
 ///
@@ -37,44 +34,19 @@ using Util;
 ///
 /// <remarks>Author: Liviu Rau.</remarks>
 /// <remarks>Author: Barak Naveh.</remarks>
-public class DepthFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, TEdge, DepthFirstIterator.VisitColor>
+public sealed class DepthFirstIterator<TNode, TEdge>
+    : CrossComponentIterator<TNode, TEdge, DepthFirstIterator<TNode, TEdge>.VisitColor>
+    where TNode : class
+    where TEdge : class
 {
-    /// <summary>
-    /// Sentinel object. Unfortunately, we can't use null, because ArrayDeque won't accept those. And
-    /// we don't want to rely on the caller to provide a sentinel object for us. So we have to play
-    /// typecasting games.
-    /// </summary>
-    public static readonly object Sentinel = new object();
-
-    /// <summary>
-    /// Standard vertex visit state enumeration.
-    /// </summary>
-    protected enum VisitColor
-    {
-        /// <summary>
-        /// Vertex has not been returned via iterator yet.
-        /// </summary>
-        White,
-
-        /// <summary>
-        /// Vertex has been returned via iterator, but we're not done with all of its out-edges yet.
-        /// </summary>
-        Gray,
-
-        /// <summary>
-        /// Vertex has been returned via iterator, and we're done with all of its out-edges.
-        /// </summary>
-        Black
-    }
-
-    private LinkedList<object> _stack = new LinkedList<object>();
+    private readonly Stack<TNode> _stack = new();
 
     /// <summary>
     /// Creates a new depth-first iterator for the specified graph.
     /// </summary>
     /// <param name="g"> the graph to be iterated.</param>
     public DepthFirstIterator(IGraph<TNode, TEdge> g)
-        : this(g, (TNode)null)
+        : this(g, (TNode?)null)
     {
     }
 
@@ -86,7 +58,7 @@ public class DepthFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, TE
     /// </summary>
     /// <param name="g"> the graph to be iterated.</param>
     /// <param name="startVertex"> the vertex iteration to be started.</param>
-    public DepthFirstIterator(IGraph<TNode, TEdge> g, TNode startVertex)
+    public DepthFirstIterator(IGraph<TNode, TEdge> g, TNode? startVertex)
         : base(g, startVertex)
     {
     }
@@ -104,95 +76,25 @@ public class DepthFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, TE
     {
     }
 
-    protected override bool ConnectedComponentExhausted
+    /// <summary>
+    /// Standard vertex visit state enumeration.
+    /// </summary>
+    public enum VisitColor
     {
-        get
-        {
-            for (;;)
-            {
-                if (_stack.Count == 0)
-                {
-                    return true;
-                }
+        /// <summary>
+        /// Vertex has not been returned via iterator yet.
+        /// </summary>
+        White,
 
-                if (_stack.Last.Value != Sentinel)
-                {
-                    // Found a non-sentinel.
-                    return false;
-                }
+        /// <summary>
+        /// Vertex has been returned via iterator, but we're not done with all of its out-edges yet.
+        /// </summary>
+        Gray,
 
-                // Found a sentinel: pop it, record the finish time,
-                // and then loop to check the rest of the stack.
-
-                // Pop null we peeked at above.
-                _stack.RemoveLast();
-
-                // This will pop corresponding vertex to be recorded as finished.
-                RecordFinish();
-            }
-        }
-    }
-
-    protected override void EncounterVertex(TNode vertex, TEdge edge)
-    {
-        PutSeenData(vertex, VisitColor.White);
-        _stack.AddLast(vertex);
-    }
-
-    protected override void EncounterVertexAgain(TNode vertex, TEdge edge)
-    {
-        var color = GetSeenData(vertex);
-        if (color != VisitColor.White)
-        {
-            // We've already visited this vertex; no need to mess with the
-            // stack (either it's BLACK and not there at all, or it's GRAY
-            // and therefore just a sentinel).
-            return;
-        }
-
-        // Since we've encountered it before, and it's still WHITE, it
-        // *must* be on the stack. Use removeLastOccurrence on the
-        // assumption that for typical topologies and traversals,
-        // it's likely to be nearer the top of the stack than
-        // the bottom of the stack.
-        bool found = _stack.removeLastOccurrence(vertex);
-        Debug.Assert((found));
-        _stack.AddLast(vertex);
-    }
-
-    protected override TNode ProvideNextVertex()
-    {
-        TNode node;
-        for (;;)
-        {
-            object o = _stack.RemoveLast();
-            if (o == Sentinel)
-            {
-                // This is a finish-time sentinel we previously pushed.
-                RecordFinish();
-                // Now carry on with another pop until we find a non-sentinel
-            }
-            else
-            {
-                // Got a real vertex to start working on
-                node = TypeUtil.UncheckedCast(o);
-                break;
-            }
-        }
-
-        // Push a sentinel for TNode onto the stack so that we'll know
-        // when we're done with it.
-        _stack.AddLast(node);
-        _stack.AddLast(Sentinel);
-        PutSeenData(node, VisitColor.Gray);
-        return node;
-    }
-
-    private void RecordFinish()
-    {
-        TNode node = TypeUtil.UncheckedCast(_stack.RemoveLast());
-        PutSeenData(node, VisitColor.Black);
-        FinishVertex(node);
+        /// <summary>
+        /// Vertex has been returned via iterator, and we're done with all of its out-edges.
+        /// </summary>
+        Black,
     }
 
     /// <summary>
@@ -202,11 +104,60 @@ public class DepthFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, TE
     /// non-sentinel entry is just (TNode).
     /// </summary>
     /// <returns>stack.</returns>
-    public virtual LinkedList<object> Stack
+    public Stack<TNode> Stack => _stack;
+
+    protected override bool ConnectedComponentExhausted
     {
         get
         {
-            return _stack;
+            RewindGrayUntilWhite();
+            return _stack.Count > 0;
         }
+    }
+
+    protected override void EncounterVertex(TNode vertex, TEdge? edge)
+    {
+        PutSeenData(vertex, VisitColor.White);
+        _stack.Push(vertex);
+    }
+
+    protected override void EncounterVertexAgain(TNode vertex, TEdge edge)
+    {
+        // do nothing
+    }
+
+    protected override TNode ProvideNextVertex()
+    {
+        RewindGrayUntilWhite();
+        var topMostWhite = _stack.Peek();
+        PutSeenData(topMostWhite, VisitColor.Gray);
+        return topMostWhite;
+    }
+
+    private void RewindGrayUntilWhite()
+    {
+        for (var top = _stack.Peek(); _stack.Count != 0; _stack.Pop())
+        {
+            switch (GetSeenData(top))
+            {
+                case VisitColor.White:
+                    return;
+                case VisitColor.Gray:
+                    RecordFinish();
+                    break;
+                case VisitColor.Black:
+                    Debug.Fail("Black nodes must not be on the stack!");
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+    }
+
+    private void RecordFinish()
+    {
+        var node = _stack.Pop();
+        PutSeenData(node, VisitColor.Black);
+        FinishVertex(node);
     }
 }

@@ -18,11 +18,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 using NGraphT.Core.Util;
+using Java2Net = J2N.Collections.Generic;
 
 namespace NGraphT.Core.Traverse;
-
-using NGraphT.Core;
-using Java2Net = J2N.Collections.Generic;
 
 /// <summary>
 /// A lexicographical breadth-first iterator for an undirected graph.
@@ -92,7 +90,17 @@ public sealed class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterato
     /// Always returns true since this iterator doesn't care about connected components.
     /// </para>
     /// </summary>
-    public override bool CrossComponentTraversal => true;
+    public override bool CrossComponentTraversal
+    {
+        get => true;
+        set
+        {
+            if (!value)
+            {
+                throw new ArgumentException("Iterator is always cross-component", nameof(value));
+            }
+        }
+    }
 
     /// <summary>
     /// Returns the current vertex in the ordering.
@@ -108,7 +116,7 @@ public sealed class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterato
     public override bool MoveNext()
     {
         var previous = _current;
-        if (NListeners != 0 && previous != null)
+        if (previous != null && NListeners != 0)
         {
             FireVertexFinished(CreateVertexTraversalEvent(previous));
         }

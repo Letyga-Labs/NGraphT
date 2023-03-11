@@ -39,5 +39,5 @@ public class VertexTraversalEventArgs<TNode> : EventArgs
     /// <summary>
     /// The traversed vertex.
     /// </summary>
-    public TNode Vertex { get; protected set; }
+    public virtual TNode Vertex { get; protected set; }
 }

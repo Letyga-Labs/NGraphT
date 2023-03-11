@@ -18,11 +18,9 @@
 
 using System.Collections;
 using NGraphT.Core.Event;
+using Java2Net = J2N.Collections.Generic;
 
 namespace NGraphT.Core.Traverse;
-
-using NGraphT.Core;
-using Java2Net = J2N.Collections.Generic;
 
 /// <summary>
 /// An empty implementation of a graph iterator to minimize the effort required to implement graph
@@ -70,9 +68,9 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
     // event firing calls can be skipped.
     protected virtual int NListeners { get; set; }
 
-    protected EdgeTraversalEventArgs<TEdge> ReusableEdgeEvent { get; set; }
+    protected FlyweightEdgeEventArgs<TEdge> ReusableEdgeEvent { get; set; }
 
-    protected VertexTraversalEventArgs<TNode> ReusableVertexEvent { get; set; }
+    protected FlyweightVertexEventArgs<TNode> ReusableVertexEvent { get; set; }
 
     public virtual void AddTraversalListener(ITraversalListener<TNode, TEdge> l)
     {
@@ -82,7 +80,7 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
 
     public virtual void Remove()
     {
-        throw new NotSupportedException("remove");
+        throw new NotSupportedException("Remove");
     }
 
     public virtual void Reset()
@@ -181,7 +179,7 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
     {
         if (ReuseEvents)
         {
-            ReusableVertexEvent.Vertex = vertex;
+            ReusableVertexEvent.SetNode(vertex);
             return ReusableVertexEvent;
         }
         else
@@ -199,7 +197,7 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
     {
         if (ReuseEvents)
         {
-            ReusableEdgeEvent.Edge = edge;
+            ReusableEdgeEvent.SetEdge(edge);
             return ReusableEdgeEvent;
         }
         else
@@ -213,7 +211,7 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
     ///
     /// <remarks>Author: Barak Naveh.</remarks>
     /// </summary>
-    internal class FlyweightEdgeEventArgs<TEdge1> : EdgeTraversalEventArgs<TEdge1>
+    protected internal class FlyweightEdgeEventArgs<TEdge1> : EdgeTraversalEventArgs<TEdge1>
     {
         /// <summary>
         /// Creates a new FlyweightEdgeEvent.
@@ -224,6 +222,11 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
             : base(eventSource, edge)
         {
         }
+
+        public void SetEdge(TEdge1 edge)
+        {
+            Edge = edge;
+        }
     }
 
     /// <summary>
@@ -231,7 +234,7 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
     ///
     /// <remarks>Author: Barak Naveh.</remarks>
     /// </summary>
-    internal class FlyweightVertexEventArgs<TNode1> : VertexTraversalEventArgs<TNode1>
+    protected internal class FlyweightVertexEventArgs<TNode1> : VertexTraversalEventArgs<TNode1>
     {
         /// <summary>
         /// Creates a new FlyweightVertexEvent.
@@ -241,6 +244,11 @@ public abstract class AbstractGraphIterator<TNode, TEdge> : IGraphIterator<TNode
         public FlyweightVertexEventArgs(object eventSource, TNode1 vertex)
             : base(eventSource, vertex)
         {
+        }
+
+        public void SetNode(TNode1 node)
+        {
+            Vertex = node;
         }
     }
 }

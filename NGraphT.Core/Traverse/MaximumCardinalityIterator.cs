@@ -16,13 +16,16 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
-namespace NGraphT.Core.Traverse;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using NGraphT.Core.Util;
+using Java2Net = J2N.Collections.Generic;
 
-using Core;
-using Util;
+namespace NGraphT.Core.Traverse;
 
 /// <summary>
 /// A maximum cardinality search iterator for an undirected graph.
+///
 /// <para>
 /// For every vertex in graph its cardinality is defined as the number of its neighbours, which have
 /// been already visited by this iterator. Iterator chooses vertex with the maximum cardinality,
@@ -32,20 +35,38 @@ using Util;
 /// <a href="http://www.ii.uib.no/~pinar/MCS-M.pdf"><i>Maximum Cardinality Search for Computing
 /// Minimal Triangulations</i></a>.
 /// </para>
+///
 /// <para>
 /// For this iterator to work correctly the graph must not be modified during iteration. Currently
 /// there are no means to ensure that, nor to fail-fast. The results of such modifications are
 /// undefined.
 /// </para>
+///
 /// <para>
 /// Note: only vertex events are fired by this iterator.
 /// </para>
+///
 /// </summary>
+///
 /// <typeparam name="TNode"> the graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam>.
+///
 /// <remarks>Author: Timofey Chudakov.</remarks>
 public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
+    where TNode : class
+    where TEdge : class
 {
+    /// <summary>
+    /// Disjoint sets of vertices of the graph, indexed by the cardinalities of already visited
+    /// neighbours.
+    /// </summary>
+    private readonly List<ISet<TNode>?> _buckets = new();
+
+    /// <summary>
+    /// Maps every vertex to its cardinality.
+    /// </summary>
+    private readonly IDictionary<TNode, int> _cardinalityMap;
+
     /// <summary>
     /// The maximum index of non-empty set in <c>buckets</c>.
     /// </summary>
@@ -59,18 +80,7 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     /// <summary>
     /// Contains current vertex.
     /// </summary>
-    private TNode _current;
-
-    /// <summary>
-    /// Disjoint sets of vertices of the graph, indexed by the cardinalities of already visited
-    /// neighbours.
-    /// </summary>
-    private List<ISet<TNode>> _buckets;
-
-    /// <summary>
-    /// Maps every vertex to its cardinality.
-    /// </summary>
-    private IDictionary<TNode, int> _cardinalityMap;
+    private TNode? _current;
 
     /// <summary>
     /// Creates a maximum cardinality iterator for the <c>graph</c>.
@@ -79,31 +89,50 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     public MaximumCardinalityIterator(IGraph<TNode, TEdge> graph)
         : base(graph)
     {
+        // GraphTests.RequireUndirected(graph);
         _remainingVertices = graph.VertexSet().Count;
         if (_remainingVertices > 0)
         {
-            GraphTests.RequireUndirected(graph);
-            _buckets        = new List<ISet<TNode>>(Collections.nCopies(graph.VertexSet().Count, null));
-            _buckets[0]     = new LinkedHashSet<TNode>(graph.VertexSet());
-            _cardinalityMap = CollectionUtil.NewHashMapWithExpectedSize(graph.VertexSet().Count);
+            _buckets[0]     = new Java2Net.LinkedHashSet<TNode>(graph.VertexSet());
+            _cardinalityMap = CollectionUtil.NewHashMapWithExpectedSize<TNode, int>(graph.VertexSet().Count);
             foreach (var node in graph.VertexSet())
             {
                 _cardinalityMap[node] = 0;
             }
-
-            _maxCardinality = 0;
+        }
+        else
+        {
+            _cardinalityMap = new Dictionary<TNode, int>();
         }
     }
 
     /// <summary>
-    /// Checks whether there exists unvisited vertex.
+    /// <inheritdoc/>
+    /// <para>
+    /// Always returns true since this iterator doesn't care about connected components.
+    /// </para>
     /// </summary>
-    /// <returns>true if there exists unvisited vertex.</returns>
-    public override bool HasNext()
+    public override bool CrossComponentTraversal
     {
-        if (_current != null)
+        get => true;
+        set
         {
-            return true;
+            if (!value)
+            {
+                throw new ArgumentException("Iterator is always cross-component", nameof(value));
+            }
+        }
+    }
+
+    [SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations")]
+    public override TNode Current => _current ?? throw new NoSuchElementException();
+
+    public override bool MoveNext()
+    {
+        var previous = _current;
+        if (previous != null && NListeners != 0)
+        {
+            FireVertexFinished(CreateVertexTraversalEvent(previous));
         }
 
         _current = Advance();
@@ -116,76 +145,34 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     }
 
     /// <summary>
-    /// Returns the next vertex in the ordering.
-    /// </summary>
-    /// <returns>the next vertex in the ordering.</returns>
-    public override TNode Next()
-    {
-        if (!HasNext())
-        {
-            throw new NoSuchElementException();
-        }
-
-        var result = _current;
-        _current = default(TNode);
-        if (NListeners != 0)
-        {
-            FireVertexFinished(CreateVertexTraversalEvent(result));
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    /// <inheritdoc/>
-    /// <para>
-    /// Always returns true since this iterator doesn't care about connected components.
-    /// </para>
-    /// </summary>
-    public override bool CrossComponentTraversal
-    {
-        get
-        {
-            return true;
-        }
-        set
-        {
-            if (!value)
-            {
-                throw new ArgumentException("Iterator is always cross-component");
-            }
-        }
-    }
-
-
-    /// <summary>
     /// Retrieves a vertex from the <c>buckets</c> with the maximum cardinality and returns it.
     /// </summary>
     /// <returns>vertex retrieved from <c>buckets</c>.</returns>
-    private TNode Advance()
+    private TNode? Advance()
     {
-        if (_remainingVertices > 0)
+        if (_remainingVertices <= 0)
         {
-            var bucket = _buckets[_maxCardinality];
-            TNode       vertex = bucket.GetEnumerator().next();
-            RemoveFromBucket(vertex);
-            if (bucket.Count == 0)
-            {
-                _buckets[_maxCardinality] = null;
-                do
-                {
-                    --_maxCardinality;
-                } while (_maxCardinality >= 0 && _buckets[_maxCardinality] == null);
-            }
+            return null;
+        }
 
-            UpdateNeighbours(vertex);
-            --_remainingVertices;
-            return vertex;
-        }
-        else
+        var bucket = _buckets[_maxCardinality];
+        Debug.Assert(bucket != null, nameof(bucket) + " != null");
+
+        var vertex = bucket.First();
+        RemoveFromBucket(vertex);
+        if (bucket.Count == 0)
         {
-            return default(TNode);
+            _buckets[_maxCardinality] = null;
+            --_maxCardinality;
+            while (_maxCardinality >= 0 && _buckets[_maxCardinality] == null)
+            {
+                --_maxCardinality;
+            }
         }
+
+        UpdateNeighbours(vertex);
+        --_remainingVertices;
+        return vertex;
     }
 
     /// <summary>
@@ -199,9 +186,10 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
         if (_cardinalityMap.ContainsKey(vertex))
         {
             var cardinality = _cardinalityMap[vertex];
-            _buckets[cardinality].remove(vertex);
+            var bucket      = _buckets[cardinality]!;
+            bucket.Remove(vertex);
             _cardinalityMap.Remove(vertex);
-            if (_buckets[cardinality].Count == 0)
+            if (bucket.Count == 0)
             {
                 _buckets[cardinality] = null;
             }
@@ -220,12 +208,9 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     private void AddToBucket(TNode vertex, int cardinality)
     {
         _cardinalityMap[vertex] = cardinality;
-        if (_buckets[cardinality] == null)
-        {
-            _buckets[cardinality] = new LinkedHashSet<TNode>();
-        }
 
-        _buckets[cardinality].Add(vertex);
+        _buckets[cardinality] ??= new Java2Net.LinkedHashSet<TNode>();
+        _buckets[cardinality]!.Add(vertex);
     }
 
     /// <summary>
@@ -235,10 +220,10 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     /// <param name="vertex"> the vertex whose neighbours are to be updated.</param>
     private void UpdateNeighbours(TNode vertex)
     {
-        ISet<TNode> processed = new HashSet<TNode>();
-        foreach (TEdge edge in graph.EdgesOf(vertex))
+        var processed = new HashSet<TNode>();
+        foreach (var edge in Graph.EdgesOf(vertex))
         {
-            var opposite = Graphs.GetOppositeVertex(graph, edge, vertex);
+            var opposite = Graphs.GetOppositeVertex(Graph, edge, vertex);
             if (_cardinalityMap.ContainsKey(opposite) && !processed.Contains(opposite))
             {
                 processed.Add(opposite);
@@ -246,7 +231,7 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
             }
         }
 
-        if (_maxCardinality < graph.VertexSet().Count && _maxCardinality >= 0 && _buckets[_maxCardinality + 1] != null)
+        if (_maxCardinality < Graph.VertexSet().Count && _maxCardinality >= 0 && _buckets[_maxCardinality + 1] != null)
         {
             ++_maxCardinality;
         }

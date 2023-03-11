@@ -17,8 +17,6 @@
  */
 namespace NGraphT.Core.Traverse;
 
-using NGraphT.Core;
-
 /// <summary>
 /// A breadth-first iterator for a directed or undirected graph.
 ///

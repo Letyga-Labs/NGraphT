@@ -22,8 +22,6 @@ using NGraphT.Core.Util;
  */
 namespace NGraphT.Core.Traverse;
 
-using NGraphT.Core;
-
 /// <summary>
 /// Provides a cross-connected-component traversal functionality for iterator subclasses.
 /// </summary>
@@ -231,11 +229,28 @@ public abstract class CrossComponentIterator<TNode, TEdge, TNodeData> : Abstract
     protected abstract void EncounterVertex(TNode vertex, TEdge? edge);
 
     /// <summary>
+    /// Called whenever we re-encounter a vertex. The default implementation does nothing.
+    /// </summary>
+    /// <param name="vertex"> the vertex re-encountered.</param>
+    /// <param name="edge"> the edge via which the vertex was re-encountered.</param>
+    protected abstract void EncounterVertexAgain(TNode vertex, TEdge edge);
+
+    /// <summary>
     /// Returns the vertex to be returned in the following call to the iterator <c>next</c>
     /// method.
     /// </summary>
     /// <returns>the next vertex to be returned by this iterator.</returns>
     protected abstract TNode ProvideNextVertex();
+
+    /// <summary>
+    /// Determines whether a vertex has been seen yet by this traversal.
+    /// </summary>
+    /// <param name="vertex"> vertex in question.</param>>
+    /// <returns><c>true</c> if vertex has already been seen.</returns>
+    protected virtual bool IsSeenVertex(TNode vertex)
+    {
+        return _seen.ContainsKey(vertex);
+    }
 
     /// <summary>
     /// Access the data stored for a seen vertex.
@@ -249,23 +264,6 @@ public abstract class CrossComponentIterator<TNode, TEdge, TNodeData> : Abstract
     {
         return _seen[vertex];
     }
-
-    /// <summary>
-    /// Determines whether a vertex has been seen yet by this traversal.
-    /// </summary>
-    /// <param name="vertex"> vertex in question.</param>>
-    /// <returns><c>true</c> if vertex has already been seen.</returns>
-    protected virtual bool IsSeenVertex(TNode vertex)
-    {
-        return _seen.ContainsKey(vertex);
-    }
-
-    /// <summary>
-    /// Called whenever we re-encounter a vertex. The default implementation does nothing.
-    /// </summary>
-    /// <param name="vertex"> the vertex re-encountered.</param>
-    /// <param name="edge"> the edge via which the vertex was re-encountered.</param>
-    protected abstract void EncounterVertexAgain(TNode vertex, TEdge edge);
 
     /// <summary>
     /// Stores iterator-dependent data for a vertex that has been seen.
