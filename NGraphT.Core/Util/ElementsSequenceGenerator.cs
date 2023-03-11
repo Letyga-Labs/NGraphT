@@ -53,7 +53,7 @@ public class ElementsSequenceGenerator<T> : IEnumerator<T>, IEnumerable<T>
     }
 
     /// <summary>
-    /// Constructs a new <see cref="ElementsSequenceGenerator"/> using the specified {@code seed}. Two
+    /// Constructs a new <see cref="ElementsSequenceGenerator"/> using the specified <c>seed</c>. Two
     /// different generators with the same seed will produce identical sequences given that the same
     /// collection of elements is provided.
     /// </summary>
@@ -66,7 +66,7 @@ public class ElementsSequenceGenerator<T> : IEnumerator<T>, IEnumerable<T>
 
     /// <summary>
     /// Constructs a new <see cref="ElementsSequenceGenerator"/> using the specified random number
-    /// generator {@code rng}. Two different generators will produce identical sequences from a
+    /// generator <c>rng</c>. Two different generators will produce identical sequences from a
     /// collection of elements given that the random number generator produces the same sequence of
     /// numbers.
     /// </summary>

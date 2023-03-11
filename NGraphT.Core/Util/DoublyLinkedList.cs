@@ -21,17 +21,17 @@ using System.Diagnostics;
 namespace NGraphT.Core.Util;
 
 /// <summary>
-/// {@code DoublyLinkedList} implements a doubly linked <see cref="System.Collections.IList"/> data structure, that exposes its
+/// <c>DoublyLinkedList</c> implements a doubly linked <see cref="System.Collections.IList"/> data structure, that exposes its
 /// <see cref="IListNode{TNode}"/> where the data is stored in.
 /// <para>
-/// An element holding {@code ListNode} can be removed or added to a {@code DoublyLinkedList} in
-/// constant time O(1). Other methods that operate on {@code ListNodes} directly also have constant
+/// An element holding <c>ListNode</c> can be removed or added to a <c>DoublyLinkedList</c> in
+/// constant time O(1). Other methods that operate on <c>ListNodes</c> directly also have constant
 /// runtime. This is also the case for methods that operate on the first(head) and last(tail) node or
 /// element. Random access methods have a runtime O(n) that is linearly dependent on the size of the
-/// {@code DoublyLinkedList}.
+/// <c>DoublyLinkedList</c>.
 /// </para>
 /// <para>
-/// A {@code DoublyLinkedList} supports {@code null} elements but does not support
+/// A <c>DoublyLinkedList</c> supports <c>null</c> elements but does not support
 /// {@code null ListNodes}. This class is not thread safe and needs to be synchronized externally if
 /// modified by concurrent threads.
 /// </para>
@@ -41,10 +41,10 @@ namespace NGraphT.Core.Util;
 /// that they're not responsible for.
 /// </para>
 /// <para>
-/// This class is similar to <see cref="System.Collections.Generic.LinkedList"/>. The general difference is that the {@code ListNodes}
-/// of this {@code List} are accessible and can be removed or added directly. To ensure the integrity
-/// of the {@code List} nodes of this List have a reference to the List they belong to. This
-/// increases the memory occupied by this list implementation compared to {@code LinkedList} for the
+/// This class is similar to <see cref="System.Collections.Generic.LinkedList"/>. The general difference is that the <c>ListNodes</c>
+/// of this <c>List</c> are accessible and can be removed or added directly. To ensure the integrity
+/// of the <c>List</c> nodes of this List have a reference to the List they belong to. This
+/// increases the memory occupied by this list implementation compared to <c>LinkedList</c> for the
 /// same elements. Instances of {@code LinkedList.Node} have three references each (the element, next
 /// and previous), instances of {@code DoublyLinkedList.ListNode} have four (the element, next,
 /// previous and the list).
@@ -56,7 +56,7 @@ namespace NGraphT.Core.Util;
 public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList<TEdge>
 {
     /// <summary>
-    /// The first element of the list, {@code null} if this list is empty. </summary>
+    /// The first element of the list, <c>null</c> if this list is empty. </summary>
     private ListNodeImpl<TEdge> _head = null;
 
     private int _size;
@@ -103,15 +103,15 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     // internal modification methods
 
     /// <summary>
-    /// Adds the given <see cref="IListNode{TNode}"/> to this {@code List}.
+    /// Adds the given <see cref="IListNode{TNode}"/> to this <c>List</c>.
     /// <para>
-    /// Sets the {@code list} reference of {@code node} to this list, increases this lists
-    /// {@code size} and {@code modcount} by one.
+    /// Sets the <c>list</c> reference of <c>node</c> to this list, increases this lists
+    /// <c>size</c> and <c>modcount</c> by one.
     /// </para>
     /// </summary>
     /// <param name="node"> the node to add to this list.</param>
-    /// <exception cref="ArgumentException"> if {@code node} is already contained in this or another
-    ///         {@code DoublyLinkedList} </exception>
+    /// <exception cref="ArgumentException"> if <c>node</c> is already contained in this or another
+    ///         <c>DoublyLinkedList</c> </exception>
     private void AddListNode(ListNodeImpl<TEdge> node)
     {
         // call this before any modification of this list is done
@@ -127,8 +127,8 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// Atomically moves all <see cref="IListNode{TNode}"/> from {@code list} to this list as if each
-    /// node was removed with <see cref="removeListNode(ListNodeImpl)"/> from {@code list} and
+    /// Atomically moves all <see cref="IListNode{TNode}"/> from <c>list</c> to this list as if each
+    /// node was removed with <see cref="removeListNode(ListNodeImpl)"/> from <c>list</c> and
     /// subsequently added to this list by <see cref="addListNode(ListNodeImpl)"/>.
     /// </summary>
     private void MoveAllListNodes(DoublyLinkedList<TEdge> list)
@@ -149,16 +149,16 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// Removes the given <see cref="IListNode{TNode}"/> from this {@code List}, if it is contained in this
-    /// {@code List}.
+    /// Removes the given <see cref="IListNode{TNode}"/> from this <c>List</c>, if it is contained in this
+    /// <c>List</c>.
     /// <para>
-    /// If {@code node} is contained in this list, sets the {@code list}, {@code next} and
-    /// {@code prev} reference of {@code node} to {@code null} decreases this list's {@code size} and
-    /// increases the {@code modcount} by one.
+    /// If <c>node</c> is contained in this list, sets the <c>list</c>, <c>next</c> and
+    /// <c>prev</c> reference of <c>node</c> to <c>null</c> decreases this list's <c>size</c> and
+    /// increases the <c>modcount</c> by one.
     /// </para>
     /// </summary>
     /// <param name="node"> the node to remove from this list.</param>
-    /// <returns>true if {@code node} was removed from this list, else false.</returns>
+    /// <returns>true if <c>node</c> was removed from this list, else false.</returns>
     private bool RemoveListNode(ListNodeImpl<TEdge> node)
     {
         // call this before any modification of this list is done
@@ -178,7 +178,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
 
     /// <summary>
     /// Establishes the links between the given <see cref="ListNodeImpl nodes"/> in such a way that the
-    /// {@code predecessor} is linked before the {@code successor}.
+    /// <c>predecessor</c> is linked before the <c>successor</c>.
     /// </summary>
     /// <param name="predecessor"> the first node linked before the other.</param>
     /// <param name="successor"> the second node linked after the other.</param>
@@ -189,7 +189,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// Insert non null {@code node} before non null {@code successor} into the list. </summary>
+    /// Insert non null <c>node</c> before non null <c>successor</c> into the list. </summary>
     private void LinkBefore(ListNodeImpl<TEdge> node, ListNodeImpl<TEdge> successor)
     {
         AddListNode(node);
@@ -198,7 +198,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// Insert non null {@code node} as last node into the list. </summary>
+    /// Insert non null <c>node</c> as last node into the list. </summary>
     private void LinkLast(ListNodeImpl<TEdge> node)
     {
         if (Empty)
@@ -215,7 +215,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// Insert non null {@code list} before node at {@code index} into the list. </summary>
+    /// Insert non null <c>list</c> before node at <c>index</c> into the list. </summary>
     private void LinkListIntoThisBefore(int index, DoublyLinkedList<TEdge> list)
     {
         var previousSize = _size;
@@ -245,7 +245,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// Remove the non null {@code node} from the list. </summary>
+    /// Remove the non null <c>node</c> from the list. </summary>
     private bool Unlink(ListNodeImpl<TEdge> node)
     {
         ListNodeImpl<TEdge> prev = node.prev;
@@ -285,16 +285,16 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// Inserts the specified <see cref="IListNode{TNode}"/> at the specified position in this list.
     /// <para>
     /// This method has a linear runtime complexity O(n) that depends linearly on the distance of the
-    /// index to the nearest end. Adding {@code node} as first or last takes only constant time O(1).
+    /// index to the nearest end. Adding <c>node</c> as first or last takes only constant time O(1).
     /// </para>
     /// </summary>
-    /// <param name="index"> index at which the specified {@code node} is to be inserted.</param>
+    /// <param name="index"> index at which the specified <c>node</c> is to be inserted.</param>
     /// <param name="node"> the node to add.</param>
     /// <exception cref="IndexOutOfBoundsException"> if the index is out of range
     ///         ({@code index < 0 || index > size()}) </exception>
-    /// <exception cref="ArgumentException"> if {@code node} is already part of this or another
-    ///         {@code DoublyLinkedList} </exception>
-    /// <exception cref="NullReferenceException"> if {@code node} is {@code null} </exception>
+    /// <exception cref="ArgumentException"> if <c>node</c> is already part of this or another
+    ///         <c>DoublyLinkedList</c> </exception>
+    /// <exception cref="NullReferenceException"> if <c>node</c> is <c>null</c> </exception>
     public virtual void AddNode(int index, IListNode<TEdge> node)
     {
         var nodeImpl = (ListNodeImpl<TEdge>)node;
@@ -321,9 +321,9 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// </para>
     /// </summary>
     /// <param name="node"> the node to add.</param>
-    /// <exception cref="ArgumentException"> if {@code node} is already part of this or another
-    ///         {@code DoublyLinkedList} </exception>
-    /// <exception cref="NullReferenceException"> if {@code node} is {@code null} </exception>
+    /// <exception cref="ArgumentException"> if <c>node</c> is already part of this or another
+    ///         <c>DoublyLinkedList</c> </exception>
+    /// <exception cref="NullReferenceException"> if <c>node</c> is <c>null</c> </exception>
     public virtual void AddNodeFirst(IListNode<TEdge> node)
     {
         AddNode(0, node);
@@ -336,26 +336,26 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// </para>
     /// </summary>
     /// <param name="node"> the node to add.</param>
-    /// <exception cref="ArgumentException"> if {@code node} is already part of this or another
-    ///         {@code DoublyLinkedList} </exception>
-    /// <exception cref="NullReferenceException"> if {@code node} is {@code null} </exception>
+    /// <exception cref="ArgumentException"> if <c>node</c> is already part of this or another
+    ///         <c>DoublyLinkedList</c> </exception>
+    /// <exception cref="NullReferenceException"> if <c>node</c> is <c>null</c> </exception>
     public virtual void AddNodeLast(IListNode<TEdge> node)
     {
         AddNode(_size, node);
     }
 
     /// <summary>
-    /// Inserts the specified <see cref="IListNode{TNode}"/> before the specified {@code successor} in this
+    /// Inserts the specified <see cref="IListNode{TNode}"/> before the specified <c>successor</c> in this
     /// list.
     /// <para>
     /// This method has constant runtime complexity O(1).
     /// </para>
     /// </summary>
     /// <param name="node"> the node to add.</param>
-    /// <param name="successor"> {@code ListNode} before which the {@code node} is inserted.</param>
-    /// <exception cref="ArgumentException"> if {@code node} is already contained in this or another
-    ///         {@code DoublyLinkedList} or {@code successor} is not contained in this list.</exception>
-    /// <exception cref="NullReferenceException"> if {@code successor} or {@code node} is {@code null} </exception>
+    /// <param name="successor"> <c>ListNode</c> before which the <c>node</c> is inserted.</param>
+    /// <exception cref="ArgumentException"> if <c>node</c> is already contained in this or another
+    ///         <c>DoublyLinkedList</c> or <c>successor</c> is not contained in this list.</exception>
+    /// <exception cref="NullReferenceException"> if <c>successor</c> or <c>node</c> is <c>null</c> </exception>
     public virtual void AddNodeBefore(IListNode<TEdge> node, IListNode<TEdge> successor)
     {
         var successorImpl = (ListNodeImpl<TEdge>)successor;
@@ -379,7 +379,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// This method has constant runtime complexity O(1).
     /// </para>
     /// </summary>
-    /// <returns>the first {@code ListNode} of this list.</returns>
+    /// <returns>the first <c>ListNode</c> of this list.</returns>
     /// <exception cref="NoSuchElementException"> if this list is empty.</exception>
     public virtual IListNode<TEdge> FirstNode
     {
@@ -400,7 +400,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// This method has constant runtime complexity O(1).
     /// </para>
     /// </summary>
-    /// <returns>the last {@code ListNode} of this list.</returns>
+    /// <returns>the last <c>ListNode</c> of this list.</returns>
     /// <exception cref="NoSuchElementException"> if this list is empty.</exception>
     public virtual IListNode<TEdge> LastNode
     {
@@ -421,8 +421,8 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// This method has linear runtime complexity O(n).
     /// </para>
     /// </summary>
-    /// <param name="index"> index of the {@code ListNode} to return.</param>
-    /// <returns>the {@code ListNode} at the specified position in this list.</returns>
+    /// <param name="index"> index of the <c>ListNode</c> to return.</param>
+    /// <returns>the <c>ListNode</c> at the specified position in this list.</returns>
     /// <exception cref="IndexOutOfBoundsException"> if the index is out of range
     ///         ({@code index < 0 || index >= size()}) </exception>
     public virtual IListNode<TEdge> GetNode(int index)
@@ -433,8 +433,8 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// <summary>
     /// Returns the <see cref="ListNodeImpl node"/> at the specified position in this list.
     /// </summary>
-    /// <param name="index"> index of the {@code ListNodeImpl} to return.</param>
-    /// <returns>the {@code ListNode} at the specified position in this list.</returns>
+    /// <param name="index"> index of the <c>ListNodeImpl</c> to return.</param>
+    /// <returns>the <c>ListNode</c> at the specified position in this list.</returns>
     /// <exception cref="IndexOutOfBoundsException"> if the index is out of range
     ///         ({@code index < 0 || index >= size()}) </exception>
     private ListNodeImpl<TEdge> GetNodeAt(int index)
@@ -467,21 +467,21 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
 
     /// <summary>
     /// Returns the index of the specified <see cref="IListNode{TNode}"/> in this list, or -1 if this list
-    /// does not contain the {@code node}.
+    /// does not contain the <c>node</c>.
     /// <para>
-    /// More formally, returns the index {@code i} such that {@code node == getNode(i)}, or -1 if
-    /// there is no such index. Because a {@code ListNode} is contained in at most one list exactly
-    /// once, the returned index (if not -1) is the only occurrence of that {@code node}.
+    /// More formally, returns the index <c>i</c> such that {@code node == getNode(i)}, or -1 if
+    /// there is no such index. Because a <c>ListNode</c> is contained in at most one list exactly
+    /// once, the returned index (if not -1) is the only occurrence of that <c>node</c>.
     /// </para>
     /// <para>
-    /// This method has linear runtime complexity O(n) to find {@code node} but returns in constant
-    /// time O(1) if {@code node} is not <see cref="containsNode(IListNode{TNode}) contained"/> in this list.
+    /// This method has linear runtime complexity O(n) to find <c>node</c> but returns in constant
+    /// time O(1) if <c>node</c> is not <see cref="containsNode(IListNode{TNode}) contained"/> in this list.
     /// </para>
     /// </summary>
     /// <param name="node"> the node to search for.</param>
-    /// <returns>the index of the specified {@code node} in this list, or -1 if this list does not
-    ///         contain {@code node}</returns>
-    /// <exception cref="NullReferenceException"> if {@code node} is {@code null} </exception>
+    /// <returns>the index of the specified <c>node</c> in this list, or -1 if this list does not
+    ///         contain <c>node</c></returns>
+    /// <exception cref="NullReferenceException"> if <c>node</c> is <c>null</c> </exception>
     public virtual int IndexOfNode(IListNode<TEdge> node)
     {
         if (!ContainsNode(node))
@@ -505,22 +505,22 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// Returns true if this {@code DoublyLinkedList} contains the specified <see cref="IListNode{TNode}"/>.
+    /// Returns true if this <c>DoublyLinkedList</c> contains the specified <see cref="IListNode{TNode}"/>.
     /// <para>
     /// This method has constant runtime complexity O(1).
     /// </para>
     /// </summary>
-    /// <param name="node"> the node whose presence in this {@code DoublyLinkedList} is to be tested.</param>
-    /// <returns>true if this {@code DoublyLinkedList} contains the <see cref="IListNode{TNode}"/></returns>
-    /// <exception cref="NullReferenceException"> if {@code node} is {@code null} </exception>
+    /// <param name="node"> the node whose presence in this <c>DoublyLinkedList</c> is to be tested.</param>
+    /// <returns>true if this <c>DoublyLinkedList</c> contains the <see cref="IListNode{TNode}"/></returns>
+    /// <exception cref="NullReferenceException"> if <c>node</c> is <c>null</c> </exception>
     public virtual bool ContainsNode(IListNode<TEdge> node)
     {
         return ((ListNodeImpl<TEdge>)node).List == this;
     }
 
     /// <summary>
-    /// Removes the <see cref="IListNode{TNode}"/> from this list. Returns true if {@code node} was in this
-    /// list and is now removed. If {@code node} is not contained in this list, the list is left
+    /// Removes the <see cref="IListNode{TNode}"/> from this list. Returns true if <c>node</c> was in this
+    /// list and is now removed. If <c>node</c> is not contained in this list, the list is left
     /// unchanged.
     /// <para>
     /// This method has constant runtime complexity O(1).
@@ -528,37 +528,37 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// </summary>
     /// <param name="node"> the node to remove from this list.</param>
     /// <returns>true if node was removed from this list.</returns>
-    /// <exception cref="NullReferenceException"> if {@code node} is {@code null} </exception>
+    /// <exception cref="NullReferenceException"> if <c>node</c> is <c>null</c> </exception>
     public virtual bool RemoveNode(IListNode<TEdge> node)
     {
         return Unlink((ListNodeImpl<TEdge>)node);
     }
 
     /// <summary>
-    /// Returns the first <see cref="IListNode{TNode}"/> holding the specified {@code element} in this list.
-    /// More formally, returns the first {@code ListNode} such that
-    /// {@code Objects.equals(element, node.getValue())}, or {@code null} if there is no such node.
+    /// Returns the first <see cref="IListNode{TNode}"/> holding the specified <c>element</c> in this list.
+    /// More formally, returns the first <c>ListNode</c> such that
+    /// {@code Objects.equals(element, node.getValue())}, or <c>null</c> if there is no such node.
     /// <para>
     /// This method has linear runtime complexity O(n).
     /// </para>
     /// </summary>
-    /// <param name="element"> the element whose {@code ListNode} is to return.</param>
-    /// <returns>the first {@code ListNode} holding the {@code element} or null if no node was found.</returns>
+    /// <param name="element"> the element whose <c>ListNode</c> is to return.</param>
+    /// <returns>the first <c>ListNode</c> holding the <c>element</c> or null if no node was found.</returns>
     public virtual IListNode<TEdge> NodeOf(object element)
     {
         return SearchNode(() => _head, n => n.next, element).First;
     }
 
     /// <summary>
-    /// Returns the last <see cref="IListNode{TNode}"/> holding the specified {@code element} in this list.
-    /// More formally, returns the last {@code ListNode} such that
-    /// {@code Objects.equals(element, node.getValue())}, or {@code null} if there is no such node.
+    /// Returns the last <see cref="IListNode{TNode}"/> holding the specified <c>element</c> in this list.
+    /// More formally, returns the last <c>ListNode</c> such that
+    /// {@code Objects.equals(element, node.getValue())}, or <c>null</c> if there is no such node.
     /// <para>
     /// This method has linear runtime complexity O(n).
     /// </para>
     /// </summary>
-    /// <param name="element"> the element whose {@code ListNode} is to return.</param>
-    /// <returns>the last {@code ListNode} holding the {@code element} or null if no node was found.</returns>
+    /// <param name="element"> the element whose <c>ListNode</c> is to return.</param>
+    /// <returns>the last <c>ListNode</c> holding the <c>element</c> or null if no node was found.</returns>
     public virtual IListNode<TEdge> LastNodeOf(object element)
     {
         return SearchNode(this.tail, n => n.prev, element).First;
@@ -566,18 +566,18 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
 
     /// <summary>
     /// Returns a <see cref="Pair"/> of the first encountered <see cref="IListNode{TNode}"/> in this list, whose
-    /// {@code value} is equal to the given {@code element}, and its index. Or if this list does not
-    /// contain such node a Pair of {@code null} and {@code -1};
+    /// <c>value</c> is equal to the given <c>element</c>, and its index. Or if this list does not
+    /// contain such node a Pair of <c>null</c> and {@code -1};
     /// <para>
-    /// The search starts at the node supplied by {@code first} and advances in the direction induced
-    /// by the specified {@code next} operator.
+    /// The search starts at the node supplied by <c>first</c> and advances in the direction induced
+    /// by the specified <c>next</c> operator.
     /// </para>
     /// </summary>
     /// <param name="first"> supplier of the first node to check if this list is not empty.</param>
-    /// <param name="next"> {@code Function} to get from the current node the next node to check.</param>
+    /// <param name="next"> <c>Function</c> to get from the current node the next node to check.</param>
     /// <param name="element"> the element for that the first node with equal value is searched.</param>
-    /// <returns>a <see cref="Pair"/> of the first encountered {@code ListNode} holding a {@code value}
-    ///         equal to {@code element} and its index, or if no such node was found a
+    /// <returns>a <see cref="Pair"/> of the first encountered <c>ListNode</c> holding a <c>value</c>
+    ///         equal to <c>element</c> and its index, or if no such node was found a
     ///         {@code Pair.of(null, -1)}</returns>
     private Pair<ListNodeImpl<TEdge>, int> SearchNode(
         Func<ListNodeImpl<TEdge>>                      first,
@@ -607,15 +607,15 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
 
     /// <summary>
     /// Inserts the specified element at the front of this list. Returns the <see cref="IListNode{TNode}"/>
-    /// allocated to store the {@code value}. The returned {@code ListNode} is the new head of the
+    /// allocated to store the <c>value</c>. The returned <c>ListNode</c> is the new head of the
     /// list.
     /// <para>
     /// This method is equivalent to <see cref="addFirst(Object)"/> but returns the allocated
-    /// {@code ListNode}.
+    /// <c>ListNode</c>.
     /// </para>
     /// </summary>
     /// <param name="element"> the element to add.</param>
-    /// <returns>the {@code ListNode} allocated to store the {@code value}</returns>
+    /// <returns>the <c>ListNode</c> allocated to store the <c>value</c></returns>
     public virtual IListNode<TEdge> AddElementFirst(TEdge element)
     {
         IListNode<TEdge> node = new ListNodeImpl<TEdge>(element);
@@ -625,14 +625,14 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
 
     /// <summary>
     /// Inserts the specified element at the end of this list. Returns the <see cref="IListNode{TNode}"/> allocated
-    /// to store the {@code value}. The returned {@code ListNode} is the new tail of the list.
+    /// to store the <c>value</c>. The returned <c>ListNode</c> is the new tail of the list.
     /// <para>
     /// This method is equivalent to <see cref="addLast(Object)"/> but returns the allocated
-    /// {@code ListNode}.
+    /// <c>ListNode</c>.
     /// </para>
     /// </summary>
     /// <param name="element"> the element to add.</param>
-    /// <returns>the {@code ListNode} allocated to store the {@code value}</returns>
+    /// <returns>the <c>ListNode</c> allocated to store the <c>value</c></returns>
     public virtual IListNode<TEdge> AddElementLast(TEdge element)
     {
         IListNode<TEdge> node = new ListNodeImpl<TEdge>(element);
@@ -642,13 +642,13 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
 
     /// <summary>
     /// Inserts the specified element before the specified <see cref="IListNode{TNode}"/> in this list.
-    /// Returns the {@code ListNode} allocated to store the {@code value}.
+    /// Returns the <c>ListNode</c> allocated to store the <c>value</c>.
     /// </summary>
-    /// <param name="successor"> {@code ListNode} before which the node holding {@code value} is inserted.</param>
+    /// <param name="successor"> <c>ListNode</c> before which the node holding <c>value</c> is inserted.</param>
     /// <param name="element"> the element to add.</param>
-    /// <returns>the {@code ListNode} allocated to store the {@code value}</returns>
-    /// <exception cref="ArgumentException"> if {@code successor} is not contained in this list.</exception>
-    /// <exception cref="NullReferenceException"> if {@code successor} is {@code null} </exception>
+    /// <returns>the <c>ListNode</c> allocated to store the <c>value</c></returns>
+    /// <exception cref="ArgumentException"> if <c>successor</c> is not contained in this list.</exception>
+    /// <exception cref="NullReferenceException"> if <c>successor</c> is <c>null</c> </exception>
     public virtual IListNode<TEdge> AddElementBeforeNode(IListNode<TEdge> successor, TEdge element)
     {
         IListNode<TEdge> node = new ListNodeImpl<TEdge>(element);
@@ -900,39 +900,39 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     }
 
     /// <summary>
-    /// Moves all <see cref="IListNode{TNode}"/> of the given {@code sourceList} to this list and inserts
-    /// them all before the node previously at the given position. All the {@code nodes} of
-    /// {@code movedList} are moved to this list. When this method terminates this list contains all
-    /// nodes of {@code movedList} and {@code movedList} is empty.
+    /// Moves all <see cref="IListNode{TNode}"/> of the given <c>sourceList</c> to this list and inserts
+    /// them all before the node previously at the given position. All the <c>nodes</c> of
+    /// <c>movedList</c> are moved to this list. When this method terminates this list contains all
+    /// nodes of <c>movedList</c> and <c>movedList</c> is empty.
     /// </summary>
-    /// <param name="index"> index of the first element of {@code list} in this {@code list} after it was
+    /// <param name="index"> index of the first element of <c>list</c> in this <c>list</c> after it was
     ///        added.</param>
-    /// <param name="movedList"> the {@code DoublyLinkedList} to move to this one.</param>
-    /// <exception cref="NullReferenceException"> if {@code movedList} is {@code null} </exception>
+    /// <param name="movedList"> the <c>DoublyLinkedList</c> to move to this one.</param>
+    /// <exception cref="NullReferenceException"> if <c>movedList</c> is <c>null</c> </exception>
     public virtual void MoveFrom(int index, DoublyLinkedList<TEdge> movedList)
     {
         LinkListIntoThisBefore(index, movedList);
     }
 
     /// <summary>
-    /// Appends the {@code movedList} to the end of this list. All the elements from
-    /// {@code movedList} are transferred to this list, i.TEdge. the {@code list} is empty after calling
+    /// Appends the <c>movedList</c> to the end of this list. All the elements from
+    /// <c>movedList</c> are transferred to this list, i.TEdge. the <c>list</c> is empty after calling
     /// this method.
     /// </summary>
-    /// <param name="movedList"> the {@code DoublyLinkedList} to append to this one.</param>
-    /// <exception cref="NullReferenceException"> if {@code movedList} is {@code null} </exception>
+    /// <param name="movedList"> the <c>DoublyLinkedList</c> to append to this one.</param>
+    /// <exception cref="NullReferenceException"> if <c>movedList</c> is <c>null</c> </exception>
     public virtual void Append(DoublyLinkedList<TEdge> movedList)
     {
         MoveFrom(_size, movedList);
     }
 
     /// <summary>
-    /// Prepends the {@code movedList} to the beginning of this list. All the elements from
-    /// {@code movedList} are transferred to this list, i.TEdge. the {@code movedList} is empty after
+    /// Prepends the <c>movedList</c> to the beginning of this list. All the elements from
+    /// <c>movedList</c> are transferred to this list, i.TEdge. the <c>movedList</c> is empty after
     /// calling this method.
     /// </summary>
-    /// <param name="movedList"> the {@code DoublyLinkedList} to prepend to this one.</param>
-    /// <exception cref="NullReferenceException"> if {@code movedList} is {@code null} </exception>
+    /// <param name="movedList"> the <c>DoublyLinkedList</c> to prepend to this one.</param>
+    /// <exception cref="NullReferenceException"> if <c>movedList</c> is <c>null</c> </exception>
     public virtual void Prepend(DoublyLinkedList<TEdge> movedList)
     {
         MoveFrom(0, movedList);
@@ -943,20 +943,20 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
 
     /// <summary>
     /// Returns a <see cref="INodeIterator{TEdge}"/> that starts at the first <see cref="IListNode{TNode}"/> of this list that is
-    /// equal to the specified {@code firstElement}, iterates in forward direction over the end of
+    /// equal to the specified <c>firstElement</c>, iterates in forward direction over the end of
     /// this list until the first node.
     /// <para>
-    /// The first call to <see cref="INodeIterator{TEdge}.nextNode()"/> returns the first {@code node} that holds a
-    /// value such that {@code Objects.equals(node.getValue, firstElement)} returns {@code true}. The
-    /// returned {@code NodeIterator} iterates in forward direction returning the respective next
+    /// The first call to <see cref="INodeIterator{TEdge}.nextNode()"/> returns the first <c>node</c> that holds a
+    /// value such that {@code Objects.equals(node.getValue, firstElement)} returns <c>true</c>. The
+    /// returned <c>NodeIterator</c> iterates in forward direction returning the respective next
     /// element in subsequent calls to {@code next(Node)}. The returned iterator ignores the actual
-    /// bounds of this {@code DoublyLinkedList} and iterates until the node before the first one is
-    /// reached. Its <see cref="INodeIterator{TEdge}.hasNext() hasNext()"/> returns {@code false} if the next node
+    /// bounds of this <c>DoublyLinkedList</c> and iterates until the node before the first one is
+    /// reached. Its <see cref="INodeIterator{TEdge}.hasNext() hasNext()"/> returns <c>false</c> if the next node
     /// would be the first one.
     /// </para>
     /// </summary>
     /// <param name="firstElement"> the element equal to the first {@code next()} </param>
-    /// <returns>a circular {@code NodeIterator} iterating forward from {@code firstElement}</returns>
+    /// <returns>a circular <c>NodeIterator</c> iterating forward from <c>firstElement</c></returns>
     public virtual INodeIterator<TEdge> CircularIterator(TEdge firstElement)
     {
         var startNode = (ListNodeImpl<TEdge>)NodeOf(firstElement);
@@ -970,20 +970,20 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
 
     /// <summary>
     /// Returns a <see cref="INodeIterator{TEdge}"/> that starts at the first <see cref="IListNode{TNode}"/> of this list that is
-    /// equal to the specified {@code firstElement}, iterates in reverse direction over the end of
+    /// equal to the specified <c>firstElement</c>, iterates in reverse direction over the end of
     /// this list until the first node.
     /// <para>
-    /// The first call to <see cref="INodeIterator{TEdge}.nextNode()"/> returns the first {@code node} that holds a
-    /// value such that {@code Objects.equals(node.getValue, firstElement)} returns {@code true}. The
-    /// returned {@code NodeIterator} iterates in reverse direction returning the respective previous
+    /// The first call to <see cref="INodeIterator{TEdge}.nextNode()"/> returns the first <c>node</c> that holds a
+    /// value such that {@code Objects.equals(node.getValue, firstElement)} returns <c>true</c>. The
+    /// returned <c>NodeIterator</c> iterates in reverse direction returning the respective previous
     /// element in subsequent calls to {@code next(Node)}. The returned iterator ignores the actual
-    /// bounds of this {@code DoublyLinkedList} and iterates until the node before the first one is
-    /// reached. Its <see cref="INodeIterator{TEdge}.hasNext() hasNext()"/> returns {@code false} if the next node
+    /// bounds of this <c>DoublyLinkedList</c> and iterates until the node before the first one is
+    /// reached. Its <see cref="INodeIterator{TEdge}.hasNext() hasNext()"/> returns <c>false</c> if the next node
     /// would be the first one.
     /// </para>
     /// </summary>
     /// <param name="firstElement"> the element equal to the first {@code next()} </param>
-    /// <returns>a circular {@code NodeIterator} iterating backwards from {@code firstElement}</returns>
+    /// <returns>a circular <c>NodeIterator</c> iterating backwards from <c>firstElement</c></returns>
     public virtual INodeIterator<TEdge> ReverseCircularIterator(TEdge firstElement)
     {
         var startNode = (ListNodeImpl<TEdge>)NodeOf(firstElement);
@@ -1022,12 +1022,12 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// <summary>
     /// Returns a <see cref="IListNodeIterator{TEdge}"/> over the elements in this list (in proper sequence)
     /// starting with the first <see cref="IListNode{TNode}"/> whose value is equal to the specified
-    /// {@code element}.
+    /// <c>element</c>.
     /// </summary>
     /// <param name="element"> the first element to be returned from the list iterator (by a call to the
-    ///        {@code next} method) </param>
+    ///        <c>next</c> method) </param>
     /// <returns>a list iterator over the elements in this list (in proper sequence)</returns>
-    /// <exception cref="NoSuchElementException"> if {@code element} is not in the list.</exception>
+    /// <exception cref="NoSuchElementException"> if <c>element</c> is not in the list.</exception>
     public virtual IListNodeIterator<TEdge> ListIterator(TEdge element)
     {
         Pair<ListNodeImpl<TEdge>, int> startPair  = SearchNode(() => _head, n => n.next, element);
@@ -1049,7 +1049,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     public interface INodeIterator<TEdge> : IEnumerator<TEdge>
     {
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         override TEdge Next()
         {
@@ -1059,7 +1059,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         /// <summary>
         /// Returns the next <see cref="IListNode{TNode}"/> in the list and advances the cursor position.
         /// </summary>
-        /// <returns>the next {@code ListNode}</returns>
+        /// <returns>the next <c>ListNode</c></returns>
         /// <seealso cref="ListIterator.next()"/>
         IListNode<TEdge> NextNode();
     }
@@ -1072,7 +1072,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     public interface IListNodeIterator<TEdge> : IEnumerator<TEdge>, INodeIterator<TEdge>
     {
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         override TEdge Next()
         {
@@ -1080,7 +1080,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         override TEdge Previous()
         {
@@ -1091,7 +1091,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         /// Returns the previous <see cref="IListNode{TNode}"/> in the list and moves the cursor position
         /// backwards.
         /// </summary>
-        /// <returns>the previous {@code ListNode}</returns>
+        /// <returns>the previous <c>ListNode</c></returns>
         /// <seealso cref="ListIterator.previous()"/>
         IListNode<TEdge> PreviousNode();
     }
@@ -1147,7 +1147,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool HasNext()
         {
@@ -1155,7 +1155,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool HasPrevious()
         {
@@ -1163,7 +1163,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override int NextIndex()
         {
@@ -1171,7 +1171,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override int PreviousIndex()
         {
@@ -1179,7 +1179,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual ListNodeImpl<TEdge> NextNode()
         {
@@ -1196,7 +1196,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual IListNode<TEdge> PreviousNode()
         {
@@ -1212,7 +1212,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override void Add(TEdge edge)
         {
@@ -1238,7 +1238,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override void Set(TEdge edge)
         {
@@ -1267,7 +1267,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override void Remove()
         {
@@ -1328,7 +1328,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public bool HasNext()
         {
@@ -1336,7 +1336,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public IListNode<TEdge> NextNode()
         {
@@ -1344,7 +1344,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public void Remove()
         {
@@ -1356,15 +1356,15 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
     /// <summary>
     /// Container for the elements stored in a <see cref="DoublyLinkedList"/>.
     /// <para>
-    /// A <see cref="IListNode{TNode}"/> is either contained exactly once in exactly one {@code DoublyLinkedList}
-    /// or contained in no {@code DoublyLinkedList}.
+    /// A <see cref="IListNode{TNode}"/> is either contained exactly once in exactly one <c>DoublyLinkedList</c>
+    /// or contained in no <c>DoublyLinkedList</c>.
     /// </para>
     /// </summary>
     /// <typeparam name="TNode"> the type of the element stored in this node.</typeparam>
     public interface IListNode<TNode>
     {
         /// <summary>
-        /// Returns the immutable value this {@code ListNode} contains.
+        /// Returns the immutable value this <c>ListNode</c> contains.
         /// </summary>
         /// <returns>the value this list node contains.</returns>
         TNode Value { get; }
@@ -1403,7 +1403,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override string ToString()
         {
@@ -1418,7 +1418,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual TNode Value
         {
@@ -1429,7 +1429,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual ListNodeImpl<TNode> Next
         {
@@ -1440,7 +1440,7 @@ public class DoublyLinkedList<TEdge> : AbstractSequentialList<TEdge>, LinkedList
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual ListNodeImpl<TNode> Prev
         {

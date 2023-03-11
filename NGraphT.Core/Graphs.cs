@@ -656,8 +656,8 @@ public abstract class Graphs
     /// <param name="graph"> the input graph.</param>
     /// <typeparam name="TNode">The graph vertex type.</typeparam>
     /// <typeparam name="TEdge">The graph edge type.</typeparam>
-    /// <exception cref="NullReferenceException"> if {@code graph} is {@code null}.</exception>
-    /// <returns>the mapping as an object containing the {@code vertexMap} and the {@code indexList}.</returns>
+    /// <exception cref="NullReferenceException"> if <c>graph</c> is <c>null</c>.</exception>
+    /// <returns>the mapping as an object containing the <c>vertexMap</c> and the <c>indexList</c>.</returns>
     /// <seealso cref="VertexToIntegerMapping{TNode}"/>
     public static VertexToIntegerMapping<TNode> GetVertexToIntegerMapping<TNode, TEdge>(IGraph<TNode, TEdge> graph)
     {

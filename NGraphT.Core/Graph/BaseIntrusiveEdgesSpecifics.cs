@@ -33,9 +33,9 @@ using Util;
 /// <typeparam name="IE"> the intrusive edge type.</typeparam>
 public abstract class BaseIntrusiveEdgesSpecifics<TNode, TEdge, TIe> where TIe : IntrusiveEdge
 {
-    protected internal IDictionary<TEdge, TIe> EdgeMap;
+    protected IDictionary<TEdge, TIe> EdgeMap;
 
-    protected internal ISet<TEdge> UnmodifiableEdgeSet = null;
+    protected ISet<TEdge> UnmodifiableEdgeSet = null;
 
     ///<summary>
     ///Constructor.
@@ -143,7 +143,7 @@ public abstract class BaseIntrusiveEdgesSpecifics<TNode, TEdge, TIe> where TIe :
     ///<returns>true if the edge was added, false if the edge was already present.</returns>
     public abstract bool Add(TEdge edge, TNode sourceVertex, TNode targetVertex);
 
-    protected internal virtual bool AddIntrusiveEdge(TEdge edge, TNode sourceVertex, TNode targetVertex, TIe edge)
+    protected virtual bool AddIntrusiveEdge(TEdge edge, TNode sourceVertex, TNode targetVertex, TIe edge)
     {
         if (edge.Source == null && edge.Target == null)
         {
@@ -167,5 +167,5 @@ public abstract class BaseIntrusiveEdgesSpecifics<TNode, TEdge, TIe> where TIe :
     ///</summary>
     ///<param name="edge"> the edge.</param>
     ///<returns>the intrusive edge.</returns>
-    protected internal abstract TIe GetIntrusiveEdge(TEdge edge);
+    protected abstract TIe GetIntrusiveEdge(TEdge edge);
 }

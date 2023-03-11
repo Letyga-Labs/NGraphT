@@ -16,6 +16,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
+using NGraphT.Core.Event;
+
 namespace NGraphT.Core.Traverse;
 
 /// <summary>
@@ -27,6 +29,8 @@ namespace NGraphT.Core.Traverse;
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
 public interface IGraphIterator<TNode, TEdge> : IEnumerator<TNode>
+    where TNode : class
+    where TEdge : class
 {
     /// <summary>
     /// Test whether this iterator is set to traverse the graph across connected components.
@@ -44,18 +48,17 @@ public interface IGraphIterator<TNode, TEdge> : IEnumerator<TNode>
     /// <returns>the value of the <c>reuseEvents</c> flag.</returns>
     bool ReuseEvents { get; set; }
 
-
     /// <summary>
     /// Adds the specified traversal listener to this iterator.
     /// </summary>
     /// <param name="l"> the traversal listener to be added.</param>
-    void AddTraversalListener(TraversalListener<TNode, TEdge> l);
+    void AddTraversalListener(ITraversalListener<TNode, TEdge> l);
 
     /// <summary>
     /// Removes the specified traversal listener from this iterator.
     /// </summary>
     /// <param name="l"> the traversal listener to be removed.</param>
-    void RemoveTraversalListener(TraversalListener<TNode, TEdge> l);
+    void RemoveTraversalListener(ITraversalListener<TNode, TEdge> l);
 
     /// <summary>
     /// Unsupported.

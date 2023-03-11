@@ -77,7 +77,7 @@ public class GraphDelegator<TNode, TEdge> : AbstractGraph<TNode, TEdge>, IGraph<
     }
 
     /// <summary>
-    /// {@inheritDoc}
+    /// <inheritdoc/>
     ///
     /// <para>
     /// Returns the delegator's vertex supplier or the backing graph's vertex supplier in case of
@@ -100,7 +100,7 @@ public class GraphDelegator<TNode, TEdge> : AbstractGraph<TNode, TEdge>, IGraph<
     }
 
     /// <summary>
-    /// {@inheritDoc}
+    /// <inheritdoc/>
     ///
     /// <para>
     /// Returns the delegator's edge supplier or the backing graph's edge supplier in case of null.
@@ -300,7 +300,7 @@ public class GraphDelegator<TNode, TEdge> : AbstractGraph<TNode, TEdge>, IGraph<
     /// Return the backing graph (the delegate).
     /// </summary>
     /// <returns>the backing graph (the delegate)</returns>
-    protected internal virtual IGraph<TNode, TEdge> Delegate
+    protected virtual IGraph<TNode, TEdge> Delegate
     {
         get
         {

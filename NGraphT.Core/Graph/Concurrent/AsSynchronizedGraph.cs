@@ -768,7 +768,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override int Size()
         {
@@ -784,7 +784,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool Empty
         {
@@ -803,7 +803,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool Contains(object o)
         {
@@ -829,7 +829,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override object[] ToArray()
         {
@@ -845,7 +845,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override T[] ToArray<T>(T[] a)
         {
@@ -861,7 +861,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool Add(TEdge edge)
         {
@@ -869,7 +869,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool Remove(object o)
         {
@@ -877,7 +877,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool ContainsAll<T1>(ICollection<T1> c)
         {
@@ -893,7 +893,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool AddAll<T1>(ICollection<T1> c) where T1 : TEdge
         {
@@ -901,7 +901,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool RetainAll<T1>(ICollection<T1> c)
         {
@@ -909,7 +909,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool RemoveAll<T1>(ICollection<T1> c)
         {
@@ -917,7 +917,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override void Clear()
         {
@@ -925,7 +925,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         // Override default methods in Collection
 //JAVA TO C# CONVERTER TODO TASK: There is no C# equivalent to the Java 'super' constraint:
@@ -944,7 +944,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
 //JAVA TO C# CONVERTER TODO TASK: There is no C# equivalent to the Java 'super' constraint:
 //ORIGINAL LINE: @Override public boolean removeIf(Predicate<? super TEdge> filter)
@@ -1164,7 +1164,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         internal const long SerialVersionUID = 19246150051213471L;
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual TEdge AddEdge(TNode sourceVertex, TNode targetVertex)
         {
@@ -1172,7 +1172,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
         {
@@ -1180,7 +1180,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual ISet<TEdge> EdgesOf(TNode vertex)
         {
@@ -1188,7 +1188,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual ISet<TEdge> IncomingEdgesOf(TNode vertex)
         {
@@ -1196,7 +1196,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual ISet<TEdge> OutgoingEdgesOf(TNode vertex)
         {
@@ -1204,7 +1204,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual bool RemoveEdge(TEdge edge)
         {
@@ -1212,7 +1212,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual TEdge RemoveEdge(TNode sourceVertex, TNode targetVertex)
         {
@@ -1220,7 +1220,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual bool RemoveVertex(TNode node)
         {
@@ -1228,7 +1228,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual bool CacheEnabled
         {
@@ -1257,7 +1257,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         internal const long SerialVersionUID = -5046944235164395939L;
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override ISet<TEdge> EdgesOf(TNode vertex)
         {
@@ -1265,7 +1265,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override ISet<TEdge> IncomingEdgesOf(TNode vertex)
         {
@@ -1273,7 +1273,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override ISet<TEdge> OutgoingEdgesOf(TNode vertex)
         {
@@ -1308,7 +1308,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
             internal readonly IDictionary<TNode, ISet<TEdge>> EdgesOfMap = new ConcurrentDictionary<TNode, ISet<TEdge>>();
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual TEdge AddEdge(TNode sourceVertex, TNode targetVertex)
         {
@@ -1322,7 +1322,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
         {
@@ -1336,7 +1336,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual ISet<TEdge> EdgesOf(TNode vertex)
         {
@@ -1352,7 +1352,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual ISet<TEdge> IncomingEdgesOf(TNode vertex)
         {
@@ -1368,7 +1368,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual ISet<TEdge> OutgoingEdgesOf(TNode vertex)
         {
@@ -1384,7 +1384,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual bool RemoveEdge(TEdge edge)
         {
@@ -1400,7 +1400,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual TEdge RemoveEdge(TNode sourceVertex, TNode targetVertex)
         {
@@ -1414,7 +1414,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual bool RemoveVertex(TNode node)
         {
@@ -1448,7 +1448,7 @@ public class AsSynchronizedGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>, I
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual bool CacheEnabled
         {

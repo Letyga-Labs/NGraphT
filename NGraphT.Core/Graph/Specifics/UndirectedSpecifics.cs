@@ -37,9 +37,9 @@ using Util;
 /// <remarks>Author: Joris Kinable.</remarks>
 public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
 {
-    protected internal IGraph<TNode, TEdge>                                      Graph;
-    protected internal IDictionary<TNode, UndirectedEdgeContainer<TNode, TEdge>> VertexMap;
-    protected internal IEdgeSetFactory<TNode, TEdge>                             EdgeSetFactory;
+    protected IGraph<TNode, TEdge>                                      Graph;
+    protected IDictionary<TNode, UndirectedEdgeContainer<TNode, TEdge>> VertexMap;
+    protected IEdgeSetFactory<TNode, TEdge>                             EdgeSetFactory;
 
     ///<summary>
     ///Construct a new undirected specifics.
@@ -264,7 +264,7 @@ public class UndirectedSpecifics<TNode, TEdge> : ISpecifics<TNode, TEdge>
     ///</summary>
     ///<param name="vertex"> a vertex in this graph.</param>>
     ///<returns>an edge container.</returns>
-    protected internal virtual UndirectedEdgeContainer<TNode, TEdge> GetEdgeContainer(TNode vertex)
+    protected virtual UndirectedEdgeContainer<TNode, TEdge> GetEdgeContainer(TNode vertex)
     {
         var ec = VertexMap[vertex];
 

@@ -34,7 +34,7 @@ public class DefaultGraphIterables<TNode, TEdge> : IGraphIterables<TNode, TEdge>
     ///<summary>
     ///The underlying graph.
     ///</summary>
-    protected internal IGraph<TNode, TEdge> Graph;
+    protected IGraph<TNode, TEdge> Graph;
 
     ///<summary>
     ///Create new graph iterables.

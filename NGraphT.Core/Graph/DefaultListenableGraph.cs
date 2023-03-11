@@ -258,7 +258,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     ///<param name="source"> edge source.</param>
     ///<param name="target"> edge target.</param>
     ///<param name="weight"> edge weight.</param>
-    protected internal virtual void FireEdgeAdded(TEdge edge, TNode source, TNode target, double weight)
+    protected virtual void FireEdgeAdded(TEdge edge, TNode source, TNode target, double weight)
     {
         GraphEdgeChangeEvent<TNode, TEdge> edge =
             CreateGraphEdgeChangeEvent(GraphEdgeChangeEvent.EDGE_ADDED, edge, source, target, weight);
@@ -276,7 +276,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     ///<param name="source"> edge source.</param>
     ///<param name="target"> edge target.</param>
     ///<param name="weight"> edge weight.</param>
-    protected internal virtual void FireEdgeRemoved(TEdge edge, TNode source, TNode target, double weight)
+    protected virtual void FireEdgeRemoved(TEdge edge, TNode source, TNode target, double weight)
     {
         GraphEdgeChangeEvent<TNode, TEdge> edge =
             CreateGraphEdgeChangeEvent(GraphEdgeChangeEvent.EDGE_REMOVED, edge, source, target, weight);
@@ -294,7 +294,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     ///<param name="source"> edge source.</param>
     ///<param name="target"> edge target.</param>
     ///<param name="weight"> the edge weight.</param>
-    protected internal virtual void FireEdgeWeightUpdated(TEdge edge, TNode source, TNode target, double weight)
+    protected virtual void FireEdgeWeightUpdated(TEdge edge, TNode source, TNode target, double weight)
     {
         GraphEdgeChangeEvent<TNode, TEdge> edge =
             CreateGraphEdgeChangeEvent(GraphEdgeChangeEvent.EDGE_WEIGHT_UPDATED, edge, source, target, weight);
@@ -309,7 +309,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     ///Notify listeners that the specified vertex was added.
     ///</summary>
     ///<param name="vertex"> the vertex that was added.</param>
-    protected internal virtual void FireVertexAdded(TNode vertex)
+    protected virtual void FireVertexAdded(TNode vertex)
     {
         GraphVertexChangeEvent<TNode> edge = CreateGraphVertexChangeEvent(GraphVertexChangeEvent.VERTEX_ADDED, vertex);
 
@@ -328,7 +328,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
     ///Notify listeners that the specified vertex was removed.
     ///</summary>
     ///<param name="vertex"> the vertex that was removed.</param>
-    protected internal virtual void FireVertexRemoved(TNode vertex)
+    protected virtual void FireVertexRemoved(TNode vertex)
     {
         GraphVertexChangeEvent<TNode>
             edge = CreateGraphVertexChangeEvent(GraphVertexChangeEvent.VERTEX_REMOVED, vertex);
@@ -410,7 +410,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         ///Sets the edge of this event.
         ///</summary>
         ///<param name="edge"> the edge to be set.</param>
-        protected internal virtual TEe Edge
+        protected virtual TEe Edge
         {
             set
             {
@@ -418,7 +418,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
             }
         }
 
-        protected internal virtual TVv EdgeSource
+        protected virtual TVv EdgeSource
         {
             set
             {
@@ -426,7 +426,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
             }
         }
 
-        protected internal virtual TVv EdgeTarget
+        protected virtual TVv EdgeTarget
         {
             set
             {
@@ -434,7 +434,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
             }
         }
 
-        protected internal virtual double EdgeWeight
+        protected virtual double EdgeWeight
         {
             set
             {
@@ -446,7 +446,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         ///Set the event type of this event.
         ///</summary>
         ///<param name="type"> the type to be set.</param>
-        protected internal virtual int Type
+        protected virtual int Type
         {
             set
             {
@@ -474,7 +474,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         /// Set the event type of this event.
         /// </summary>
         /// <param name="type"> type to be set.</param>
-        protected internal virtual int Type
+        protected virtual int Type
         {
             set
             {
@@ -486,7 +486,7 @@ public class DefaultListenableGraph<TNode, TEdge> : GraphDelegator<TNode, TEdge>
         /// Sets the vertex of this event.
         /// </summary>
         /// <param name="vertex"> the vertex to be set.</param>
-        protected internal virtual TVv Vertex
+        protected virtual TVv Vertex
         {
             set
             {

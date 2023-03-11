@@ -78,11 +78,11 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Adds {@code value} as a maximum element to this tree. The running time of this method is
+    /// Adds <c>value</c> as a maximum element to this tree. The running time of this method is
     /// $\mathcal{O}(\log n)$
     /// </summary>
     /// <param name="value"> a value to add as a tree max.</param>
-    /// <returns>a tree node holding the {@code value}</returns>
+    /// <returns>a tree node holding the <c>value</c></returns>
     public virtual TreeNode<T> AddMax(T value)
     {
         var newMax = new TreeNode<T>(value);
@@ -91,7 +91,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Adds the {@code newMax} as a maximum node to this tree.
+    /// Adds the <c>newMax</c> as a maximum node to this tree.
     /// </summary>
     /// <param name="newMax"> a node to add as a tree max.</param>
     public virtual void AddMaxNode(TreeNode<T> newMax)
@@ -112,10 +112,10 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Adds the {@code value} as a minimum element to this tree.
+    /// Adds the <c>value</c> as a minimum element to this tree.
     /// </summary>
     /// <param name="value"> a value to add as a tree min.</param>
-    /// <returns>a tree node holding the {@code value}</returns>
+    /// <returns>a tree node holding the <c>value</c></returns>
     public virtual TreeNode<T> AddMin(T value)
     {
         var newMin = new TreeNode<T>(value);
@@ -124,7 +124,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Adds the {@code newMin} as a minimum node to this tree.
+    /// Adds the <c>newMin</c> as a minimum node to this tree.
     /// </summary>
     /// <param name="newMin"> a node to add as a tree min.</param>
     public virtual void AddMinNode(TreeNode<T> newMin)
@@ -146,14 +146,14 @@ public class AvlTree<T> : IEnumerable<T>
     /// <summary>
     /// Splits the tree into two parts.
     /// <para>
-    /// The first part contains the nodes which are smaller than or equal to the {@code node}. The
+    /// The first part contains the nodes which are smaller than or equal to the <c>node</c>. The
     /// first part stays in this tree. The second part contains the nodes which are strictly greater
-    /// than the {@code node}. The second part is returned as a tree.
+    /// than the <c>node</c>. The second part is returned as a tree.
     /// </para>
     ///
     /// </summary>
     /// <param name="node"> a separating node.</param>
-    /// <returns>a tree containing the nodes which are strictly greater than the {@code node}</returns>
+    /// <returns>a tree containing the nodes which are strictly greater than the <c>node</c></returns>
     public virtual AvlTree<T> SplitAfter(TreeNode<T> node)
     {
         RegisterModification();
@@ -208,14 +208,14 @@ public class AvlTree<T> : IEnumerable<T>
     /// <summary>
     /// Splits the tree into two parts.
     /// <para>
-    /// The first part contains the nodes which are smaller than the {@code node}. The first part
+    /// The first part contains the nodes which are smaller than the <c>node</c>. The first part
     /// stays in this tree. The second part contains the nodes which are greater than or equal to the
-    /// {@code node}. The second part is returned as a tree.
+    /// <c>node</c>. The second part is returned as a tree.
     /// </para>
     ///
     /// </summary>
     /// <param name="node"> a separating node.</param>
-    /// <returns>a tree containing the nodes which are greater than or equal to the {@code node}</returns>
+    /// <returns>a tree containing the nodes which are greater than or equal to the <c>node</c></returns>
     public virtual AvlTree<T> SplitBefore(TreeNode<T> node)
     {
         RegisterModification();
@@ -233,7 +233,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Append the nodes in the {@code tree} after the nodes in this tree.
+    /// Append the nodes in the <c>tree</c> after the nodes in this tree.
     /// <para>
     /// The result of this operation is stored in this tree.
     /// </para>
@@ -261,7 +261,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Prepends the nodes in the {@code tree} before the nodes in this tree.
+    /// Prepends the nodes in the <c>tree</c> before the nodes in this tree.
     /// <para>
     /// The result of this operation is stored in this tree.
     /// </para>
@@ -278,9 +278,9 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Removes the minimum node in this tree. Returns {@code null} if this tree is empty.
+    /// Removes the minimum node in this tree. Returns <c>null</c> if this tree is empty.
     /// </summary>
-    /// <returns>the removed node or {@code null} if this tree is empty.</returns>
+    /// <returns>the removed node or <c>null</c> if this tree is empty.</returns>
     public virtual TreeNode<T> RemoveMin()
     {
         RegisterModification();
@@ -307,9 +307,9 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Removes the maximum node in this tree. Returns {@code null} if this tree is empty.
+    /// Removes the maximum node in this tree. Returns <c>null</c> if this tree is empty.
     /// </summary>
-    /// <returns>the removed node or {@code null} if this tree is empty.</returns>
+    /// <returns>the removed node or <c>null</c> if this tree is empty.</returns>
     public virtual TreeNode<T> RemoveMax()
     {
         RegisterModification();
@@ -345,22 +345,22 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Returns the node following the {@code node} in the order defined by this tree. Returns null
-    /// if the {@code node} is the maximum node in the tree.
+    /// Returns the node following the <c>node</c> in the order defined by this tree. Returns null
+    /// if the <c>node</c> is the maximum node in the tree.
     /// </summary>
     /// <param name="node"> a node to compute successor of.</param>
-    /// <returns>the successor of the {@code node}</returns>
+    /// <returns>the successor of the <c>node</c></returns>
     public virtual TreeNode<T> Successor(TreeNode<T> node)
     {
         return node.successor;
     }
 
     /// <summary>
-    /// Returns the node, which is before the {@code node} in the order defined by this tree. Returns
-    /// null if the {@code node} is the minimum node in the tree.
+    /// Returns the node, which is before the <c>node</c> in the order defined by this tree. Returns
+    /// null if the <c>node</c> is the minimum node in the tree.
     /// </summary>
     /// <param name="node"> a node to compute predecessor of.</param>
-    /// <returns>the predecessor of the {@code node}</returns>
+    /// <returns>the predecessor of the <c>node</c></returns>
     public virtual TreeNode<T> Predecessor(TreeNode<T> node)
     {
         return node.predecessor;
@@ -393,7 +393,7 @@ public class AvlTree<T> : IEnumerable<T>
     /// <summary>
     /// Check if this tree is empty.
     /// </summary>
-    /// <returns>{@code true} if this tree is empty, {@code false otherwise}</returns>
+    /// <returns><c>true</c> if this tree is empty, {@code false otherwise}</returns>
     public virtual bool Empty
     {
         get
@@ -429,7 +429,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Makes the {@code node} the root of this tree.
+    /// Makes the <c>node</c> the root of this tree.
     /// </summary>
     /// <param name="node"> a new root of this tree.</param>
     private void MakeRoot(TreeNode<T> node)
@@ -454,7 +454,7 @@ public class AvlTree<T> : IEnumerable<T>
     /// <param name="left"> a left subtree.</param>
     /// <param name="right"> a right subtree.</param>
     /// <param name="p"> next parent node.</param>
-    /// <param name="leftMove"> {@code true} if we're moving from the left child, {@code false} otherwise.</param>
+    /// <param name="leftMove"> <c>true</c> if we're moving from the left child, <c>false</c> otherwise.</param>
     /// <returns>the resulting right tree.</returns>
     private AvlTree<T> Split(TreeNode<T> left, TreeNode<T> right, TreeNode<T> p, bool leftMove)
     {
@@ -485,7 +485,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Merges the {@code left} and {@code right} subtrees using the {@code junctionNode}.
+    /// Merges the <c>left</c> and <c>right</c> subtrees using the <c>junctionNode</c>.
     /// <para>
     /// The algorithm is described in <i>Donald TEdge. Knuth. The art of computer programming. Second
     /// Edition. Volume 3 / Sorting and Searching, p. 474</i>.
@@ -532,7 +532,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Swaps the contents of this tree and the {@code tree}
+    /// Swaps the contents of this tree and the <c>tree</c>
     /// </summary>
     /// <param name="tree"> a tree to swap content of.</param>
     private void Swap(AvlTree<T> tree)
@@ -546,7 +546,7 @@ public class AvlTree<T> : IEnumerable<T>
     /// Performs a right node rotation.
     /// </summary>
     /// <param name="node"> a node to rotate.</param>
-    /// <returns>a new parent of the {@code node}</returns>
+    /// <returns>a new parent of the <c>node</c></returns>
     private TreeNode<T> RotateRight(TreeNode<T> node)
     {
         TreeNode<T> left = node.left;
@@ -565,7 +565,7 @@ public class AvlTree<T> : IEnumerable<T>
     /// Performs a left node rotation.
     /// </summary>
     /// <param name="node"> a node to rotate.</param>
-    /// <returns>a new parent of the {@code node}</returns>
+    /// <returns>a new parent of the <c>node</c></returns>
     private TreeNode<T> RotateLeft(TreeNode<T> node)
     {
         TreeNode<T> right = node.right;
@@ -582,7 +582,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Performs a node balancing on the path from {@code node} up until the root.
+    /// Performs a node balancing on the path from <c>node</c> up until the root.
     /// </summary>
     /// <param name="node"> a node to start tree balancing from.</param>
     private void Balance(TreeNode<T> node)
@@ -591,7 +591,7 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Performs a node balancing on the path from {@code node} up until the {@code stop} node.
+    /// Performs a node balancing on the path from <c>node</c> up until the <c>stop</c> node.
     /// </summary>
     /// <param name="node"> a node to start tree balancing from.</param>
     /// <param name="stop"> a node to stop balancing at (this node is not being balanced) </param>
@@ -616,10 +616,10 @@ public class AvlTree<T> : IEnumerable<T>
     }
 
     /// <summary>
-    /// Checks whether the {@code node} is unbalanced. If so, balances the {@code node}
+    /// Checks whether the <c>node</c> is unbalanced. If so, balances the <c>node</c>
     /// </summary>
     /// <param name="node"> a node to balance.</param>
-    /// <returns>a new parent of {@code node} if the balancing occurs, {@code node} otherwise.</returns>
+    /// <returns>a new parent of <c>node</c> if the balancing occurs, <c>node</c> otherwise.</returns>
     private TreeNode<T> BalanceNode(TreeNode<T> node)
     {
         node.UpdateHeightAndSubtreeSize();
@@ -686,19 +686,19 @@ public class AvlTree<T> : IEnumerable<T>
 
     /// <summary>
     /// Iterator over the values stored in this tree. This implementation uses the
-    /// {@code TreeNodeIterator} to iterator over the values.
+    /// <c>TreeNodeIterator</c> to iterator over the values.
     /// </summary>
     private class TreeValuesIterator : IEnumerator<T>
     {
         private readonly AvlTree<T> _outerInstance;
 
         /// <summary>
-        /// Internally used {@code TreeNodeIterator}
+        /// Internally used <c>TreeNodeIterator</c>
         /// </summary>
         internal TreeNodeIterator Iterator;
 
         /// <summary>
-        /// Constructs a new {@code TreeValuesIterator}
+        /// Constructs a new <c>TreeValuesIterator</c>
         /// </summary>
         public TreeValuesIterator(AvlTree<T> outerInstance)
         {
@@ -707,7 +707,7 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool HasNext()
         {
@@ -716,7 +716,7 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override T Next()
         {
@@ -734,7 +734,7 @@ public class AvlTree<T> : IEnumerable<T>
         private readonly AvlTree<T> _outerInstance;
 
         /// <summary>
-        /// A node that is returned next or {@code null} if all nodes are traversed
+        /// A node that is returned next or <c>null</c> if all nodes are traversed
         /// </summary>
         internal TreeNode<T> NextNode;
 
@@ -744,7 +744,7 @@ public class AvlTree<T> : IEnumerable<T>
         internal readonly int ExpectedModCount;
 
         /// <summary>
-        /// Constructs a new {@code TreeNodeIterator}
+        /// Constructs a new <c>TreeNodeIterator</c>
         /// </summary>
         public TreeNodeIterator(AvlTree<T> outerInstance)
         {
@@ -754,7 +754,7 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override bool HasNext()
         {
@@ -763,7 +763,7 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override TreeNode<T> Next()
         {
@@ -846,7 +846,7 @@ public class AvlTree<T> : IEnumerable<T>
         internal int SubtreeSize;
 
         /// <summary>
-        /// Constructs a new node with the {@code value} stored in it
+        /// Constructs a new node with the <c>value</c> stored in it
         /// </summary>
         /// <param name="value"> a value to store in this node.</param>
         internal TreeNode(T value)
@@ -1064,10 +1064,10 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// Returns {@code true} if this node is unbalanced and the left child's height is greater,
+        /// Returns <c>true</c> if this node is unbalanced and the left child's height is greater,
         /// {@code false otherwise}
         /// </summary>
-        /// <returns>{@code true} if this node is unbalanced and the left child's height is greater,
+        /// <returns><c>true</c> if this node is unbalanced and the left child's height is greater,
         ///         {@code false otherwise}</returns>
         internal virtual bool LeftDoubleHeavy
         {
@@ -1078,10 +1078,10 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// Returns {@code true} if this node is unbalanced and the right child's height is greater,
+        /// Returns <c>true</c> if this node is unbalanced and the right child's height is greater,
         /// {@code false otherwise}
         /// </summary>
-        /// <returns>{@code true} if this node is unbalanced and the right child's height is greater,
+        /// <returns><c>true</c> if this node is unbalanced and the right child's height is greater,
         ///         {@code false otherwise}</returns>
         internal virtual bool RightDoubleHeavy
         {
@@ -1092,10 +1092,10 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// Returns {@code true} if the height of the left child is greater than the height of the
+        /// Returns <c>true</c> if the height of the left child is greater than the height of the
         /// right child
         /// </summary>
-        /// <returns>{@code true} if the height of the left child is greater than the height of the
+        /// <returns><c>true</c> if the height of the left child is greater than the height of the
         ///         right child.</returns>
         internal virtual bool LeftHeavy
         {
@@ -1106,10 +1106,10 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// Returns {@code true} if the height of the right child is greater than the height of the
+        /// Returns <c>true</c> if the height of the right child is greater than the height of the
         /// left child
         /// </summary>
-        /// <returns>{@code true} if the height of the right child is greater than the height of the
+        /// <returns><c>true</c> if the height of the right child is greater than the height of the
         ///         left child.</returns>
         internal virtual bool RightHeavy
         {
@@ -1120,9 +1120,9 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// Returns {@code true} if this node is a left child of its parent, {@code false} otherwise
+        /// Returns <c>true</c> if this node is a left child of its parent, <c>false</c> otherwise
         /// </summary>
-        /// <returns>{@code true} if this node is a left child of its parent, {@code false} otherwise.</returns>
+        /// <returns><c>true</c> if this node is a left child of its parent, <c>false</c> otherwise.</returns>
         internal virtual bool LeftChild
         {
             get
@@ -1132,9 +1132,9 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// Returns {@code true} if this node is a right child of its parent, {@code false} otherwise
+        /// Returns <c>true</c> if this node is a right child of its parent, <c>false</c> otherwise
         /// </summary>
-        /// <returns>{@code true} if this node is a right child of its parent, {@code false} otherwise.</returns>
+        /// <returns><c>true</c> if this node is a right child of its parent, <c>false</c> otherwise.</returns>
         internal virtual bool RightChild
         {
             get
@@ -1145,7 +1145,7 @@ public class AvlTree<T> : IEnumerable<T>
 
         /// <summary>
         /// Returns a successor of this node according to the tree in order traversal, or
-        /// {@code null} if this node is a maximum node in the tree
+        /// <c>null</c> if this node is a maximum node in the tree
         /// </summary>
         /// <returns>successor of this node, or {@code} null if this node in a maximum node in the
         ///         tree.</returns>
@@ -1167,7 +1167,7 @@ public class AvlTree<T> : IEnumerable<T>
 
         /// <summary>
         /// Returns a predecessor of this node according to the tree in order traversal, or
-        /// {@code null} if this node is a minimum node in the tree
+        /// <c>null</c> if this node is a minimum node in the tree
         /// </summary>
         /// <returns>predecessor of this node, or {@code} null if this node in a minimum node in the
         ///         tree.</returns>
@@ -1189,8 +1189,8 @@ public class AvlTree<T> : IEnumerable<T>
 
 
         /// <summary>
-        /// Sets the left child reference of this node to {@code node}. If the {@code node} is not
-        /// {@code null}, updates its parent reference as well.
+        /// Sets the left child reference of this node to <c>node</c>. If the <c>node</c> is not
+        /// <c>null</c>, updates its parent reference as well.
         /// </summary>
         /// <param name="node"> a new left child.</param>
         internal virtual void SetLeftChild(TreeNode<T> node)
@@ -1210,8 +1210,8 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// Sets the right child reference of this node to {@code node}. If the {@code node} is not
-        /// {@code null}, updates its parent reference as well.
+        /// Sets the right child reference of this node to <c>node</c>. If the <c>node</c> is not
+        /// <c>null</c>, updates its parent reference as well.
         /// </summary>
         /// <param name="node"> a new right child.</param>
         internal virtual void SetRightChild(TreeNode<T> node)
@@ -1231,8 +1231,8 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// Substitutes the {@code prevChild} with the {@code newChild}. If the {@code newChild} is
-        /// not {@code null}, updates its parent reference as well
+        /// Substitutes the <c>prevChild</c> with the <c>newChild</c>. If the <c>newChild</c> is
+        /// not <c>null</c>, updates its parent reference as well
         /// </summary>
         /// <param name="prevChild"> either left or right child of this node.</param>
         /// <param name="newChild"> a new child of this node.</param>
@@ -1251,7 +1251,7 @@ public class AvlTree<T> : IEnumerable<T>
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public override string ToString()
         {

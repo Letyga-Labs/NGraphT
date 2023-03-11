@@ -66,7 +66,7 @@ public class UniformIntrusiveEdgesSpecifics<TNode, TEdge> : BaseIntrusiveEdgesSp
         }
     }
 
-    protected internal override IntrusiveEdge GetIntrusiveEdge(TEdge edge)
+    protected override IntrusiveEdge GetIntrusiveEdge(TEdge edge)
     {
         if (edge is IntrusiveEdge)
         {

@@ -27,7 +27,7 @@ namespace NGraphT.Core.Event;
 public class VertexTraversalEventArgs<TNode> : EventArgs
 {
     /// <summary>
-    /// Creates a new VertexTraversalEvent.
+    /// Creates a new VertexTraversalEventArgs.
     /// </summary>
     /// <param name="eventSource"> the source of the event. </param>
     /// <param name="vertex"> the traversed vertex. </param>
@@ -39,5 +39,5 @@ public class VertexTraversalEventArgs<TNode> : EventArgs
     /// <summary>
     /// The traversed vertex.
     /// </summary>
-    public TNode Vertex { get; }
+    public TNode Vertex { get; protected set; }
 }

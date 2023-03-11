@@ -30,7 +30,7 @@ public class DefaultEdge : IntrusiveEdge
     ///implementing toString).
     ///</summary>
     ///<returns>source of this edge.</returns>
-    protected internal virtual object Source
+    protected virtual object Source
     {
         get
         {
@@ -43,7 +43,7 @@ public class DefaultEdge : IntrusiveEdge
     /// implementing toString).
     /// </summary>
     /// <returns>target of this edge.</returns>
-    protected internal virtual object Target
+    protected virtual object Target
     {
         get
         {

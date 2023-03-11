@@ -37,5 +37,5 @@ public class GraphChangeEventArgs : EventArgs
     /// <summary>
     /// The type of graph change this event indicates.
     /// </summary>
-    public int Type { get; set; }
+    public int Type { get; protected set; }
 }

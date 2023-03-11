@@ -25,7 +25,7 @@ namespace NGraphT.Core.Event;
 public class EdgeTraversalEventArgs<TEdge> : EventArgs
 {
     /// <summary>
-    /// Creates a new EdgeTraversalEvent.
+    /// Creates a new EdgeTraversalEventArgs.
     /// </summary>
     /// <param name="eventSource"> the source of the event. </param>
     /// <param name="edge"> the traversed edge. </param>
@@ -37,5 +37,5 @@ public class EdgeTraversalEventArgs<TEdge> : EventArgs
     /// <summary>
     /// The traversed edge.
     /// </summary>
-    public TEdge Edge { get; set; }
+    public TEdge Edge { get; protected set; }
 }

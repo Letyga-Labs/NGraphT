@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using NGraphT.Core.Event;
 
 /*
  * (C) Copyright 2003-2021, by Barak Naveh and Contributors.
@@ -19,40 +20,35 @@
  */
 namespace NGraphT.Core.Traverse;
 
-using Core;
+using NGraphT.Core;
 
 /// <summary>
 /// Provides a cross-connected-component traversal functionality for iterator subclasses.
 /// </summary>
+///
 /// <typeparam name="TNode"> vertex type.</typeparam>
 /// <typeparam name="TEdge"> edge type.</typeparam>
-/// @param <D> type of data associated to seen vertices
+/// <typeparam name="TNodeData"> type of data associated to seen vertices.</typeparam>
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
-public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIterator<TNode, TEdge>
+public abstract class CrossComponentIterator<TNode, TEdge, TNodeData> : AbstractGraphIterator<TNode, TEdge>
+    where TNode : class
+    where TEdge : class
 {
-    private bool _instanceFieldsInitialized = false;
-
-    private void InitializeInstanceFields()
-    {
-        _ccFinishedEvent =
-            new ConnectedComponentTraversalEvent(this, ConnectedComponentTraversalEvent.ConnectedComponentFinished);
-        _ccStartedEvent =
-            new ConnectedComponentTraversalEvent(this, ConnectedComponentTraversalEvent.ConnectedComponentStarted);
-    }
-
     private const int CcsBeforeComponent = 1;
     private const int CcsWithinComponent = 2;
     private const int CcsAfterComponent  = 3;
 
-    private ConnectedComponentTraversalEvent _ccFinishedEvent;
-    private ConnectedComponentTraversalEvent _ccStartedEvent;
+    private bool _instanceFieldsInitialized;
+
+    private ConnectedComponentTraversalEventArgs _ccFinishedEvent;
+    private ConnectedComponentTraversalEventArgs _ccStartedEvent;
 
     /// <summary>
     /// Stores the vertices that have been seen during iteration and (optionally) some additional
     /// traversal info regarding each vertex.
     /// </summary>
-    private IDictionary<TNode, TD> _seen = new Dictionary<TNode, TD>();
+    private readonly IDictionary<TNode, TNodeData> _seen = new Dictionary<TNode, TNodeData>();
 
     /// <summary>
     /// Iterator which provides start vertices for cross-component iteration.
@@ -78,7 +74,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// Creates a new iterator for the specified graph.
     /// </summary>
     /// <param name="g"> the graph to be iterated.</param>
-    public CrossComponentIterator(IGraph<TNode, TEdge> g)
+    protected CrossComponentIterator(IGraph<TNode, TEdge> g)
         : this(g, (TNode)null)
     {
         if (!_instanceFieldsInitialized)
@@ -97,8 +93,8 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// <param name="startVertex"> the vertex iteration to be started.</param>
     /// <exception cref="ArgumentException"> if <c>g==null</c> or does not contain
     ///         <c>startVertex</c> </exception>
-    public CrossComponentIterator(IGraph<TNode, TEdge> g, TNode startVertex)
-        : this(g, startVertex == null ? null : Collections.singletonList(startVertex))
+    protected CrossComponentIterator(IGraph<TNode, TEdge> g, TNode startVertex)
+        : this(g, startVertex == null ? null : new List<TNode> { startVertex })
     {
         if (!_instanceFieldsInitialized)
         {
@@ -116,7 +112,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// <param name="startVertices"> the vertices iteration to be started.</param>
     /// <exception cref="ArgumentException"> if <c>g==null</c> or does not contain
     ///         <c>startVertex</c> </exception>
-    public CrossComponentIterator(IGraph<TNode, TEdge> g, IEnumerable<TNode> startVertices)
+    protected CrossComponentIterator(IGraph<TNode, TEdge> g, IEnumerable<TNode> startVertices)
         : base(g)
     {
         if (!_instanceFieldsInitialized)
@@ -135,7 +131,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
         else
         {
             this.crossComponentTraversal = false;
-            _startVertexIterator    = startVertices.GetEnumerator();
+            _startVertexIterator         = startVertices.GetEnumerator();
         }
 
         /*
@@ -238,10 +234,10 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     }
 
     /// <summary>
-    /// Lazily instantiates {@code entireGraphVertexIterator}.
+    /// Lazily instantiates <c>entireGraphVertexIterator</c>.
     /// </summary>
     /// <returns>iterator which provides start vertices for cross-component iteration.</returns>
-    protected internal virtual IEnumerator<TNode> EntireGraphVertexIterator
+    protected virtual IEnumerator<TNode> EntireGraphVertexIterator
     {
         get
         {
@@ -261,7 +257,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// </summary>
     /// <returns><c>true</c> if there are no more uniterated vertices in the currently iterated
     ///         connected component; <c>false</c> otherwise.</returns>
-    protected internal abstract bool ConnectedComponentExhausted { get; }
+    protected abstract bool ConnectedComponentExhausted { get; }
 
     /// <summary>
     /// Update data structures the first time we see a vertex.
@@ -269,14 +265,14 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// <param name="vertex"> the vertex encountered.</param>
     /// <param name="edge"> the edge via which the vertex was encountered, or null if the vertex is a
     ///        starting point.</param>
-    protected internal abstract void EncounterVertex(TNode vertex, TEdge edge);
+    protected abstract void EncounterVertex(TNode vertex, TEdge edge);
 
     /// <summary>
     /// Returns the vertex to be returned in the following call to the iterator <c>next</c>
     /// method.
     /// </summary>
     /// <returns>the next vertex to be returned by this iterator.</returns>
-    protected internal abstract TNode ProvideNextVertex();
+    protected abstract TNode ProvideNextVertex();
 
     /// <summary>
     /// Access the data stored for a seen vertex.
@@ -286,7 +282,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     ///         with the vertex. A <c>null</c> return can also indicate that the vertex was
     ///         explicitly associated with <c>
     /// null</c>.</returns>
-    protected internal virtual TD GetSeenData(TNode vertex)
+    protected virtual TNodeData GetSeenData(TNode vertex)
     {
         return _seen[vertex];
     }
@@ -296,7 +292,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// </summary>
     /// <param name="vertex"> vertex in question.</param>>
     /// <returns><c>true</c> if vertex has already been seen.</returns>
-    protected internal virtual bool IsSeenVertex(TNode vertex)
+    protected virtual bool IsSeenVertex(TNode vertex)
     {
         return _seen.ContainsKey(vertex);
     }
@@ -306,7 +302,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// </summary>
     /// <param name="vertex"> the vertex re-encountered.</param>
     /// <param name="edge"> the edge via which the vertex was re-encountered.</param>
-    protected internal abstract void EncounterVertexAgain(TNode vertex, TEdge edge);
+    protected abstract void EncounterVertexAgain(TNode vertex, TEdge edge);
 
     /// <summary>
     /// Stores iterator-dependent data for a vertex that has been seen.
@@ -317,7 +313,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// null</c> if no data was associated with the vertex. A <c>
     /// null</c> return can also indicate that the vertex was explicitly associated with
     ///         <c>null</c>.</returns>
-    protected internal virtual TD PutSeenData(TNode vertex, TD data)
+    protected virtual TNodeData PutSeenData(TNode vertex, TNodeData data)
     {
         return _seen[vertex] = data;
     }
@@ -327,7 +323,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// subclass).
     /// </summary>
     /// <param name="vertex"> vertex which has been finished.</param>
-    protected internal virtual void FinishVertex(TNode vertex)
+    protected virtual void FinishVertex(TNode vertex)
     {
         if (NListeners != 0)
         {
@@ -341,7 +337,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     /// </summary>
     /// <param name="vertex"> vertex in question.</param>
     /// <returns>set of outgoing edges connected to the vertex.</returns>
-    protected internal virtual ISet<TEdge> SelectOutgoingEdges(TNode vertex)
+    protected virtual ISet<TEdge> SelectOutgoingEdges(TNode vertex)
     {
         return graph.OutgoingEdgesOf(vertex);
     }
@@ -372,5 +368,17 @@ public abstract class CrossComponentIterator<TNode, TEdge, TD> : AbstractGraphIt
     {
         EncounterVertex(_startVertex, default(TEdge));
         _startVertex = default(TNode);
+    }
+
+    private void InitializeInstanceFields()
+    {
+        _ccFinishedEvent = new ConnectedComponentTraversalEventArgs(
+            this,
+            ConnectedComponentTraversalEventArgs.ConnectedComponentFinished
+        );
+        _ccStartedEvent = new ConnectedComponentTraversalEventArgs(
+            this,
+            ConnectedComponentTraversalEventArgs.ConnectedComponentStarted
+        );
     }
 }

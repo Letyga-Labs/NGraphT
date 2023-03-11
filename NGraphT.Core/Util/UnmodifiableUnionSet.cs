@@ -48,7 +48,7 @@ public class UnmodifiableUnionSet<TEdge> : AbstractSet<TEdge>
     }
 
     /// <summary>
-    /// {@inheritDoc}
+    /// <inheritdoc/>
     ///
     /// Since the view is live, this operation is no longer a constant time operation.
     /// </summary>

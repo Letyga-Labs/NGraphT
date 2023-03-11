@@ -37,10 +37,10 @@ public class VertexToIntegerMapping<TNode>
 
     /// <summary>
     /// Create a new mapping from a list of vertices. The input list will be used as the
-    /// {@code indexList} so it must not be modified.
+    /// <c>indexList</c> so it must not be modified.
     /// </summary>
     /// <param name="vertices"> the input list of vertices.</param>
-    /// <exception cref="NullReferenceException"> if {@code vertices} is {@code null} </exception>
+    /// <exception cref="NullReferenceException"> if <c>vertices</c> is <c>null</c> </exception>
     /// <exception cref="ArgumentException"> if the vertices are not distinct.</exception>
     public VertexToIntegerMapping(IList<TNode> vertices)
     {
@@ -62,7 +62,7 @@ public class VertexToIntegerMapping<TNode>
     /// Create a new mapping from a collection of vertices.
     /// </summary>
     /// <param name="vertices"> the input collection of vertices.</param>
-    /// <exception cref="NullReferenceException"> if {@code vertices} is {@code null} </exception>
+    /// <exception cref="NullReferenceException"> if <c>vertices</c> is <c>null</c> </exception>
     /// <exception cref="ArgumentException"> if the vertices are not distinct.</exception>
     public VertexToIntegerMapping(ICollection<TNode> vertices)
         : this(new List<>(Objects.requireNonNull(vertices, "the input collection of vertices cannot be null")))
@@ -70,8 +70,8 @@ public class VertexToIntegerMapping<TNode>
     }
 
     /// <summary>
-    /// Get the {@code vertexMap}, a mapping from vertices to integers (i.TEdge. the inverse of
-    /// {@code indexList}).
+    /// Get the <c>vertexMap</c>, a mapping from vertices to integers (i.TEdge. the inverse of
+    /// <c>indexList</c>).
     /// </summary>
     /// <returns>a mapping from vertices to integers.</returns>
     public virtual IDictionary<TNode, int> VertexMap
@@ -83,8 +83,8 @@ public class VertexToIntegerMapping<TNode>
     }
 
     /// <summary>
-    /// Get the {@code indexList}, a mapping from integers to vertices (i.TEdge. the inverse of
-    /// {@code vertexMap}).
+    /// Get the <c>indexList</c>, a mapping from integers to vertices (i.TEdge. the inverse of
+    /// <c>vertexMap</c>).
     /// </summary>
     /// <returns>a mapping from integers to vertices.</returns>
     public virtual IList<TNode> IndexList

@@ -67,7 +67,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// <summary>
     /// Construct a new empty graph object.
     /// </summary>
-    protected internal AbstractGraph()
+    protected AbstractGraph()
     {
     }
 
@@ -135,7 +135,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// <returns><c>true</c> if this assertion holds.</returns>
     /// <exception cref="NullReferenceException"> if specified vertex is <c>null</c>.</exception>
     /// <exception cref="ArgumentException"> if specified vertex does not exist in this graph.</exception>
-    protected internal virtual bool AssertVertexExist(TNode node)
+    protected virtual bool AssertVertexExist(TNode node)
     {
         if (ContainsVertex(node))
         {
@@ -160,7 +160,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// <returns><c>true</c> if this graph changed as a result of the call.</returns>
     /// <seealso cref="Graph.removeEdge(Object)"/>
     /// <seealso cref="Graph.containsEdge(Object)"/>
-    protected internal virtual bool RemoveAllEdges(TEdge[] edges)
+    protected virtual bool RemoveAllEdges(TEdge[] edges)
     {
         var modified = false;
 
@@ -180,7 +180,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     /// <param name="directed"> true to use parens for each edge (representing directed); false to use curly
     ///        braces (representing undirected).</param>>
     /// <returns>a string representation of (TNode,TEdge)</returns>
-    protected internal virtual string ToStringFromSets<T1, T2>(
+    protected virtual string ToStringFromSets<T1, T2>(
         ICollection<T1> vertexSet,
         ICollection<T2> edgeSet,
         bool            directed

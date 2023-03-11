@@ -128,7 +128,7 @@ public class TopologicalOrderIterator<TNode, TEdge> : AbstractGraphIterator<TNod
     }
 
     /// <summary>
-    /// {@inheritDoc}
+    /// <inheritdoc/>
     ///
     /// Always returns true since the iterator does not care about components.
     /// </summary>

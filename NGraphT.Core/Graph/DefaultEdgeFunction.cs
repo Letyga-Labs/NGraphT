@@ -27,8 +27,8 @@ namespace NGraphT.Core.Graph;
 /// <typeparam name="T"> the value type.</typeparam>
 public class DefaultEdgeFunction<TEdge, T> : Func<TEdge, T>
 {
-    protected internal readonly IDictionary<TEdge, T> Map;
-    protected internal readonly T                     DefaultValue;
+    protected readonly IDictionary<TEdge, T> Map;
+    protected readonly T                     DefaultValue;
 
     ///<summary>
     ///Create a new function.

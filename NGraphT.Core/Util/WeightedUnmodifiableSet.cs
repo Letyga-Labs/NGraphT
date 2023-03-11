@@ -21,7 +21,7 @@ namespace NGraphT.Core.Util;
 /// <summary>
 /// Implementation of a weighted, unmodifiable set. This class can for instance be used to store a
 /// weighted vertex cover. The {@code hashCode()} and {@code equals()} methods are identical to those
-/// of a normal set, i.TEdge. they are independent of the {@code weight} of this class. All methods are
+/// of a normal set, i.TEdge. they are independent of the <c>weight</c> of this class. All methods are
 /// delegated to the underlying set.
 /// </summary>
 /// @param <TEdge> element type

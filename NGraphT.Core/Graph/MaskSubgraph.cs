@@ -36,12 +36,12 @@ public class MaskSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
 {
     private const string UNMODIFIABLE = "this graph is unmodifiable";
 
-    protected internal readonly IGraph<TNode, TEdge>    Base;
-    protected internal readonly IGraphType              BaseType;
-    protected internal readonly ISet<TEdge>             Edges;
-    protected internal readonly ISet<TNode>             Vertices;
-    protected internal readonly Predicate<TNode> VertexMask;
-    protected internal readonly Predicate<TEdge> EdgeMask;
+    protected readonly IGraph<TNode, TEdge>    Base;
+    protected readonly IGraphType              BaseType;
+    protected readonly ISet<TEdge>             Edges;
+    protected readonly ISet<TNode>             Vertices;
+    protected readonly Predicate<TNode> VertexMask;
+    protected readonly Predicate<TEdge> EdgeMask;
 
     /// <summary>
     /// Creates a new induced subgraph. Running-time = O(1).
@@ -117,7 +117,7 @@ public class MaskSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     }
 
     /// <summary>
-    /// {@inheritDoc}
+    /// <inheritdoc/>
     ///
     /// <para>
     /// By default this method returns the sum of in-degree and out-degree. The exact value returned

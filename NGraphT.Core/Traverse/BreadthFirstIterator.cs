@@ -77,7 +77,7 @@ public class
     }
 
     /// <inheritdoc/>
-    protected internal override bool ConnectedComponentExhausted
+    protected override bool ConnectedComponentExhausted
     {
         get
         {
@@ -86,7 +86,7 @@ public class
     }
 
     /// <inheritdoc/>
-    protected internal override void EncounterVertex(TNode vertex, TEdge edge)
+    protected override void EncounterVertex(TNode vertex, TEdge edge)
     {
         var depth = (edge == null ? 0 : GetSeenData(Graphs.GetOppositeVertex(graph, edge, vertex)).depth + 1);
         PutSeenData(vertex, new SearchNodeData<TEdge>(edge, depth));
@@ -94,7 +94,7 @@ public class
     }
 
     /// <inheritdoc/>
-    protected internal override void EncounterVertexAgain(TNode vertex, TEdge edge)
+    protected override void EncounterVertexAgain(TNode vertex, TEdge edge)
     {
     }
 
@@ -148,7 +148,7 @@ public class
     }
 
     /// <seealso cref="CrossComponentIterator.provideNextVertex()"/>
-    protected internal override TNode ProvideNextVertex()
+    protected override TNode ProvideNextVertex()
     {
         return _queue.RemoveFirst();
     }
@@ -157,7 +157,7 @@ public class
     /// Data kept for discovered vertices.
     /// </summary>
     /// <typeparam name="TEdge">The graph edge type.</typeparam>
-    protected internal class SearchNodeData<TEdge>
+    protected class SearchNodeData<TEdge>
     {
         internal readonly TEdge Edge;
         internal readonly int   Depth;

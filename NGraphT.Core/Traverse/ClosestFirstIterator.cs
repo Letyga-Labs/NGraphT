@@ -102,7 +102,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
     /// start at the specified start vertex and will be limited to the subset of the connected
     /// component which includes that vertex and is reachable via paths of weighted length less than
     /// or equal to the specified radius. The specified start vertex may not be <c>
-    /// null</c>. This algorithm will use the heap supplied by the {@code heapSupplier}.
+    /// null</c>. This algorithm will use the heap supplied by the <c>heapSupplier</c>.
     /// </summary>
     /// <param name="g"> the graph to be iterated.</param>
     /// <param name="startVertex"> the vertex iteration to be started.</param>
@@ -146,7 +146,7 @@ public class ClosestFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, 
     /// Iteration order is based on minimum distance from any of the start vertices, regardless of
     /// the order in which the start vertices are supplied. Because of this, the entire traversal is
     /// treated as if it were over a single connected component with respect to events fired. This
-    /// algorithm will use the heap supplied by the {@code heapSupplier}.
+    /// algorithm will use the heap supplied by the <c>heapSupplier</c>.
     /// </summary>
     /// <param name="g"> the graph to be iterated.</param>
     /// <param name="startVertices"> the vertices iteration to be started.</param>

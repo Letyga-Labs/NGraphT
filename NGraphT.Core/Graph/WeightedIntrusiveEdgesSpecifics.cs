@@ -89,7 +89,7 @@ public class WeightedIntrusiveEdgesSpecifics<TNode, TEdge> :
         ie.Weight = weight;
     }
 
-    protected internal override IntrusiveWeightedEdge GetIntrusiveEdge(TEdge edge)
+    protected override IntrusiveWeightedEdge GetIntrusiveEdge(TEdge edge)
     {
         if (edge is IntrusiveWeightedEdge)
         {

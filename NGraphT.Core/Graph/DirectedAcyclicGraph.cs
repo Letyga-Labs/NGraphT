@@ -152,7 +152,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     ///<param name="topoOrderMap"> the topological order map. For performance reasons, subclasses can change
     ///       the way this class stores the topological order.</param>
     ///<param name="weighted"> if true the graph will be weighted, otherwise not.</param>
-    protected internal DirectedAcyclicGraph(
+    protected DirectedAcyclicGraph(
         Func<TNode>      vertexSupplier,
         Func<TEdge>      edgeSupplier,
         IVisitedStrategyFactory visitedStrategyFactory,
@@ -174,7 +174,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     ///        the way this class stores the topological order.</param>
     /// <param name="weighted"> if true the graph will be weighted, otherwise not.</param>
     /// <param name="allowMultipleEdges"> if true the graph will allow multiple edges, otherwise not.</param>
-    protected internal DirectedAcyclicGraph(
+    protected DirectedAcyclicGraph(
         Func<TNode>      vertexSupplier,
         Func<TEdge>      edgeSupplier,
         IVisitedStrategyFactory visitedStrategyFactory,
@@ -205,7 +205,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// <param name="weighted"> if true the graph will be weighted, otherwise not.</param>
     /// <param name="allowMultipleEdges"> if true the graph will allow multiple edges, otherwise not.</param>
     /// <param name="graphSpecificsStrategy"> strategy for constructing low-level graph specifics.</param>
-    protected internal DirectedAcyclicGraph(
+    protected DirectedAcyclicGraph(
         Func<TNode>                    vertexSupplier,
         Func<TEdge>                    edgeSupplier,
         IVisitedStrategyFactory               visitedStrategyFactory,
@@ -333,7 +333,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     }
 
     /// <summary>
-    /// {@inheritDoc}
+    /// <inheritdoc/>
     ///
     /// <para>
     /// The complexity of adding a new edge in the graph depends on the number of edges incident to
@@ -361,7 +361,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     }
 
     /// <summary>
-    /// {@inheritDoc}
+    /// <inheritdoc/>
     ///
     /// <para>
     /// The complexity of adding a new edge in the graph depends on the number of edges incident to
@@ -686,7 +686,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// @param <TNode> the graph vertex type
     ///
     /// <remarks>Author: Peter Giles.</remarks>
-    protected internal interface ITopoOrderMap<TNode>
+    protected interface ITopoOrderMap<TNode>
     {
         /// <summary>
         /// Add a vertex at the given topological index.
@@ -734,7 +734,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// <remarks>Author: Peter Giles.</remarks>
     /// </para>
     /// </summary>
-    protected internal interface IVisitedStrategy
+    protected interface IVisitedStrategy
     {
         /// <summary>
         /// Mark the given topological index as visited.
@@ -767,7 +767,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
-    protected internal interface IVisitedStrategyFactory
+    protected interface IVisitedStrategyFactory
     {
         /// <summary>
         /// Create a new instance of <see cref="IVisitedStrategy"/>.
@@ -782,7 +782,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
-        protected internal class TopoVertexBiMap<TNode> : ITopoOrderMap<TNode>
+        protected class TopoVertexBiMap<TNode> : ITopoOrderMap<TNode>
     {
         internal const long SerialVersionUID = 1L;
 
@@ -837,7 +837,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
-        protected internal class TopoVertexMap : ITopoOrderMap<TNode>
+        protected class TopoVertexMap : ITopoOrderMap<TNode>
     {
         private readonly DirectedAcyclicGraph<TNode, TEdge> _outerInstance;
 
@@ -917,7 +917,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     ///
     /// <remarks>Author: Peter Giles.</remarks>
     /// </summary>
-        protected internal class Region
+        protected class Region
     {
         internal const long SerialVersionUID = 1L;
 
@@ -997,7 +997,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// <remarks>Author: John TNode. Sichi.</remarks>
     /// </para>
     /// </summary>
-        protected internal class VisitedBitSetImpl : IVisitedStrategy, IVisitedStrategyFactory
+        protected class VisitedBitSetImpl : IVisitedStrategy, IVisitedStrategyFactory
     {
         internal const long SerialVersionUID = 1L;
 
@@ -1061,7 +1061,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// <remarks>Author: Peter Giles.</remarks>
     /// </para>
     /// </summary>
-        protected internal class VisitedArrayListImpl : IVisitedStrategy, IVisitedStrategyFactory
+        protected class VisitedArrayListImpl : IVisitedStrategy, IVisitedStrategyFactory
     {
         internal const long SerialVersionUID = 1L;
 
@@ -1133,7 +1133,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// <remarks>Author: Peter Giles.</remarks>
     /// </para>
     /// </summary>
-        protected internal class VisitedHashSetImpl : IVisitedStrategy, IVisitedStrategyFactory
+        protected class VisitedHashSetImpl : IVisitedStrategy, IVisitedStrategyFactory
     {
         internal const long SerialVersionUID = 1L;
 
@@ -1183,7 +1183,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
     /// <remarks>Author: Peter Giles.</remarks>
     /// </para>
     /// </summary>
-        protected internal class VisitedArrayImpl : IVisitedStrategy, IVisitedStrategyFactory
+        protected class VisitedArrayImpl : IVisitedStrategy, IVisitedStrategyFactory
     {
         internal const long SerialVersionUID = 1L;
 

@@ -25,7 +25,7 @@ public class ConcurrencyUtil
 {
     /// <summary>
     /// Creates a <see cref="ThreadPoolExecutor"/> with fixed number of threads which is equal to
-    /// {@code parallelism}.
+    /// <c>parallelism</c>.
     /// </summary>
     /// <param name="parallelism"> number of threads for the executor.</param>
     /// <returns>created executor.</returns>
@@ -35,8 +35,8 @@ public class ConcurrencyUtil
     }
 
     /// <summary>
-    /// Shuts down the {@code executor}. This operation puts the {@code service} into a state where
-    /// every subsequent task submitted to the {@code service} will be rejected. This method calls
+    /// Shuts down the <c>executor</c>. This operation puts the <c>service</c> into a state where
+    /// every subsequent task submitted to the <c>service</c> will be rejected. This method calls
     /// <see cref="shutdownExecutionService(ExecutorService, long, TimeUnit)"/> with $time =
     /// Long.MAX_VALUE$ and $timeUnit = TimeUnit.MILLISECONDS$.
     /// </summary>
@@ -49,12 +49,12 @@ public class ConcurrencyUtil
     }
 
     /// <summary>
-    /// Shuts down the {@code executor}. This operation puts the {@code service} into a state where
-    /// every subsequent task submitted to the {@code service} will be rejected.
+    /// Shuts down the <c>executor</c>. This operation puts the <c>service</c> into a state where
+    /// every subsequent task submitted to the <c>service</c> will be rejected.
     /// </summary>
     /// <param name="service"> service to be shut down.</param>
     /// <param name="time"> period of time to wait for the completion of the termination.</param>
-    /// <param name="timeUnit"> time duration granularity for the provided {@code time} </param>
+    /// <param name="timeUnit"> time duration granularity for the provided <c>time</c> </param>
 //JAVA TO C# CONVERTER WARNING: Method 'throws' clauses are not available in C#:
 //ORIGINAL LINE: public static void shutdownExecutionService(java.util.concurrent.ExecutorService service, long time, java.util.concurrent.TimeUnit timeUnit) throws InterruptedException
     public static void ShutdownExecutionService(ExecutorService service, long time, TimeUnit timeUnit)

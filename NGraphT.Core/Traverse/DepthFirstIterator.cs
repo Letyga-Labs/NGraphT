@@ -49,7 +49,7 @@ public class DepthFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, TE
     /// <summary>
     /// Standard vertex visit state enumeration.
     /// </summary>
-    protected internal enum VisitColor
+    protected enum VisitColor
     {
         /// <summary>
         /// Vertex has not been returned via iterator yet.
@@ -104,7 +104,7 @@ public class DepthFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, TE
     {
     }
 
-    protected internal override bool ConnectedComponentExhausted
+    protected override bool ConnectedComponentExhausted
     {
         get
         {
@@ -133,13 +133,13 @@ public class DepthFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, TE
         }
     }
 
-    protected internal override void EncounterVertex(TNode vertex, TEdge edge)
+    protected override void EncounterVertex(TNode vertex, TEdge edge)
     {
         PutSeenData(vertex, VisitColor.White);
         _stack.AddLast(vertex);
     }
 
-    protected internal override void EncounterVertexAgain(TNode vertex, TEdge edge)
+    protected override void EncounterVertexAgain(TNode vertex, TEdge edge)
     {
         var color = GetSeenData(vertex);
         if (color != VisitColor.White)
@@ -160,7 +160,7 @@ public class DepthFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, TE
         _stack.AddLast(vertex);
     }
 
-    protected internal override TNode ProvideNextVertex()
+    protected override TNode ProvideNextVertex()
     {
         TNode node;
         for (;;)

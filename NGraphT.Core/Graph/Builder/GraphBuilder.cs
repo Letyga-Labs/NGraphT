@@ -44,7 +44,7 @@ public class GraphBuilder<TNode, TEdge, TG> : AbstractGraphBuilder<TNode, TEdge,
     where TG : IGraph<TNode, TEdge>
 {
     ///<summary>
-    ///Creates a builder based on {@code baseGraph}. {@code baseGraph} must be mutable.
+    ///Creates a builder based on <c>baseGraph</c>. <c>baseGraph</c> must be mutable.
     ///
     ///<para>
     ///The recommended way to use this constructor is: {@code new
@@ -52,7 +52,7 @@ public class GraphBuilder<TNode, TEdge, TG> : AbstractGraphBuilder<TNode, TEdge,
     ///</para>
     ///
     ///<para>
-    ///NOTE: {@code baseGraph} should not be an existing graph. If you want to add an existing graph
+    ///NOTE: <c>baseGraph</c> should not be an existing graph. If you want to add an existing graph
     ///to the graph being built, you should use the <see cref="addVertex(Object)"/> method.
     ///</para>
     ///
@@ -63,7 +63,7 @@ public class GraphBuilder<TNode, TEdge, TG> : AbstractGraphBuilder<TNode, TEdge,
     {
     }
 
-    protected internal override GraphBuilder<TNode, TEdge, TG> Self()
+    protected override GraphBuilder<TNode, TEdge, TG> Self()
     {
         return this;
     }

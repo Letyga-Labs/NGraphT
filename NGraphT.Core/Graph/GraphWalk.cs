@@ -61,16 +61,16 @@ using Core;
 public class GraphWalk<TNode, TEdge> : IGraphPath<TNode, TEdge>
 {
     private const      long                 SerialVersionUID = 7663410644865380676L;
-    protected internal IGraph<TNode, TEdge> Graph;
+    protected IGraph<TNode, TEdge> Graph;
 
-    protected internal IList<TNode> VertexList;
-    protected internal IList<TEdge> EdgeList;
+    protected IList<TNode> VertexList;
+    protected IList<TEdge> EdgeList;
 
-    protected internal TNode StartVertex;
+    protected TNode StartVertex;
 
-    protected internal TNode EndVertex;
+    protected TNode EndVertex;
 
-    protected internal double Weight;
+    protected double Weight;
 
     ///<summary>
     ///Creates a walk defined by a sequence of edges. A walk defined by its edges can be specified

@@ -416,6 +416,12 @@ MA0053.public_class_should_be_sealed = true
 MA0053.exceptions_should_be_sealed = true
 MA0053.class_with_virtual_member_shoud_be_sealed = true
 
+# MA0056: Do not call overridable members in constructor
+dotnet_diagnostic.ma0056.severity = none
+
+# MA0026: to do analysis
+dotnet_diagnostic.ma0026.severity = none
+
 ## ----------------------------------------------------------------------------
 ##                               IDE FORMATTING rules
 ## ----------------------------------------------------------------------------
@@ -477,6 +483,9 @@ dotnet_diagnostic.ca1043.severity = none
 # CA1040: Do not use empty interfaces
 dotnet_diagnostic.ca1040.severity = none
 
+# CA1030: Consider making an event TODO: remove later
+dotnet_diagnostic.CA1030.severity = none
+
 ## ----------------------------------------------------------------------------
 ##                               Style Cop rules
 ## ----------------------------------------------------------------------------
@@ -526,6 +535,9 @@ dotnet_diagnostic.sa1009.severity = none
 
 # SA1516: Elements should be separated by blank line
 dotnet_diagnostic.sa1516.severity = none
+
+# SA1111: Closing parenthesis should be on line of last parameter
+dotnet_diagnostic.sa1111.severity = none
 
 ## ----------------------------------------------------------------------------
 ##                               Sonar Qube rules

@@ -34,10 +34,10 @@ using Graph;
 public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGraph<TNode, TEdge>
     where TB : AbstractGraphBuilder<TNode, TEdge, TG, TB>
 {
-    protected internal readonly TG Graph;
+    protected readonly TG Graph;
 
     ///<summary>
-    ///Creates a builder based on {@code baseGraph}. {@code baseGraph} must be mutable.
+    ///Creates a builder based on <c>baseGraph</c>. <c>baseGraph</c> must be mutable.
     ///</summary>
     ///<param name="baseGraph"> the graph object to base building on.</param>
     public AbstractGraphBuilder(TG baseGraph)
@@ -45,11 +45,11 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
         Graph = baseGraph;
     }
 
-    ///<returns>the {@code this} object.</returns>
-    protected internal abstract TB Self();
+    ///<returns>the <c>this</c> object.</returns>
+    protected abstract TB Self();
 
     ///<summary>
-    ///Adds {@code vertex} to the graph being built.
+    ///Adds <c>vertex</c> to the graph being built.
     ///</summary>
     ///<param name="vertex"> the vertex to add.</param>>
     ///<returns>this builder object.</returns>
@@ -61,7 +61,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     }
 
     ///<summary>
-    ///Adds each vertex of {@code vertices} to the graph being built.
+    ///Adds each vertex of <c>vertices</c> to the graph being built.
     ///</summary>
     ///<param name="vertices"> the vertices to add.</param>>
     ///<returns>this builder object.</returns>
@@ -134,7 +134,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     }
 
     ///<summary>
-    ///Adds all the vertices and all the edges of the {@code sourceGraph} to the graph being built.
+    ///Adds all the vertices and all the edges of the <c>sourceGraph</c> to the graph being built.
     ///</summary>
     ///<param name="sourceGraph"> the source graph.</param>
     ///<returns>this builder object.</returns>
@@ -146,7 +146,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     }
 
     ///<summary>
-    ///Removes {@code vertex} from the graph being built, if such vertex exist in graph.
+    ///Removes <c>vertex</c> from the graph being built, if such vertex exist in graph.
     ///</summary>
     ///<param name="vertex"> the vertex to remove.</param>>
     ///<returns>this builder object.</returns>
@@ -158,7 +158,7 @@ public abstract class AbstractGraphBuilder<TNode, TEdge, TG, TB> where TG : IGra
     }
 
     ///<summary>
-    ///Removes each vertex of {@code vertices} from the graph being built, if such vertices exist in
+    ///Removes each vertex of <c>vertices</c> from the graph being built, if such vertices exist in
     ///graph.
     ///</summary>
     ///<param name="vertices"> the vertices to remove.</param>>

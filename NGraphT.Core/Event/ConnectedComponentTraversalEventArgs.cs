@@ -21,7 +21,7 @@ namespace NGraphT.Core.Event;
 /// A traversal event with respect to a connected component.
 /// </summary>
 /// <remarks>Author: Barak Naveh.</remarks>
-public class ConnectedComponentTraversalEventArgs : EventArgs
+public sealed class ConnectedComponentTraversalEventArgs : EventArgs
 {
     /// <summary>
     /// Connected component traversal started event.
@@ -34,7 +34,7 @@ public class ConnectedComponentTraversalEventArgs : EventArgs
     public const int ConnectedComponentFinished = 32;
 
     /// <summary>
-    /// Creates a new ConnectedComponentTraversalEvent.
+    /// Creates a new ConnectedComponentTraversalEventArgs.
     /// </summary>
     /// <param name="eventSource"> the source of the event. </param>
     /// <param name="type"> the type of event. </param>
@@ -46,5 +46,5 @@ public class ConnectedComponentTraversalEventArgs : EventArgs
     /// <summary>
     /// The type of this event.
     /// </summary>
-    public int Type { get; set; }
+    public int Type { get; private set; }
 }

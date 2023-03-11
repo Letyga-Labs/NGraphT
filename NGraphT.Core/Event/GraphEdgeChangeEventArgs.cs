@@ -95,20 +95,20 @@ public class GraphEdgeChangeEventArgs<TNode, TEdge> : GraphChangeEventArgs
     /// <summary>
     /// The edge that this event is related to.
     /// </summary>
-    public TEdge Edge { get; }
+    public TEdge Edge { get; protected set; }
 
     /// <summary>
     /// The source vertex of the edge that this event is related to.
     /// </summary>
-    public TNode EdgeSource { get; }
+    public TNode EdgeSource { get; protected set; }
 
     /// <summary>
     /// The target vertex of the edge that this event is related to.
     /// </summary>
-    public TNode EdgeTarget { get; }
+    public TNode EdgeTarget { get; protected set; }
 
     /// <summary>
     /// The weight of the edge that this event is related to.
     /// </summary>
-    public double EdgeWeight { get; }
+    public double EdgeWeight { get; protected set; }
 }

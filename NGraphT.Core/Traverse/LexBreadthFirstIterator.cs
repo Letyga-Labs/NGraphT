@@ -16,15 +16,16 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
+using NGraphT.Core.Util;
+
 namespace NGraphT.Core.Traverse;
 
-using Core;
-using GraphTests = GraphTests;
-using Graphs = Graphs;
-using CollectionUtil = Util.CollectionUtil;
+using NGraphT.Core;
+using Java2Net = J2N.Collections.Generic;
 
 /// <summary>
 /// A lexicographical breadth-first iterator for an undirected graph.
+///
 /// <para>
 /// Every vertex has an implicit label (they aren't used explicitly in order to reduce time and
 /// memory complexity). When some vertex is returned by this iterator, its index is the number of
@@ -32,6 +33,7 @@ using CollectionUtil = Util.CollectionUtil;
 /// is a concatenation of indices of already returned vertices, that were also its neighbours, with
 /// some separator between them. For example, 7#4#3 is a valid vertex label.
 /// </para>
+///
 /// <para>
 /// Iterator chooses vertex with lexicographically largest label and returns it. It breaks ties
 /// arbitrarily. For more information on lexicographical BFS see the following article: Corneil D.G.
@@ -42,50 +44,71 @@ using CollectionUtil = Util.CollectionUtil;
 /// paper:<a href="http://www.cse.iitd.ac.in/~naveen/courses/CSL851/uwaterloo.pdf"><i>CS 762:
 /// Graph-theoretic algorithms. Lecture notes of a graduate course. University of Waterloo</i></a>.
 /// </para>
+///
 /// <para>
 /// For this iterator to work correctly the graph must not be modified during iteration. Currently
 /// there are no means to ensure that, nor to fail-fast. The results of such modifications are
 /// undefined.
 /// </para>
+///
 /// <para>
 /// Note: only vertex events are fired by this iterator.
 /// </para>
 /// </summary>
+///
 /// <typeparam name="TNode"> the graph vertex type.</typeparam>
 /// <typeparam name="TEdge">The graph edge type.</typeparam>.
+///
 /// <remarks>Author: Timofey Chudakov.</remarks>
-public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
+public sealed class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
+    where TNode : class
+    where TEdge : class
 {
     /// <summary>
-    /// Reference to the {@code BucketList} that contains unvisited vertices.
+    /// Reference to the <c>BucketList</c> that contains unvisited vertices.
     /// </summary>
-    private BucketList _bucketList;
+    private readonly BucketList _bucketList;
 
     /// <summary>
-    /// Contains current vertex of the {@code graph}.
+    /// Contains current vertex of the <c>graph</c>.
     /// </summary>
-    private TNode _current;
+    private TNode? _current;
 
     /// <summary>
-    /// Creates new lexicographical breadth-first iterator for {@code graph}.
+    /// Creates new lexicographical breadth-first iterator for <c>graph</c>.
     /// </summary>
     /// <param name="graph"> the graph to be iterated.</param>
     public LexBreadthFirstIterator(IGraph<TNode, TEdge> graph)
         : base(graph)
     {
-        GraphTests.RequireUndirected(graph);
-        _bucketList = new BucketList(this, graph.VertexSet());
+        // TODO: GraphTests.RequireUndirected(graph);
+        _bucketList = new BucketList(graph.VertexSet());
     }
 
     /// <summary>
-    /// Checks whether there exist unvisited vertices.
+    /// <inheritdoc/>
+    /// <para>
+    /// Always returns true since this iterator doesn't care about connected components.
+    /// </para>
+    /// </summary>
+    public override bool CrossComponentTraversal => true;
+
+    /// <summary>
+    /// Returns the current vertex in the ordering.
+    /// </summary>
+    /// <returns>the current vertex in the ordering.</returns>
+    public override TNode Current => _current ?? throw new InvalidOperationException("No more elements");
+
+    /// <summary>
+    /// Checks whether there exist unvisited vertices and moves to the next one.
     /// </summary>
     /// <returns>true if there exist unvisited vertices.</returns>
-    public override bool HasNext()
+    public override bool MoveNext()
     {
-        if (_current != null)
+        var previous = _current;
+        if (NListeners != 0 && previous != null)
         {
-            return true;
+            FireVertexFinished(CreateVertexTraversalEvent(previous));
         }
 
         _current = Advance();
@@ -98,53 +121,10 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
     }
 
     /// <summary>
-    /// Returns the next vertex in the ordering.
+    /// Retrieves vertex from the <c>bucketList</c> and returns it.
     /// </summary>
-    /// <returns>the next vertex in the ordering.</returns>
-    public override TNode Next()
-    {
-        if (!HasNext())
-        {
-            throw new NoSuchElementException();
-        }
-
-        var result = _current;
-        _current = default(TNode);
-        if (NListeners != 0)
-        {
-            FireVertexFinished(CreateVertexTraversalEvent(result));
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    /// {@inheritDoc}
-    /// <para>
-    /// Always returns true since this iterator doesn't care about connected components.
-    /// </para>
-    /// </summary>
-    public override bool CrossComponentTraversal
-    {
-        get
-        {
-            return true;
-        }
-        set
-        {
-            if (!value)
-            {
-                throw new ArgumentException("Iterator is always cross-component");
-            }
-        }
-    }
-
-
-    /// <summary>
-    /// Retrieves vertex from the {@code bucketList} and returns it.
-    /// </summary>
-    /// <returns>the vertex retrieved from the {@code bucketList}.</returns>
-    private TNode Advance()
+    /// <returns>the vertex retrieved from the <c>bucketList</c>.</returns>
+    private TNode? Advance()
     {
         var vertex = _bucketList.Poll();
         if (vertex != null)
@@ -156,18 +136,18 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
     }
 
     /// <summary>
-    /// Computes and returns neighbours of {@code vertex} which haven't been visited by this
+    /// Computes and returns neighbours of <c>vertex</c> which haven't been visited by this
     /// iterator.
     /// </summary>
     /// <param name="vertex"> the vertex, whose neighbours are being explored.</param>
-    /// <returns>neighbours of {@code vertex} which have yet to be visited by this iterator.</returns>
+    /// <returns>neighbours of <c>vertex</c> which have yet to be visited by this iterator.</returns>
     private ISet<TNode> GetUnvisitedNeighbours(TNode vertex)
     {
-        ISet<TNode> unmapped = new LinkedHashSet<TNode>();
-        ISet<TEdge> edges    = graph.EdgesOf(vertex);
+        var unmapped = new Java2Net.LinkedHashSet<TNode>();
+        var edges    = Graph.EdgesOf(vertex);
         foreach (var edge in edges)
         {
-            var oppositeVertex = Graphs.GetOppositeVertex(graph, edge, vertex);
+            var oppositeVertex = Graphs.GetOppositeVertex(Graph, edge, vertex);
             if (_bucketList.ContainsBucketWith(oppositeVertex))
             {
                 unmapped.Add(oppositeVertex);
@@ -184,72 +164,69 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
     ///
     /// <remarks>Author: Timofey Chudakov.</remarks>
     /// </summary>
-    internal class BucketList
+    private sealed class BucketList
     {
-        private readonly LexBreadthFirstIterator<TNode, TEdge> _outerInstance;
-
-        /// <summary>
-        /// Bucket with the vertices that have lexicographically largest label.
-        /// </summary>
-        internal Bucket Head;
-
         /// <summary>
         /// Map for mapping vertices to buckets they are currently in. Is used for finding the bucket
         /// of the vertex in constant time.
         /// </summary>
-        internal IDictionary<TNode, Bucket> BucketMap;
+        private readonly IDictionary<TNode, Bucket> _bucketMap;
 
         /// <summary>
-        /// Creates a {@code BucketList} with a single bucket and all specified {@code vertices} in
+        /// Bucket with the vertices that have lexicographically largest label.
+        /// </summary>
+        private Bucket? _head;
+
+        /// <summary>
+        /// Creates a <c>BucketList</c> with a single bucket and all specified <c>vertices</c> in
         /// it.
         /// </summary>
-        /// <param name="vertices"> the vertices of the graph, that should be stored in the {@code head}
+        /// <param name="vertices"> the vertices of the graph, that should be stored in the <c>head</c>
         ///        bucket.</param>
-        internal BucketList(LexBreadthFirstIterator<TNode, TEdge> outerInstance, ICollection<TNode> vertices)
+        internal BucketList(ICollection<TNode> vertices)
         {
-            _outerInstance = outerInstance;
-            Head                = new Bucket(this, vertices);
-            BucketMap           = CollectionUtil.NewHashMapWithExpectedSize(vertices.Count);
+            _head      = new Bucket(vertices);
+            _bucketMap = CollectionUtil.NewHashMapWithExpectedSize<TNode, Bucket>(vertices.Count);
             foreach (var vertex in vertices)
             {
-                BucketMap[vertex] = Head;
+                _bucketMap[vertex] = _head;
             }
         }
 
         /// <summary>
-        /// Checks whether there exists a bucket with the specified {@code vertex}.
+        /// Checks whether there exists a bucket with the specified <c>vertex</c>.
         /// </summary>
-        /// <param name="vertex"> the vertex whose presence in some {@code Bucket} in this {@code BucketList}
+        /// <param name="vertex"> the vertex whose presence in some <c>Bucket</c> in this <c>BucketList</c>
         ///        is checked.</param>
-        /// <returns><tt>true</tt> if there exists a bucket with {@code vertex} in it, otherwise
-        ///         <tt>false</tt>.</returns>
-        internal virtual bool ContainsBucketWith(TNode vertex)
+        /// <returns><c>true</c> if there exists a bucket with <c>vertex</c> in it, otherwise
+        ///         <c>false</c>.</returns>
+        internal bool ContainsBucketWith(TNode vertex)
         {
-            return BucketMap.ContainsKey(vertex);
+            return _bucketMap.ContainsKey(vertex);
         }
 
         /// <summary>
-        /// Retrieves element from the head bucket by invoking <see cref="Bucket.poll()"/> or null if this
-        /// {@code BucketList} is empty.
+        /// Retrieves element from the head bucket by invoking <see cref="Bucket.Poll()"/> or null if this
+        /// <c>BucketList</c> is empty.
         /// <para>
         /// Removes the head bucket if it becomes empty after the operation.
         ///
         /// </para>
         /// </summary>
-        /// <returns>vertex returned by <see cref="Bucket.poll()"/> invoked on head bucket or null if this
-        ///         {@code BucketList} is empty.</returns>
-        internal virtual TNode Poll()
+        /// <returns>vertex returned by <see cref="Bucket.Poll()"/> invoked on head bucket or null if this
+        ///         <c>BucketList</c> is empty.</returns>
+        internal TNode? Poll()
         {
-            if (BucketMap.Count > 0)
+            if (_bucketMap.Count > 0)
             {
-                var res = Head.Poll();
-                BucketMap.Remove(res);
-                if (Head.Empty)
+                var res = _head!.Poll();
+                _bucketMap.Remove(res);
+                if (_head.Empty)
                 {
-                    Head = Head.Next;
-                    if (Head != null)
+                    _head = _head.Next;
+                    if (_head != null)
                     {
-                        Head.Prev = null;
+                        _head.Prev = null;
                     }
                 }
 
@@ -257,46 +234,45 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
             }
             else
             {
-                return default(TNode);
+                return default;
             }
         }
 
         /// <summary>
-        /// For every bucket B in this {@code BucketList}, which contains vertices from the set
-        /// {@code
-        /// vertices}, creates a new {@code Bucket} B' and moves vertices from B to B' according to
+        /// For every bucket B in this <c>BucketList</c>, which contains vertices from the set
+        /// <c>vertices</c>, creates a new <c>Bucket</c> B' and moves vertices from B to B' according to
         /// the following rule: $B' = B\cap vertices$ and $B = B\backslash B'$. For every such
-        /// {@code Bucket} B only one {@code Bucket} B' is created. If some bucket B becomes empty
+        /// <c>Bucket</c> B only one <c>Bucket</c> B' is created. If some bucket B becomes empty
         /// after this operation, it is removed from the data structure.
         /// </summary>
         /// <param name="vertices"> the vertices, that should be moved to new buckets.</param>
-        internal virtual void UpdateBuckets(ISet<TNode> vertices)
+        internal void UpdateBuckets(ISet<TNode> vertices)
         {
-            ISet<Bucket> visitedBuckets = new HashSet<Bucket>();
+            var visitedBuckets = new HashSet<Bucket>();
             foreach (var vertex in vertices)
             {
-                var bucket = BucketMap[vertex];
+                var bucket = _bucketMap[vertex];
                 if (visitedBuckets.Contains(bucket))
                 {
-                    bucket.Prev.AddVertex(vertex);
-                    BucketMap[vertex] = bucket.Prev;
+                    bucket.Prev!.AddVertex(vertex);
+                    _bucketMap[vertex] = bucket.Prev;
                 }
                 else
                 {
                     visitedBuckets.Add(bucket);
-                    var newBucket = new Bucket(this, vertex);
+                    var newBucket = new Bucket(vertex);
                     newBucket.InsertBefore(bucket);
-                    BucketMap[vertex] = newBucket;
-                    if (Head == bucket)
+                    _bucketMap[vertex] = newBucket;
+                    if (_head == bucket)
                     {
-                        Head = newBucket;
+                        _head = newBucket;
                     }
                 }
 
                 bucket.RemoveVertex(vertex);
                 if (bucket.Empty)
                 {
-                    visitedBuckets.remove(bucket);
+                    visitedBuckets.Remove(bucket);
                     bucket.RemoveSelf();
                 }
             }
@@ -310,59 +286,60 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
         /// of a bucket from the data structure.
         /// </para>
         /// </summary>
-        private class Bucket
+        private sealed class Bucket
         {
-            private readonly BucketList _outerInstance;
+            /// <summary>
+            /// Set of vertices currently stored in this bucket.
+            /// </summary>
+            private readonly ISet<TNode> _vertices;
+
+            /// <summary>
+            /// Creates a new bucket with all <c>vertices</c> stored in it.
+            /// </summary>
+            /// <param name="vertices"> vertices to store in this bucket.</param>
+            internal Bucket(ICollection<TNode> vertices)
+            {
+                _vertices = new Java2Net.LinkedHashSet<TNode>(vertices);
+            }
+
+            /// <summary>
+            /// Creates a new Bucket with a single <c>vertex</c> in it.
+            /// </summary>
+            /// <param name="vertex"> the vertex to store in this bucket.</param>
+            internal Bucket(TNode vertex)
+            {
+                _vertices = new Java2Net.LinkedHashSet<TNode> { vertex, };
+            }
 
             /// <summary>
             /// Reference of the bucket with lexicographically smaller label.
             /// </summary>
-            internal Bucket Next;
+            internal Bucket? Next { get; private set; }
 
             /// <summary>
             /// Reference of the bucket with lexicographically larger label.
             /// </summary>
-            internal Bucket Prev;
+            internal Bucket? Prev { get; set; }
 
             /// <summary>
-            /// Set of vertices currently stored in this bucket.
+            /// Checks whether this bucket is empty.
             /// </summary>
-            internal ISet<TNode> Vertices;
+            /// <returns><c>true</c> if this bucket doesn't contain any elements, otherwise false.</returns>
+            internal bool Empty => _vertices.Count == 0;
 
             /// <summary>
-            /// Creates a new bucket with all {@code vertices} stored in it.
-            /// </summary>
-            /// <param name="vertices"> vertices to store in this bucket.</param>
-            internal Bucket(BucketList outerInstance, ICollection<TNode> vertices)
-            {
-                _outerInstance = outerInstance;
-                Vertices       = new LinkedHashSet<TNode>(vertices);
-            }
-
-            /// <summary>
-            /// Creates a new Bucket with a single {@code vertex} in it.
-            /// </summary>
-            /// <param name="vertex"> the vertex to store in this bucket.</param>
-            internal Bucket(BucketList outerInstance, TNode vertex)
-            {
-                _outerInstance = outerInstance;
-                Vertices       = new LinkedHashSet<TNode>();
-                Vertices.Add(vertex);
-            }
-
-            /// <summary>
-            /// Removes the {@code vertex} from this bucket.
+            /// Removes the <c>vertex</c> from this bucket.
             /// </summary>
             /// <param name="vertex"> the vertex to remove.</param>
-            internal virtual void RemoveVertex(TNode vertex)
+            internal void RemoveVertex(TNode vertex)
             {
-                Vertices.remove(vertex);
+                _vertices.Remove(vertex);
             }
 
             /// <summary>
             /// Removes this bucket from the data structure.
             /// </summary>
-            internal virtual void RemoveSelf()
+            internal void RemoveSelf()
             {
                 if (Next != null)
                 {
@@ -376,10 +353,10 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
             }
 
             /// <summary>
-            /// Inserts this bucket in the data structure before the {@code bucket}.
+            /// Inserts this bucket in the data structure before the <c>bucket</c>.
             /// </summary>
             /// <param name="bucket"> the bucket, that will be the next to this bucket.</param>
-            internal virtual void InsertBefore(Bucket bucket)
+            internal void InsertBefore(Bucket? bucket)
             {
                 Next = bucket;
                 if (bucket != null)
@@ -399,41 +376,29 @@ public class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterator<TNode
             }
 
             /// <summary>
-            /// Adds the {@code vertex} to this bucket.
+            /// Adds the <c>vertex</c> to this bucket.
             /// </summary>
             /// <param name="vertex"> the vertex to add.</param>
-            internal virtual void AddVertex(TNode vertex)
+            internal void AddVertex(TNode vertex)
             {
-                Vertices.Add(vertex);
+                _vertices.Add(vertex);
             }
 
             /// <summary>
             /// Retrieves one vertex from this bucket.
             /// </summary>
             /// <returns>vertex, that was removed from this bucket, null if the bucket was empty.</returns>
-            internal virtual TNode Poll()
+            internal TNode Poll()
             {
-                if (Vertices.Count == 0)
+                if (_vertices.Count == 0)
                 {
-                    return default(TNode);
+                    return default!;
                 }
                 else
                 {
-                    TNode vertex = Vertices.GetEnumerator().next();
-                    Vertices.remove(vertex);
+                    var vertex = _vertices.First();
+                    _vertices.Remove(vertex);
                     return vertex;
-                }
-            }
-
-            /// <summary>
-            /// Checks whether this bucket is empty.
-            /// </summary>
-            /// <returns><tt>true</tt> if this bucket doesn't contain any elements, otherwise false.</returns>
-            internal virtual bool Empty
-            {
-                get
-                {
-                    return Vertices.Count == 0;
                 }
             }
         }

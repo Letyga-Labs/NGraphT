@@ -64,5 +64,5 @@ public class GraphVertexChangeEventArgs<TNode> : GraphChangeEventArgs
     /// <summary>
     /// The vertex that this event is related to.
     /// </summary>
-    public TNode Vertex { get; }
+    public TNode Vertex { get; protected set; }
 }

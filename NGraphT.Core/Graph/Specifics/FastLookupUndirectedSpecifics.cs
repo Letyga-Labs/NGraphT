@@ -38,7 +38,7 @@ public class FastLookupUndirectedSpecifics<TNode, TEdge> : UndirectedSpecifics<T
     ///Maps a pair of vertices &lt;u,TNode&gt; to a set of edges {(u,TNode)}. In case of a multigraph, all
     ///edges which touch both u and TNode are included in the set.
     ///</summary>
-    protected internal IDictionary<Pair<TNode, TNode>, ISet<TEdge>> TouchingVerticesToEdgeMap;
+    protected IDictionary<Pair<TNode, TNode>, ISet<TEdge>> TouchingVerticesToEdgeMap;
 
     ///<summary>
     ///Construct a new fast lookup undirected specifics.
@@ -149,7 +149,7 @@ public class FastLookupUndirectedSpecifics<TNode, TEdge> : UndirectedSpecifics<T
     ///<param name="sourceVertex"> the source vertex.</param>
     ///<param name="targetVertex"> the target vertex.</param>
     ///<param name="edge"> the edge.</param>
-    protected internal virtual void AddToIndex(TNode sourceVertex, TNode targetVertex, TEdge edge)
+    protected virtual void AddToIndex(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         Pair<TNode, TNode> vertexPair = new UnorderedPair<TNode, TNode>(sourceVertex, targetVertex);
         var        edgeSet    = TouchingVerticesToEdgeMap[vertexPair];
@@ -171,7 +171,7 @@ public class FastLookupUndirectedSpecifics<TNode, TEdge> : UndirectedSpecifics<T
     ///<param name="sourceVertex"> the source vertex.</param>
     ///<param name="targetVertex"> the target vertex.</param>
     ///<param name="edge"> the edge.</param>
-    protected internal virtual void RemoveFromIndex(TNode sourceVertex, TNode targetVertex, TEdge edge)
+    protected virtual void RemoveFromIndex(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
         Pair<TNode, TNode> vertexPair = new UnorderedPair<TNode, TNode>(sourceVertex, targetVertex);
         var        edgeSet    = TouchingVerticesToEdgeMap[vertexPair];

@@ -47,7 +47,7 @@ using Util;
 public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
 {
     /// <summary>
-    /// The maximum index of non-empty set in {@code buckets}.
+    /// The maximum index of non-empty set in <c>buckets</c>.
     /// </summary>
     private int _maxCardinality;
 
@@ -73,7 +73,7 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     private IDictionary<TNode, int> _cardinalityMap;
 
     /// <summary>
-    /// Creates a maximum cardinality iterator for the {@code graph}.
+    /// Creates a maximum cardinality iterator for the <c>graph</c>.
     /// </summary>
     /// <param name="graph"> the graph to be iterated.</param>
     public MaximumCardinalityIterator(IGraph<TNode, TEdge> graph)
@@ -137,7 +137,7 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     }
 
     /// <summary>
-    /// {@inheritDoc}
+    /// <inheritdoc/>
     /// <para>
     /// Always returns true since this iterator doesn't care about connected components.
     /// </para>
@@ -159,9 +159,9 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
 
 
     /// <summary>
-    /// Retrieves a vertex from the {@code buckets} with the maximum cardinality and returns it.
+    /// Retrieves a vertex from the <c>buckets</c> with the maximum cardinality and returns it.
     /// </summary>
-    /// <returns>vertex retrieved from {@code buckets}.</returns>
+    /// <returns>vertex retrieved from <c>buckets</c>.</returns>
     private TNode Advance()
     {
         if (_remainingVertices > 0)
@@ -189,7 +189,7 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     }
 
     /// <summary>
-    /// Removes {@code vertex} from the bucket it was contained in.
+    /// Removes <c>vertex</c> from the bucket it was contained in.
     /// </summary>
     /// <param name="vertex"> the vertex, which has to be removed from the bucket it was contained in.</param>
     /// <returns>the cardinality of the removed vertex or -1, if the vertex wasn't contained in any
@@ -213,7 +213,7 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     }
 
     /// <summary>
-    /// Adds the {@code vertex} to the bucket with the given {@code cardinality}.
+    /// Adds the <c>vertex</c> to the bucket with the given <c>cardinality</c>.
     /// </summary>
     /// <param name="vertex"> the vertex, which has to be added to the the bucket.</param>
     /// <param name="cardinality"> the cardinality of the destination bucket.</param>
@@ -229,8 +229,8 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     }
 
     /// <summary>
-    /// Increments the cardinalities of the neighbours of the {@code vertex} by 1. If the maximum
-    /// cardinality increases, increments {@code maxCardinality} by 1.
+    /// Increments the cardinalities of the neighbours of the <c>vertex</c> by 1. If the maximum
+    /// cardinality increases, increments <c>maxCardinality</c> by 1.
     /// </summary>
     /// <param name="vertex"> the vertex whose neighbours are to be updated.</param>
     private void UpdateNeighbours(TNode vertex)

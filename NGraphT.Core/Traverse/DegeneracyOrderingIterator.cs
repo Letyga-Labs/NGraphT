@@ -101,7 +101,7 @@ public class DegeneracyOrderingIterator<TNode, TEdge> : AbstractGraphIterator<TN
     }
 
     /// <summary>
-    /// {@inheritDoc}
+    /// <inheritdoc/>
     ///
     /// Always returns true since the iterator does not care about components.
     /// </summary>

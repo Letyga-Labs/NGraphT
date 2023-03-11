@@ -10,6 +10,7 @@
       <Compile Remove="generate\**" />
       <Compile Remove="GraphMetrics.cs" />
       <Compile Remove="GraphTests.cs" />
+      <Compile Remove="Traverse\ClosestFirstIterator.cs" />
     </ItemGroup>
 
     <ItemGroup>

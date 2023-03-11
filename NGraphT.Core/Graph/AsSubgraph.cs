@@ -90,11 +90,11 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     private const string NoSuchVertexInBase                  = "no such vertex in base graph";
     private const string CannotCreateNewVerticesFromSubgraph = "Cannot create new vertices from subgraph";
 
-    protected internal readonly ISet<TEdge>          EdgeSet   = new LinkedHashSet<TEdge>();
-    protected internal readonly ISet<TNode>          VertexSet = new LinkedHashSet<TNode>();
-    protected internal readonly IGraph<TNode, TEdge> Base;
-    protected internal readonly IGraphType           BaseType;
-    protected internal readonly bool                 IsInduced;
+    protected readonly ISet<TEdge>          EdgeSet   = new LinkedHashSet<TEdge>();
+    protected readonly ISet<TNode>          VertexSet = new LinkedHashSet<TNode>();
+    protected readonly IGraph<TNode, TEdge> Base;
+    protected readonly IGraphType           BaseType;
+    protected readonly bool                 IsInduced;
 
     private ISet<TEdge> _unmodifiableEdgeSet = null;
 
@@ -325,7 +325,7 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
     }
 
     /// <summary>
-    /// {@inheritDoc}
+    /// <inheritdoc/>
     ///
     /// <para>
     /// By default this method returns the sum of in-degree and out-degree. The exact value returned
@@ -547,7 +547,7 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         internal const long SerialVersionUID = 4343535244243546391L;
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual void EdgeAdded(GraphEdgeChangeEvent<TNode, TEdge> edge)
         {
@@ -564,7 +564,7 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual void EdgeRemoved(GraphEdgeChangeEvent<TNode, TEdge> edge)
         {
@@ -574,7 +574,7 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual void VertexAdded(GraphVertexChangeEvent<TNode> edge)
         {
@@ -582,7 +582,7 @@ public class AsSubgraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>
         }
 
         /// <summary>
-        /// {@inheritDoc}
+        /// <inheritdoc/>
         /// </summary>
         public virtual void VertexRemoved(GraphVertexChangeEvent<TNode> edge)
         {

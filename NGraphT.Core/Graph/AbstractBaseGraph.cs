@@ -90,7 +90,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// <param name="edgeSupplier"> the edge supplier, can be null.</param>
     /// <param name="type"> the graph type.</param>>
     /// <exception cref="ArgumentException"> if the graph type is mixed.</exception>
-    protected internal AbstractBaseGraph(
+    protected AbstractBaseGraph(
         Func<TNode> vertexSupplier,
         Func<TEdge> edgeSupplier,
         IGraphType         type
@@ -107,7 +107,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// <param name="type"> the graph type.</param>
     /// <param name="graphSpecificsStrategy"> strategy for constructing low-level graph specifics.</param>>
     /// <exception cref="ArgumentException"> if the graph type is mixed.</exception>
-    protected internal AbstractBaseGraph(
+    protected AbstractBaseGraph(
         Func<TNode>                    vertexSupplier,
         Func<TEdge>                    edgeSupplier,
         IGraphType                            type,
