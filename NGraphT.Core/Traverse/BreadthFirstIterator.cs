@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-/*
+﻿/*
  * (C) Copyright 2003-2021, by Barak Naveh and Contributors.
  *
  * JGraphT : a free Java graph-theory library
@@ -19,15 +17,15 @@
  */
 namespace NGraphT.Core.Traverse;
 
-using Core;
+using NGraphT.Core;
 
 /// <summary>
 /// A breadth-first iterator for a directed or undirected graph.
 ///
 /// <para>
-/// For this iterator to work correctly the graph must not be modified during iteration. Currently
-/// there are no means to ensure that, nor to fail-fast. The results of such modifications are
-/// undefined.
+/// For this iterator to work correctly the graph must not be modified during iteration.
+/// Currently there are no means to ensure that, nor to fail-fast.
+/// The results of such modifications are undefined.
 /// </para>
 /// </summary>
 ///
@@ -35,18 +33,19 @@ using Core;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
-public class
-    BreadthFirstIterator<TNode, TEdge> : CrossComponentIterator<TNode, TEdge,
-        BreadthFirstIterator.SearchNodeData<TEdge>>
+public sealed class BreadthFirstIterator<TNode, TEdge>
+    : CrossComponentIterator<TNode, TEdge, BreadthFirstIterator<TNode, TEdge>.SearchNodeData>
+    where TNode : class
+    where TEdge : class
 {
-    private LinkedList<TNode> _queue = new LinkedList<TNode>();
+    private readonly LinkedList<TNode> _queue = new();
 
     /// <summary>
     /// Creates a new breadth-first iterator for the specified graph.
     /// </summary>
     /// <param name="g"> the graph to be iterated.</param>
     public BreadthFirstIterator(IGraph<TNode, TEdge> g)
-        : this(g, (TNode)null)
+        : this(g, (TNode?)null)
     {
     }
 
@@ -58,7 +57,7 @@ public class
     /// </summary>
     /// <param name="g"> the graph to be iterated.</param>
     /// <param name="startVertex"> the vertex iteration to be started.</param>
-    public BreadthFirstIterator(IGraph<TNode, TEdge> g, TNode startVertex)
+    public BreadthFirstIterator(IGraph<TNode, TEdge> g, TNode? startVertex)
         : base(g, startVertex)
     {
     }
@@ -77,19 +76,52 @@ public class
     }
 
     /// <inheritdoc/>
-    protected override bool ConnectedComponentExhausted
+    protected override bool ConnectedComponentExhausted => _queue.Count == 0;
+
+    /// <summary>
+    /// Returns the parent node of vertex $v$ in the BFS search tree, or null if $v$ is the root
+    /// node. This method can only be invoked on a vertex $v$ once the iterator has visited vertex $v$.
+    /// </summary>
+    /// <param name="node"> vertex.</param>
+    /// <returns>parent node of vertex $v$ in the BFS search tree, or null if $v$ is a root node.</returns>
+    public TNode? GetParent(TNode node)
     {
-        get
-        {
-            return _queue.Count == 0;
-        }
+        var edge = GetSeenData(node).Edge;
+        return edge == null ? null : Graphs.GetOppositeVertex(Graph, edge, node);
+    }
+
+    /// <summary>
+    /// Returns the edge connecting vertex $v$ to its parent in the spanning tree formed by the BFS
+    /// search, or null if $v$ is a root node. This method can only be invoked on a vertex $v$ once
+    /// the iterator has visited vertex $v$.
+    /// </summary>
+    /// <param name="node"> vertex.</param>
+    /// <returns>
+    ///     edge connecting vertex $v$ in the BFS search tree to its parent, or null if $v$ is a root node.
+    /// </returns>
+    public TEdge? GetSpanningTreeEdge(TNode node)
+    {
+        return GetSeenData(node).Edge;
+    }
+
+    /// <summary>
+    /// Returns the depth of vertex $v$ in the search tree. The depth of a vertex $v$ is defined as
+    /// the number of edges traversed on the path from the root of the BFS tree to vertex $v$. The
+    /// root of the search tree has depth 0. This method can only be invoked on a vertex $v$ once the
+    /// iterator has visited vertex $v$.
+    /// </summary>
+    /// <param name="node"> vertex.</param>
+    /// <returns>depth of vertex $v$ in the search tree.</returns>
+    public int GetDepth(TNode node)
+    {
+        return GetSeenData(node).Depth;
     }
 
     /// <inheritdoc/>
-    protected override void EncounterVertex(TNode vertex, TEdge edge)
+    protected override void EncounterVertex(TNode vertex, TEdge? edge)
     {
-        var depth = (edge == null ? 0 : GetSeenData(Graphs.GetOppositeVertex(graph, edge, vertex)).depth + 1);
-        PutSeenData(vertex, new SearchNodeData<TEdge>(edge, depth));
+        var depth = edge == null ? 0 : GetSeenData(Graphs.GetOppositeVertex(Graph, edge, vertex)).Depth + 1;
+        PutSeenData(vertex, new SearchNodeData(edge, depth));
         _queue.AddLast(vertex);
     }
 
@@ -98,103 +130,31 @@ public class
     {
     }
 
-    /// <summary>
-    /// Returns the parent node of vertex $v$ in the BFS search tree, or null if $v$ is the root
-    /// node. This method can only be invoked on a vertex $v$ once the iterator has visited vertex
-    /// $v$!
-    /// </summary>
-    /// <param name="node"> vertex.</param>
-    /// <returns>parent node of vertex $v$ in the BFS search tree, or null if $v$ is a root node.</returns>
-    public virtual TNode GetParent(TNode node)
-    {
-        Debug.Assert(GetSeenData(node) != null);
-        TEdge edge = GetSeenData(node).edge;
-        if (edge == null)
-        {
-            return default(TNode);
-        }
-        else
-        {
-            return Graphs.GetOppositeVertex(graph, edge, node);
-        }
-    }
-
-    /// <summary>
-    /// Returns the edge connecting vertex $v$ to its parent in the spanning tree formed by the BFS
-    /// search, or null if $v$ is a root node. This method can only be invoked on a vertex $v$ once
-    /// the iterator has visited vertex $v$!
-    /// </summary>
-    /// <param name="node"> vertex.</param>
-    /// <returns>edge connecting vertex $v$ in the BFS search tree to its parent, or null if $v$ is a
-    ///         root node.</returns>
-    public virtual TEdge GetSpanningTreeEdge(TNode node)
-    {
-        Debug.Assert(GetSeenData(node) != null);
-        return GetSeenData(node).edge;
-    }
-
-    /// <summary>
-    /// Returns the depth of vertex $v$ in the search tree. The depth of a vertex $v$ is defined as
-    /// the number of edges traversed on the path from the root of the BFS tree to vertex $v$. The
-    /// root of the search tree has depth 0. This method can only be invoked on a vertex $v$ once the
-    /// iterator has visited vertex $v$!
-    /// </summary>
-    /// <param name="node"> vertex.</param>
-    /// <returns>depth of vertex $v$ in the search tree.</returns>
-    public virtual int GetDepth(TNode node)
-    {
-        Debug.Assert(GetSeenData(node) != null);
-        return GetSeenData(node).depth;
-    }
-
-    /// <seealso cref="CrossComponentIterator.provideNextVertex()"/>
+    /// <inheritdoc/>
     protected override TNode ProvideNextVertex()
     {
-        return _queue.RemoveFirst();
+        var next = _queue.First!.Value;
+        _queue.RemoveFirst();
+        return next;
     }
 
     /// <summary>
     /// Data kept for discovered vertices.
     /// </summary>
-    /// <typeparam name="TEdge">The graph edge type.</typeparam>
-    protected class SearchNodeData<TEdge>
+    public sealed class SearchNodeData
     {
-        internal readonly TEdge Edge;
-        internal readonly int   Depth;
-
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
         /// <param name="edge"> edge to parent.</param>
         /// <param name="depth"> depth of node in search tree.</param>
-        public SearchNodeData(TEdge edge, int depth)
+        public SearchNodeData(TEdge? edge, int depth)
         {
-            this.edge  = edge;
-            this.depth = depth;
+            Edge  = edge;
+            Depth = depth;
         }
 
-        /// <summary>
-        /// Edge to parent
-        /// </summary>
-        /// <returns>the edge to the parent.</returns>
-        public virtual TEdge Edge
-        {
-            get
-            {
-                return edge;
-            }
-        }
-
-        /// <summary>
-        /// Depth of node in search tree
-        /// </summary>
-        /// <returns>the depth of the node in the search tree.</returns>
-        public virtual int Depth
-        {
-            get
-            {
-                return depth;
-            }
-        }
+        internal TEdge? Edge  { get; }
+        internal int    Depth { get; }
     }
 }

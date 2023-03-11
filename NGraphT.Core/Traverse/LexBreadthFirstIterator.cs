@@ -16,6 +16,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
+using System.Diagnostics.CodeAnalysis;
 using NGraphT.Core.Util;
 
 namespace NGraphT.Core.Traverse;
@@ -97,7 +98,8 @@ public sealed class LexBreadthFirstIterator<TNode, TEdge> : AbstractGraphIterato
     /// Returns the current vertex in the ordering.
     /// </summary>
     /// <returns>the current vertex in the ordering.</returns>
-    public override TNode Current => _current ?? throw new InvalidOperationException("No more elements");
+    [SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations")]
+    public override TNode Current => _current ?? throw new NoSuchElementException();
 
     /// <summary>
     /// Checks whether there exist unvisited vertices and moves to the next one.

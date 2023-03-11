@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using NGraphT.Core.Event;
+using NGraphT.Core.Util;
 
 /*
  * (C) Copyright 2003-2021, by Barak Naveh and Contributors.
@@ -39,31 +41,29 @@ public abstract class CrossComponentIterator<TNode, TEdge, TNodeData> : Abstract
     private const int CcsWithinComponent = 2;
     private const int CcsAfterComponent  = 3;
 
-    private bool _instanceFieldsInitialized;
-
-    private ConnectedComponentTraversalEventArgs _ccFinishedEvent;
-    private ConnectedComponentTraversalEventArgs _ccStartedEvent;
-
     /// <summary>
     /// Stores the vertices that have been seen during iteration and (optionally) some additional
     /// traversal info regarding each vertex.
     /// </summary>
     private readonly IDictionary<TNode, TNodeData> _seen = new Dictionary<TNode, TNodeData>();
 
-    /// <summary>
-    /// Iterator which provides start vertices for cross-component iteration.
-    /// </summary>
-    private IEnumerator<TNode> _entireGraphVertexIterator = null;
+    private readonly ConnectedComponentTraversalEventArgs _ccFinishedEvent;
+    private readonly ConnectedComponentTraversalEventArgs _ccStartedEvent;
 
     /// <summary>
     /// Iterator which provides start vertices for specified start vertices.
     /// </summary>
-    private IEnumerator<TNode> _startVertexIterator = null;
+    private readonly IEnumerator<TNode>? _startVertexIterator;
+
+    /// <summary>
+    /// Iterator which provides start vertices for cross-component iteration.
+    /// </summary>
+    private IEnumerator<TNode>? _entireGraphVertexIterator;
 
     /// <summary>
     /// The current vertex.
     /// </summary>
-    private TNode _startVertex;
+    private TNode? _startVertex;
 
     /// <summary>
     /// The connected component state.
@@ -71,165 +71,139 @@ public abstract class CrossComponentIterator<TNode, TEdge, TNodeData> : Abstract
     private int _state = CcsBeforeComponent;
 
     /// <summary>
+    /// Contains current vertex of the <c>graph</c>.
+    /// </summary>
+    private TNode? _current;
+
+    /// <summary>
     /// Creates a new iterator for the specified graph.
     /// </summary>
     /// <param name="g"> the graph to be iterated.</param>
     protected CrossComponentIterator(IGraph<TNode, TEdge> g)
-        : this(g, (TNode)null)
+        : this(g, (TNode?)null)
     {
-        if (!_instanceFieldsInitialized)
-        {
-            InitializeInstanceFields();
-            _instanceFieldsInitialized = true;
-        }
     }
 
     /// <summary>
     /// Creates a new iterator for the specified graph. Iteration will start at the specified start
-    /// vertex. If the specified start vertex is <c>
-    /// null</c>, Iteration will start at an arbitrary graph vertex.
+    /// vertex. If the specified start vertex is <c> null</c>, Iteration will start at an arbitrary graph vertex.
     /// </summary>
+    ///
     /// <param name="g"> the graph to be iterated.</param>
     /// <param name="startVertex"> the vertex iteration to be started.</param>
-    /// <exception cref="ArgumentException"> if <c>g==null</c> or does not contain
-    ///         <c>startVertex</c> </exception>
-    protected CrossComponentIterator(IGraph<TNode, TEdge> g, TNode startVertex)
-        : this(g, startVertex == null ? null : new List<TNode> { startVertex })
+    ///
+    /// <exception cref="ArgumentException">
+    ///     if <c>g==null</c> or does not contain <c>startVertex</c>.
+    /// </exception>
+    protected CrossComponentIterator(IGraph<TNode, TEdge> g, TNode? startVertex)
+        : this(g, startVertex == null ? Array.Empty<TNode>() : new List<TNode> { startVertex, })
     {
-        if (!_instanceFieldsInitialized)
-        {
-            InitializeInstanceFields();
-            _instanceFieldsInitialized = true;
-        }
     }
 
     /// <summary>
     /// Creates a new iterator for the specified graph. Iteration will start at the specified start
-    /// vertices. If the specified start vertices is <c>
-    /// null</c>, Iteration will start at an arbitrary graph vertex.
+    /// vertices. If the specified start vertices is <c> null</c>, Iteration will start at an arbitrary graph vertex.
     /// </summary>
+    ///
     /// <param name="g"> the graph to be iterated.</param>
     /// <param name="startVertices"> the vertices iteration to be started.</param>
-    /// <exception cref="ArgumentException"> if <c>g==null</c> or does not contain
-    ///         <c>startVertex</c> </exception>
-    protected CrossComponentIterator(IGraph<TNode, TEdge> g, IEnumerable<TNode> startVertices)
+    ///
+    /// <exception cref="ArgumentException">
+    ///     if <c>g==null</c> or does not contain <c>startVertex</c>.
+    /// </exception>
+    protected CrossComponentIterator(IGraph<TNode, TEdge> g, IEnumerable<TNode>? startVertices)
         : base(g)
     {
-        if (!_instanceFieldsInitialized)
-        {
-            InitializeInstanceFields();
-            _instanceFieldsInitialized = true;
-        }
+        _ccFinishedEvent = new ConnectedComponentTraversalEventArgs(
+            this,
+            ConnectedComponentTraversalEventArgs.ConnectedComponentFinished
+        );
+        _ccStartedEvent = new ConnectedComponentTraversalEventArgs(
+            this,
+            ConnectedComponentTraversalEventArgs.ConnectedComponentStarted
+        );
 
-        /*
-         * Initialize crossComponentTraversal and test for containment
-         */
+        // Initialize crossComponentTraversal and test for containment
         if (startVertices == null)
         {
-            this.crossComponentTraversal = true;
+            CrossComponentTraversal = true;
         }
         else
         {
-            this.crossComponentTraversal = false;
-            _startVertexIterator         = startVertices.GetEnumerator();
+            CrossComponentTraversal = false;
+            _startVertexIterator    = startVertices.GetEnumerator();
         }
 
-        /*
-         * Initialize start vertex
-         */
-        var it = crossComponentTraversal ? EntireGraphVertexIterator : _startVertexIterator;
-        // pick a start vertex if possible
-//JAVA TO C# CONVERTER TODO TASK: Java iterators are only converted within the context of 'while' and 'for' loops:
-        if (it.hasNext())
+        // Initialize start vertex
+        var it = CrossComponentTraversal ? GetEntireGraphVertexIterator() : _startVertexIterator;
+        if (it != null && it.MoveNext())
         {
-//JAVA TO C# CONVERTER TODO TASK: Java iterators are only converted within the context of 'while' and 'for' loops:
-            _startVertex = it.next();
-            if (!graph.ContainsVertex(_startVertex))
+            _startVertex = it.Current;
+            if (!Graph.ContainsVertex(_startVertex))
             {
-                throw new ArgumentException("graph must contain the start vertex");
+                throw new ArgumentException("graph must contain the start vertex", nameof(startVertices));
             }
         }
         else
         {
-            _startVertex = default(TNode);
+            _startVertex = null;
         }
     }
 
-    public override bool HasNext()
+    [SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations")]
+    public override TNode Current => _current ?? throw new NoSuchElementException();
+
+    /// <summary>
+    /// Returns <c>true</c> if there are no more uniterated vertices in the currently iterated
+    /// connected component; <c>false</c> otherwise.
+    /// </summary>
+    /// <returns>
+    /// <c>true</c> if there are no more uniterated vertices in the currently iterated
+    /// connected component; <c>false</c> otherwise.
+    /// </returns>
+    protected abstract bool ConnectedComponentExhausted { get; }
+
+    public override bool MoveNext()
     {
         if (_startVertex != null)
         {
             EncounterStartVertex();
         }
 
-        if (ConnectedComponentExhausted)
+        if (!HasNext())
         {
-            if (_state == CcsWithinComponent)
-            {
-                _state = CcsAfterComponent;
-                if (NListeners != 0)
-                {
-                    FireConnectedComponentFinished(_ccFinishedEvent);
-                }
-            }
-
-            var it = CrossComponentTraversal ? EntireGraphVertexIterator : _startVertexIterator;
-            while (it != null && it.MoveNext())
-            {
-                var node = it.Current;
-                if (!graph.ContainsVertex(node))
-                {
-                    throw new ArgumentException("graph must contain the start vertex");
-                }
-
-                if (!IsSeenVertex(node))
-                {
-                    EncounterVertex(node, default(TEdge));
-                    _state = CcsBeforeComponent;
-
-                    return true;
-                }
-            }
-
             return false;
         }
-        else
-        {
-            return true;
-        }
-    }
 
-    public override TNode Next()
-    {
-        if (_startVertex != null)
+        if (_state == CcsBeforeComponent)
         {
-            EncounterStartVertex();
-        }
-
-        if (HasNext())
-        {
-            if (_state == CcsBeforeComponent)
-            {
-                _state = CcsWithinComponent;
-                if (NListeners != 0)
-                {
-                    FireConnectedComponentStarted(_ccStartedEvent);
-                }
-            }
-
-            var nextVertex = ProvideNextVertex();
+            _state = CcsWithinComponent;
             if (NListeners != 0)
             {
-                FireVertexTraversed(CreateVertexTraversalEvent(nextVertex));
+                FireConnectedComponentStarted(_ccStartedEvent);
             }
-
-            AddUnseenChildrenOf(nextVertex);
-
-            return nextVertex;
         }
-        else
+
+        var nextVertex = ProvideNextVertex();
+        if (NListeners != 0)
         {
-            throw new NoSuchElementException();
+            FireVertexTraversed(CreateVertexTraversalEvent(nextVertex));
+        }
+
+        AddUnseenChildrenOf(nextVertex);
+
+        _current = nextVertex;
+        return true;
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        base.Dispose(disposing);
+
+        if (disposing)
+        {
+            _startVertexIterator?.Dispose();
+            _entireGraphVertexIterator?.Dispose();
         }
     }
 
@@ -237,27 +211,16 @@ public abstract class CrossComponentIterator<TNode, TEdge, TNodeData> : Abstract
     /// Lazily instantiates <c>entireGraphVertexIterator</c>.
     /// </summary>
     /// <returns>iterator which provides start vertices for cross-component iteration.</returns>
-    protected virtual IEnumerator<TNode> EntireGraphVertexIterator
+    protected IEnumerator<TNode> GetEntireGraphVertexIterator()
     {
-        get
+        if (_entireGraphVertexIterator == null)
         {
-            if (_entireGraphVertexIterator == null)
-            {
-                Debug.Assert((CrossComponentTraversal));
-                _entireGraphVertexIterator = graph.VertexSet().GetEnumerator();
-            }
-
-            return _entireGraphVertexIterator;
+            Debug.Assert(CrossComponentTraversal, nameof(CrossComponentTraversal) + "must be set to true");
+            _entireGraphVertexIterator = Graph.VertexSet().GetEnumerator();
         }
-    }
 
-    /// <summary>
-    /// Returns <c>true</c> if there are no more uniterated vertices in the currently iterated
-    /// connected component; <c>false</c> otherwise.
-    /// </summary>
-    /// <returns><c>true</c> if there are no more uniterated vertices in the currently iterated
-    ///         connected component; <c>false</c> otherwise.</returns>
-    protected abstract bool ConnectedComponentExhausted { get; }
+        return _entireGraphVertexIterator;
+    }
 
     /// <summary>
     /// Update data structures the first time we see a vertex.
@@ -265,7 +228,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TNodeData> : Abstract
     /// <param name="vertex"> the vertex encountered.</param>
     /// <param name="edge"> the edge via which the vertex was encountered, or null if the vertex is a
     ///        starting point.</param>
-    protected abstract void EncounterVertex(TNode vertex, TEdge edge);
+    protected abstract void EncounterVertex(TNode vertex, TEdge? edge);
 
     /// <summary>
     /// Returns the vertex to be returned in the following call to the iterator <c>next</c>
@@ -339,7 +302,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TNodeData> : Abstract
     /// <returns>set of outgoing edges connected to the vertex.</returns>
     protected virtual ISet<TEdge> SelectOutgoingEdges(TNode vertex)
     {
-        return graph.OutgoingEdgesOf(vertex);
+        return Graph.OutgoingEdgesOf(vertex);
     }
 
     private void AddUnseenChildrenOf(TNode vertex)
@@ -351,7 +314,7 @@ public abstract class CrossComponentIterator<TNode, TEdge, TNodeData> : Abstract
                 FireEdgeTraversed(CreateEdgeTraversalEvent(edge));
             }
 
-            var oppositeV = Graphs.GetOppositeVertex(graph, edge, vertex);
+            var oppositeV = Graphs.GetOppositeVertex(Graph, edge, vertex);
 
             if (IsSeenVertex(oppositeV))
             {
@@ -364,21 +327,52 @@ public abstract class CrossComponentIterator<TNode, TEdge, TNodeData> : Abstract
         }
     }
 
-    private void EncounterStartVertex()
+    [SuppressMessage("Usage", "MA0015:Specify the parameter name in ArgumentException")]
+    private bool HasNext()
     {
-        EncounterVertex(_startVertex, default(TEdge));
-        _startVertex = default(TNode);
+        if (_startVertex != null)
+        {
+            EncounterStartVertex();
+        }
+
+        if (!ConnectedComponentExhausted)
+        {
+            return true;
+        }
+
+        if (_state == CcsWithinComponent)
+        {
+            _state = CcsAfterComponent;
+            if (NListeners != 0)
+            {
+                FireConnectedComponentFinished(_ccFinishedEvent);
+            }
+        }
+
+        var it = CrossComponentTraversal ? GetEntireGraphVertexIterator() : _startVertexIterator;
+        while (it != null && it.MoveNext())
+        {
+            var node = it.Current;
+            if (!Graph.ContainsVertex(node))
+            {
+                throw new ArgumentException("graph must contain the start vertex");
+            }
+
+            if (!IsSeenVertex(node))
+            {
+                EncounterVertex(node, edge: null);
+                _state = CcsBeforeComponent;
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    private void InitializeInstanceFields()
+    private void EncounterStartVertex()
     {
-        _ccFinishedEvent = new ConnectedComponentTraversalEventArgs(
-            this,
-            ConnectedComponentTraversalEventArgs.ConnectedComponentFinished
-        );
-        _ccStartedEvent = new ConnectedComponentTraversalEventArgs(
-            this,
-            ConnectedComponentTraversalEventArgs.ConnectedComponentStarted
-        );
+        EncounterVertex(_startVertex!, edge: null);
+        _startVertex = null;
     }
 }

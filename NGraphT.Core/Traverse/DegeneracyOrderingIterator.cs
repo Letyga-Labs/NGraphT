@@ -16,6 +16,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
+using NGraphT.Core.Util;
+
 namespace NGraphT.Core.Traverse;
 
 using Core;
