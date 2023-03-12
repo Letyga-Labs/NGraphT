@@ -256,7 +256,7 @@ public abstract class AbstractGraph<TNode, TEdge> : IGraph<TNode, TEdge>
     ///
     /// <exception cref="NullReferenceException"> if specified vertex is <c>null</c>.</exception>
     /// <exception cref="ArgumentException"> if specified vertex does not exist in this graph.</exception>
-    protected virtual bool AssertVertexExist([MaybeNullWhen(false)] TNode node)
+    protected virtual bool AssertVertexExist([NotNull] TNode node)
     {
         ArgumentNullException.ThrowIfNull(node);
 

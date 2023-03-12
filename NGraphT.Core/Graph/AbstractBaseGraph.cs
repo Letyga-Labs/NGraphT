@@ -16,9 +16,10 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
+using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using NGraphT.Core.Graph.Concurrent;
 using NGraphT.Core.Graph.Specifics;
-using NGraphT.Core.Util;
 
 namespace NGraphT.Core.Graph;
 
@@ -32,8 +33,8 @@ namespace NGraphT.Core.Graph;
 /// </para>
 ///
 /// <para>
-/// The behavior of this class can be adjusted by changing the <see cref="IGraphSpecificsStrategy{TNode,TEdge}"/> that is
-/// provided from the constructor. All implemented strategies guarantee deterministic vertex and edge
+/// The behavior of this class can be adjusted by changing the <see cref="IGraphSpecificsStrategy{TNode,TEdge}"/>
+/// that is provided from the constructor. All implemented strategies guarantee deterministic vertex and edge
 /// set ordering (via <see cref="J2N.Collections.Generic.LinkedDictionary{TKey,TValue}"/>
 /// and <see cref="J2N.Collections.Generic.LinkedHashSet{T}"/>). The defaults are reasonable
 /// for most use-cases, only change if you know what you are doing.
@@ -63,25 +64,21 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     where TNode : class
     where TEdge : class
 {
-    private const string InvalidVertexSupplierDoesNotReturnUniqueVerticesOnEachCall =
-        "Invalid vertex supplier (does not return unique vertices on each call).";
+    private const string LoopsNotAllowed             = "loops not allowed";
+    private const string GraphSpecificsMustNotBeNull = "Graph specifics must not be null";
 
-    private const string LoopsNotAllowed                  = "loops not allowed";
-    private const string GraphSpecificsMustNotBeNull      = "Graph specifics must not be null";
-    private const string MixedGraphNotSupported           = "Mixed graph not supported";
-    private const string TheGraphContainsNoVertexSupplier = "The graph contains no vertex supplier";
-    private const string TheGraphContainsNoEdgeSupplier   = "The graph contains no edge supplier";
+    private readonly ISpecifics<TNode, TEdge>               _specifics;
+    private readonly IIntrusiveEdgesSpecifics<TNode, TEdge> _intrusiveEdgesSpecifics;
 
-    private ISet<TNode> _unmodifiableVertexSet = null;
+    [SuppressMessage(
+        "Critical Code Smell",
+        "S4487:Unread \"private\" fields should be removed",
+        Justification = "Should be used later in Copy implementation"
+    )]
+    private readonly IGraphSpecificsStrategy<TNode, TEdge> _graphSpecificsStrategy;
 
-    private Func<TNode> _vertexSupplier;
-    private Func<TEdge> _edgeSupplier;
-
-    private ISpecifics<TNode, TEdge>              _specifics;
-    private IIntrusiveEdgesSpecifics<TNode, TEdge> _intrusiveEdgesSpecifics;
-    private IGraphSpecificsStrategy<TNode, TEdge> _graphSpecificsStrategy;
-
-    private IGraphIterables<TNode, TEdge> _graphIterables = null;
+    private readonly Lazy<ISet<TNode>>                   _unmodifiableVertexSet;
+    private readonly Lazy<IGraphIterables<TNode, TEdge>> _graphIterables;
 
     /// <summary>
     /// Construct a new graph.
@@ -116,69 +113,51 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
         ArgumentNullException.ThrowIfNull(type);
         ArgumentNullException.ThrowIfNull(graphSpecificsStrategy);
 
-        _vertexSupplier = vertexSupplier;
-        _edgeSupplier   = edgeSupplier;
+        VertexSupplier = vertexSupplier;
+        EdgeSupplier   = edgeSupplier;
 
         Type = type;
         if (type.Mixed)
         {
-            throw new ArgumentException(MixedGraphNotSupported, nameof(type));
+            throw new ArgumentException("Mixed graph not supported", nameof(type));
         }
 
         _graphSpecificsStrategy = graphSpecificsStrategy;
 
         _specifics =
-            graphSpecificsStrategy.SpecificsFactory.apply(this, type) ??
+            graphSpecificsStrategy.SpecificsFactory(this, type) ??
             throw new InvalidOperationException(GraphSpecificsMustNotBeNull);
 
         _intrusiveEdgesSpecifics =
-            graphSpecificsStrategy.IntrusiveEdgesSpecificsFactory.apply(type) ??
+            graphSpecificsStrategy.IntrusiveEdgesSpecificsFactory(type) ??
             throw new InvalidOperationException(GraphSpecificsMustNotBeNull);
+
+        _unmodifiableVertexSet = new Lazy<ISet<TNode>>(() => _specifics.VertexSet.ToImmutableHashSet());
+        _graphIterables = new Lazy<IGraphIterables<TNode, TEdge>>(() => new DefaultGraphIterables<TNode, TEdge>(this));
     }
 
+    public override Func<TEdge> EdgeSupplier { get; }
+
+    public override Func<TNode> VertexSupplier { get; }
+
+    public override IGraphType Type { get; }
+
     /// <inheritdoc/>
-    public override ISet<TEdge> GetAllEdges(TNode sourceVertex, TNode targetVertex)
+    public override ISet<TEdge> GetAllEdges(TNode? sourceVertex, TNode? targetVertex)
     {
         return _specifics.GetAllEdges(sourceVertex, targetVertex);
     }
 
-    public override Func<TEdge> EdgeSupplier
-    {
-        get
-        {
-            return _edgeSupplier;
-        }
-        set
-        {
-            _edgeSupplier = value;
-        }
-    }
-
-
-    public override Func<TNode> VertexSupplier
-    {
-        get
-        {
-            return _vertexSupplier;
-        }
-        set
-        {
-            _vertexSupplier = value;
-        }
-    }
-
-    public virtual IGraphType Type { get; }
-
-    public override abstract void SetEdgeWeight(TNode sourceVertex, TNode targetVertex, double weight);
+    public abstract override void SetEdgeWeight(TNode sourceVertex, TNode targetVertex, double weight);
 
     /// <inheritdoc/>
-    public override TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
+    public override TEdge? GetEdge(TNode? sourceVertex, TNode? targetVertex)
     {
         return _specifics.GetEdge(sourceVertex, targetVertex);
     }
 
     /// <inheritdoc/>
-    public override TEdge AddEdge(TNode sourceVertex, TNode targetVertex)
+    public override TEdge? AddEdge(TNode sourceVertex, TNode targetVertex)
     {
         AssertVertexExist(sourceVertex);
         AssertVertexExist(targetVertex);
@@ -188,39 +167,41 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
             throw new ArgumentException(LoopsNotAllowed, nameof(sourceVertex));
         }
 
-        if (_edgeSupplier == null)
+        if (EdgeSupplier == null)
         {
-            throw new NotSupportedException(TheGraphContainsNoEdgeSupplier);
+            throw new NotSupportedException("The graph contains no edge supplier");
         }
 
         if (!Type.AllowingMultipleEdges)
         {
-            var edge = _specifics.CreateEdgeToTouchingVerticesIfAbsent(sourceVertex, targetVertex, _edgeSupplier);
-            if (edge != null)
+            var edge = _specifics.CreateEdgeToTouchingVerticesIfAbsent(sourceVertex, targetVertex, EdgeSupplier);
+            if (edge == null)
             {
-                var edgeAdded = false;
-                try
-                {
-                    edgeAdded = _intrusiveEdgesSpecifics.Add(edge, sourceVertex, targetVertex);
-                }
-                finally
-                {
-                    if (!edgeAdded)
-                    {
-                        // edge was already present or adding threw an exception -> revert add
-                        _specifics.RemoveEdgeFromTouchingVertices(sourceVertex, targetVertex, edge);
-                    }
-                }
+                return null;
+            }
 
-                if (edgeAdded)
+            var edgeAdded = false;
+            try
+            {
+                edgeAdded = _intrusiveEdgesSpecifics.Add(edge, sourceVertex, targetVertex);
+            }
+            finally
+            {
+                if (!edgeAdded)
                 {
-                    return edge;
+                    // edge was already present or adding threw an exception -> revert add
+                    _specifics.RemoveEdgeFromTouchingVertices(sourceVertex, targetVertex, edge);
                 }
+            }
+
+            if (edgeAdded)
+            {
+                return edge;
             }
         }
         else
         {
-            TEdge edge = _edgeSupplier.get();
+            var edge = EdgeSupplier();
             if (_intrusiveEdgesSpecifics.Add(edge, sourceVertex, targetVertex))
             {
                 _specifics.AddEdgeToTouchingVertices(sourceVertex, targetVertex, edge);
@@ -267,30 +248,28 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
 
             return edgeAdded;
         }
-        else
-        {
-            if (_intrusiveEdgesSpecifics.Add(edge, sourceVertex, targetVertex))
-            {
-                _specifics.AddEdgeToTouchingVertices(sourceVertex, targetVertex, edge);
-                return true;
-            }
 
-            return false;
+        if (_intrusiveEdgesSpecifics.Add(edge, sourceVertex, targetVertex))
+        {
+            _specifics.AddEdgeToTouchingVertices(sourceVertex, targetVertex, edge);
+            return true;
         }
+
+        return false;
     }
 
+    [SuppressMessage("Usage", "MA0015:Specify the parameter name in ArgumentException")]
     public override TNode AddVertex()
     {
-        if (_vertexSupplier == null)
+        if (VertexSupplier == null)
         {
-            throw new NotSupportedException(TheGraphContainsNoVertexSupplier);
+            throw new NotSupportedException("The graph contains no vertex supplier");
         }
 
-        TNode node = _vertexSupplier.get();
-
+        var node = VertexSupplier();
         if (!_specifics.AddVertex(node))
         {
-            throw new ArgumentException(InvalidVertexSupplierDoesNotReturnUniqueVerticesOnEachCall, nameof(node));
+            throw new ArgumentException("Invalid vertex supplier (does not return unique vertices on each call).");
         }
 
         return node;
@@ -323,56 +302,16 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
         return _intrusiveEdgesSpecifics.GetEdgeTarget(edge);
     }
 
-    /// <summary>
-    /// Returns a shallow copy of this graph instance. Neither edges nor vertices are cloned.
-    /// </summary>
-    /// <returns>a shallow copy of this graph.</returns>
-    /// <exception cref="RuntimeException"> in case the clone is not supported.</exception>
-    /// <seealso cref="object.clone()"/>
-    public override object Clone()
+    /// <inheritdoc/>
+    public override bool ContainsEdge([NotNullWhen(true)] TEdge? edge)
     {
-        try
-        {
-            AbstractBaseGraph<TNode, TEdge> newGraph = TypeUtil.UncheckedCast(base.clone());
-
-            newGraph._vertexSupplier        = _vertexSupplier;
-            newGraph._edgeSupplier          = _edgeSupplier;
-            newGraph.Type                   = Type;
-            newGraph._unmodifiableVertexSet = null;
-
-            newGraph._graphSpecificsStrategy = _graphSpecificsStrategy;
-
-            // NOTE: it's important for this to happen in an object
-            // method so that the new inner class instance gets associated with
-            // the right outer class instance
-            newGraph._specifics = newGraph._graphSpecificsStrategy.SpecificsFactory.apply(newGraph, newGraph.Type);
-            newGraph._intrusiveEdgesSpecifics =
-                newGraph._graphSpecificsStrategy.IntrusiveEdgesSpecificsFactory.apply(newGraph.Type);
-
-            newGraph._graphIterables = null;
-
-            Graphs.AddGraph(newGraph, this);
-
-            return newGraph;
-        }
-        catch (CloneNotSupportedException edge)
-        {
-            Console.WriteLine(edge.ToString());
-            Console.Write(edge.StackTrace);
-            throw new Exception();
-        }
+        return edge != null && _intrusiveEdgesSpecifics.ContainsEdge(edge);
     }
 
     /// <inheritdoc/>
-    public override bool ContainsEdge(TEdge edge)
+    public override bool ContainsVertex([NotNullWhen(true)] TNode? node)
     {
-        return _intrusiveEdgesSpecifics.ContainsEdge(edge);
-    }
-
-    /// <inheritdoc/>
-    public override bool ContainsVertex(TNode node)
-    {
-        return _specifics.VertexSet.Contains(node);
+        return node != null && _specifics.VertexSet.Contains(node);
     }
 
     /// <inheritdoc/>
@@ -424,7 +363,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     }
 
     /// <inheritdoc/>
-    public override TEdge RemoveEdge(TNode sourceVertex, TNode targetVertex)
+    public override TEdge? RemoveEdge(TNode sourceVertex, TNode targetVertex)
     {
         var edge = GetEdge(sourceVertex, targetVertex);
 
@@ -438,7 +377,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     }
 
     /// <inheritdoc/>
-    public override bool RemoveEdge(TEdge edge)
+    public override bool RemoveEdge(TEdge? edge)
     {
         if (ContainsEdge(edge))
         {
@@ -455,18 +394,14 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     }
 
     /// <inheritdoc/>
-    public override bool RemoveVertex(TNode node)
+    public override bool RemoveVertex(TNode? node)
     {
         if (ContainsVertex(node))
         {
             var touchingEdgesList = EdgesOf(node);
-
-            // cannot iterate over list - will cause
-            // ConcurrentModificationException
-            removeAllEdges(new List<>(touchingEdgesList));
-
-            _specifics.VertexSet.remove(node); // remove the vertex itself
-
+            // cannot iterate over list - will cause ConcurrentModificationException
+            RemoveAllEdges(new List<TEdge>(touchingEdgesList));
+            _specifics.VertexSet.Remove(node); // remove the vertex itself
             return true;
         }
         else
@@ -478,12 +413,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// <inheritdoc/>
     public override ISet<TNode> VertexSet()
     {
-        if (_unmodifiableVertexSet == null)
-        {
-            _unmodifiableVertexSet = Collections.unmodifiableSet(_specifics.VertexSet);
-        }
-
-        return _unmodifiableVertexSet;
+        return _unmodifiableVertexSet.Value;
     }
 
     /// <inheritdoc/>
@@ -508,12 +438,6 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// <inheritdoc/>
     public override IGraphIterables<TNode, TEdge> Iterables()
     {
-        // override interface to avoid instantiating frequently
-        if (_graphIterables == null)
-        {
-            _graphIterables = new DefaultGraphIterables<TNode, TEdge>(this);
-        }
-
-        return _graphIterables;
+        return _graphIterables.Value;
     }
 }

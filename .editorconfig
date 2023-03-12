@@ -37,7 +37,7 @@ dotnet_naming_rule.constants_rule.severity = none
 dotnet_naming_rule.constants_rule.style = all_upper_style
 dotnet_naming_rule.constants_rule.symbols = constants_symbols
 dotnet_naming_rule.constants_rule_1.import_to_resharper = as_predefined
-dotnet_naming_rule.constants_rule_1.severity = none
+dotnet_naming_rule.constants_rule_1.severity= none
 dotnet_naming_rule.constants_rule_1.style = all_upper_style
 dotnet_naming_rule.constants_rule_1.symbols = constants_symbols_1
 dotnet_naming_rule.event_rule.import_to_resharper = True
@@ -422,6 +422,9 @@ dotnet_diagnostic.ma0056.severity = none
 
 # MA0026: to do analysis
 dotnet_diagnostic.ma0026.severity = none
+
+# MA0003: Name the parameter to improve code readability
+dotnet_diagnostic.ma0003.severity = none
 
 ## ----------------------------------------------------------------------------
 ##                               IDE FORMATTING rules
