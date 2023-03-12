@@ -322,7 +322,7 @@ public class DirectedAcyclicGraph<TNode, TEdge> : AbstractBaseGraph<TNode, TEdge
             {
                 while ((_maxTopoIndex > 0) && (_topoOrderMap.GetVertex(_maxTopoIndex) == null))
                 {
-                    --_maxTopoIndex;
+                    _maxTopoIndex--;
                 }
             }
 

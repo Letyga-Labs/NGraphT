@@ -16,10 +16,11 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
-namespace NGraphT.Core.Traverse;
+using System.Diagnostics.CodeAnalysis;
+using NGraphT.Core.DotNetUtil;
+using NGraphT.Core.Util;
 
-using Core;
-using Util;
+namespace NGraphT.Core.Traverse;
 
 /// <summary>
 /// A topological ordering iterator for a directed acyclic graph.
@@ -31,11 +32,13 @@ using Util;
 /// <a href="https://en.wikipedia.org/wiki/Topological_sorting">wikipedia</a> or
 /// <a href="http://mathworld.wolfram.com/TopologicalSort.html">wolfram</a>.
 /// </para>
+///
 /// <para>
 /// The iterator crosses components but does not track them, it only tracks visited vertices. The
 /// iterator will detect (at some point) if the graph is not a directed acyclic graph and throw a
 /// <see cref="NotDirectedAcyclicGraphException"/>.
 /// </para>
+///
 /// <para>
 /// For this iterator to work correctly the graph must not be modified during iteration. Currently
 /// there are no means to ensure that, nor to fail-fast. The results of such modifications are
@@ -48,12 +51,15 @@ using Util;
 ///
 /// <remarks>Author: Marden Neubert.</remarks>
 /// <remarks>Author: Dimitrios Michail.</remarks>
-public class TopologicalOrderIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
+public sealed class TopologicalOrderIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
+    where TNode : class
+    where TEdge : class
 {
-    private LinkedList<TNode>                     _queue;
-    private IDictionary<TNode, ModifiableInteger> _inDegreeMap;
-    private int                                   _remainingVertices;
-    private TNode                                 _cur;
+    private readonly IQueue<TNode>          _queue;
+    private readonly Dictionary<TNode, int> _inDegreeMap = new();
+
+    private int    _remainingVertices;
+    private TNode? _current;
 
     /// <summary>
     /// Construct a topological order iterator.
@@ -68,7 +74,7 @@ public class TopologicalOrderIterator<TNode, TEdge> : AbstractGraphIterator<TNod
     /// </summary>
     /// <param name="graph"> the directed graph to be iterated.</param>
     public TopologicalOrderIterator(IGraph<TNode, TEdge> graph)
-        : this(graph, (IComparer<TNode>)null)
+        : this(graph, comparer: null)
     {
     }
 
@@ -84,42 +90,39 @@ public class TopologicalOrderIterator<TNode, TEdge> : AbstractGraphIterator<TNod
     ///
     /// </summary>
     /// <param name="graph"> the directed graph to be iterated.</param>
-    /// <param name="comparator"> comparator in order to break ties in case of partial order.</param>
-    public TopologicalOrderIterator(IGraph<TNode, TEdge> graph, IComparer<TNode> comparator)
+    /// <param name="comparer"> comparator in order to break ties in case of partial order.</param>
+    public TopologicalOrderIterator(IGraph<TNode, TEdge> graph, IComparer<TNode>? comparer)
         : base(graph)
     {
-        GraphTests.RequireDirected(graph);
-
-        // create queue
-        if (comparator == null)
+        // TODO: GraphTests.RequireDirected(graph);
+        if (comparer == null)
         {
-            _queue = new LinkedList<TNode>();
+            _queue = new QueueAdapter<TNode>(new Queue<TNode>());
         }
         else
         {
-            _queue = new PriorityQueue<TNode>(comparator);
+            _queue = new PriorityQueueAdapter<TNode>(new PriorityQueue<TNode, TNode>(comparer));
         }
 
         // count in-degrees
-        _inDegreeMap = new Dictionary<TNode, ModifiableInteger>();
         foreach (var node in graph.VertexSet())
         {
-            var d = 0;
+            var degree = 0;
             foreach (var edge in graph.IncomingEdgesOf(node))
             {
                 var u = Graphs.GetOppositeVertex(graph, edge, node);
                 if (node.Equals(u))
                 {
-                    throw new NotDirectedAcyclicGraphException();
+                    throw new NotDirectedAcyclicGraphException("The given graph grpah is not acyclic", nameof(graph));
                 }
 
-                d++;
+                degree++;
             }
 
-            _inDegreeMap[node] = new ModifiableInteger(d);
-            if (d == 0)
+            _inDegreeMap[node] = degree;
+            if (degree == 0)
             {
-                _queue.AddLast(node);
+                _queue.Enqueue(node);
             }
         }
 
@@ -134,85 +137,70 @@ public class TopologicalOrderIterator<TNode, TEdge> : AbstractGraphIterator<TNod
     /// </summary>
     public override bool CrossComponentTraversal
     {
-        get
-        {
-            return true;
-        }
+        get => true;
         set
         {
             if (!value)
             {
-                throw new ArgumentException("Iterator is always cross-component");
+                throw new ArgumentException("Iterator is always cross-component", nameof(value));
             }
         }
     }
 
+    /// <summary>
+    /// Returns the current vertex in the ordering.
+    /// </summary>
+    /// <returns>the current vertex in the ordering.</returns>
+    [SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations")]
+    public override TNode Current => _current ?? throw new NoSuchElementException();
 
-    public override bool HasNext()
+    public override bool MoveNext()
     {
-        if (_cur != null)
+        var previous = _current;
+        if (previous != null && NListeners != 0)
         {
-            return true;
+            FireVertexFinished(CreateVertexTraversalEvent(previous));
         }
 
-        _cur = Advance();
-        if (_cur != null && NListeners != 0)
+        _current = Advance();
+        if (_current != null && NListeners != 0)
         {
-            FireVertexTraversed(CreateVertexTraversalEvent(_cur));
+            FireVertexTraversed(CreateVertexTraversalEvent(_current));
         }
 
-        return _cur != null;
+        return _current != null;
     }
 
-    public override TNode Next()
+    private TNode? Advance()
     {
-        if (!HasNext())
+        if (_queue.TryDequeue(out var result))
         {
-            throw new NoSuchElementException();
-        }
-
-        var result = _cur;
-        _cur = default(TNode);
-        if (NListeners != 0)
-        {
-            FireVertexFinished(CreateVertexTraversalEvent(result));
-        }
-
-        return result;
-    }
-
-    private TNode Advance()
-    {
-        TNode result = _queue.RemoveFirst();
-
-        if (result != null)
-        {
-            foreach (TEdge edge in graph.OutgoingEdgesOf(result))
+            foreach (var edge in Graph.OutgoingEdgesOf(result))
             {
-                var other = Graphs.GetOppositeVertex(graph, edge, result);
+                var other = Graphs.GetOppositeVertex(Graph, edge, result);
 
                 var inDegree = _inDegreeMap[other];
-                if (inDegree.value > 0)
+                if (inDegree == 1)
                 {
-                    inDegree.value--;
+                    _queue.Enqueue(other);
+                }
 
-                    if (inDegree.value == 0)
-                    {
-                        _queue.AddLast(other);
-                    }
+                if (inDegree > 0)
+                {
+                    _inDegreeMap[other]--;
                 }
             }
 
-            --_remainingVertices;
+            _remainingVertices--;
         }
         else
         {
-            /*
-             * Still expecting some vertices, but no vertex has zero degree.
-             */
+            // Still expecting some vertices, but no vertex has zero degree.
             if (_remainingVertices > 0)
             {
+#pragma warning disable MA0015
                 throw new NotDirectedAcyclicGraphException();
+#pragma warning restore MA0015
             }
         }
 

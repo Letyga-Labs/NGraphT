@@ -52,7 +52,7 @@ namespace NGraphT.Core.Traverse;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>.
 ///
 /// <remarks>Author: Timofey Chudakov.</remarks>
-public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
+public sealed class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TNode, TEdge>
     where TNode : class
     where TEdge : class
 {
@@ -89,7 +89,7 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
     public MaximumCardinalityIterator(IGraph<TNode, TEdge> graph)
         : base(graph)
     {
-        // GraphTests.RequireUndirected(graph);
+        // TODO: GraphTests.RequireUndirected(graph);
         _remainingVertices = graph.VertexSet().Count;
         if (_remainingVertices > 0)
         {
@@ -163,15 +163,15 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
         if (bucket.Count == 0)
         {
             _buckets[_maxCardinality] = null;
-            --_maxCardinality;
+            _maxCardinality--;
             while (_maxCardinality >= 0 && _buckets[_maxCardinality] == null)
             {
-                --_maxCardinality;
+                _maxCardinality--;
             }
         }
 
         UpdateNeighbours(vertex);
-        --_remainingVertices;
+        _remainingVertices--;
         return vertex;
     }
 
@@ -233,7 +233,7 @@ public class MaximumCardinalityIterator<TNode, TEdge> : AbstractGraphIterator<TN
 
         if (_maxCardinality < Graph.VertexSet().Count && _maxCardinality >= 0 && _buckets[_maxCardinality + 1] != null)
         {
-            ++_maxCardinality;
+            _maxCardinality++;
         }
     }
 }

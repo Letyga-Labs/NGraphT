@@ -25,12 +25,22 @@ namespace NGraphT.Core.Traverse;
 /// </summary>
 ///
 /// <remarks>Author: Kaiichiro Ota.</remarks>
-public class NotDirectedAcyclicGraphException : ArgumentException
+public sealed class NotDirectedAcyclicGraphException : ArgumentException
 {
     private const string GraphIsNotADag = "Graph is not a DAG";
 
     public NotDirectedAcyclicGraphException()
         : base(GraphIsNotADag)
+    {
+    }
+
+    public NotDirectedAcyclicGraphException(string? message, string? paramName)
+        : base(message, paramName)
+    {
+    }
+
+    public NotDirectedAcyclicGraphException(string? message, string? paramName, Exception? innerException)
+        : base(message, paramName, innerException)
     {
     }
 }

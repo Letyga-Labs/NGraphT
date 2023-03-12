@@ -30,7 +30,7 @@ namespace NGraphT.Core.Traverse;
 /// neighbor; then we select a neighbor of this point at random, and move to it etc. The (random)
 /// sequence of points selected this way is a random walk on the graph." This very simple definition,
 /// together with a comprehensive survey can be found at: "Lovász, L. (1993). Random walks on graphs:
-/// A survey. Combinatorics, Paul erdos is eighty, 2(1), 1-46."
+/// A survey. Combinatorics, Paul erdos is eighty, 2(1), 1-46.".
 /// </para>
 ///
 /// <para>
@@ -47,18 +47,19 @@ namespace NGraphT.Core.Traverse;
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
 [SuppressMessage("Security", "CA5394:Do not use insecure randomness")]
-public class RandomWalkVertexIterator<TNode, TEdge> : IEnumerator<TNode>
+public sealed class RandomWalkVertexIterator<TNode, TEdge> : IEnumerator<TNode>
     where TNode : class
+    where TEdge : class
 {
-    private readonly IGraph<TNode, TEdge>       _graph;
-    private readonly IDictionary<TNode, double> _outEdgesTotalWeight = new Dictionary<TNode, double>();
+    private readonly IGraph<TNode, TEdge>      _graph;
+    private readonly Dictionary<TNode, double> _outEdgesTotalWeight = new();
 
     private readonly bool   _weighted;
     private readonly long   _maxHops;
     private readonly Random _random;
 
     private long   _hops;
-    private TNode? _nextVertex;
+    private TNode? _current;
 
     /// <summary>
     /// Create a new iterator.
@@ -105,27 +106,26 @@ public class RandomWalkVertexIterator<TNode, TEdge> : IEnumerator<TNode>
             throw new ArgumentException("Random walk must start at a graph vertex", nameof(vertex));
         }
 
-        _graph      = graph;
-        _weighted   = weighted;
-        _nextVertex = vertex;
-        _maxHops    = maxHops;
-        _random     = random;
+        _graph    = graph;
+        _weighted = weighted;
+        _current  = vertex;
+        _maxHops  = maxHops;
+        _random   = random;
     }
 
     object IEnumerator.Current => Current;
 
-    public TNode Current { get; }
+    /// <summary>
+    /// Returns the current vertex in the ordering.
+    /// </summary>
+    /// <returns>the current vertex in the ordering.</returns>
+    [SuppressMessage("Design", "CA1065:Do not raise exceptions in unexpected locations")]
+    public TNode Current => _current ?? throw new NoSuchElementException();
 
     public bool MoveNext()
     {
-        if (_nextVertex == null)
-        {
-            throw new NoSuchElementException();
-        }
-
-        var value = _nextVertex;
-        ComputeNext();
-        return value;
+        Advance();
+        return _current != null;
     }
 
     public void Reset()
@@ -133,33 +133,38 @@ public class RandomWalkVertexIterator<TNode, TEdge> : IEnumerator<TNode>
         throw new NotSupportedException("Reset");
     }
 
-    private void ComputeNext()
+    public void Dispose()
+    {
+        // empty
+    }
+
+    private void Advance()
     {
         if (_hops >= _maxHops)
         {
-            _nextVertex = null;
+            _current = null;
             return;
         }
 
         _hops++;
-        if (_graph.OutDegreeOf(_nextVertex) == 0)
+        if (_current == null || _graph.OutDegreeOf(_current) == 0)
         {
-            _nextVertex = null;
+            _current = null;
             return;
         }
 
-        var edge = default(TEdge);
+        TEdge? edge = null;
         if (_weighted)
         {
-            double outEdgesWeight = _outEdgesTotalWeight.computeIfAbsent(_nextVertex,
-                node =>
-                {
-                    return _graph.OutgoingEdgesOf(node).collect(Collectors.summingDouble(_graph.getEdgeWeight));
-                }
-            );
-            var p           = outEdgesWeight * _random.NextDouble();
+            if (!_outEdgesTotalWeight.ContainsKey(_current))
+            {
+                _outEdgesTotalWeight[_current] = _graph.OutgoingEdgesOf(_current).Sum(it => _graph.GetEdgeWeight(it));
+            }
+
+            var p = _outEdgesTotalWeight[_current] * _random.NextDouble();
+
             var cumulativeP = 0d;
-            foreach (var curEdge in _graph.OutgoingEdgesOf(_nextVertex))
+            foreach (var curEdge in _graph.OutgoingEdgesOf(_current))
             {
                 cumulativeP += _graph.GetEdgeWeight(curEdge);
                 if (p <= cumulativeP)
@@ -171,10 +176,10 @@ public class RandomWalkVertexIterator<TNode, TEdge> : IEnumerator<TNode>
         }
         else
         {
-            var outEdges = new List<TEdge>(_graph.OutgoingEdgesOf(_nextVertex));
-            edge = outEdges[_random.Next(outEdges.Count)];
+            var outEdges = _graph.OutgoingEdgesOf(_current);
+            edge = outEdges.ElementAt(_random.Next(outEdges.Count));
         }
 
-        _nextVertex = Graphs.GetOppositeVertex(_graph, edge, _nextVertex);
+        _current = Graphs.GetOppositeVertex(_graph, edge!, _current);
     }
 }
