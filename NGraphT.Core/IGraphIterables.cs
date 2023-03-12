@@ -16,9 +16,9 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
-namespace NGraphT.Core;
-
 using NGraphT.Core.Util;
+
+namespace NGraphT.Core;
 
 /// <summary>
 /// Presents a graph as a collection of views suitable for graphs which contain a very large number
@@ -37,6 +37,8 @@ using NGraphT.Core.Util;
 ///
 /// <remarks>Author: Dimitrios Michail.</remarks>
 public interface IGraphIterables<TNode, TEdge>
+    where TNode : class
+    where TEdge : class
 {
     /// <summary>
     /// Get the underlying graph.
@@ -52,8 +54,8 @@ public interface IGraphIterables<TNode, TEdge>
     /// responsibility of callers who rely on this behavior to only use graph implementations which
     /// support it.
     /// </para>
-    ///
     /// </summary>
+    ///
     /// <returns>an iterable over the edges of the graph.</returns>
     IEnumerable<TEdge> Edges()
     {
@@ -80,6 +82,7 @@ public interface IGraphIterables<TNode, TEdge>
     /// use graph implementations which support it.
     /// </para>
     /// </summary>
+    ///
     /// <returns>an iterable view of the vertices contained in this graph.</returns>
     IEnumerable<TNode> Vertices()
     {
@@ -101,8 +104,10 @@ public interface IGraphIterables<TNode, TEdge>
     /// the iteration are undefined. If no edges are touching the specified vertex, the returned
     /// iterators are already exhausted.
     /// </summary>
+    ///
     /// <param name="vertex"> input vertex.</param>
     /// <returns>an iterable view of the vertices contained in this graph.</returns>
+    ///
     /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     IEnumerable<TEdge> EdgesOf(TNode vertex)
@@ -121,10 +126,11 @@ public interface IGraphIterables<TNode, TEdge>
     /// <para>
     /// In directed graphs this method returns the sum of the "in degree" and the "out degree".
     /// </para>
-    ///
     /// </summary>
+    ///
     /// <param name="vertex"> vertex whose degree is to be calculated.</param>
     /// <returns>the degree of the specified vertex.</returns>
+    ///
     /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     long DegreeOf(TNode vertex)
@@ -144,8 +150,10 @@ public interface IGraphIterables<TNode, TEdge>
     /// </para>
     ///
     /// </summary>
+    ///
     /// <param name="vertex"> input vertex.</param>
     /// <returns>an iterable view of all edges incoming into the specified vertex.</returns>
+    ///
     /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     IEnumerable<TEdge> IncomingEdgesOf(TNode vertex)
@@ -166,10 +174,11 @@ public interface IGraphIterables<TNode, TEdge>
     /// In the case of undirected graphs this method returns the number of edges touching the vertex.
     /// Edges with same source and target vertices (self-loops) are counted twice.
     /// </para>
-    ///
     /// </summary>
+    ///
     /// <param name="vertex"> vertex whose degree is to be calculated.</param>
     /// <returns>the degree of the specified vertex.</returns>
+    ///
     /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     long InDegreeOf(TNode vertex)
@@ -187,10 +196,11 @@ public interface IGraphIterables<TNode, TEdge>
     /// thus, some of the returned edges may have their source and target vertices in the opposite
     /// order.
     /// </para>
-    ///
     /// </summary>
+    ///
     /// <param name="vertex"> input vertex.</param>
     /// <returns>an iterable view of all edges outgoing from the specified vertex.</returns>
+    ///
     /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     IEnumerable<TEdge> OutgoingEdgesOf(TNode vertex)
@@ -213,8 +223,10 @@ public interface IGraphIterables<TNode, TEdge>
     /// </para>
     ///
     /// </summary>
+    ///
     /// <param name="vertex"> vertex whose degree is to be calculated.</param>
     /// <returns>the degree of the specified vertex.</returns>
+    ///
     /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     long OutDegreeOf(TNode vertex)
@@ -236,9 +248,11 @@ public interface IGraphIterables<TNode, TEdge>
     /// the opposite order. In simple graphs the returned set is either singleton set or empty set.
     /// </para>
     /// </summary>
+    ///
     /// <param name="sourceVertex"> source vertex of the edge.</param>
     /// <param name="targetVertex"> target vertex of the edge.</param>
     /// <returns>an iterable view of all edges connecting source to target vertex.</returns>
+    ///
     /// <exception cref="ArgumentException"> if vertex is not found in the graph.</exception>
     /// <exception cref="NullReferenceException"> if vertex is <c>null</c>.</exception>
     IEnumerable<TEdge> AllEdges(TNode sourceVertex, TNode targetVertex)

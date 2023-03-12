@@ -34,7 +34,7 @@ namespace NGraphT.Core.Graph;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 public class WeightedIntrusiveEdgesSpecifics<TNode, TEdge> :
     BaseIntrusiveEdgesSpecifics<TNode, TEdge, IntrusiveWeightedEdge>,
-    INtrusiveEdgesSpecifics<TNode, TEdge>
+    IIntrusiveEdgesSpecifics<TNode, TEdge>
 {
     /// <summary>
     /// Constructor.

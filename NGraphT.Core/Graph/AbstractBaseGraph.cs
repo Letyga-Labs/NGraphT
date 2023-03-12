@@ -16,11 +16,11 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
-namespace NGraphT.Core.Graph;
+using NGraphT.Core.Graph.Concurrent;
+using NGraphT.Core.Graph.Specifics;
+using NGraphT.Core.Util;
 
-using Core;
-using Specifics;
-using Util;
+namespace NGraphT.Core.Graph;
 
 /// <summary>
 /// The most general implementation of the <see cref="NGraphT.Core.Graph"/> interface.
@@ -30,12 +30,15 @@ using Util;
 /// directed or undirected is decided at construction time and cannot be later modified (see
 /// constructor for details).
 /// </para>
+///
 /// <para>
 /// The behavior of this class can be adjusted by changing the <see cref="IGraphSpecificsStrategy{TNode,TEdge}"/> that is
 /// provided from the constructor. All implemented strategies guarantee deterministic vertex and edge
-/// set ordering (via <see cref="LinkedHashMap"/> and <see cref="LinkedHashSet"/>). The defaults are reasonable
+/// set ordering (via <see cref="J2N.Collections.Generic.LinkedDictionary{TKey,TValue}"/>
+/// and <see cref="J2N.Collections.Generic.LinkedHashSet{T}"/>). The defaults are reasonable
 /// for most use-cases, only change if you know what you are doing.
 /// </para>
+///
 /// <para>
 /// The default graph implementations are not safe for concurrent reads and writes from different
 /// threads. If an application attempts to modify a graph in one thread while another thread is
@@ -44,9 +47,10 @@ using Util;
 /// Graph interface} itself makes no such guarantee, so for non-default implementations, different
 /// rules may apply.)
 /// </para>
+///
 /// <para>
 /// If you need support for concurrent reads and writes, consider using the
-/// <see cref="NGraphT.Core.Graph.Concurrent.AsSynchronizedGraph AsSynchronizedGraph wrapper"/>.
+/// <see cref="AsSynchronizedGraph{TNode,TEdge}"/>.
 /// </para>
 /// </summary>
 ///
@@ -55,30 +59,26 @@ using Util;
 ///
 /// <remarks>Author: Barak Naveh.</remarks>
 /// <remarks>Author: Dimitrios Michail.</remarks>
-public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>, IGraph<TNode, TEdge>, ICloneable
+public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEdge>, IGraph<TNode, TEdge>
+    where TNode : class
+    where TEdge : class
 {
-    public override abstract void SetEdgeWeight(TNode sourceVertex, TNode targetVertex, double weight);
-    private const            long SerialVersionUID = -3582386521833998627L;
-
-    private const string LoopsNotAllowed             = "loops not allowed";
-    private const string GraphSpecificsMustNotBeNull = "Graph specifics must not be null";
-
     private const string InvalidVertexSupplierDoesNotReturnUniqueVerticesOnEachCall =
         "Invalid vertex supplier (does not return unique vertices on each call).";
 
+    private const string LoopsNotAllowed                  = "loops not allowed";
+    private const string GraphSpecificsMustNotBeNull      = "Graph specifics must not be null";
     private const string MixedGraphNotSupported           = "Mixed graph not supported";
-    private const string GraphSpecificsStrategyRequired   = "Graph specifics strategy required";
     private const string TheGraphContainsNoVertexSupplier = "The graph contains no vertex supplier";
     private const string TheGraphContainsNoEdgeSupplier   = "The graph contains no edge supplier";
 
     private ISet<TNode> _unmodifiableVertexSet = null;
 
-    private        Func<TNode> _vertexSupplier;
-    private        Func<TEdge> _edgeSupplier;
-    public virtual Type { get; }
+    private Func<TNode> _vertexSupplier;
+    private Func<TEdge> _edgeSupplier;
 
     private ISpecifics<TNode, TEdge>              _specifics;
-    private INtrusiveEdgesSpecifics<TNode, TEdge> _intrusiveEdgesSpecifics;
+    private IIntrusiveEdgesSpecifics<TNode, TEdge> _intrusiveEdgesSpecifics;
     private IGraphSpecificsStrategy<TNode, TEdge> _graphSpecificsStrategy;
 
     private IGraphIterables<TNode, TEdge> _graphIterables = null;
@@ -93,7 +93,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     protected AbstractBaseGraph(
         Func<TNode> vertexSupplier,
         Func<TEdge> edgeSupplier,
-        IGraphType         type
+        IGraphType  type
     )
         : this(vertexSupplier, edgeSupplier, type, new FastLookupGraphSpecificsStrategy<TNode, TEdge>())
     {
@@ -108,28 +108,32 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// <param name="graphSpecificsStrategy"> strategy for constructing low-level graph specifics.</param>>
     /// <exception cref="ArgumentException"> if the graph type is mixed.</exception>
     protected AbstractBaseGraph(
-        Func<TNode>                    vertexSupplier,
-        Func<TEdge>                    edgeSupplier,
+        Func<TNode>                           vertexSupplier,
+        Func<TEdge>                           edgeSupplier,
         IGraphType                            type,
-        IGraphSpecificsStrategy<TNode, TEdge> graphSpecificsStrategy
-    )
+        IGraphSpecificsStrategy<TNode, TEdge> graphSpecificsStrategy)
     {
+        ArgumentNullException.ThrowIfNull(type);
+        ArgumentNullException.ThrowIfNull(graphSpecificsStrategy);
+
         _vertexSupplier = vertexSupplier;
         _edgeSupplier   = edgeSupplier;
-        Type            = Objects.requireNonNull(type);
+
+        Type = type;
         if (type.Mixed)
         {
-            throw new ArgumentException(MixedGraphNotSupported);
+            throw new ArgumentException(MixedGraphNotSupported, nameof(type));
         }
 
-        _graphSpecificsStrategy = Objects.requireNonNull(graphSpecificsStrategy, GraphSpecificsStrategyRequired);
-        _specifics = Objects.requireNonNull(graphSpecificsStrategy.SpecificsFactory.apply(this, type),
-            GraphSpecificsMustNotBeNull
-        );
+        _graphSpecificsStrategy = graphSpecificsStrategy;
+
+        _specifics =
+            graphSpecificsStrategy.SpecificsFactory.apply(this, type) ??
+            throw new InvalidOperationException(GraphSpecificsMustNotBeNull);
+
         _intrusiveEdgesSpecifics =
-            Objects.requireNonNull(graphSpecificsStrategy.IntrusiveEdgesSpecificsFactory.apply(type),
-                GraphSpecificsMustNotBeNull
-            );
+            graphSpecificsStrategy.IntrusiveEdgesSpecificsFactory.apply(type) ??
+            throw new InvalidOperationException(GraphSpecificsMustNotBeNull);
     }
 
     /// <inheritdoc/>
@@ -137,7 +141,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     {
         return _specifics.GetAllEdges(sourceVertex, targetVertex);
     }
-    
+
     public override Func<TEdge> EdgeSupplier
     {
         get
@@ -163,6 +167,9 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
         }
     }
 
+    public virtual IGraphType Type { get; }
+
+    public override abstract void SetEdgeWeight(TNode sourceVertex, TNode targetVertex, double weight);
 
     /// <inheritdoc/>
     public override TEdge GetEdge(TNode sourceVertex, TNode targetVertex)
@@ -178,7 +185,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
 
         if (!Type.AllowingSelfLoops && sourceVertex.Equals(targetVertex))
         {
-            throw new ArgumentException(LoopsNotAllowed);
+            throw new ArgumentException(LoopsNotAllowed, nameof(sourceVertex));
         }
 
         if (_edgeSupplier == null)
@@ -221,23 +228,20 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
             }
         }
 
-        return default(TEdge);
+        return null;
     }
 
     /// <inheritdoc/>
     public override bool AddEdge(TNode sourceVertex, TNode targetVertex, TEdge edge)
     {
-        if (edge == null)
-        {
-            throw new NullReferenceException();
-        }
+        ArgumentNullException.ThrowIfNull(edge);
 
         AssertVertexExist(sourceVertex);
         AssertVertexExist(targetVertex);
 
         if (!Type.AllowingSelfLoops && sourceVertex.Equals(targetVertex))
         {
-            throw new ArgumentException(LoopsNotAllowed);
+            throw new ArgumentException(LoopsNotAllowed, nameof(sourceVertex));
         }
 
         if (!Type.AllowingMultipleEdges)
@@ -286,7 +290,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
 
         if (!_specifics.AddVertex(node))
         {
-            throw new ArgumentException(InvalidVertexSupplierDoesNotReturnUniqueVerticesOnEachCall);
+            throw new ArgumentException(InvalidVertexSupplierDoesNotReturnUniqueVerticesOnEachCall, nameof(node));
         }
 
         return node;
@@ -295,11 +299,8 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// <inheritdoc/>
     public override bool AddVertex(TNode node)
     {
-        if (node == null)
-        {
-            throw new NullReferenceException();
-        }
-        else if (ContainsVertex(node))
+        ArgumentNullException.ThrowIfNull(node);
+        if (ContainsVertex(node))
         {
             return false;
         }
@@ -327,7 +328,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// </summary>
     /// <returns>a shallow copy of this graph.</returns>
     /// <exception cref="RuntimeException"> in case the clone is not supported.</exception>
-    /// <seealso cref="java.lang.Object.clone()"/>
+    /// <seealso cref="object.clone()"/>
     public override object Clone()
     {
         try
@@ -488,11 +489,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// <inheritdoc/>
     public override double GetEdgeWeight(TEdge edge)
     {
-        if (edge == null)
-        {
-            throw new NullReferenceException();
-        }
-
+        ArgumentNullException.ThrowIfNull(edge);
         return _intrusiveEdgesSpecifics.GetEdgeWeight(edge);
     }
 
@@ -504,11 +501,7 @@ public abstract class AbstractBaseGraph<TNode, TEdge> : AbstractGraph<TNode, TEd
     /// <exception cref="NotSupportedException"> if the graph is not weighted.</exception>
     public override void SetEdgeWeight(TEdge edge, double weight)
     {
-        if (edge == null)
-        {
-            throw new NullReferenceException();
-        }
-
+        ArgumentNullException.ThrowIfNull(edge);
         _intrusiveEdgesSpecifics.SetEdgeWeight(edge, weight);
     }
 

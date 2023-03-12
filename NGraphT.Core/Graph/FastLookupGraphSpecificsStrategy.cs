@@ -38,11 +38,11 @@ using Specifics;
 /// <typeparam name="TEdge">The graph edge type.</typeparam>
 public class FastLookupGraphSpecificsStrategy<TNode, TEdge> : IGraphSpecificsStrategy<TNode, TEdge>
 {
-    public virtual Func<IGraphType, INtrusiveEdgesSpecifics<TNode, TEdge>> IntrusiveEdgesSpecificsFactory
+    public virtual Func<IGraphType, IIntrusiveEdgesSpecifics<TNode, TEdge>> IntrusiveEdgesSpecificsFactory
     {
         get
         {
-            return (Func<IGraphType, INtrusiveEdgesSpecifics<TNode, TEdge>> & Serializable)(type) =>
+            return (Func<IGraphType, IIntrusiveEdgesSpecifics<TNode, TEdge>> & Serializable)(type) =>
             {
                 if (type.isWeighted())
                 {
@@ -52,8 +52,8 @@ public class FastLookupGraphSpecificsStrategy<TNode, TEdge> : IGraphSpecificsStr
                 }
                 else
                 {
-                    return new UniformIntrusiveEdgesSpecifics<IGraphType, INtrusiveEdgesSpecifics<TNode, TEdge>>(
-                        new LinkedHashMap<IGraphType, INtrusiveEdgesSpecifics<TNode, TEdge>>()
+                    return new UniformIntrusiveEdgesSpecifics<IGraphType, IIntrusiveEdgesSpecifics<TNode, TEdge>>(
+                        new LinkedHashMap<IGraphType, IIntrusiveEdgesSpecifics<TNode, TEdge>>()
                     );
                 }
             }

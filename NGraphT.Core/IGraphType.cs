@@ -27,14 +27,15 @@ namespace NGraphT.Core;
 /// same as the target vertex), whether it contain multiple (parallel) edges (multiple edges which
 /// connect the same pair of vertices) and whether it is weighted or not.
 /// </para>
+///
 /// <para>
 /// The type of a graph can be queried on runtime using method <see cref="IGraph{TNode,TEdge}.Type"/>. This way, for
 /// example, an algorithm can have different behavior based on whether the input graph is directed or
 /// undirected, etc.
-///
-/// <remarks>Author: Dimitrios Michail.</remarks>
 /// </para>
 /// </summary>
+///
+/// <remarks>Author: Dimitrios Michail.</remarks>
 public interface IGraphType
 {
     /// <summary>
@@ -57,8 +58,7 @@ public interface IGraphType
 
     /// <summary>
     /// Returns <c>true</c> if and only if multiple (parallel) edges are allowed in this graph.
-    /// The meaning of multiple edges is that there can be many edges going from vertex v1 to vertex
-    /// v2.
+    /// The meaning of multiple edges is that there can be many edges going from vertex v1 to vertex v2.
     /// </summary>
     /// <returns><c>true</c> if and only if multiple (parallel) edges are allowed.</returns>
     bool AllowingMultipleEdges { get; }

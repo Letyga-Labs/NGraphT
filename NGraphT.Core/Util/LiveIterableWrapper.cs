@@ -16,15 +16,18 @@
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
 
+using System.Collections;
+
 namespace NGraphT.Core.Util;
 
 /// <summary>
 /// A wrapper around a supplier of an iterable.
 /// </summary>
 ///
-/// <remarks>Author: Dimitrios Michail.</remarks>
 /// <typeparam name="TEdge"> the element type.</typeparam>
-public class LiveIterableWrapper<TEdge> : IEnumerable<TEdge>
+///
+/// <remarks>Author: Dimitrios Michail.</remarks>
+public sealed class LiveIterableWrapper<TEdge> : IEnumerable<TEdge>
 {
     /// <summary>
     /// Create a new wrapper.
@@ -33,7 +36,6 @@ public class LiveIterableWrapper<TEdge> : IEnumerable<TEdge>
     public LiveIterableWrapper(Func<IEnumerable<TEdge>> supplier)
     {
         ArgumentNullException.ThrowIfNull(supplier);
-
         Supplier = supplier;
     }
 
@@ -41,9 +43,14 @@ public class LiveIterableWrapper<TEdge> : IEnumerable<TEdge>
     /// Get the supplier.
     /// </summary>
     /// <returns>the supplier.</returns>
-    public virtual Func<IEnumerable<TEdge>> Supplier { get; }
+    public Func<IEnumerable<TEdge>> Supplier { get; }
 
-    public virtual IEnumerator<TEdge> GetEnumerator()
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+    public IEnumerator<TEdge> GetEnumerator()
     {
         return Supplier().GetEnumerator();
     }
