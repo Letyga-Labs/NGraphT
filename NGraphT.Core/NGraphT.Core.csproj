@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="alg\**" />
+      <Compile Remove="generate\**" />
+      <Compile Remove="GraphMetrics.cs" />
+      <Compile Remove="GraphTests.cs" />
+      <Compile Remove="Traverse\ClosestFirstIterator.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="alg\**" />
+      <EmbeddedResource Remove="generate\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="alg\**" />
+      <None Remove="generate\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="J2N" Version="2.0.0" />
+    </ItemGroup>
+
+</Project>
